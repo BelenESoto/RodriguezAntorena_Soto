@@ -31,10 +31,10 @@
             this.PAgregarClienteFondo = new System.Windows.Forms.Panel();
             this.LAgregarCliente = new System.Windows.Forms.Label();
             this.PAgregarCliente = new System.Windows.Forms.Panel();
-            this.TBCorreo = new System.Windows.Forms.TextBox();
+            this.TBCorreoCliente = new System.Windows.Forms.TextBox();
             this.LCorreo = new System.Windows.Forms.Label();
             this.BAgregarCliente = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.TBNumCliente = new System.Windows.Forms.TextBox();
             this.LTelefonoCliente = new System.Windows.Forms.Label();
             this.TBDomicilioCliente = new System.Windows.Forms.TextBox();
             this.LDomicilioCliente = new System.Windows.Forms.Label();
@@ -77,10 +77,10 @@
             // PAgregarCliente
             // 
             this.PAgregarCliente.BackColor = System.Drawing.Color.PeachPuff;
-            this.PAgregarCliente.Controls.Add(this.TBCorreo);
+            this.PAgregarCliente.Controls.Add(this.TBCorreoCliente);
             this.PAgregarCliente.Controls.Add(this.LCorreo);
             this.PAgregarCliente.Controls.Add(this.BAgregarCliente);
-            this.PAgregarCliente.Controls.Add(this.textBox1);
+            this.PAgregarCliente.Controls.Add(this.TBNumCliente);
             this.PAgregarCliente.Controls.Add(this.LTelefonoCliente);
             this.PAgregarCliente.Controls.Add(this.TBDomicilioCliente);
             this.PAgregarCliente.Controls.Add(this.LDomicilioCliente);
@@ -98,14 +98,15 @@
             this.PAgregarCliente.TabIndex = 1;
             this.PAgregarCliente.Paint += new System.Windows.Forms.PaintEventHandler(this.PAgregarCliente_Paint);
             // 
-            // TBCorreo
+            // TBCorreoCliente
             // 
-            this.TBCorreo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TBCorreo.Location = new System.Drawing.Point(21, 331);
-            this.TBCorreo.MaxLength = 8;
-            this.TBCorreo.Name = "TBCorreo";
-            this.TBCorreo.Size = new System.Drawing.Size(729, 30);
-            this.TBCorreo.TabIndex = 27;
+            this.TBCorreoCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TBCorreoCliente.Location = new System.Drawing.Point(21, 331);
+            this.TBCorreoCliente.MaxLength = 100;
+            this.TBCorreoCliente.Name = "TBCorreoCliente";
+            this.TBCorreoCliente.Size = new System.Drawing.Size(729, 30);
+            this.TBCorreoCliente.TabIndex = 27;
+            this.TBCorreoCliente.Validating += new System.ComponentModel.CancelEventHandler(this.TBCorreoCliente_Validating);
             // 
             // LCorreo
             // 
@@ -129,15 +130,17 @@
             this.BAgregarCliente.TabIndex = 25;
             this.BAgregarCliente.Text = "Agregar Cliente";
             this.BAgregarCliente.UseVisualStyleBackColor = false;
+            this.BAgregarCliente.Click += new System.EventHandler(this.BAgregarCliente_Click);
             // 
-            // textBox1
+            // TBNumCliente
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(21, 272);
-            this.textBox1.MaxLength = 8;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(729, 30);
-            this.textBox1.TabIndex = 24;
+            this.TBNumCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TBNumCliente.Location = new System.Drawing.Point(21, 272);
+            this.TBNumCliente.MaxLength = 8;
+            this.TBNumCliente.Name = "TBNumCliente";
+            this.TBNumCliente.Size = new System.Drawing.Size(729, 30);
+            this.TBNumCliente.TabIndex = 24;
+            this.TBNumCliente.Validating += new System.ComponentModel.CancelEventHandler(this.TBProvinciaCliente_Validating);
             // 
             // LTelefonoCliente
             // 
@@ -158,6 +161,8 @@
             this.TBDomicilioCliente.Name = "TBDomicilioCliente";
             this.TBDomicilioCliente.Size = new System.Drawing.Size(729, 30);
             this.TBDomicilioCliente.TabIndex = 22;
+            this.TBDomicilioCliente.TextChanged += new System.EventHandler(this.TBDomicilioCliente_TextChanged);
+            this.TBDomicilioCliente.Validating += new System.ComponentModel.CancelEventHandler(this.TBDomicilioCliente_Validating);
             // 
             // LDomicilioCliente
             // 
@@ -178,6 +183,7 @@
             this.TBCiudadCliente.Name = "TBCiudadCliente";
             this.TBCiudadCliente.Size = new System.Drawing.Size(340, 30);
             this.TBCiudadCliente.TabIndex = 20;
+            this.TBCiudadCliente.Validating += new System.ComponentModel.CancelEventHandler(this.TBCiudadCliente_Validating);
             // 
             // TBProvinciaCliente
             // 
@@ -187,6 +193,7 @@
             this.TBProvinciaCliente.Name = "TBProvinciaCliente";
             this.TBProvinciaCliente.Size = new System.Drawing.Size(383, 30);
             this.TBProvinciaCliente.TabIndex = 19;
+            this.TBProvinciaCliente.Validating += new System.ComponentModel.CancelEventHandler(this.TBProvinciaCliente_Validating);
             // 
             // LCiudadCliente
             // 
@@ -219,7 +226,8 @@
             this.TBDniCliente.Size = new System.Drawing.Size(729, 30);
             this.TBDniCliente.TabIndex = 16;
             this.TBDniCliente.TextChanged += new System.EventHandler(this.TBDniCliente_TextChanged);
-            this.TBDniCliente.Validated += new System.EventHandler(this.TBDniCliente_TextChanged);
+            this.TBDniCliente.Validating += new System.ComponentModel.CancelEventHandler(this.TBDniCliente_Validating);
+            this.TBDniCliente.Validated += new System.EventHandler(this.TBNombreCliente_TextChanged);
             // 
             // LDniCliente
             // 
@@ -241,6 +249,7 @@
             this.TBNombreCliente.Size = new System.Drawing.Size(729, 30);
             this.TBNombreCliente.TabIndex = 14;
             this.TBNombreCliente.TextChanged += new System.EventHandler(this.TBNombreCliente_TextChanged);
+            this.TBNombreCliente.Validating += new System.ComponentModel.CancelEventHandler(this.TBNombreCliente_Validating);
             this.TBNombreCliente.Validated += new System.EventHandler(this.TBNombreCliente_TextChanged);
             // 
             // LNombreCliente
@@ -281,13 +290,13 @@
         private System.Windows.Forms.TextBox TBDniCliente;
         private System.Windows.Forms.Label LDniCliente;
         private System.Windows.Forms.TextBox TBCiudadCliente;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox TBNumCliente;
         private System.Windows.Forms.Label LTelefonoCliente;
         private System.Windows.Forms.TextBox TBDomicilioCliente;
         private System.Windows.Forms.Label LDomicilioCliente;
         private System.Windows.Forms.Button BAgregarCliente;
         public System.Windows.Forms.Label LAgregarCliente;
         private System.Windows.Forms.Label LCorreo;
-        private System.Windows.Forms.TextBox TBCorreo;
+        private System.Windows.Forms.TextBox TBCorreoCliente;
     }
 }

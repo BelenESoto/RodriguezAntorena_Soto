@@ -52,10 +52,6 @@ namespace Antorena_Soto
             }
         }
 
-       //validacion para contraseña
-
-        
-
         private void BIngresar_Click(object sender, EventArgs e)
         {
             string dni = TBDni.Text.Trim();
