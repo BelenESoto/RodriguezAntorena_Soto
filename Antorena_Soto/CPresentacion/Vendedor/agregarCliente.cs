@@ -200,5 +200,15 @@ namespace Antorena_Soto.CPresentacion.Vendedor
            
 
         }
+
+        private void agregarCliente_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TBNumCliente_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

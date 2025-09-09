@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,6 +52,18 @@
     </Compile>
     <Compile Include="CPresentacion\Administrador\menuAdm.Designer.cs">
       <DependentUpon>menuAdm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CPresentacion\Gerente\agregarVendedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CPresentacion\Gerente\agregarVendedor.Designer.cs">
+      <DependentUpon>agregarVendedor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CPresentacion\Gerente\FormMenuGerente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CPresentacion\Gerente\FormMenuGerente.Designer.cs">
+      <DependentUpon>FormMenuGerente.cs</DependentUpon>
     </Compile>
     <Compile Include="CPresentacion\Gerente\menuGerente.cs">
       <SubType>Form</SubType>
@@ -78,6 +91,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CPresentacion\Gerente\agregarVendedor.resx">
+      <DependentUpon>agregarVendedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CPresentacion\Gerente\FormMenuGerente.resx">
+      <DependentUpon>FormMenuGerente.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CPresentacion\Vendedor\agregarCliente.resx">
       <DependentUpon>agregarCliente.cs</DependentUpon>
     </EmbeddedResource>

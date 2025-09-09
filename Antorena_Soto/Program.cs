@@ -17,7 +17,7 @@ namespace Antorena_Soto
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new CPresentacion.Vendedor.agregarCliente());
+            Application.Run(new CPresentacion.Gerente.FormMenuGerente());
         }
     }
 }
