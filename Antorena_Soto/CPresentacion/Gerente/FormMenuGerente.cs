@@ -16,7 +16,6 @@ namespace Antorena_Soto.CPresentacion.Gerente
             public FormMenuGerente()
         {
             InitializeComponent();
-
             BTAltaVendedor.Click += BTAltaVendedor_Click;
         }
 
@@ -34,7 +33,6 @@ namespace Antorena_Soto.CPresentacion.Gerente
 
                 _formActual = formHijo;
 
-                // IMPORTANT: TopLevel = false antes de añadirlo a Controls
                 formHijo.TopLevel = false;
                 formHijo.FormBorderStyle = FormBorderStyle.None;
                 formHijo.Dock = DockStyle.Fill;
@@ -55,15 +53,62 @@ namespace Antorena_Soto.CPresentacion.Gerente
 
         private void BTAltaVendedor_Click(object sender, EventArgs e)
         {
-           
             var form = new agregarVendedor(); 
             AbrirFormEnPanel(form);
         }
+
+        public void AgregarVendedor(string nombre, string dni, DateTime fechaNac)
+        {
+            DGVListaVendedor.Rows.Add(nombre, dni, fechaNac.ToShortDateString());
+            DGVListaVendedor.Show();
+            DGVListaVendedor.BringToFront();
+        }
+
         private void label1_Click(object sender, EventArgs e)
         {
 
         }
 
+        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void toolStrip1_ItemClicked_1(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void BTBajaVendedor_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LMenuGerente_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BAltaProducto_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FormMenuGerente_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BTListaVendedores_Click(object sender, EventArgs e)
+        {
+            DGVListaVendedor.Show();
+            DGVListaVendedor.BringToFront();
         }
     }
+}
 

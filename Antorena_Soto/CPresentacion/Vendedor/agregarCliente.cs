@@ -194,11 +194,6 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             TBDomicilioCliente.Clear();
             TBNumCliente.Clear();
             TBCorreoCliente.Clear();
-
-
-
-           
-
         }
 
         private void agregarCliente_Load(object sender, EventArgs e)
@@ -207,6 +202,11 @@ namespace Antorena_Soto.CPresentacion.Vendedor
         }
 
         private void TBNumCliente_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TBProvinciaCliente_TextChanged(object sender, EventArgs e)
         {
 
         }

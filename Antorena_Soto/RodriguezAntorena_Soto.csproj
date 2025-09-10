@@ -59,17 +59,17 @@
     <Compile Include="CPresentacion\Gerente\agregarVendedor.Designer.cs">
       <DependentUpon>agregarVendedor.cs</DependentUpon>
     </Compile>
+    <Compile Include="CPresentacion\Gerente\AltaProductos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CPresentacion\Gerente\AltaProductos.Designer.cs">
+      <DependentUpon>AltaProductos.cs</DependentUpon>
+    </Compile>
     <Compile Include="CPresentacion\Gerente\FormMenuGerente.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CPresentacion\Gerente\FormMenuGerente.Designer.cs">
       <DependentUpon>FormMenuGerente.cs</DependentUpon>
-    </Compile>
-    <Compile Include="CPresentacion\Gerente\menuGerente.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CPresentacion\Gerente\menuGerente.Designer.cs">
-      <DependentUpon>menuGerente.cs</DependentUpon>
     </Compile>
     <Compile Include="CPresentacion\Vendedor\agregarCliente.cs">
       <SubType>Form</SubType>
@@ -93,6 +93,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="CPresentacion\Gerente\agregarVendedor.resx">
       <DependentUpon>agregarVendedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CPresentacion\Gerente\AltaProductos.resx">
+      <DependentUpon>AltaProductos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CPresentacion\Gerente\FormMenuGerente.resx">
       <DependentUpon>FormMenuGerente.cs</DependentUpon>

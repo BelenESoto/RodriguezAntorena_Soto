@@ -31,11 +31,11 @@
             this.PAgregarClienteFondo = new System.Windows.Forms.Panel();
             this.LAgregarVendedor = new System.Windows.Forms.Label();
             this.PAgregarVendedor = new System.Windows.Forms.Panel();
-            this.TBFechanacVendedor = new System.Windows.Forms.TextBox();
+            this.DTFechaIngVendedor = new System.Windows.Forms.DateTimePicker();
+            this.DTFechaNacVendedor = new System.Windows.Forms.DateTimePicker();
             this.LFechaNacVendedor = new System.Windows.Forms.Label();
-            this.TBFechaIngresoVendedor = new System.Windows.Forms.TextBox();
-            this.LFechaIngreso = new System.Windows.Forms.Label();
-            this.TBCuit = new System.Windows.Forms.TextBox();
+            this.LFechaIngresoVendedor = new System.Windows.Forms.Label();
+            this.TBCuitVendedor = new System.Windows.Forms.TextBox();
             this.LCuitVendedor = new System.Windows.Forms.Label();
             this.TBCorreoVendedor = new System.Windows.Forms.TextBox();
             this.LCorreoVendedor = new System.Windows.Forms.Label();
@@ -69,24 +69,24 @@
             // LAgregarVendedor
             // 
             this.LAgregarVendedor.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.LAgregarVendedor.BackColor = System.Drawing.Color.Coral;
-            this.LAgregarVendedor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LAgregarVendedor.Location = new System.Drawing.Point(10, 0);
+            this.LAgregarVendedor.BackColor = System.Drawing.Color.Gainsboro;
+            this.LAgregarVendedor.Font = new System.Drawing.Font("SimSun", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LAgregarVendedor.Location = new System.Drawing.Point(5, 9);
             this.LAgregarVendedor.Name = "LAgregarVendedor";
             this.LAgregarVendedor.Padding = new System.Windows.Forms.Padding(10, 4, 4, 4);
-            this.LAgregarVendedor.Size = new System.Drawing.Size(771, 44);
+            this.LAgregarVendedor.Size = new System.Drawing.Size(793, 35);
             this.LAgregarVendedor.TabIndex = 2;
-            this.LAgregarVendedor.Text = "AGREGAR VENDEDOR";
+            this.LAgregarVendedor.Text = "AGREGAR USUARIO VENDEDOR";
             this.LAgregarVendedor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // PAgregarVendedor
             // 
-            this.PAgregarVendedor.BackColor = System.Drawing.Color.PeachPuff;
-            this.PAgregarVendedor.Controls.Add(this.TBFechanacVendedor);
+            this.PAgregarVendedor.BackColor = System.Drawing.Color.Gainsboro;
+            this.PAgregarVendedor.Controls.Add(this.DTFechaIngVendedor);
+            this.PAgregarVendedor.Controls.Add(this.DTFechaNacVendedor);
             this.PAgregarVendedor.Controls.Add(this.LFechaNacVendedor);
-            this.PAgregarVendedor.Controls.Add(this.TBFechaIngresoVendedor);
-            this.PAgregarVendedor.Controls.Add(this.LFechaIngreso);
-            this.PAgregarVendedor.Controls.Add(this.TBCuit);
+            this.PAgregarVendedor.Controls.Add(this.LFechaIngresoVendedor);
+            this.PAgregarVendedor.Controls.Add(this.TBCuitVendedor);
             this.PAgregarVendedor.Controls.Add(this.LCuitVendedor);
             this.PAgregarVendedor.Controls.Add(this.TBCorreoVendedor);
             this.PAgregarVendedor.Controls.Add(this.LCorreoVendedor);
@@ -103,19 +103,29 @@
             this.PAgregarVendedor.Controls.Add(this.LDniVendedor);
             this.PAgregarVendedor.Controls.Add(this.TBNombreVendedor);
             this.PAgregarVendedor.Controls.Add(this.LNombreVendedor);
-            this.PAgregarVendedor.Location = new System.Drawing.Point(10, 47);
+            this.PAgregarVendedor.Location = new System.Drawing.Point(3, 47);
             this.PAgregarVendedor.Name = "PAgregarVendedor";
-            this.PAgregarVendedor.Size = new System.Drawing.Size(771, 404);
+            this.PAgregarVendedor.Size = new System.Drawing.Size(795, 404);
             this.PAgregarVendedor.TabIndex = 1;
+            this.PAgregarVendedor.Paint += new System.Windows.Forms.PaintEventHandler(this.PAgregarVendedor_Paint);
             // 
-            // TBFechanacVendedor
+            // DTFechaIngVendedor
             // 
-            this.TBFechanacVendedor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TBFechanacVendedor.Location = new System.Drawing.Point(24, 331);
-            this.TBFechanacVendedor.MaxLength = 8;
-            this.TBFechanacVendedor.Name = "TBFechanacVendedor";
-            this.TBFechanacVendedor.Size = new System.Drawing.Size(360, 30);
-            this.TBFechanacVendedor.TabIndex = 33;
+            this.DTFechaIngVendedor.Location = new System.Drawing.Point(387, 333);
+            this.DTFechaIngVendedor.Name = "DTFechaIngVendedor";
+            this.DTFechaIngVendedor.Size = new System.Drawing.Size(363, 22);
+            this.DTFechaIngVendedor.TabIndex = 35;
+            this.DTFechaIngVendedor.ValueChanged += new System.EventHandler(this.DTFechaIngVendedor_ValueChanged);
+            this.DTFechaIngVendedor.Validating += new System.ComponentModel.CancelEventHandler(this.DTFechaIngVendedor_Validating);
+            // 
+            // DTFechaNacVendedor
+            // 
+            this.DTFechaNacVendedor.Location = new System.Drawing.Point(21, 333);
+            this.DTFechaNacVendedor.Name = "DTFechaNacVendedor";
+            this.DTFechaNacVendedor.Size = new System.Drawing.Size(360, 22);
+            this.DTFechaNacVendedor.TabIndex = 34;
+            this.DTFechaNacVendedor.ValueChanged += new System.EventHandler(this.DTFechaNacVendedor_ValueChanged);
+            this.DTFechaNacVendedor.Validating += new System.ComponentModel.CancelEventHandler(this.DTFechaNacVendedor_Validating);
             // 
             // LFechaNacVendedor
             // 
@@ -128,34 +138,27 @@
             this.LFechaNacVendedor.TabIndex = 32;
             this.LFechaNacVendedor.Text = "Fecha Nacimiento";
             // 
-            // TBFechaIngresoVendedor
+            // LFechaIngresoVendedor
             // 
-            this.TBFechaIngresoVendedor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TBFechaIngresoVendedor.Location = new System.Drawing.Point(390, 331);
-            this.TBFechaIngresoVendedor.MaxLength = 8;
-            this.TBFechaIngresoVendedor.Name = "TBFechaIngresoVendedor";
-            this.TBFechaIngresoVendedor.Size = new System.Drawing.Size(360, 30);
-            this.TBFechaIngresoVendedor.TabIndex = 31;
+            this.LFechaIngresoVendedor.AutoSize = true;
+            this.LFechaIngresoVendedor.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LFechaIngresoVendedor.ForeColor = System.Drawing.Color.Black;
+            this.LFechaIngresoVendedor.Location = new System.Drawing.Point(386, 305);
+            this.LFechaIngresoVendedor.Name = "LFechaIngresoVendedor";
+            this.LFechaIngresoVendedor.Size = new System.Drawing.Size(166, 23);
+            this.LFechaIngresoVendedor.TabIndex = 30;
+            this.LFechaIngresoVendedor.Text = "Fecha Ingreso";
             // 
-            // LFechaIngreso
+            // TBCuitVendedor
             // 
-            this.LFechaIngreso.AutoSize = true;
-            this.LFechaIngreso.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LFechaIngreso.ForeColor = System.Drawing.Color.Black;
-            this.LFechaIngreso.Location = new System.Drawing.Point(386, 305);
-            this.LFechaIngreso.Name = "LFechaIngreso";
-            this.LFechaIngreso.Size = new System.Drawing.Size(166, 23);
-            this.LFechaIngreso.TabIndex = 30;
-            this.LFechaIngreso.Text = "Fecha Ingreso";
-            // 
-            // TBCuit
-            // 
-            this.TBCuit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TBCuit.Location = new System.Drawing.Point(387, 95);
-            this.TBCuit.MaxLength = 8;
-            this.TBCuit.Name = "TBCuit";
-            this.TBCuit.Size = new System.Drawing.Size(363, 30);
-            this.TBCuit.TabIndex = 29;
+            this.TBCuitVendedor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TBCuitVendedor.Location = new System.Drawing.Point(387, 95);
+            this.TBCuitVendedor.MaxLength = 11;
+            this.TBCuitVendedor.Name = "TBCuitVendedor";
+            this.TBCuitVendedor.Size = new System.Drawing.Size(363, 30);
+            this.TBCuitVendedor.TabIndex = 29;
+            this.TBCuitVendedor.TextChanged += new System.EventHandler(this.TBCuit_TextChanged);
+            this.TBCuitVendedor.Validating += new System.ComponentModel.CancelEventHandler(this.TBCiutVendedor_Validating);
             // 
             // LCuitVendedor
             // 
@@ -176,6 +179,7 @@
             this.TBCorreoVendedor.Name = "TBCorreoVendedor";
             this.TBCorreoVendedor.Size = new System.Drawing.Size(363, 30);
             this.TBCorreoVendedor.TabIndex = 27;
+            this.TBCorreoVendedor.Validating += new System.ComponentModel.CancelEventHandler(this.TBCorreoVendedor_Validating);
             // 
             // LCorreoVendedor
             // 
@@ -190,24 +194,26 @@
             // 
             // BAgregarVendedor
             // 
-            this.BAgregarVendedor.BackColor = System.Drawing.Color.Black;
-            this.BAgregarVendedor.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BAgregarVendedor.ForeColor = System.Drawing.Color.Coral;
-            this.BAgregarVendedor.Location = new System.Drawing.Point(559, 361);
+            this.BAgregarVendedor.BackColor = System.Drawing.Color.DarkGray;
+            this.BAgregarVendedor.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BAgregarVendedor.ForeColor = System.Drawing.Color.Black;
+            this.BAgregarVendedor.Location = new System.Drawing.Point(480, 361);
             this.BAgregarVendedor.Name = "BAgregarVendedor";
             this.BAgregarVendedor.Size = new System.Drawing.Size(191, 40);
             this.BAgregarVendedor.TabIndex = 25;
             this.BAgregarVendedor.Text = "Agregar Vendedor";
             this.BAgregarVendedor.UseVisualStyleBackColor = false;
+            this.BAgregarVendedor.Click += new System.EventHandler(this.BAgregarVendedor_Click_1);
             // 
             // TBNumVendedor
             // 
             this.TBNumVendedor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TBNumVendedor.Location = new System.Drawing.Point(21, 272);
-            this.TBNumVendedor.MaxLength = 8;
+            this.TBNumVendedor.MaxLength = 10;
             this.TBNumVendedor.Name = "TBNumVendedor";
             this.TBNumVendedor.Size = new System.Drawing.Size(360, 30);
             this.TBNumVendedor.TabIndex = 24;
+            this.TBNumVendedor.Validating += new System.ComponentModel.CancelEventHandler(this.TBNumVendedor_Validating);
             // 
             // LTelefonoVendedor
             // 
@@ -228,6 +234,7 @@
             this.TBDomicilioVendedor.Name = "TBDomicilioVendedor";
             this.TBDomicilioVendedor.Size = new System.Drawing.Size(729, 30);
             this.TBDomicilioVendedor.TabIndex = 22;
+            this.TBDomicilioVendedor.Validating += new System.ComponentModel.CancelEventHandler(this.TBDomicilioVendedor_Validating);
             // 
             // LDomicilioVendedor
             // 
@@ -248,6 +255,8 @@
             this.TBCiudadVendedor.Name = "TBCiudadVendedor";
             this.TBCiudadVendedor.Size = new System.Drawing.Size(363, 30);
             this.TBCiudadVendedor.TabIndex = 20;
+            this.TBCiudadVendedor.TextChanged += new System.EventHandler(this.TBCiudadVendedor_TextChanged);
+            this.TBCiudadVendedor.Validating += new System.ComponentModel.CancelEventHandler(this.TBCiudadVendedor_Validating);
             // 
             // TBProvinciaVendedor
             // 
@@ -257,6 +266,8 @@
             this.TBProvinciaVendedor.Name = "TBProvinciaVendedor";
             this.TBProvinciaVendedor.Size = new System.Drawing.Size(360, 30);
             this.TBProvinciaVendedor.TabIndex = 19;
+            this.TBProvinciaVendedor.TextChanged += new System.EventHandler(this.TBProvinciaVendedor_TextChanged);
+            this.TBProvinciaVendedor.Validating += new System.ComponentModel.CancelEventHandler(this.TBProvinciaVendedor_Validating);
             // 
             // LCiudadVendedor
             // 
@@ -359,11 +370,11 @@
         private System.Windows.Forms.Label LDniVendedor;
         private System.Windows.Forms.TextBox TBNombreVendedor;
         private System.Windows.Forms.Label LNombreVendedor;
-        private System.Windows.Forms.TextBox TBCuit;
+        private System.Windows.Forms.TextBox TBCuitVendedor;
         private System.Windows.Forms.Label LCuitVendedor;
-        private System.Windows.Forms.TextBox TBFechaIngresoVendedor;
-        private System.Windows.Forms.Label LFechaIngreso;
-        private System.Windows.Forms.TextBox TBFechanacVendedor;
+        private System.Windows.Forms.Label LFechaIngresoVendedor;
         private System.Windows.Forms.Label LFechaNacVendedor;
+        private System.Windows.Forms.DateTimePicker DTFechaNacVendedor;
+        private System.Windows.Forms.DateTimePicker DTFechaIngVendedor;
     }
 }

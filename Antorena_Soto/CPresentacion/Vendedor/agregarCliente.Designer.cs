@@ -64,19 +64,19 @@
             // LAgregarCliente
             // 
             this.LAgregarCliente.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.LAgregarCliente.BackColor = System.Drawing.Color.Coral;
-            this.LAgregarCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LAgregarCliente.BackColor = System.Drawing.Color.Gainsboro;
+            this.LAgregarCliente.Font = new System.Drawing.Font("SimSun", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LAgregarCliente.Location = new System.Drawing.Point(10, 0);
             this.LAgregarCliente.Name = "LAgregarCliente";
             this.LAgregarCliente.Padding = new System.Windows.Forms.Padding(10, 4, 4, 4);
-            this.LAgregarCliente.Size = new System.Drawing.Size(771, 44);
+            this.LAgregarCliente.Size = new System.Drawing.Size(776, 44);
             this.LAgregarCliente.TabIndex = 2;
             this.LAgregarCliente.Text = "AGREGAR CLIENTE ";
             this.LAgregarCliente.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // PAgregarCliente
             // 
-            this.PAgregarCliente.BackColor = System.Drawing.Color.PeachPuff;
+            this.PAgregarCliente.BackColor = System.Drawing.Color.Gainsboro;
             this.PAgregarCliente.Controls.Add(this.TBCorreoCliente);
             this.PAgregarCliente.Controls.Add(this.LCorreoCliente);
             this.PAgregarCliente.Controls.Add(this.BAgregarCliente);
@@ -94,7 +94,7 @@
             this.PAgregarCliente.Controls.Add(this.LNombreCliente);
             this.PAgregarCliente.Location = new System.Drawing.Point(10, 47);
             this.PAgregarCliente.Name = "PAgregarCliente";
-            this.PAgregarCliente.Size = new System.Drawing.Size(771, 404);
+            this.PAgregarCliente.Size = new System.Drawing.Size(776, 404);
             this.PAgregarCliente.TabIndex = 1;
             this.PAgregarCliente.Paint += new System.Windows.Forms.PaintEventHandler(this.PAgregarCliente_Paint);
             // 
@@ -121,9 +121,9 @@
             // 
             // BAgregarCliente
             // 
-            this.BAgregarCliente.BackColor = System.Drawing.Color.Black;
-            this.BAgregarCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BAgregarCliente.ForeColor = System.Drawing.Color.Coral;
+            this.BAgregarCliente.BackColor = System.Drawing.Color.Silver;
+            this.BAgregarCliente.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BAgregarCliente.ForeColor = System.Drawing.Color.Black;
             this.BAgregarCliente.Location = new System.Drawing.Point(559, 361);
             this.BAgregarCliente.Name = "BAgregarCliente";
             this.BAgregarCliente.Size = new System.Drawing.Size(191, 40);
@@ -194,6 +194,7 @@
             this.TBProvinciaCliente.Name = "TBProvinciaCliente";
             this.TBProvinciaCliente.Size = new System.Drawing.Size(383, 30);
             this.TBProvinciaCliente.TabIndex = 19;
+            this.TBProvinciaCliente.TextChanged += new System.EventHandler(this.TBProvinciaCliente_TextChanged);
             this.TBProvinciaCliente.Validating += new System.ComponentModel.CancelEventHandler(this.TBProvinciaCliente_Validating);
             // 
             // LCiudadCliente
