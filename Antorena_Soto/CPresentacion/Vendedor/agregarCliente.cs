@@ -72,5 +72,10 @@ namespace Antorena_Soto.CPresentacion.Vendedor
         {
 
         }
+
+        private void LAgregarCliente_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

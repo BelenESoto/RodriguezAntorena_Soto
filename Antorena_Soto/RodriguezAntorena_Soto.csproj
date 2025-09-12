@@ -81,6 +81,9 @@
     <EmbeddedResource Include="CPresentacion\Vendedor\agregarCliente.resx">
       <DependentUpon>agregarCliente.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CPresentacion\Vendedor\menuVendedor.resx">
+      <DependentUpon>menuVendedor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
