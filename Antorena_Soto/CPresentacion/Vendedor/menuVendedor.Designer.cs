@@ -33,389 +33,276 @@ namespace Antorena_Soto.CPresentacion.Vendedor
         /// </summary>
         private void InitializeComponent()
         {
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.productosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.MAgregarVenta = new System.Windows.Forms.ToolStripMenuItem();
-            this.verListadoVentasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.verInformacionToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.usuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.agregarUsuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.verListadoComprasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.verInformacionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.productosToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.verProductoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.listadoProductosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button1 = new System.Windows.Forms.Button();
-            this.PanelIngresoDatos = new System.Windows.Forms.FlowLayoutPanel();
-            this.LDatosVenta = new System.Windows.Forms.Label();
-            this.LIngresoProd = new System.Windows.Forms.Label();
-            this.TProducto = new System.Windows.Forms.TextBox();
-            this.LCantidad = new System.Windows.Forms.Label();
-            this.TCantidad = new System.Windows.Forms.TextBox();
-            this.BAgregarProd = new System.Windows.Forms.Button();
-            this.PanelDerecho = new System.Windows.Forms.FlowLayoutPanel();
-            this.LDetalleVenta = new System.Windows.Forms.Label();
-            this.DGDetalle_Venta = new System.Windows.Forms.DataGridView();
-            this.CCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CCantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CSubtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label4 = new System.Windows.Forms.Label();
-            this.LTotal = new System.Windows.Forms.Label();
-            this.BFinCompra = new System.Windows.Forms.Button();
-            this.PanelBuscar = new System.Windows.Forms.FlowLayoutPanel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.menuStrip1.SuspendLayout();
-            this.PanelIngresoDatos.SuspendLayout();
-            this.PanelDerecho.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DGDetalle_Venta)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(menuVendedor));
+            this.BarraBusqueda = new System.Windows.Forms.ToolStrip();
+            this.BBuscar = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.TBusqueda = new System.Windows.Forms.ToolStripTextBox();
+            this.TBotonFoto = new System.Windows.Forms.ToolStripButton();
+            this.LMenuVentas = new System.Windows.Forms.Label();
+            this.PGerente2 = new System.Windows.Forms.Panel();
+            this.DGVListaVentas = new System.Windows.Forms.DataGridView();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Dni = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaIng = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PGerente1 = new System.Windows.Forms.Panel();
+            this.BVerInfoCliente = new System.Windows.Forms.Button();
+            this.LCliente = new System.Windows.Forms.Label();
+            this.BAgregarDatoCliente = new System.Windows.Forms.Button();
+            this.BListarVenta = new System.Windows.Forms.Button();
+            this.LVentas = new System.Windows.Forms.Label();
+            this.LProductos = new System.Windows.Forms.Label();
+            this.BListarProducto = new System.Windows.Forms.Button();
+            this.BVerProducto = new System.Windows.Forms.Button();
+            this.BAgregarVenta = new System.Windows.Forms.Button();
+            this.BarraBusqueda.SuspendLayout();
+            this.PGerente2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DGVListaVentas)).BeginInit();
+            this.PGerente1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // menuStrip1
+            // BarraBusqueda
             // 
-            this.menuStrip1.BackColor = System.Drawing.Color.Coral;
-            this.menuStrip1.Dock = System.Windows.Forms.DockStyle.None;
-            this.menuStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.productosToolStripMenuItem,
-            this.usuarioToolStripMenuItem,
-            this.productosToolStripMenuItem1});
-            this.menuStrip1.Location = new System.Drawing.Point(63, 8);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(477, 44);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
-            this.menuStrip1.UseWaitCursor = true;
+            this.BarraBusqueda.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.BarraBusqueda.AutoSize = false;
+            this.BarraBusqueda.Dock = System.Windows.Forms.DockStyle.None;
+            this.BarraBusqueda.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.BarraBusqueda.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.BBuscar,
+            this.toolStripSeparator1,
+            this.TBusqueda,
+            this.TBotonFoto});
+            this.BarraBusqueda.Location = new System.Drawing.Point(216, 3);
+            this.BarraBusqueda.Name = "BarraBusqueda";
+            this.BarraBusqueda.Size = new System.Drawing.Size(558, 45);
+            this.BarraBusqueda.TabIndex = 6;
+            this.BarraBusqueda.Text = "toolStrip1";
+            this.BarraBusqueda.UseWaitCursor = true;
             // 
-            // productosToolStripMenuItem
+            // BBuscar
             // 
-            this.productosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MAgregarVenta,
-            this.verListadoVentasToolStripMenuItem,
-            this.verInformacionToolStripMenuItem1});
-            this.productosToolStripMenuItem.Font = new System.Drawing.Font("SimSun-ExtG", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.productosToolStripMenuItem.Name = "productosToolStripMenuItem";
-            this.productosToolStripMenuItem.Size = new System.Drawing.Size(195, 40);
-            this.productosToolStripMenuItem.Text = "       Vendedor       ";
+            this.BBuscar.Name = "BBuscar";
+            this.BBuscar.Size = new System.Drawing.Size(42, 42);
+            this.BBuscar.Text = "Buscar";
+            this.BBuscar.Click += new System.EventHandler(this.BBuscar_Click);
             // 
-            // MAgregarVenta
+            // toolStripSeparator1
             // 
-            this.MAgregarVenta.Name = "MAgregarVenta";
-            this.MAgregarVenta.Size = new System.Drawing.Size(266, 22);
-            this.MAgregarVenta.Text = "Agregar venta";
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 45);
             // 
-            // verListadoVentasToolStripMenuItem
+            // TBusqueda
             // 
-            this.verListadoVentasToolStripMenuItem.Name = "verListadoVentasToolStripMenuItem";
-            this.verListadoVentasToolStripMenuItem.Size = new System.Drawing.Size(266, 22);
-            this.verListadoVentasToolStripMenuItem.Text = "Ver listado ventas";
+            this.TBusqueda.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.TBusqueda.Name = "TBusqueda";
+            this.TBusqueda.Size = new System.Drawing.Size(367, 45);
+            this.TBusqueda.Click += new System.EventHandler(this.TBusqueda_Click);
             // 
-            // verInformacionToolStripMenuItem1
+            // TBotonFoto
             // 
-            this.verInformacionToolStripMenuItem1.Name = "verInformacionToolStripMenuItem1";
-            this.verInformacionToolStripMenuItem1.Size = new System.Drawing.Size(266, 22);
-            this.verInformacionToolStripMenuItem1.Text = "Ver informacion Vendedor";
+            this.TBotonFoto.AutoSize = false;
+            this.TBotonFoto.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TBotonFoto.Image = ((System.Drawing.Image)(resources.GetObject("TBotonFoto.Image")));
+            this.TBotonFoto.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.TBotonFoto.Name = "TBotonFoto";
+            this.TBotonFoto.Size = new System.Drawing.Size(29, 24);
+            this.TBotonFoto.Text = "toolStripButton1";
             // 
-            // usuarioToolStripMenuItem
+            // LMenuVentas
             // 
-            this.usuarioToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.agregarUsuarioToolStripMenuItem,
-            this.verListadoComprasToolStripMenuItem,
-            this.verInformacionToolStripMenuItem});
-            this.usuarioToolStripMenuItem.Font = new System.Drawing.Font("SimSun-ExtG", 12F);
-            this.usuarioToolStripMenuItem.Name = "usuarioToolStripMenuItem";
-            this.usuarioToolStripMenuItem.Padding = new System.Windows.Forms.Padding(4, 10, 4, 10);
-            this.usuarioToolStripMenuItem.Size = new System.Drawing.Size(75, 40);
-            this.usuarioToolStripMenuItem.Text = "Cliente";
+            this.LMenuVentas.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.LMenuVentas.BackColor = System.Drawing.Color.Gainsboro;
+            this.LMenuVentas.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LMenuVentas.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.LMenuVentas.Location = new System.Drawing.Point(8, 3);
+            this.LMenuVentas.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.LMenuVentas.Name = "LMenuVentas";
+            this.LMenuVentas.Size = new System.Drawing.Size(204, 45);
+            this.LMenuVentas.TabIndex = 3;
+            this.LMenuVentas.Text = "MENU VENTAS";
+            this.LMenuVentas.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LMenuVentas.UseWaitCursor = true;
+            this.LMenuVentas.Click += new System.EventHandler(this.LMenuVentas_Click);
             // 
-            // agregarUsuarioToolStripMenuItem
+            // PGerente2
             // 
-            this.agregarUsuarioToolStripMenuItem.Name = "agregarUsuarioToolStripMenuItem";
-            this.agregarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(258, 22);
-            this.agregarUsuarioToolStripMenuItem.Text = "Agregar cliente";
+            this.PGerente2.BackColor = System.Drawing.Color.Gainsboro;
+            this.PGerente2.Controls.Add(this.DGVListaVentas);
+            this.PGerente2.Location = new System.Drawing.Point(216, 50);
+            this.PGerente2.Margin = new System.Windows.Forms.Padding(2);
+            this.PGerente2.Name = "PGerente2";
+            this.PGerente2.Size = new System.Drawing.Size(558, 347);
+            this.PGerente2.TabIndex = 5;
+            this.PGerente2.UseWaitCursor = true;
             // 
-            // verListadoComprasToolStripMenuItem
+            // DGVListaVentas
             // 
-            this.verListadoComprasToolStripMenuItem.Name = "verListadoComprasToolStripMenuItem";
-            this.verListadoComprasToolStripMenuItem.Size = new System.Drawing.Size(258, 22);
-            this.verListadoComprasToolStripMenuItem.Text = "Ver listado compras";
+            this.DGVListaVentas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGVListaVentas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Nombre,
+            this.Dni,
+            this.FechaIng});
+            this.DGVListaVentas.Location = new System.Drawing.Point(20, 23);
+            this.DGVListaVentas.Margin = new System.Windows.Forms.Padding(2);
+            this.DGVListaVentas.Name = "DGVListaVentas";
+            this.DGVListaVentas.RowHeadersWidth = 51;
+            this.DGVListaVentas.RowTemplate.Height = 24;
+            this.DGVListaVentas.Size = new System.Drawing.Size(530, 331);
+            this.DGVListaVentas.TabIndex = 0;
+            this.DGVListaVentas.UseWaitCursor = true;
+            this.DGVListaVentas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGVListaVentas_CellContentClick);
             // 
-            // verInformacionToolStripMenuItem
+            // Nombre
             // 
-            this.verInformacionToolStripMenuItem.Name = "verInformacionToolStripMenuItem";
-            this.verInformacionToolStripMenuItem.Size = new System.Drawing.Size(258, 22);
-            this.verInformacionToolStripMenuItem.Text = "Ver informacion cliente";
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.MinimumWidth = 6;
+            this.Nombre.Name = "Nombre";
+            this.Nombre.Width = 125;
             // 
-            // productosToolStripMenuItem1
+            // Dni
             // 
-            this.productosToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.verProductoToolStripMenuItem,
-            this.listadoProductosToolStripMenuItem});
-            this.productosToolStripMenuItem1.Font = new System.Drawing.Font("SimSun-ExtG", 12F);
-            this.productosToolStripMenuItem1.Name = "productosToolStripMenuItem1";
-            this.productosToolStripMenuItem1.Size = new System.Drawing.Size(195, 40);
-            this.productosToolStripMenuItem1.Text = "       Productos      ";
+            this.Dni.HeaderText = "Dni";
+            this.Dni.MinimumWidth = 6;
+            this.Dni.Name = "Dni";
+            this.Dni.Width = 125;
             // 
-            // verProductoToolStripMenuItem
+            // FechaIng
             // 
-            this.verProductoToolStripMenuItem.Name = "verProductoToolStripMenuItem";
-            this.verProductoToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
-            this.verProductoToolStripMenuItem.Text = "Ver producto";
+            this.FechaIng.HeaderText = "Fecha Ingreso";
+            this.FechaIng.MinimumWidth = 6;
+            this.FechaIng.Name = "FechaIng";
+            this.FechaIng.Width = 125;
             // 
-            // listadoProductosToolStripMenuItem
+            // PGerente1
             // 
-            this.listadoProductosToolStripMenuItem.Name = "listadoProductosToolStripMenuItem";
-            this.listadoProductosToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
-            this.listadoProductosToolStripMenuItem.Text = "Listado productos";
+            this.PGerente1.BackColor = System.Drawing.Color.Gainsboro;
+            this.PGerente1.Controls.Add(this.BVerInfoCliente);
+            this.PGerente1.Controls.Add(this.LCliente);
+            this.PGerente1.Controls.Add(this.BAgregarDatoCliente);
+            this.PGerente1.Controls.Add(this.BListarVenta);
+            this.PGerente1.Controls.Add(this.LVentas);
+            this.PGerente1.Controls.Add(this.LProductos);
+            this.PGerente1.Controls.Add(this.BListarProducto);
+            this.PGerente1.Controls.Add(this.BVerProducto);
+            this.PGerente1.Controls.Add(this.BAgregarVenta);
+            this.PGerente1.Location = new System.Drawing.Point(8, 50);
+            this.PGerente1.Margin = new System.Windows.Forms.Padding(2);
+            this.PGerente1.Name = "PGerente1";
+            this.PGerente1.Size = new System.Drawing.Size(204, 347);
+            this.PGerente1.TabIndex = 4;
+            this.PGerente1.UseWaitCursor = true;
             // 
-            // button1
+            // BVerInfoCliente
             // 
-            this.button1.BackColor = System.Drawing.Color.LightBlue;
-            this.button1.Cursor = System.Windows.Forms.Cursors.WaitCursor;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.Font = new System.Drawing.Font("SimSun-ExtG", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(612, 8);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(62, 38);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "SALIR";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.UseWaitCursor = true;
+            this.BVerInfoCliente.Location = new System.Drawing.Point(20, 179);
+            this.BVerInfoCliente.Margin = new System.Windows.Forms.Padding(2);
+            this.BVerInfoCliente.Name = "BVerInfoCliente";
+            this.BVerInfoCliente.Size = new System.Drawing.Size(164, 27);
+            this.BVerInfoCliente.TabIndex = 12;
+            this.BVerInfoCliente.Text = "Ver Informacion";
+            this.BVerInfoCliente.UseVisualStyleBackColor = true;
+            this.BVerInfoCliente.UseWaitCursor = true;
+            this.BVerInfoCliente.Click += new System.EventHandler(this.BVerInfoCliente_Click);
             // 
-            // PanelIngresoDatos
+            // LCliente
             // 
-            this.PanelIngresoDatos.BackColor = System.Drawing.Color.PeachPuff;
-            this.PanelIngresoDatos.Controls.Add(this.LDatosVenta);
-            this.PanelIngresoDatos.Controls.Add(this.LIngresoProd);
-            this.PanelIngresoDatos.Controls.Add(this.TProducto);
-            this.PanelIngresoDatos.Controls.Add(this.LCantidad);
-            this.PanelIngresoDatos.Controls.Add(this.TCantidad);
-            this.PanelIngresoDatos.Controls.Add(this.BAgregarProd);
-            this.PanelIngresoDatos.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.PanelIngresoDatos.Location = new System.Drawing.Point(10, 86);
-            this.PanelIngresoDatos.Name = "PanelIngresoDatos";
-            this.PanelIngresoDatos.Padding = new System.Windows.Forms.Padding(9, 0, 0, 0);
-            this.PanelIngresoDatos.Size = new System.Drawing.Size(169, 173);
-            this.PanelIngresoDatos.TabIndex = 2;
-            this.PanelIngresoDatos.UseWaitCursor = true;
-            this.PanelIngresoDatos.WrapContents = false;
+            this.LCliente.AutoSize = true;
+            this.LCliente.BackColor = System.Drawing.Color.LightGray;
+            this.LCliente.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LCliente.Location = new System.Drawing.Point(74, 124);
+            this.LCliente.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.LCliente.Name = "LCliente";
+            this.LCliente.Size = new System.Drawing.Size(55, 17);
+            this.LCliente.TabIndex = 11;
+            this.LCliente.Text = "Cliente";
+            this.LCliente.UseWaitCursor = true;
             // 
-            // LDatosVenta
+            // BAgregarDatoCliente
             // 
-            this.LDatosVenta.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.LDatosVenta.AutoSize = true;
-            this.LDatosVenta.Font = new System.Drawing.Font("SimSun-ExtG", 11F, System.Drawing.FontStyle.Bold);
-            this.LDatosVenta.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.LDatosVenta.Location = new System.Drawing.Point(12, 0);
-            this.LDatosVenta.Name = "LDatosVenta";
-            this.LDatosVenta.Padding = new System.Windows.Forms.Padding(3);
-            this.LDatosVenta.Size = new System.Drawing.Size(149, 36);
-            this.LDatosVenta.TabIndex = 11;
-            this.LDatosVenta.Text = "DATOS DE LA VENTA";
-            this.LDatosVenta.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.LDatosVenta.UseWaitCursor = true;
+            this.BAgregarDatoCliente.Location = new System.Drawing.Point(20, 149);
+            this.BAgregarDatoCliente.Margin = new System.Windows.Forms.Padding(2);
+            this.BAgregarDatoCliente.Name = "BAgregarDatoCliente";
+            this.BAgregarDatoCliente.Size = new System.Drawing.Size(164, 27);
+            this.BAgregarDatoCliente.TabIndex = 9;
+            this.BAgregarDatoCliente.Text = "Agregar Datos ";
+            this.BAgregarDatoCliente.UseVisualStyleBackColor = true;
+            this.BAgregarDatoCliente.UseWaitCursor = true;
+            this.BAgregarDatoCliente.Click += new System.EventHandler(this.BAgregarDatoCliente_Click);
             // 
-            // LIngresoProd
+            // BListarVenta
             // 
-            this.LIngresoProd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.LIngresoProd.Location = new System.Drawing.Point(12, 36);
-            this.LIngresoProd.Name = "LIngresoProd";
-            this.LIngresoProd.Padding = new System.Windows.Forms.Padding(3);
-            this.LIngresoProd.Size = new System.Drawing.Size(149, 20);
-            this.LIngresoProd.TabIndex = 1;
-            this.LIngresoProd.Text = "Ingrese Producto";
-            this.LIngresoProd.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.LIngresoProd.UseWaitCursor = true;
+            this.BListarVenta.Location = new System.Drawing.Point(20, 74);
+            this.BListarVenta.Margin = new System.Windows.Forms.Padding(2);
+            this.BListarVenta.Name = "BListarVenta";
+            this.BListarVenta.Size = new System.Drawing.Size(164, 25);
+            this.BListarVenta.TabIndex = 7;
+            this.BListarVenta.Text = "Listado Ventas";
+            this.BListarVenta.UseVisualStyleBackColor = true;
+            this.BListarVenta.UseWaitCursor = true;
+            this.BListarVenta.Click += new System.EventHandler(this.BListarVenta_Click);
             // 
-            // TProducto
+            // LVentas
             // 
-            this.TProducto.BackColor = System.Drawing.Color.MistyRose;
-            this.TProducto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TProducto.Location = new System.Drawing.Point(12, 59);
-            this.TProducto.Name = "TProducto";
-            this.TProducto.Size = new System.Drawing.Size(149, 20);
-            this.TProducto.TabIndex = 0;
-            this.TProducto.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.TProducto.UseWaitCursor = true;
+            this.LVentas.AutoSize = true;
+            this.LVentas.BackColor = System.Drawing.Color.LightGray;
+            this.LVentas.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LVentas.Location = new System.Drawing.Point(74, 19);
+            this.LVentas.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.LVentas.Name = "LVentas";
+            this.LVentas.Size = new System.Drawing.Size(56, 17);
+            this.LVentas.TabIndex = 6;
+            this.LVentas.Text = "Ventas";
+            this.LVentas.UseWaitCursor = true;
+            this.LVentas.Click += new System.EventHandler(this.LVentas_Click);
             // 
-            // LCantidad
+            // LProductos
             // 
-            this.LCantidad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.LCantidad.Location = new System.Drawing.Point(12, 82);
-            this.LCantidad.Name = "LCantidad";
-            this.LCantidad.Padding = new System.Windows.Forms.Padding(3);
-            this.LCantidad.Size = new System.Drawing.Size(149, 20);
-            this.LCantidad.TabIndex = 3;
-            this.LCantidad.Text = "Cantidad";
-            this.LCantidad.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.LCantidad.UseWaitCursor = true;
+            this.LProductos.AutoSize = true;
+            this.LProductos.BackColor = System.Drawing.Color.LightGray;
+            this.LProductos.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LProductos.Location = new System.Drawing.Point(61, 230);
+            this.LProductos.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.LProductos.Name = "LProductos";
+            this.LProductos.Size = new System.Drawing.Size(79, 17);
+            this.LProductos.TabIndex = 5;
+            this.LProductos.Text = "Productos";
+            this.LProductos.UseWaitCursor = true;
             // 
-            // TCantidad
+            // BListarProducto
             // 
-            this.TCantidad.BackColor = System.Drawing.Color.MistyRose;
-            this.TCantidad.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TCantidad.Location = new System.Drawing.Point(12, 105);
-            this.TCantidad.Name = "TCantidad";
-            this.TCantidad.Size = new System.Drawing.Size(149, 20);
-            this.TCantidad.TabIndex = 2;
-            this.TCantidad.UseWaitCursor = true;
+            this.BListarProducto.Location = new System.Drawing.Point(20, 287);
+            this.BListarProducto.Margin = new System.Windows.Forms.Padding(2);
+            this.BListarProducto.Name = "BListarProducto";
+            this.BListarProducto.Size = new System.Drawing.Size(164, 27);
+            this.BListarProducto.TabIndex = 4;
+            this.BListarProducto.Text = "Listar Productos";
+            this.BListarProducto.UseVisualStyleBackColor = true;
+            this.BListarProducto.UseWaitCursor = true;
+            this.BListarProducto.Click += new System.EventHandler(this.BListarProducto_Click);
             // 
-            // BAgregarProd
+            // BVerProducto
             // 
-            this.BAgregarProd.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.BAgregarProd.AutoSize = true;
-            this.BAgregarProd.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.BAgregarProd.Cursor = System.Windows.Forms.Cursors.WaitCursor;
-            this.BAgregarProd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.PanelIngresoDatos.SetFlowBreak(this.BAgregarProd, true);
-            this.BAgregarProd.ForeColor = System.Drawing.Color.Tomato;
-            this.BAgregarProd.Location = new System.Drawing.Point(12, 131);
-            this.BAgregarProd.Name = "BAgregarProd";
-            this.BAgregarProd.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.BAgregarProd.Size = new System.Drawing.Size(149, 23);
-            this.BAgregarProd.TabIndex = 10;
-            this.BAgregarProd.TabStop = false;
-            this.BAgregarProd.Text = "Agregar";
-            this.BAgregarProd.UseMnemonic = false;
-            this.BAgregarProd.UseVisualStyleBackColor = false;
-            this.BAgregarProd.UseWaitCursor = true;
+            this.BVerProducto.Location = new System.Drawing.Point(20, 256);
+            this.BVerProducto.Margin = new System.Windows.Forms.Padding(2);
+            this.BVerProducto.Name = "BVerProducto";
+            this.BVerProducto.Size = new System.Drawing.Size(164, 27);
+            this.BVerProducto.TabIndex = 3;
+            this.BVerProducto.Text = "Ver Producto";
+            this.BVerProducto.UseVisualStyleBackColor = true;
+            this.BVerProducto.UseWaitCursor = true;
+            this.BVerProducto.Click += new System.EventHandler(this.BVerProducto_Click);
             // 
-            // PanelDerecho
+            // BAgregarVenta
             // 
-            this.PanelDerecho.BackColor = System.Drawing.Color.PeachPuff;
-            this.PanelDerecho.Controls.Add(this.LDetalleVenta);
-            this.PanelDerecho.Controls.Add(this.DGDetalle_Venta);
-            this.PanelDerecho.Controls.Add(this.label4);
-            this.PanelDerecho.Controls.Add(this.LTotal);
-            this.PanelDerecho.Controls.Add(this.BFinCompra);
-            this.PanelDerecho.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.PanelDerecho.Location = new System.Drawing.Point(184, 86);
-            this.PanelDerecho.Name = "PanelDerecho";
-            this.PanelDerecho.Padding = new System.Windows.Forms.Padding(9);
-            this.PanelDerecho.Size = new System.Drawing.Size(489, 294);
-            this.PanelDerecho.TabIndex = 3;
-            this.PanelDerecho.UseWaitCursor = true;
-            // 
-            // LDetalleVenta
-            // 
-            this.LDetalleVenta.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.LDetalleVenta.BackColor = System.Drawing.Color.Coral;
-            this.LDetalleVenta.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LDetalleVenta.ForeColor = System.Drawing.Color.Black;
-            this.LDetalleVenta.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.LDetalleVenta.Location = new System.Drawing.Point(12, 9);
-            this.LDetalleVenta.Name = "LDetalleVenta";
-            this.LDetalleVenta.Padding = new System.Windows.Forms.Padding(9, 3, 3, 3);
-            this.LDetalleVenta.Size = new System.Drawing.Size(465, 40);
-            this.LDetalleVenta.TabIndex = 12;
-            this.LDetalleVenta.Text = "DETALLE VENTA";
-            this.LDetalleVenta.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.LDetalleVenta.UseWaitCursor = true;
-            // 
-            // DGDetalle_Venta
-            // 
-            this.DGDetalle_Venta.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.DGDetalle_Venta.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.DGDetalle_Venta.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.DGDetalle_Venta.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
-            this.DGDetalle_Venta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGDetalle_Venta.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.CCodigo,
-            this.CNombre,
-            this.CCantidad,
-            this.CSubtotal});
-            this.DGDetalle_Venta.Location = new System.Drawing.Point(12, 52);
-            this.DGDetalle_Venta.Name = "DGDetalle_Venta";
-            this.DGDetalle_Venta.Size = new System.Drawing.Size(465, 70);
-            this.DGDetalle_Venta.TabIndex = 18;
-            this.DGDetalle_Venta.UseWaitCursor = true;
-            // 
-            // CCodigo
-            // 
-            this.CCodigo.HeaderText = "CÓDIGO";
-            this.CCodigo.Name = "CCodigo";
-            // 
-            // CNombre
-            // 
-            this.CNombre.HeaderText = "NOMBRE";
-            this.CNombre.Name = "CNombre";
-            // 
-            // CCantidad
-            // 
-            this.CCantidad.HeaderText = "CANTIDAD";
-            this.CCantidad.Name = "CCantidad";
-            // 
-            // CSubtotal
-            // 
-            this.CSubtotal.HeaderText = "SUBTOTAL";
-            this.CSubtotal.Name = "CSubtotal";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 125);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(0, 13);
-            this.label4.TabIndex = 15;
-            this.label4.UseWaitCursor = true;
-            // 
-            // LTotal
-            // 
-            this.LTotal.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.LTotal.AutoSize = true;
-            this.LTotal.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LTotal.Location = new System.Drawing.Point(218, 138);
-            this.LTotal.Name = "LTotal";
-            this.LTotal.Padding = new System.Windows.Forms.Padding(0, 9, 0, 9);
-            this.LTotal.Size = new System.Drawing.Size(52, 35);
-            this.LTotal.TabIndex = 17;
-            this.LTotal.Text = "TOTAL:";
-            this.LTotal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.LTotal.UseWaitCursor = true;
-            // 
-            // BFinCompra
-            // 
-            this.BFinCompra.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.BFinCompra.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.BFinCompra.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.BFinCompra.ForeColor = System.Drawing.Color.Tomato;
-            this.BFinCompra.Location = new System.Drawing.Point(181, 176);
-            this.BFinCompra.Name = "BFinCompra";
-            this.BFinCompra.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.BFinCompra.Size = new System.Drawing.Size(127, 31);
-            this.BFinCompra.TabIndex = 16;
-            this.BFinCompra.TabStop = false;
-            this.BFinCompra.Text = "FINALIZAR COMPRA";
-            this.BFinCompra.UseMnemonic = false;
-            this.BFinCompra.UseVisualStyleBackColor = false;
-            this.BFinCompra.UseWaitCursor = true;
-            // 
-            // PanelBuscar
-            // 
-            this.PanelBuscar.BackColor = System.Drawing.Color.PeachPuff;
-            this.PanelBuscar.Location = new System.Drawing.Point(10, 57);
-            this.PanelBuscar.Name = "PanelBuscar";
-            this.PanelBuscar.Size = new System.Drawing.Size(663, 25);
-            this.PanelBuscar.TabIndex = 5;
-            this.PanelBuscar.UseWaitCursor = true;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.ErrorImage = global::Antorena_Soto.Properties.Resources.DSC08269__1___1_;
-            this.pictureBox1.InitialImage = global::Antorena_Soto.Properties.Resources.DSC08269__1___1_;
-            this.pictureBox1.Location = new System.Drawing.Point(10, 7);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(51, 39);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 4;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.UseWaitCursor = true;
-            this.pictureBox1.WaitOnLoad = true;
+            this.BAgregarVenta.Location = new System.Drawing.Point(20, 43);
+            this.BAgregarVenta.Margin = new System.Windows.Forms.Padding(2);
+            this.BAgregarVenta.Name = "BAgregarVenta";
+            this.BAgregarVenta.Size = new System.Drawing.Size(164, 25);
+            this.BAgregarVenta.TabIndex = 1;
+            this.BAgregarVenta.Text = "Agregar Venta";
+            this.BAgregarVenta.UseVisualStyleBackColor = true;
+            this.BAgregarVenta.UseWaitCursor = true;
+            this.BAgregarVenta.Click += new System.EventHandler(this.BAgregarVenta_Click);
             // 
             // menuVendedor
             // 
@@ -424,64 +311,47 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.InfoText;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(686, 390);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.PanelBuscar);
-            this.Controls.Add(this.PanelDerecho);
-            this.Controls.Add(this.PanelIngresoDatos);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.menuStrip1);
+            this.ClientSize = new System.Drawing.Size(778, 401);
+            this.Controls.Add(this.BarraBusqueda);
+            this.Controls.Add(this.LMenuVentas);
+            this.Controls.Add(this.PGerente2);
+            this.Controls.Add(this.PGerente1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.MainMenuStrip = this.menuStrip1;
             this.Name = "menuVendedor";
             this.Text = "menuVendedor";
             this.UseWaitCursor = true;
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
-            this.PanelIngresoDatos.ResumeLayout(false);
-            this.PanelIngresoDatos.PerformLayout();
-            this.PanelDerecho.ResumeLayout(false);
-            this.PanelDerecho.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DGDetalle_Venta)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.BarraBusqueda.ResumeLayout(false);
+            this.BarraBusqueda.PerformLayout();
+            this.PGerente2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.DGVListaVentas)).EndInit();
+            this.PGerente1.ResumeLayout(false);
+            this.PGerente1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private MenuStrip menuStrip1;
-        private ToolStripMenuItem usuarioToolStripMenuItem;
-        private ToolStripMenuItem verListadoComprasToolStripMenuItem;
-        private ToolStripMenuItem productosToolStripMenuItem;
-        private ToolStripMenuItem agregarUsuarioToolStripMenuItem;
-        private ToolStripMenuItem MAgregarVenta;
-        private ToolStripMenuItem verInformacionToolStripMenuItem;
-        private ToolStripMenuItem productosToolStripMenuItem1;
-        private ToolStripMenuItem verListadoVentasToolStripMenuItem;
-        private ToolStripMenuItem verInformacionToolStripMenuItem1;
-        private ToolStripMenuItem verProductoToolStripMenuItem;
-        private ToolStripMenuItem listadoProductosToolStripMenuItem;
-        private Button button1;
-        private FlowLayoutPanel PanelIngresoDatos;
-        private FlowLayoutPanel PanelDerecho;
-        private PictureBox pictureBox1;
-        private FlowLayoutPanel PanelBuscar;
-        private Label LIngresoProd;
-        private TextBox TProducto;
-        private Label LCantidad;
-        private TextBox TCantidad;
-        public Button BAgregarProd;
-        private Label LDatosVenta;
-        private Label LDetalleVenta;
-        private Label label4;
-        private Label LTotal;
-        public Button BFinCompra;
-        private DataGridView DGDetalle_Venta;
-        private DataGridViewTextBoxColumn CCodigo;
-        private DataGridViewTextBoxColumn CNombre;
-        private DataGridViewTextBoxColumn CCantidad;
-        private DataGridViewTextBoxColumn CSubtotal;
+        private ToolStrip BarraBusqueda;
+        private ToolStripLabel BBuscar;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripTextBox TBusqueda;
+        private ToolStripButton TBotonFoto;
+        private Label LMenuVentas;
+        private Panel PGerente2;
+        private DataGridView DGVListaVentas;
+        private DataGridViewTextBoxColumn Nombre;
+        private DataGridViewTextBoxColumn Dni;
+        private DataGridViewTextBoxColumn FechaIng;
+        private Panel PGerente1;
+        private Button BListarVenta;
+        private Label LVentas;
+        private Label LProductos;
+        private Button BListarProducto;
+        private Button BVerProducto;
+        private Button BAgregarVenta;
+        private Button BVerInfoCliente;
+        private Label LCliente;
+        private Button BAgregarDatoCliente;
     }
 }

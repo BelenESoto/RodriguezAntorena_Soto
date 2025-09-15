@@ -10,11 +10,21 @@ using System.Windows.Forms;
 
 namespace Antorena_Soto.CPresentacion.Gerente
 {
-    public partial class menuGerente : Form
+    public partial class AltaProductos : Form
     {
-        public menuGerente()
+        public AltaProductos()
         {
             InitializeComponent();
+        }
+
+        private void LAgregarVendedor_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LDniVendedor_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
