@@ -19,7 +19,7 @@ namespace Antorena_Soto
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new CPresentacion.Gerente.agregarVendedor());
+            Application.Run(new AltaProductos());
       
         }
     }

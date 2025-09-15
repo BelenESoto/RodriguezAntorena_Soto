@@ -35,7 +35,20 @@ namespace Antorena_Soto.CPresentacion.Gerente
             }
         }
 
-         private void TBDniVendedor_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        private void CBTipoUsuario_Validating(object sender, CancelEventArgs e)
+        {
+            if (CBTipoUsuario.SelectedIndex == -1) 
+            {
+                MessageBox.Show("Debe seleccionar un tipo de usuario.",
+                                "Error de Validación",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+                e.Cancel = true;
+            }
+        }
+
+
+        private void TBDniVendedor_Validating(object sender, System.ComponentModel.CancelEventArgs e)
           {
              if (String.IsNullOrEmpty(TBDniVendedor.Text))
             {
@@ -313,6 +326,11 @@ namespace Antorena_Soto.CPresentacion.Gerente
         }
 
         private void PAgregarVendedor_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
