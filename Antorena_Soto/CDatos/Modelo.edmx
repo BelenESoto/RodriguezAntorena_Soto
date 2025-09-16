@@ -36,6 +36,7 @@
           <Property Name="domicilio" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="telefono" Type="Int64" Nullable="false" />
           <Property Name="correo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+			<!--   <Property Name="tipoUsuario" Type="String" Nullable="false" /> -->
         </EntityType>
         <EntityContainer Name="RodriguezAntorena_SotoEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Usuario" EntityType="Self.Usuario" />

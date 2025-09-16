@@ -14,8 +14,8 @@ namespace Antorena_Soto.CLogica
         }
 
         public bool AgregarUsuario(string dni, string nombre, string provincia, string ciudad,
-                                   string domicilio, string telefono, string correo, string cuit,
-                                   DateTime fechaNacimiento, DateTime fechaIngreso)
+                                   string domicilio, string telefono, string correo, long cuit,
+                                   DateTime fechaNacimiento, DateTime fechaIngreso, int tipoUsuario)
         {
             if (string.IsNullOrWhiteSpace(nombre))
                 throw new ArgumentException("El nombre es obligatorio.");
@@ -23,7 +23,7 @@ namespace Antorena_Soto.CLogica
             if (!int.TryParse(dni, out int dniInt))
                 throw new ArgumentException("El DNI debe ser numérico.");
 
-            return usuarioDAL.InsertarUsuario(dniInt, nombre, provincia, ciudad, domicilio, telefono, correo, cuit, fechaNacimiento, fechaIngreso);
+            return usuarioDAL.InsertarUsuario(dniInt, nombre, provincia, ciudad, domicilio, telefono, correo, cuit, fechaNacimiento, fechaIngreso, tipoUsuario);
         }
     }
 }

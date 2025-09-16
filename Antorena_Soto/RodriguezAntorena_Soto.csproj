@@ -79,11 +79,11 @@
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="CLogica\CN_Usuario.cs" />
-    <Compile Include="CPresentacion\Administrador\menuAdm.cs">
+    <Compile Include="CPresentacion\SuperAdministrador\menuSuperAdm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CPresentacion\Administrador\menuAdm.Designer.cs">
-      <DependentUpon>menuAdm.cs</DependentUpon>
+    <Compile Include="CPresentacion\SuperAdministrador\menuSuperAdm.Designer.cs">
+      <DependentUpon>menuSuperAdm.cs</DependentUpon>
     </Compile>
     <Compile Include="CPresentacion\Gerente\agregarVendedor.cs">
       <SubType>Form</SubType>
@@ -125,6 +125,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CPresentacion\Gerente\FormMenuGerente.resx">
       <DependentUpon>FormMenuGerente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CPresentacion\SuperAdministrador\menuSuperAdm.resx">
+      <DependentUpon>menuSuperAdm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CPresentacion\Vendedor\menuVendedor.resx">
       <DependentUpon>menuVendedor.cs</DependentUpon>

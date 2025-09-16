@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -56,10 +57,12 @@ namespace Antorena_Soto
         {
             string dni = TBDni.Text.Trim();
             string contrasenia = TBContrasenia.Text;
-            string dniGerente = "00000000";
-            string contraseniaGerente = "000000";
-            string dniVendedor = "11111111";
-            string contraseniaVendedor = "111111";
+            string dniGerente = "11111111";
+            string contraseniaGerente = "111111";
+            string dniVendedor = "00000000";
+            string contraseniaVendedor = "000000";
+            string dniSuperAdmin = "22222222";
+            string contraseniaSuperAdmin = "222222";
 
             if (dni.Equals(dniGerente, StringComparison.Ordinal) && contrasenia.Equals(contraseniaGerente, StringComparison.Ordinal))
             {
@@ -75,10 +78,17 @@ namespace Antorena_Soto
               {
                     MessageBox.Show("Abriendo perfil vendedor");
                     CPresentacion.Vendedor.menuVendedor formVendedor = new CPresentacion.Vendedor.menuVendedor();
-                formVendedor.Show();
+                    formVendedor.Show();
                     this.Hide();
                 }
-            else
+             else if (dni.Equals(dniSuperAdmin, StringComparison.Ordinal) && contrasenia.Equals(contraseniaSuperAdmin, StringComparison.Ordinal))
+            {
+                MessageBox.Show("Abriendo perfil Administrador");
+                CPresentacion.Administrador.menuSuperAdm formSuperAdm = new CPresentacion.Administrador.menuSuperAdm();
+                formSuperAdm.Show();
+                this.Hide();
+            }
+             else
             {
                 MessageBox.Show("Dni y/o contraseña no son correctos");
                

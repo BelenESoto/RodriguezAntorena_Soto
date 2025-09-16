@@ -31,13 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMenuGerente));
             this.PGerente1 = new System.Windows.Forms.Panel();
             this.BListarProductos = new System.Windows.Forms.Button();
-            this.BTBajaVendedor = new System.Windows.Forms.Button();
             this.LProductosGest = new System.Windows.Forms.Label();
-            this.LPersonalGest = new System.Windows.Forms.Label();
             this.BEditarProducto = new System.Windows.Forms.Button();
-            this.BAltaProducto = new System.Windows.Forms.Button();
-            this.BTListaVendedores = new System.Windows.Forms.Button();
-            this.BTAltaVendedor = new System.Windows.Forms.Button();
+            this.BAltaProductos = new System.Windows.Forms.Button();
             this.LMenuGerente = new System.Windows.Forms.Label();
             this.PGerente2 = new System.Windows.Forms.Panel();
             this.DGVListaVendedor = new System.Windows.Forms.DataGridView();
@@ -49,23 +45,23 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
+            this.Linformes = new System.Windows.Forms.Label();
             this.PGerente1.SuspendLayout();
             this.PGerente2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGVListaVendedor)).BeginInit();
             this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.SuspendLayout();
             // 
             // PGerente1
             // 
             this.PGerente1.BackColor = System.Drawing.Color.Gainsboro;
+            this.PGerente1.Controls.Add(this.Linformes);
             this.PGerente1.Controls.Add(this.BListarProductos);
-            this.PGerente1.Controls.Add(this.BTBajaVendedor);
             this.PGerente1.Controls.Add(this.LProductosGest);
-            this.PGerente1.Controls.Add(this.LPersonalGest);
             this.PGerente1.Controls.Add(this.BEditarProducto);
-            this.PGerente1.Controls.Add(this.BAltaProducto);
-            this.PGerente1.Controls.Add(this.BTListaVendedores);
-            this.PGerente1.Controls.Add(this.BTAltaVendedor);
+            this.PGerente1.Controls.Add(this.BAltaProductos);
             this.PGerente1.Location = new System.Drawing.Point(5, 57);
             this.PGerente1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.PGerente1.Name = "PGerente1";
@@ -74,7 +70,7 @@
             // 
             // BListarProductos
             // 
-            this.BListarProductos.Location = new System.Drawing.Point(27, 347);
+            this.BListarProductos.Location = new System.Drawing.Point(27, 156);
             this.BListarProductos.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BListarProductos.Name = "BListarProductos";
             this.BListarProductos.Size = new System.Drawing.Size(219, 33);
@@ -82,43 +78,20 @@
             this.BListarProductos.Text = "Listar Productos";
             this.BListarProductos.UseVisualStyleBackColor = true;
             // 
-            // BTBajaVendedor
-            // 
-            this.BTBajaVendedor.Location = new System.Drawing.Point(27, 91);
-            this.BTBajaVendedor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.BTBajaVendedor.Name = "BTBajaVendedor";
-            this.BTBajaVendedor.Size = new System.Drawing.Size(219, 33);
-            this.BTBajaVendedor.TabIndex = 7;
-            this.BTBajaVendedor.Text = "Baja Usuario";
-            this.BTBajaVendedor.UseVisualStyleBackColor = true;
-            this.BTBajaVendedor.Click += new System.EventHandler(this.BTBajaVendedor_Click);
-            // 
             // LProductosGest
             // 
             this.LProductosGest.AutoSize = true;
             this.LProductosGest.BackColor = System.Drawing.Color.LightGray;
             this.LProductosGest.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LProductosGest.Location = new System.Drawing.Point(99, 234);
+            this.LProductosGest.Location = new System.Drawing.Point(87, 39);
             this.LProductosGest.Name = "LProductosGest";
             this.LProductosGest.Size = new System.Drawing.Size(93, 20);
             this.LProductosGest.TabIndex = 6;
             this.LProductosGest.Text = "Productos";
             // 
-            // LPersonalGest
-            // 
-            this.LPersonalGest.AutoSize = true;
-            this.LPersonalGest.BackColor = System.Drawing.Color.LightGray;
-            this.LPersonalGest.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LPersonalGest.Location = new System.Drawing.Point(99, 17);
-            this.LPersonalGest.Name = "LPersonalGest";
-            this.LPersonalGest.Size = new System.Drawing.Size(81, 20);
-            this.LPersonalGest.TabIndex = 5;
-            this.LPersonalGest.Text = "Personal";
-            this.LPersonalGest.Click += new System.EventHandler(this.label1_Click);
-            // 
             // BEditarProducto
             // 
-            this.BEditarProducto.Location = new System.Drawing.Point(27, 308);
+            this.BEditarProducto.Location = new System.Drawing.Point(27, 119);
             this.BEditarProducto.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BEditarProducto.Name = "BEditarProducto";
             this.BEditarProducto.Size = new System.Drawing.Size(219, 33);
@@ -126,38 +99,16 @@
             this.BEditarProducto.Text = "Editar Productos";
             this.BEditarProducto.UseVisualStyleBackColor = true;
             // 
-            // BAltaProducto
+            // BAltaProductos
             // 
-            this.BAltaProducto.Location = new System.Drawing.Point(27, 270);
-            this.BAltaProducto.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.BAltaProducto.Name = "BAltaProducto";
-            this.BAltaProducto.Size = new System.Drawing.Size(219, 33);
-            this.BAltaProducto.TabIndex = 3;
-            this.BAltaProducto.Text = "Alta Producto";
-            this.BAltaProducto.UseVisualStyleBackColor = true;
-            this.BAltaProducto.Click += new System.EventHandler(this.BAltaProducto_Click);
-            // 
-            // BTListaVendedores
-            // 
-            this.BTListaVendedores.Location = new System.Drawing.Point(27, 129);
-            this.BTListaVendedores.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.BTListaVendedores.Name = "BTListaVendedores";
-            this.BTListaVendedores.Size = new System.Drawing.Size(219, 33);
-            this.BTListaVendedores.TabIndex = 2;
-            this.BTListaVendedores.Text = "Lista de Ususarios";
-            this.BTListaVendedores.UseVisualStyleBackColor = true;
-            this.BTListaVendedores.Click += new System.EventHandler(this.BTListaVendedores_Click);
-            // 
-            // BTAltaVendedor
-            // 
-            this.BTAltaVendedor.Location = new System.Drawing.Point(27, 53);
-            this.BTAltaVendedor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.BTAltaVendedor.Name = "BTAltaVendedor";
-            this.BTAltaVendedor.Size = new System.Drawing.Size(219, 33);
-            this.BTAltaVendedor.TabIndex = 1;
-            this.BTAltaVendedor.Text = "Alta Usuario";
-            this.BTAltaVendedor.UseVisualStyleBackColor = true;
-            this.BTAltaVendedor.Click += new System.EventHandler(this.BTAltaVendedor_Click);
+            this.BAltaProductos.Location = new System.Drawing.Point(27, 82);
+            this.BAltaProductos.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.BAltaProductos.Name = "BAltaProductos";
+            this.BAltaProductos.Size = new System.Drawing.Size(219, 33);
+            this.BAltaProductos.TabIndex = 3;
+            this.BAltaProductos.Text = "Alta Productos";
+            this.BAltaProductos.UseVisualStyleBackColor = true;
+            this.BAltaProductos.Click += new System.EventHandler(this.BAltaProductos_Click);
             // 
             // LMenuGerente
             // 
@@ -169,7 +120,7 @@
             this.LMenuGerente.Name = "LMenuGerente";
             this.LMenuGerente.Size = new System.Drawing.Size(272, 48);
             this.LMenuGerente.TabIndex = 0;
-            this.LMenuGerente.Text = "MENU SUPER-ADMIN";
+            this.LMenuGerente.Text = "MENU GERENTE";
             this.LMenuGerente.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.LMenuGerente.Click += new System.EventHandler(this.LMenuGerente_Click);
             // 
@@ -265,6 +216,22 @@
             this.toolStripButton1.Size = new System.Drawing.Size(29, 24);
             this.toolStripButton1.Text = "toolStripButton1";
             // 
+            // fileSystemWatcher1
+            // 
+            this.fileSystemWatcher1.EnableRaisingEvents = true;
+            this.fileSystemWatcher1.SynchronizingObject = this;
+            // 
+            // Linformes
+            // 
+            this.Linformes.AutoSize = true;
+            this.Linformes.BackColor = System.Drawing.Color.LightGray;
+            this.Linformes.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Linformes.Location = new System.Drawing.Point(87, 250);
+            this.Linformes.Name = "Linformes";
+            this.Linformes.Size = new System.Drawing.Size(87, 20);
+            this.Linformes.TabIndex = 9;
+            this.Linformes.Text = "Informes";
+            // 
             // FormMenuGerente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -285,6 +252,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.DGVListaVendedor)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -294,13 +262,9 @@
         private System.Windows.Forms.Panel PGerente1;
         private System.Windows.Forms.Panel PGerente2;
         private System.Windows.Forms.Label LMenuGerente;
-        private System.Windows.Forms.Button BTAltaVendedor;
-        private System.Windows.Forms.Label LPersonalGest;
         private System.Windows.Forms.Button BEditarProducto;
-        private System.Windows.Forms.Button BAltaProducto;
-        private System.Windows.Forms.Button BTListaVendedores;
+        private System.Windows.Forms.Button BAltaProductos;
         private System.Windows.Forms.Label LProductosGest;
-        private System.Windows.Forms.Button BTBajaVendedor;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
@@ -311,5 +275,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Dni;
         private System.Windows.Forms.DataGridViewTextBoxColumn FechaIng;
         private System.Windows.Forms.Button BListarProductos;
+        private System.IO.FileSystemWatcher fileSystemWatcher1;
+        private System.Windows.Forms.Label Linformes;
     }
 }
