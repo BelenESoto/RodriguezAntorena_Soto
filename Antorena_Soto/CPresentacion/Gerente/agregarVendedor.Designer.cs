@@ -31,6 +31,8 @@
             this.PAgregarClienteFondo = new System.Windows.Forms.Panel();
             this.LAgregarVendedor = new System.Windows.Forms.Label();
             this.PAgregarVendedor = new System.Windows.Forms.Panel();
+            this.CBTipoUsuario = new System.Windows.Forms.ComboBox();
+            this.LTipoUsuario = new System.Windows.Forms.Label();
             this.DTFechaIngVendedor = new System.Windows.Forms.DateTimePicker();
             this.DTFechaNacVendedor = new System.Windows.Forms.DateTimePicker();
             this.LFechaNacVendedor = new System.Windows.Forms.Label();
@@ -76,12 +78,14 @@
             this.LAgregarVendedor.Padding = new System.Windows.Forms.Padding(10, 4, 4, 4);
             this.LAgregarVendedor.Size = new System.Drawing.Size(793, 35);
             this.LAgregarVendedor.TabIndex = 2;
-            this.LAgregarVendedor.Text = "AGREGAR USUARIO VENDEDOR";
+            this.LAgregarVendedor.Text = "AGREGAR USUARIO";
             this.LAgregarVendedor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // PAgregarVendedor
             // 
             this.PAgregarVendedor.BackColor = System.Drawing.Color.Gainsboro;
+            this.PAgregarVendedor.Controls.Add(this.CBTipoUsuario);
+            this.PAgregarVendedor.Controls.Add(this.LTipoUsuario);
             this.PAgregarVendedor.Controls.Add(this.DTFechaIngVendedor);
             this.PAgregarVendedor.Controls.Add(this.DTFechaNacVendedor);
             this.PAgregarVendedor.Controls.Add(this.LFechaNacVendedor);
@@ -108,6 +112,33 @@
             this.PAgregarVendedor.Size = new System.Drawing.Size(795, 404);
             this.PAgregarVendedor.TabIndex = 1;
             this.PAgregarVendedor.Paint += new System.Windows.Forms.PaintEventHandler(this.PAgregarVendedor_Paint);
+            // 
+            // CBTipoUsuario
+            // 
+            this.CBTipoUsuario.AutoCompleteCustomSource.AddRange(new string[] {
+            "Administrador",
+            "Vendedor"});
+            this.CBTipoUsuario.FormattingEnabled = true;
+            this.CBTipoUsuario.Items.AddRange(new object[] {
+            "Vendedor",
+            "Administrador"});
+            this.CBTipoUsuario.Location = new System.Drawing.Point(614, 36);
+            this.CBTipoUsuario.Name = "CBTipoUsuario";
+            this.CBTipoUsuario.Size = new System.Drawing.Size(156, 24);
+            this.CBTipoUsuario.TabIndex = 37;
+            this.CBTipoUsuario.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.CBTipoUsuario.Validating += new System.ComponentModel.CancelEventHandler(this.CBTipoUsuario_Validating);
+            // 
+            // LTipoUsuario
+            // 
+            this.LTipoUsuario.AutoSize = true;
+            this.LTipoUsuario.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LTipoUsuario.ForeColor = System.Drawing.Color.Black;
+            this.LTipoUsuario.Location = new System.Drawing.Point(610, 10);
+            this.LTipoUsuario.Name = "LTipoUsuario";
+            this.LTipoUsuario.Size = new System.Drawing.Size(154, 23);
+            this.LTipoUsuario.TabIndex = 36;
+            this.LTipoUsuario.Text = "Tipo Usuario";
             // 
             // DTFechaIngVendedor
             // 
@@ -165,7 +196,7 @@
             this.LCuitVendedor.AutoSize = true;
             this.LCuitVendedor.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LCuitVendedor.ForeColor = System.Drawing.Color.Black;
-            this.LCuitVendedor.Location = new System.Drawing.Point(410, 69);
+            this.LCuitVendedor.Location = new System.Drawing.Point(386, 69);
             this.LCuitVendedor.Name = "LCuitVendedor";
             this.LCuitVendedor.Size = new System.Drawing.Size(58, 23);
             this.LCuitVendedor.TabIndex = 28;
@@ -186,7 +217,7 @@
             this.LCorreoVendedor.AutoSize = true;
             this.LCorreoVendedor.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LCorreoVendedor.ForeColor = System.Drawing.Color.Black;
-            this.LCorreoVendedor.Location = new System.Drawing.Point(410, 246);
+            this.LCorreoVendedor.Location = new System.Drawing.Point(387, 246);
             this.LCorreoVendedor.Name = "LCorreoVendedor";
             this.LCorreoVendedor.Size = new System.Drawing.Size(94, 23);
             this.LCorreoVendedor.TabIndex = 26;
@@ -201,7 +232,7 @@
             this.BAgregarVendedor.Name = "BAgregarVendedor";
             this.BAgregarVendedor.Size = new System.Drawing.Size(191, 40);
             this.BAgregarVendedor.TabIndex = 25;
-            this.BAgregarVendedor.Text = "Agregar Vendedor";
+            this.BAgregarVendedor.Text = "Agregar Ususario";
             this.BAgregarVendedor.UseVisualStyleBackColor = false;
             this.BAgregarVendedor.Click += new System.EventHandler(this.BAgregarVendedor_Click_1);
             // 
@@ -274,7 +305,7 @@
             this.LCiudadVendedor.AutoSize = true;
             this.LCiudadVendedor.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LCiudadVendedor.ForeColor = System.Drawing.Color.Black;
-            this.LCiudadVendedor.Location = new System.Drawing.Point(410, 128);
+            this.LCiudadVendedor.Location = new System.Drawing.Point(387, 128);
             this.LCiudadVendedor.Name = "LCiudadVendedor";
             this.LCiudadVendedor.Size = new System.Drawing.Size(82, 23);
             this.LCiudadVendedor.TabIndex = 18;
@@ -318,7 +349,7 @@
             this.TBNombreVendedor.Location = new System.Drawing.Point(21, 36);
             this.TBNombreVendedor.MaxLength = 8;
             this.TBNombreVendedor.Name = "TBNombreVendedor";
-            this.TBNombreVendedor.Size = new System.Drawing.Size(729, 30);
+            this.TBNombreVendedor.Size = new System.Drawing.Size(580, 30);
             this.TBNombreVendedor.TabIndex = 14;
             this.TBNombreVendedor.TextChanged += new System.EventHandler(this.TBNombreVendedor_TextChanged);
             this.TBNombreVendedor.Validating += new System.ComponentModel.CancelEventHandler(this.TBNombreVendedor_Validating);
@@ -330,9 +361,9 @@
             this.LNombreVendedor.ForeColor = System.Drawing.Color.Black;
             this.LNombreVendedor.Location = new System.Drawing.Point(17, 10);
             this.LNombreVendedor.Name = "LNombreVendedor";
-            this.LNombreVendedor.Size = new System.Drawing.Size(202, 23);
+            this.LNombreVendedor.Size = new System.Drawing.Size(238, 23);
             this.LNombreVendedor.TabIndex = 11;
-            this.LNombreVendedor.Text = "Nombre completo ";
+            this.LNombreVendedor.Text = "Nombre del Ususario";
             this.LNombreVendedor.Click += new System.EventHandler(this.LNombreVendedor_Click);
             // 
             // agregarVendedor
@@ -376,5 +407,7 @@
         private System.Windows.Forms.Label LFechaNacVendedor;
         private System.Windows.Forms.DateTimePicker DTFechaNacVendedor;
         private System.Windows.Forms.DateTimePicker DTFechaIngVendedor;
+        private System.Windows.Forms.Label LTipoUsuario;
+        private System.Windows.Forms.ComboBox CBTipoUsuario;
     }
 }

@@ -56,21 +56,28 @@ namespace Antorena_Soto
         {
             string dni = TBDni.Text.Trim();
             string contrasenia = TBContrasenia.Text;
-            string dniAdmin = "000000";
-            string contraseniaAdmin = "000000";
+            string dniGerente = "00000000";
+            string contraseniaGerente = "000000";
             string dniVendedor = "11111111";
             string contraseniaVendedor = "111111";
 
-            if (dni.Equals(dniAdmin, StringComparison.Ordinal) && contrasenia.Equals(contraseniaAdmin, StringComparison.Ordinal))
+            if (dni.Equals(dniGerente, StringComparison.Ordinal) && contrasenia.Equals(contraseniaGerente, StringComparison.Ordinal))
             {
                 //aca redirigir a ventana admin
-                MessageBox.Show("Abriendo perfil administrador");
-            }
-            else if (dni.Equals(dniVendedor, StringComparison.Ordinal) && contrasenia.Equals(contraseniaVendedor, StringComparison.Ordinal))
-            {
-                //aca redirigir a ventana vendedor
-                MessageBox.Show("Abriendo perfil vendedor");
-            }
+                MessageBox.Show("Abriendo perfil Gerente");
+
+            CPresentacion.Gerente.FormMenuGerente formGerente = new CPresentacion.Gerente.FormMenuGerente();
+            formGerente.Show();
+            this.Hide(); // oculta el formulario actual
+        }
+
+              else if (dni.Equals(dniVendedor, StringComparison.Ordinal) && contrasenia.Equals(contraseniaVendedor, StringComparison.Ordinal))
+              {
+                    MessageBox.Show("Abriendo perfil vendedor");
+                    CPresentacion.Vendedor.menuVendedor formVendedor = new CPresentacion.Vendedor.menuVendedor();
+                formVendedor.Show();
+                    this.Hide();
+                }
             else
             {
                 MessageBox.Show("Dni y/o contraseña no son correctos");

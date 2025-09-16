@@ -31,9 +31,11 @@
             this.PAgregarClienteFondo = new System.Windows.Forms.Panel();
             this.LAgregarProducto = new System.Windows.Forms.Label();
             this.PAgregarProducto = new System.Windows.Forms.Panel();
-            this.DTFechaIngVendedor = new System.Windows.Forms.DateTimePicker();
-            this.LFechaModificacion = new System.Windows.Forms.Label();
-            this.BAgregarVendedor = new System.Windows.Forms.Button();
+            this.PBImagenProducto = new System.Windows.Forms.PictureBox();
+            this.CBCategoriaProducto = new System.Windows.Forms.ComboBox();
+            this.DTFechaModifProd = new System.Windows.Forms.DateTimePicker();
+            this.LFechaModificacionProd = new System.Windows.Forms.Label();
+            this.BAgregarProducto = new System.Windows.Forms.Button();
             this.TBStockProducto = new System.Windows.Forms.TextBox();
             this.LStockProducto = new System.Windows.Forms.Label();
             this.LImagenProducto = new System.Windows.Forms.Label();
@@ -42,10 +44,8 @@
             this.LCategoriaProducto = new System.Windows.Forms.Label();
             this.TBDescripcionProducto = new System.Windows.Forms.TextBox();
             this.LDescripcionProducto = new System.Windows.Forms.Label();
-            this.TBNombreVendedor = new System.Windows.Forms.TextBox();
+            this.TBNombreProducto = new System.Windows.Forms.TextBox();
             this.LNombreProducto = new System.Windows.Forms.Label();
-            this.CBCategoriaProducto = new System.Windows.Forms.ComboBox();
-            this.PBImagenProducto = new System.Windows.Forms.PictureBox();
             this.PAgregarClienteFondo.SuspendLayout();
             this.PAgregarProducto.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PBImagenProducto)).BeginInit();
@@ -73,16 +73,15 @@
             this.LAgregarProducto.TabIndex = 2;
             this.LAgregarProducto.Text = "AGREGAR PRODUCTO";
             this.LAgregarProducto.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.LAgregarProducto.Click += new System.EventHandler(this.LAgregarVendedor_Click);
             // 
             // PAgregarProducto
             // 
             this.PAgregarProducto.BackColor = System.Drawing.Color.Gainsboro;
             this.PAgregarProducto.Controls.Add(this.PBImagenProducto);
             this.PAgregarProducto.Controls.Add(this.CBCategoriaProducto);
-            this.PAgregarProducto.Controls.Add(this.DTFechaIngVendedor);
-            this.PAgregarProducto.Controls.Add(this.LFechaModificacion);
-            this.PAgregarProducto.Controls.Add(this.BAgregarVendedor);
+            this.PAgregarProducto.Controls.Add(this.DTFechaModifProd);
+            this.PAgregarProducto.Controls.Add(this.LFechaModificacionProd);
+            this.PAgregarProducto.Controls.Add(this.BAgregarProducto);
             this.PAgregarProducto.Controls.Add(this.TBStockProducto);
             this.PAgregarProducto.Controls.Add(this.LStockProducto);
             this.PAgregarProducto.Controls.Add(this.LImagenProducto);
@@ -91,42 +90,70 @@
             this.PAgregarProducto.Controls.Add(this.LCategoriaProducto);
             this.PAgregarProducto.Controls.Add(this.TBDescripcionProducto);
             this.PAgregarProducto.Controls.Add(this.LDescripcionProducto);
-            this.PAgregarProducto.Controls.Add(this.TBNombreVendedor);
+            this.PAgregarProducto.Controls.Add(this.TBNombreProducto);
             this.PAgregarProducto.Controls.Add(this.LNombreProducto);
             this.PAgregarProducto.Location = new System.Drawing.Point(3, 47);
             this.PAgregarProducto.Name = "PAgregarProducto";
             this.PAgregarProducto.Size = new System.Drawing.Size(795, 404);
             this.PAgregarProducto.TabIndex = 1;
             // 
-            // DTFechaIngVendedor
+            // PBImagenProducto
             // 
-            this.DTFechaIngVendedor.Location = new System.Drawing.Point(384, 325);
-            this.DTFechaIngVendedor.Name = "DTFechaIngVendedor";
-            this.DTFechaIngVendedor.Size = new System.Drawing.Size(384, 22);
-            this.DTFechaIngVendedor.TabIndex = 35;
+            this.PBImagenProducto.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.PBImagenProducto.Location = new System.Drawing.Point(21, 154);
+            this.PBImagenProducto.Name = "PBImagenProducto";
+            this.PBImagenProducto.Size = new System.Drawing.Size(336, 237);
+            this.PBImagenProducto.TabIndex = 37;
+            this.PBImagenProducto.TabStop = false;
+            this.PBImagenProducto.Click += new System.EventHandler(this.PBImagenProducto_Click);
+            this.PBImagenProducto.Validating += new System.ComponentModel.CancelEventHandler(this.PBImagenProducto_Validating);
             // 
-            // LFechaModificacion
+            // CBCategoriaProducto
             // 
-            this.LFechaModificacion.AutoSize = true;
-            this.LFechaModificacion.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LFechaModificacion.ForeColor = System.Drawing.Color.Black;
-            this.LFechaModificacion.Location = new System.Drawing.Point(383, 299);
-            this.LFechaModificacion.Name = "LFechaModificacion";
-            this.LFechaModificacion.Size = new System.Drawing.Size(226, 23);
-            this.LFechaModificacion.TabIndex = 30;
-            this.LFechaModificacion.Text = "Fecha Modificacion";
+            this.CBCategoriaProducto.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.CBCategoriaProducto.FormattingEnabled = true;
+            this.CBCategoriaProducto.Items.AddRange(new object[] {
+            "1-Collares",
+            "2-Aros",
+            "3-Otros"});
+            this.CBCategoriaProducto.Location = new System.Drawing.Point(387, 154);
+            this.CBCategoriaProducto.Name = "CBCategoriaProducto";
+            this.CBCategoriaProducto.Size = new System.Drawing.Size(381, 24);
+            this.CBCategoriaProducto.TabIndex = 36;
+            this.CBCategoriaProducto.SelectedIndexChanged += new System.EventHandler(this.CBCategoriaProducto_SelectedIndexChanged);
             // 
-            // BAgregarVendedor
+            // DTFechaModifProd
             // 
-            this.BAgregarVendedor.BackColor = System.Drawing.Color.DarkGray;
-            this.BAgregarVendedor.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BAgregarVendedor.ForeColor = System.Drawing.Color.Black;
-            this.BAgregarVendedor.Location = new System.Drawing.Point(561, 353);
-            this.BAgregarVendedor.Name = "BAgregarVendedor";
-            this.BAgregarVendedor.Size = new System.Drawing.Size(191, 40);
-            this.BAgregarVendedor.TabIndex = 25;
-            this.BAgregarVendedor.Text = "Agregar Producto";
-            this.BAgregarVendedor.UseVisualStyleBackColor = false;
+            this.DTFechaModifProd.Location = new System.Drawing.Point(384, 325);
+            this.DTFechaModifProd.Name = "DTFechaModifProd";
+            this.DTFechaModifProd.Size = new System.Drawing.Size(384, 22);
+            this.DTFechaModifProd.TabIndex = 35;
+            this.DTFechaModifProd.ValueChanged += new System.EventHandler(this.DTFechaModifProd_ValueChanged);
+            this.DTFechaModifProd.Validating += new System.ComponentModel.CancelEventHandler(this.DTFechaModifProd_Validating);
+            // 
+            // LFechaModificacionProd
+            // 
+            this.LFechaModificacionProd.AutoSize = true;
+            this.LFechaModificacionProd.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LFechaModificacionProd.ForeColor = System.Drawing.Color.Black;
+            this.LFechaModificacionProd.Location = new System.Drawing.Point(383, 299);
+            this.LFechaModificacionProd.Name = "LFechaModificacionProd";
+            this.LFechaModificacionProd.Size = new System.Drawing.Size(226, 23);
+            this.LFechaModificacionProd.TabIndex = 30;
+            this.LFechaModificacionProd.Text = "Fecha Modificacion";
+            // 
+            // BAgregarProducto
+            // 
+            this.BAgregarProducto.BackColor = System.Drawing.Color.DarkGray;
+            this.BAgregarProducto.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BAgregarProducto.ForeColor = System.Drawing.Color.Black;
+            this.BAgregarProducto.Location = new System.Drawing.Point(561, 353);
+            this.BAgregarProducto.Name = "BAgregarProducto";
+            this.BAgregarProducto.Size = new System.Drawing.Size(191, 40);
+            this.BAgregarProducto.TabIndex = 25;
+            this.BAgregarProducto.Text = "Agregar Producto";
+            this.BAgregarProducto.UseVisualStyleBackColor = false;
+            this.BAgregarProducto.Click += new System.EventHandler(this.BAgregarProducto_Click);
             // 
             // TBStockProducto
             // 
@@ -136,6 +163,7 @@
             this.TBStockProducto.Name = "TBStockProducto";
             this.TBStockProducto.Size = new System.Drawing.Size(381, 30);
             this.TBStockProducto.TabIndex = 24;
+            this.TBStockProducto.TextChanged += new System.EventHandler(this.TBStockProducto_TextChanged);
             // 
             // LStockProducto
             // 
@@ -167,6 +195,7 @@
             this.TBPrecioProducto.Name = "TBPrecioProducto";
             this.TBPrecioProducto.Size = new System.Drawing.Size(381, 30);
             this.TBPrecioProducto.TabIndex = 20;
+            this.TBPrecioProducto.TextChanged += new System.EventHandler(this.TBPrecioProducto_TextChanged);
             // 
             // LPrecioProducto
             // 
@@ -198,6 +227,7 @@
             this.TBDescripcionProducto.Name = "TBDescripcionProducto";
             this.TBDescripcionProducto.Size = new System.Drawing.Size(747, 30);
             this.TBDescripcionProducto.TabIndex = 16;
+            this.TBDescripcionProducto.TextChanged += new System.EventHandler(this.TBDescripcionProducto_TextChanged);
             // 
             // LDescripcionProducto
             // 
@@ -209,16 +239,17 @@
             this.LDescripcionProducto.Size = new System.Drawing.Size(142, 23);
             this.LDescripcionProducto.TabIndex = 15;
             this.LDescripcionProducto.Text = "Descripcion";
-            this.LDescripcionProducto.Click += new System.EventHandler(this.LDniVendedor_Click);
             // 
-            // TBNombreVendedor
+            // TBNombreProducto
             // 
-            this.TBNombreVendedor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TBNombreVendedor.Location = new System.Drawing.Point(21, 36);
-            this.TBNombreVendedor.MaxLength = 8;
-            this.TBNombreVendedor.Name = "TBNombreVendedor";
-            this.TBNombreVendedor.Size = new System.Drawing.Size(747, 30);
-            this.TBNombreVendedor.TabIndex = 14;
+            this.TBNombreProducto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TBNombreProducto.Location = new System.Drawing.Point(21, 36);
+            this.TBNombreProducto.MaxLength = 8;
+            this.TBNombreProducto.Name = "TBNombreProducto";
+            this.TBNombreProducto.Size = new System.Drawing.Size(747, 30);
+            this.TBNombreProducto.TabIndex = 14;
+            this.TBNombreProducto.TextChanged += new System.EventHandler(this.TBNombreProducto_TextChanged);
+            this.TBNombreProducto.Validating += new System.ComponentModel.CancelEventHandler(this.TBNombreProductos_Validating);
             // 
             // LNombreProducto
             // 
@@ -230,28 +261,6 @@
             this.LNombreProducto.Size = new System.Drawing.Size(190, 23);
             this.LNombreProducto.TabIndex = 11;
             this.LNombreProducto.Text = "Nombre Producto";
-            // 
-            // CBCategoriaProducto
-            // 
-            this.CBCategoriaProducto.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.CBCategoriaProducto.FormattingEnabled = true;
-            this.CBCategoriaProducto.Items.AddRange(new object[] {
-            "1-Collares",
-            "2-Aros",
-            "3-Otros"});
-            this.CBCategoriaProducto.Location = new System.Drawing.Point(387, 154);
-            this.CBCategoriaProducto.Name = "CBCategoriaProducto";
-            this.CBCategoriaProducto.Size = new System.Drawing.Size(381, 24);
-            this.CBCategoriaProducto.TabIndex = 36;
-            // 
-            // PBImagenProducto
-            // 
-            this.PBImagenProducto.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.PBImagenProducto.Location = new System.Drawing.Point(21, 154);
-            this.PBImagenProducto.Name = "PBImagenProducto";
-            this.PBImagenProducto.Size = new System.Drawing.Size(336, 237);
-            this.PBImagenProducto.TabIndex = 37;
-            this.PBImagenProducto.TabStop = false;
             // 
             // AltaProductos
             // 
@@ -274,9 +283,9 @@
         private System.Windows.Forms.Panel PAgregarClienteFondo;
         public System.Windows.Forms.Label LAgregarProducto;
         private System.Windows.Forms.Panel PAgregarProducto;
-        private System.Windows.Forms.DateTimePicker DTFechaIngVendedor;
-        private System.Windows.Forms.Label LFechaModificacion;
-        private System.Windows.Forms.Button BAgregarVendedor;
+        private System.Windows.Forms.DateTimePicker DTFechaModifProd;
+        private System.Windows.Forms.Label LFechaModificacionProd;
+        private System.Windows.Forms.Button BAgregarProducto;
         private System.Windows.Forms.TextBox TBStockProducto;
         private System.Windows.Forms.Label LStockProducto;
         private System.Windows.Forms.Label LImagenProducto;
@@ -285,7 +294,7 @@
         private System.Windows.Forms.Label LCategoriaProducto;
         private System.Windows.Forms.TextBox TBDescripcionProducto;
         private System.Windows.Forms.Label LDescripcionProducto;
-        private System.Windows.Forms.TextBox TBNombreVendedor;
+        private System.Windows.Forms.TextBox TBNombreProducto;
         private System.Windows.Forms.Label LNombreProducto;
         private System.Windows.Forms.ComboBox CBCategoriaProducto;
         private System.Windows.Forms.PictureBox PBImagenProducto;

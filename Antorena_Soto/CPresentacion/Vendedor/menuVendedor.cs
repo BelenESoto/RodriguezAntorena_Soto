@@ -87,5 +87,10 @@ namespace Antorena_Soto.CPresentacion.Vendedor
         {
 
         }
+
+        private void PGerente2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

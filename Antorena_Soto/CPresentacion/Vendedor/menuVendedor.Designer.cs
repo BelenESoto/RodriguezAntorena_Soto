@@ -72,9 +72,9 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             this.toolStripSeparator1,
             this.TBusqueda,
             this.TBotonFoto});
-            this.BarraBusqueda.Location = new System.Drawing.Point(215, 4);
+            this.BarraBusqueda.Location = new System.Drawing.Point(288, 4);
             this.BarraBusqueda.Name = "BarraBusqueda";
-            this.BarraBusqueda.Size = new System.Drawing.Size(558, 45);
+            this.BarraBusqueda.Size = new System.Drawing.Size(744, 55);
             this.BarraBusqueda.TabIndex = 6;
             this.BarraBusqueda.Text = "toolStrip1";
             this.BarraBusqueda.UseWaitCursor = true;
@@ -82,20 +82,20 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             // BBuscar
             // 
             this.BBuscar.Name = "BBuscar";
-            this.BBuscar.Size = new System.Drawing.Size(42, 42);
+            this.BBuscar.Size = new System.Drawing.Size(52, 52);
             this.BBuscar.Text = "Buscar";
             this.BBuscar.Click += new System.EventHandler(this.BBuscar_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 45);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 55);
             // 
             // TBusqueda
             // 
             this.TBusqueda.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.TBusqueda.Name = "TBusqueda";
-            this.TBusqueda.Size = new System.Drawing.Size(367, 45);
+            this.TBusqueda.Size = new System.Drawing.Size(488, 55);
             this.TBusqueda.Click += new System.EventHandler(this.TBusqueda_Click);
             // 
             // TBotonFoto
@@ -114,10 +114,9 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             this.LMenuVentas.BackColor = System.Drawing.Color.Gainsboro;
             this.LMenuVentas.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LMenuVentas.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.LMenuVentas.Location = new System.Drawing.Point(7, 4);
-            this.LMenuVentas.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.LMenuVentas.Location = new System.Drawing.Point(11, 4);
             this.LMenuVentas.Name = "LMenuVentas";
-            this.LMenuVentas.Size = new System.Drawing.Size(204, 45);
+            this.LMenuVentas.Size = new System.Drawing.Size(272, 55);
             this.LMenuVentas.TabIndex = 3;
             this.LMenuVentas.Text = "MENU VENTAS";
             this.LMenuVentas.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -128,12 +127,13 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             // 
             this.PGerente2.BackColor = System.Drawing.Color.Gainsboro;
             this.PGerente2.Controls.Add(this.DGVListaVentas);
-            this.PGerente2.Location = new System.Drawing.Point(216, 50);
-            this.PGerente2.Margin = new System.Windows.Forms.Padding(2);
+            this.PGerente2.Location = new System.Drawing.Point(288, 62);
+            this.PGerente2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.PGerente2.Name = "PGerente2";
-            this.PGerente2.Size = new System.Drawing.Size(558, 347);
+            this.PGerente2.Size = new System.Drawing.Size(744, 427);
             this.PGerente2.TabIndex = 5;
             this.PGerente2.UseWaitCursor = true;
+            this.PGerente2.Paint += new System.Windows.Forms.PaintEventHandler(this.PGerente2_Paint);
             // 
             // DGVListaVentas
             // 
@@ -142,12 +142,12 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             this.Nombre,
             this.Dni,
             this.FechaIng});
-            this.DGVListaVentas.Location = new System.Drawing.Point(20, 23);
-            this.DGVListaVentas.Margin = new System.Windows.Forms.Padding(2);
+            this.DGVListaVentas.Location = new System.Drawing.Point(27, 28);
+            this.DGVListaVentas.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.DGVListaVentas.Name = "DGVListaVentas";
             this.DGVListaVentas.RowHeadersWidth = 51;
             this.DGVListaVentas.RowTemplate.Height = 24;
-            this.DGVListaVentas.Size = new System.Drawing.Size(530, 331);
+            this.DGVListaVentas.Size = new System.Drawing.Size(707, 407);
             this.DGVListaVentas.TabIndex = 0;
             this.DGVListaVentas.UseWaitCursor = true;
             this.DGVListaVentas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGVListaVentas_CellContentClick);
@@ -185,19 +185,19 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             this.PGerente1.Controls.Add(this.BListarProducto);
             this.PGerente1.Controls.Add(this.BVerProducto);
             this.PGerente1.Controls.Add(this.BAgregarVenta);
-            this.PGerente1.Location = new System.Drawing.Point(8, 50);
-            this.PGerente1.Margin = new System.Windows.Forms.Padding(2);
+            this.PGerente1.Location = new System.Drawing.Point(11, 62);
+            this.PGerente1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.PGerente1.Name = "PGerente1";
-            this.PGerente1.Size = new System.Drawing.Size(204, 347);
+            this.PGerente1.Size = new System.Drawing.Size(272, 427);
             this.PGerente1.TabIndex = 4;
             this.PGerente1.UseWaitCursor = true;
             // 
             // BVerInfoCliente
             // 
-            this.BVerInfoCliente.Location = new System.Drawing.Point(20, 179);
-            this.BVerInfoCliente.Margin = new System.Windows.Forms.Padding(2);
+            this.BVerInfoCliente.Location = new System.Drawing.Point(27, 220);
+            this.BVerInfoCliente.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BVerInfoCliente.Name = "BVerInfoCliente";
-            this.BVerInfoCliente.Size = new System.Drawing.Size(164, 27);
+            this.BVerInfoCliente.Size = new System.Drawing.Size(219, 33);
             this.BVerInfoCliente.TabIndex = 12;
             this.BVerInfoCliente.Text = "Ver Informacion";
             this.BVerInfoCliente.UseVisualStyleBackColor = true;
@@ -209,20 +209,19 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             this.LCliente.AutoSize = true;
             this.LCliente.BackColor = System.Drawing.Color.LightGray;
             this.LCliente.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LCliente.Location = new System.Drawing.Point(74, 124);
-            this.LCliente.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.LCliente.Location = new System.Drawing.Point(99, 153);
             this.LCliente.Name = "LCliente";
-            this.LCliente.Size = new System.Drawing.Size(55, 17);
+            this.LCliente.Size = new System.Drawing.Size(69, 20);
             this.LCliente.TabIndex = 11;
             this.LCliente.Text = "Cliente";
             this.LCliente.UseWaitCursor = true;
             // 
             // BAgregarDatoCliente
             // 
-            this.BAgregarDatoCliente.Location = new System.Drawing.Point(20, 149);
-            this.BAgregarDatoCliente.Margin = new System.Windows.Forms.Padding(2);
+            this.BAgregarDatoCliente.Location = new System.Drawing.Point(27, 183);
+            this.BAgregarDatoCliente.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BAgregarDatoCliente.Name = "BAgregarDatoCliente";
-            this.BAgregarDatoCliente.Size = new System.Drawing.Size(164, 27);
+            this.BAgregarDatoCliente.Size = new System.Drawing.Size(219, 33);
             this.BAgregarDatoCliente.TabIndex = 9;
             this.BAgregarDatoCliente.Text = "Agregar Datos ";
             this.BAgregarDatoCliente.UseVisualStyleBackColor = true;
@@ -231,10 +230,10 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             // 
             // BListarVenta
             // 
-            this.BListarVenta.Location = new System.Drawing.Point(20, 74);
-            this.BListarVenta.Margin = new System.Windows.Forms.Padding(2);
+            this.BListarVenta.Location = new System.Drawing.Point(27, 91);
+            this.BListarVenta.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BListarVenta.Name = "BListarVenta";
-            this.BListarVenta.Size = new System.Drawing.Size(164, 25);
+            this.BListarVenta.Size = new System.Drawing.Size(219, 31);
             this.BListarVenta.TabIndex = 7;
             this.BListarVenta.Text = "Listado Ventas";
             this.BListarVenta.UseVisualStyleBackColor = true;
@@ -246,10 +245,9 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             this.LVentas.AutoSize = true;
             this.LVentas.BackColor = System.Drawing.Color.LightGray;
             this.LVentas.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LVentas.Location = new System.Drawing.Point(74, 19);
-            this.LVentas.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.LVentas.Location = new System.Drawing.Point(99, 23);
             this.LVentas.Name = "LVentas";
-            this.LVentas.Size = new System.Drawing.Size(56, 17);
+            this.LVentas.Size = new System.Drawing.Size(67, 20);
             this.LVentas.TabIndex = 6;
             this.LVentas.Text = "Ventas";
             this.LVentas.UseWaitCursor = true;
@@ -260,20 +258,19 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             this.LProductos.AutoSize = true;
             this.LProductos.BackColor = System.Drawing.Color.LightGray;
             this.LProductos.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LProductos.Location = new System.Drawing.Point(61, 230);
-            this.LProductos.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.LProductos.Location = new System.Drawing.Point(81, 283);
             this.LProductos.Name = "LProductos";
-            this.LProductos.Size = new System.Drawing.Size(79, 17);
+            this.LProductos.Size = new System.Drawing.Size(93, 20);
             this.LProductos.TabIndex = 5;
             this.LProductos.Text = "Productos";
             this.LProductos.UseWaitCursor = true;
             // 
             // BListarProducto
             // 
-            this.BListarProducto.Location = new System.Drawing.Point(20, 287);
-            this.BListarProducto.Margin = new System.Windows.Forms.Padding(2);
+            this.BListarProducto.Location = new System.Drawing.Point(27, 353);
+            this.BListarProducto.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BListarProducto.Name = "BListarProducto";
-            this.BListarProducto.Size = new System.Drawing.Size(164, 27);
+            this.BListarProducto.Size = new System.Drawing.Size(219, 33);
             this.BListarProducto.TabIndex = 4;
             this.BListarProducto.Text = "Listar Productos";
             this.BListarProducto.UseVisualStyleBackColor = true;
@@ -282,10 +279,10 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             // 
             // BVerProducto
             // 
-            this.BVerProducto.Location = new System.Drawing.Point(20, 256);
-            this.BVerProducto.Margin = new System.Windows.Forms.Padding(2);
+            this.BVerProducto.Location = new System.Drawing.Point(27, 315);
+            this.BVerProducto.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BVerProducto.Name = "BVerProducto";
-            this.BVerProducto.Size = new System.Drawing.Size(164, 27);
+            this.BVerProducto.Size = new System.Drawing.Size(219, 33);
             this.BVerProducto.TabIndex = 3;
             this.BVerProducto.Text = "Ver Producto";
             this.BVerProducto.UseVisualStyleBackColor = true;
@@ -294,10 +291,10 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             // 
             // BAgregarVenta
             // 
-            this.BAgregarVenta.Location = new System.Drawing.Point(20, 43);
-            this.BAgregarVenta.Margin = new System.Windows.Forms.Padding(2);
+            this.BAgregarVenta.Location = new System.Drawing.Point(27, 53);
+            this.BAgregarVenta.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BAgregarVenta.Name = "BAgregarVenta";
-            this.BAgregarVenta.Size = new System.Drawing.Size(164, 25);
+            this.BAgregarVenta.Size = new System.Drawing.Size(219, 31);
             this.BAgregarVenta.TabIndex = 1;
             this.BAgregarVenta.Text = "Agregar Venta";
             this.BAgregarVenta.UseVisualStyleBackColor = true;
@@ -307,16 +304,17 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             // menuVendedor
             // 
             this.AllowDrop = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.InfoText;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(776, 402);
+            this.ClientSize = new System.Drawing.Size(1037, 494);
             this.Controls.Add(this.BarraBusqueda);
             this.Controls.Add(this.LMenuVentas);
             this.Controls.Add(this.PGerente2);
             this.Controls.Add(this.PGerente1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "menuVendedor";
             this.Text = "menuVendedor";
             this.UseWaitCursor = true;

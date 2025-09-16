@@ -89,7 +89,7 @@
             this.BTBajaVendedor.Name = "BTBajaVendedor";
             this.BTBajaVendedor.Size = new System.Drawing.Size(164, 27);
             this.BTBajaVendedor.TabIndex = 7;
-            this.BTBajaVendedor.Text = "Baja Usuario Vendedor";
+            this.BTBajaVendedor.Text = "Baja Usuario";
             this.BTBajaVendedor.UseVisualStyleBackColor = true;
             this.BTBajaVendedor.Click += new System.EventHandler(this.BTBajaVendedor_Click);
             // 
@@ -146,7 +146,7 @@
             this.BTListaVendedores.Name = "BTListaVendedores";
             this.BTListaVendedores.Size = new System.Drawing.Size(164, 27);
             this.BTListaVendedores.TabIndex = 2;
-            this.BTListaVendedores.Text = "Lista Vendedores";
+            this.BTListaVendedores.Text = "Lista de Ususarios";
             this.BTListaVendedores.UseVisualStyleBackColor = true;
             this.BTListaVendedores.Click += new System.EventHandler(this.BTListaVendedores_Click);
             // 
@@ -157,7 +157,7 @@
             this.BTAltaVendedor.Name = "BTAltaVendedor";
             this.BTAltaVendedor.Size = new System.Drawing.Size(164, 27);
             this.BTAltaVendedor.TabIndex = 1;
-            this.BTAltaVendedor.Text = "Alta Usuario Vendedor";
+            this.BTAltaVendedor.Text = "Alta Usuario";
             this.BTAltaVendedor.UseVisualStyleBackColor = true;
             this.BTAltaVendedor.Click += new System.EventHandler(this.BTAltaVendedor_Click);
             // 
@@ -172,7 +172,7 @@
             this.LMenuGerente.Name = "LMenuGerente";
             this.LMenuGerente.Size = new System.Drawing.Size(204, 39);
             this.LMenuGerente.TabIndex = 0;
-            this.LMenuGerente.Text = "MENU ADMIN USUARIOS";
+            this.LMenuGerente.Text = "MENU SUPER-ADMIN";
             this.LMenuGerente.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.LMenuGerente.Click += new System.EventHandler(this.LMenuGerente_Click);
             // 
