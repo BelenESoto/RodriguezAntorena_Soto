@@ -71,11 +71,13 @@ namespace Antorena_Soto
             this.Hide(); // oculta el formulario actual
         }
 
-            else if (dni.Equals(dniVendedor, StringComparison.Ordinal) && contrasenia.Equals(contraseniaVendedor, StringComparison.Ordinal))
-            {
-                //aca redirigir a ventana vendedor
-                MessageBox.Show("Abriendo perfil vendedor");
-            }
+              else if (dni.Equals(dniVendedor, StringComparison.Ordinal) && contrasenia.Equals(contraseniaVendedor, StringComparison.Ordinal))
+              {
+                    MessageBox.Show("Abriendo perfil vendedor");
+                    CPresentacion.Vendedor.menuVendedor formVendedor = new CPresentacion.Vendedor.menuVendedor();
+                formVendedor.Show();
+                    this.Hide();
+                }
             else
             {
                 MessageBox.Show("Dni y/o contraseña no son correctos");
