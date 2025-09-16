@@ -241,7 +241,7 @@ namespace Antorena_Soto.CPresentacion.Gerente
 
             try
             {
-                string connectionString = "Data Source=DESKTOP-IDH7B7D/SQLEXPRESS;Initial Catalog=RodriguezAntorena_Soto;Integrated Security=True";
+                string connectionString = "Data Source=DESKTOP-IDH7B7D\\SQLEXPRESS;Initial Catalog=RodriguezAntorena_Soto;Integrated Security=True";
                 UsuarioBLL usuarioBLL = new UsuarioBLL(connectionString);
 
                 bool ok = usuarioBLL.AgregarUsuario(
@@ -252,9 +252,10 @@ namespace Antorena_Soto.CPresentacion.Gerente
                     domicilio: TBDomicilioVendedor.Text.Trim(),
                     telefono: TBNumVendedor.Text.Trim(),
                     correo: TBCorreoVendedor.Text.Trim(),
-                    cuit: TBCuitVendedor.Text.Trim(),
+                    cuit: long.Parse(TBCuitVendedor.Text.Trim()),
                     fechaNacimiento: DTFechaNacVendedor.Value,
                     fechaIngreso: DTFechaIngVendedor.Value
+
                 );
 
                 if (ok)

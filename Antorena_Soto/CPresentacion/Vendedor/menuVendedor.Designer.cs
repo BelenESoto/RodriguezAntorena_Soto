@@ -72,7 +72,7 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             this.toolStripSeparator1,
             this.TBusqueda,
             this.TBotonFoto});
-            this.BarraBusqueda.Location = new System.Drawing.Point(216, 3);
+            this.BarraBusqueda.Location = new System.Drawing.Point(215, 4);
             this.BarraBusqueda.Name = "BarraBusqueda";
             this.BarraBusqueda.Size = new System.Drawing.Size(558, 45);
             this.BarraBusqueda.TabIndex = 6;
@@ -114,7 +114,7 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             this.LMenuVentas.BackColor = System.Drawing.Color.Gainsboro;
             this.LMenuVentas.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LMenuVentas.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.LMenuVentas.Location = new System.Drawing.Point(8, 3);
+            this.LMenuVentas.Location = new System.Drawing.Point(7, 4);
             this.LMenuVentas.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LMenuVentas.Name = "LMenuVentas";
             this.LMenuVentas.Size = new System.Drawing.Size(204, 45);
@@ -311,7 +311,7 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.InfoText;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(778, 401);
+            this.ClientSize = new System.Drawing.Size(776, 402);
             this.Controls.Add(this.BarraBusqueda);
             this.Controls.Add(this.LMenuVentas);
             this.Controls.Add(this.PGerente2);

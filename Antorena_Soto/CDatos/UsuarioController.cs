@@ -13,16 +13,15 @@ namespace Antorena_Soto.CDatos
         }
 
         public bool InsertarUsuario(int dni, string nombre, string provincia, string ciudad,
-                                    string domicilio, string telefono, string correo, string cuit,
-                                    DateTime fechaNacimiento, DateTime fechaIngreso)
+                                    string domicilio, string telefono, string correo, DateTime fechaNacimiento, long cuit , DateTime fechaIngreso)
         {
             try
             {
                 using (SqlConnection conexionSql = new SqlConnection(conexionString))
                 {
                     string consulta = @"INSERT INTO Usuario
-                                    (id_dni_usuario, nomYApe_usuario, provincia, ciudad, domicilio, telefono, correo, cuit, fechaNacimiento, fechaIngreso)
-                                     VALUES (@dni, @nombre, @provincia, @ciudad, @domicilio, @telefono, @correo, @cuit, @fechaNacimiento, @fechaIngreso)";
+                                    (id_dni_usuario, nomYApe_usuario, provincia, ciudad, domicilio, telefono, correo, fecha_nacimiento, cuit, fecha_ingreso)
+                                     VALUES (@dni, @nombre, @provincia, @ciudad, @domicilio, @telefono, @correo, @fechaNacimiento, @cuit, @fechaIngreso)";
 
                     SqlCommand comandoSql = new SqlCommand(consulta, conexionSql);
                     comandoSql.Parameters.AddWithValue("@dni", dni);
@@ -32,8 +31,8 @@ namespace Antorena_Soto.CDatos
                     comandoSql.Parameters.AddWithValue("@domicilio", domicilio);
                     comandoSql.Parameters.AddWithValue("@telefono", telefono);
                     comandoSql.Parameters.AddWithValue("@correo", correo);
-                    comandoSql.Parameters.AddWithValue("@cuit", cuit);
                     comandoSql.Parameters.AddWithValue("@fechaNacimiento", fechaNacimiento);
+                    comandoSql.Parameters.AddWithValue("@cuit", cuit);             
                     comandoSql.Parameters.AddWithValue("@fechaIngreso", fechaIngreso);
 
                     conexionSql.Open();

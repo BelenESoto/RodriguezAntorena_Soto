@@ -103,6 +103,16 @@
     <Compile Include="CPresentacion\Gerente\FormMenuGerente.Designer.cs">
       <DependentUpon>FormMenuGerente.cs</DependentUpon>
     </Compile>
+    <Compile Include="CPresentacion\Vendedor\agregarCliente.cs" />
+    <Compile Include="CPresentacion\Vendedor\agregarCliente.Designer.cs">
+      <DependentUpon>agregarCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CPresentacion\Vendedor\agregarVenta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CPresentacion\Vendedor\agregarVenta.Designer.cs">
+      <DependentUpon>agregarVenta.cs</DependentUpon>
+    </Compile>
     <Compile Include="CPresentacion\Vendedor\menuVendedor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -125,6 +135,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CPresentacion\Gerente\FormMenuGerente.resx">
       <DependentUpon>FormMenuGerente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CPresentacion\Vendedor\agregarCliente.resx">
+      <DependentUpon>agregarCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CPresentacion\Vendedor\agregarVenta.es-AR.resx">
+      <DependentUpon>agregarVenta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CPresentacion\Vendedor\agregarVenta.resx">
+      <DependentUpon>agregarVenta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CPresentacion\Vendedor\menuVendedor.resx">
       <DependentUpon>menuVendedor.cs</DependentUpon>

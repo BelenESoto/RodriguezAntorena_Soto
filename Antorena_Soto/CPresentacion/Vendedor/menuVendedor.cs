@@ -29,7 +29,7 @@ namespace Antorena_Soto.CPresentacion.Vendedor
 
         private void BAgregarVenta_Click(object sender, EventArgs e)
         {
-
+            AbrirFormularioEnPanel(new agregarVenta());
         }
 
         private void BListarVenta_Click(object sender, EventArgs e)
@@ -39,7 +39,7 @@ namespace Antorena_Soto.CPresentacion.Vendedor
 
         private void BAgregarDatoCliente_Click(object sender, EventArgs e)
         {
-
+            //AbrirFormularioEnPanel(new agregarCliente());
         }
 
         private void BVerInfoCliente_Click(object sender, EventArgs e)
@@ -65,6 +65,22 @@ namespace Antorena_Soto.CPresentacion.Vendedor
         private void BBuscar_Click(object sender, EventArgs e)
         {
 
+        }
+
+
+        private void AbrirFormularioEnPanel(Form formHijo)
+        {
+            // Limpia el contenido actual
+            DGVListaVentas.Controls.Clear();
+
+            // Configurar formulario hijo
+            formHijo.TopLevel = false;
+            formHijo.FormBorderStyle = FormBorderStyle.None;
+            formHijo.Dock = DockStyle.Fill;
+
+            // Agregar al panel y mostrar
+            DGVListaVentas.Controls.Add(formHijo);
+            formHijo.Show();
         }
 
         private void DGVListaVentas_CellContentClick(object sender, DataGridViewCellEventArgs e)

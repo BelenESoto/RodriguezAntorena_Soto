@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+﻿/*using System;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,11 +9,11 @@ namespace Antorena_Soto.CPresentacion.Vendedor
 {
     public partial class agregarCliente : Form
     {
-            public agregarCliente()
-            {
-                InitializeComponent();
-            }
-            //aca validaciones 
+        public agregarCliente()
+        {
+            InitializeComponent();
+        }
+        //aca validaciones 
 
         private void TBNombreCliente_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
@@ -86,7 +82,7 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             }
         }
 
-         private void TBDomicilioCliente_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        private void TBDomicilioCliente_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             string domicilio = TBDomicilioCliente.Text.Trim();
 
@@ -210,5 +206,10 @@ namespace Antorena_Soto.CPresentacion.Vendedor
         {
 
         }
+
+        private void LAgregarVendedor_Click(object sender, EventArgs e)
+        {
+
+        }
     }
-}
+}*/
