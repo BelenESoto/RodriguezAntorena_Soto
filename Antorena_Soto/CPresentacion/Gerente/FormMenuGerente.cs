@@ -86,7 +86,20 @@ namespace Antorena_Soto.CPresentacion.Gerente
 
         private void BTBajaVendedor_Click(object sender, EventArgs e)
         {
+            DialogResult ask = MessageBox.Show(
+                "¿Está a punto de eliminar los datos",
+                "Confirmar eliminación",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
 
+            if (ask == DialogResult.Yes)
+            {
+                MessageBox.Show("los datos se eliminaron correctamente.", "Eliminar", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Operación Cancelada", "Cancelar", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void LMenuGerente_Click(object sender, EventArgs e)
