@@ -68,6 +68,7 @@ namespace Antorena_Soto.CPresentacion.Gerente
 
         private void TBCiutVendedor_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            long CuitUsusario = long.Parse(TBCuitVendedor.Text.Trim());
             if (String.IsNullOrEmpty(TBCuitVendedor.Text))
             {
                 MessageBox.Show("El campo CUIT no puede estar vacío.", "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -254,7 +255,7 @@ namespace Antorena_Soto.CPresentacion.Gerente
 
             try
             {
-                string connectionString = "Data Source=DESKTOP-IDH7B7D\\SQLEXPRESS;Initial Catalog=RodriguezAntorena_Soto;Integrated Security=True";
+                string connectionString = "Data Source=DESKTOP-IDH7B7D/SQLEXPRESS;Initial Catalog=RodriguezAntorena_Soto;Integrated Security=True";
                 UsuarioBLL usuarioBLL = new UsuarioBLL(connectionString);
 
                 bool ok = usuarioBLL.AgregarUsuario(
@@ -267,8 +268,8 @@ namespace Antorena_Soto.CPresentacion.Gerente
                     correo: TBCorreoVendedor.Text.Trim(),
                     cuit: long.Parse(TBCuitVendedor.Text.Trim()),
                     fechaNacimiento: DTFechaNacVendedor.Value,
-                    fechaIngreso: DTFechaIngVendedor.Value
-
+                    fechaIngreso: DTFechaIngVendedor.Value,
+                    tipoUsuario: int.Parse(CBTipoUsuario.Text.Trim())
                 );
 
                 if (ok)
@@ -331,7 +332,12 @@ namespace Antorena_Soto.CPresentacion.Gerente
 
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void CBTipoUsuario_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LAgregarVendedor_Click_1(object sender, EventArgs e)
         {
 
         }

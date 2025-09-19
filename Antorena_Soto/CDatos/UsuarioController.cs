@@ -13,15 +13,16 @@ namespace Antorena_Soto.CDatos
         }
 
         public bool InsertarUsuario(int dni, string nombre, string provincia, string ciudad,
-                                    string domicilio, string telefono, string correo, DateTime fechaNacimiento, long cuit , DateTime fechaIngreso)
+                                    string domicilio, string telefono, string correo, long cuit,
+                                    DateTime fechaNacimiento, DateTime fechaIngreso, int tipoUsuario)
         {
             try
             {
                 using (SqlConnection conexionSql = new SqlConnection(conexionString))
                 {
                     string consulta = @"INSERT INTO Usuario
-                                    (id_dni_usuario, nomYApe_usuario, provincia, ciudad, domicilio, telefono, correo, fecha_nacimiento, cuit, fecha_ingreso)
-                                     VALUES (@dni, @nombre, @provincia, @ciudad, @domicilio, @telefono, @correo, @fechaNacimiento, @cuit, @fechaIngreso)";
+                                    (id_dni_usuario, nomYApe_usuario, provincia, ciudad, domicilio, telefono, correo, cuit, fechaNacimiento, fechaIngreso,tipoUsuario)
+                                     VALUES (@dni, @nombre, @provincia, @ciudad, @domicilio, @telefono, @correo, @cuit, @fechaNacimiento, @fechaIngreso, @tipoUsuario)";
 
                     SqlCommand comandoSql = new SqlCommand(consulta, conexionSql);
                     comandoSql.Parameters.AddWithValue("@dni", dni);
@@ -31,9 +32,10 @@ namespace Antorena_Soto.CDatos
                     comandoSql.Parameters.AddWithValue("@domicilio", domicilio);
                     comandoSql.Parameters.AddWithValue("@telefono", telefono);
                     comandoSql.Parameters.AddWithValue("@correo", correo);
+                    comandoSql.Parameters.AddWithValue("@cuit", cuit);
                     comandoSql.Parameters.AddWithValue("@fechaNacimiento", fechaNacimiento);
-                    comandoSql.Parameters.AddWithValue("@cuit", cuit);             
                     comandoSql.Parameters.AddWithValue("@fechaIngreso", fechaIngreso);
+                    comandoSql.Parameters.AddWithValue("@tipoUsuario", tipoUsuario);
 
                     conexionSql.Open();
                     int filasAfectadas = comandoSql.ExecuteNonQuery();

@@ -80,6 +80,7 @@
             this.LAgregarVendedor.TabIndex = 2;
             this.LAgregarVendedor.Text = "AGREGAR USUARIO";
             this.LAgregarVendedor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LAgregarVendedor.Click += new System.EventHandler(this.LAgregarVendedor_Click_1);
             // 
             // PAgregarVendedor
             // 
@@ -126,7 +127,7 @@
             this.CBTipoUsuario.Name = "CBTipoUsuario";
             this.CBTipoUsuario.Size = new System.Drawing.Size(156, 24);
             this.CBTipoUsuario.TabIndex = 37;
-            this.CBTipoUsuario.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.CBTipoUsuario.SelectedIndexChanged += new System.EventHandler(this.CBTipoUsuario_SelectedIndexChanged);
             this.CBTipoUsuario.Validating += new System.ComponentModel.CancelEventHandler(this.CBTipoUsuario_Validating);
             // 
             // LTipoUsuario

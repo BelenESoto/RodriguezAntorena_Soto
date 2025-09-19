@@ -16,7 +16,6 @@ namespace Antorena_Soto.CPresentacion.Gerente
             public FormMenuGerente()
         {
             InitializeComponent();
-            BTAltaVendedor.Click += BTAltaVendedor_Click;
         }
 
         private void AbrirFormEnPanel(Form formHijo)
@@ -107,9 +106,18 @@ namespace Antorena_Soto.CPresentacion.Gerente
 
         }
 
-        private void BAltaProducto_Click(object sender, EventArgs e)
+        private void BAltaProductos_Click(object sender, EventArgs e)
         {
 
+            PGerente2.Controls.Clear();
+            AltaProductos formAlta = new AltaProductos();
+            formAlta.TopLevel = false; 
+            formAlta.FormBorderStyle = FormBorderStyle.None; 
+            formAlta.Dock = DockStyle.Fill; // ajusta al tamaño del panel
+
+            PGerente2.Controls.Add(formAlta);
+            PGerente2.Tag = formAlta;
+            formAlta.Show();
         }
 
         private void FormMenuGerente_Load(object sender, EventArgs e)
