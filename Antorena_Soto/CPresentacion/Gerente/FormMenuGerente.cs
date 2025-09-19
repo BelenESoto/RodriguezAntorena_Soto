@@ -17,6 +17,10 @@ namespace Antorena_Soto.CPresentacion.Gerente
         {
             InitializeComponent();
         }
+        public FormMenuGerente(string titulo) : this()
+        {
+            this.Text = titulo;
+        }
 
         private void AbrirFormEnPanel(Form formHijo)
         {
@@ -48,8 +52,9 @@ namespace Antorena_Soto.CPresentacion.Gerente
                 MessageBox.Show("Error abriendo formulario en panel:\n" + ex.Message + "\n\n" + ex.StackTrace,
                                 "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
 
+        }
+       /* }
         private void BTAltaVendedor_Click(object sender, EventArgs e)
         {
             var form = new agregarVendedor(); 
@@ -58,9 +63,9 @@ namespace Antorena_Soto.CPresentacion.Gerente
 
         public void AgregarVendedor(string nombre, string dni, DateTime fechaNac)
         {
-            DGVListaVendedor.Rows.Add(nombre, dni, fechaNac.ToShortDateString());
-            DGVListaVendedor.Show();
-            DGVListaVendedor.BringToFront();
+            DGVListaProd.Rows.Add(nombre, dni, fechaNac.ToShortDateString());
+            DGVListaProd.Show();
+            DGVListaProd.BringToFront();
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -100,7 +105,7 @@ namespace Antorena_Soto.CPresentacion.Gerente
                 MessageBox.Show("Operación Cancelada", "Cancelar", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-
+        */
         private void LMenuGerente_Click(object sender, EventArgs e)
         {
 
@@ -127,9 +132,26 @@ namespace Antorena_Soto.CPresentacion.Gerente
 
         private void BTListaVendedores_Click(object sender, EventArgs e)
         {
-            DGVListaVendedor.Show();
-            DGVListaVendedor.BringToFront();
+            DGVListaProd.Show();
+            DGVListaProd.BringToFront();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BListarProductos_Click(object sender, EventArgs e)
+        {
+            FormMenuGerente formListaProd = new FormMenuGerente("Lista de productos");
+            AbrirFormEnPanel(formListaProd);
+        }
+
+        private void PGerente2_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
+
 

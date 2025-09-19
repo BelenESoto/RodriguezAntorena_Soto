@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Antorena_Soto.CLogica;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,21 +20,21 @@ namespace Antorena_Soto.CPresentacion.Gerente
         }
 
         //validadiones 
-       
+
         private void TBNombreProductos_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             string nombreProducto = TBNombreProducto.Text.Trim();
-             if (string.IsNullOrEmpty(nombreProducto))
-             {
+            if (string.IsNullOrEmpty(nombreProducto))
+            {
                 MessageBox.Show("El campo nombre no puede estar vacío.", "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 e.Cancel = true;
-               }
-              else if (nombreProducto.All(char.IsDigit))
-            {
-                 MessageBox.Show("El nombre no puede ser númerico.", "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                 e.Cancel = true;
-               }
             }
+            else if (nombreProducto.All(char.IsDigit))
+            {
+                MessageBox.Show("El nombre no puede ser númerico.", "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                e.Cancel = true;
+            }
+        }
         private void TBCategoriaProducto_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             string categoriaProducto = CBCategoriaProducto.Text.Trim();
@@ -44,7 +45,8 @@ namespace Antorena_Soto.CPresentacion.Gerente
             }
         }
         private void TBPrecioProducto_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-        {   string precioProducto = TBPrecioProducto.Text.Trim();
+        {
+            string precioProducto = TBPrecioProducto.Text.Trim();
             if (String.IsNullOrEmpty(precioProducto))
             {
                 MessageBox.Show("El campo precio no puede estar vacío.", "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -97,7 +99,7 @@ namespace Antorena_Soto.CPresentacion.Gerente
         }
 
         private void PBImagenProducto_Validating(object sender, CancelEventArgs e)
-        { 
+        {
             string rutaArchivo = PBImagenProducto.ImageLocation;
             if (string.IsNullOrEmpty(rutaArchivo))
             {
@@ -182,6 +184,30 @@ namespace Antorena_Soto.CPresentacion.Gerente
         }
 
         private void BAgregarProducto_Click(object sender, EventArgs e)
+        {
+            if (!ValidateChildren())
+            {
+                MessageBox.Show("Por favor, corrija los errores antes de continuar.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            /*
+                        Producto nuevoProducto = new Producto
+                        {
+                            nombreProd = TBNombreProducto.Text.Trim(),
+                            descripcionProd = TBDescripcionProducto.Text.Trim(),
+                            categoriaProd = CBCategoriaProducto.Text.Trim(),
+                            precioProd = decimal.Parse(TBPrecioProducto.Text.Trim()),
+                            stockProd = int.Parse(TBStockProducto.Text.Trim()),
+                            fechaModifProd = DTFechaModifProd.Value,
+                            imagen = PBImagenProducto.ImageLocation
+                        }
+
+                            );
+
+                    }*/
+        }
+
+        private void LAgregarProducto_Click(object sender, EventArgs e)
         {
 
         }

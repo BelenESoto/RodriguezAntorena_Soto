@@ -30,13 +30,15 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMenuGerente));
             this.PGerente1 = new System.Windows.Forms.Panel();
+            this.bListarVentas = new System.Windows.Forms.Button();
+            this.Linformes = new System.Windows.Forms.Label();
             this.BListarProductos = new System.Windows.Forms.Button();
             this.LProductosGest = new System.Windows.Forms.Label();
             this.BEditarProducto = new System.Windows.Forms.Button();
             this.BAltaProductos = new System.Windows.Forms.Button();
             this.LMenuGerente = new System.Windows.Forms.Label();
             this.PGerente2 = new System.Windows.Forms.Panel();
-            this.DGVListaVendedor = new System.Windows.Forms.DataGridView();
+            this.DGVListaProd = new System.Windows.Forms.DataGridView();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Dni = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FechaIng = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -46,10 +48,9 @@
             this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
-            this.Linformes = new System.Windows.Forms.Label();
             this.PGerente1.SuspendLayout();
             this.PGerente2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DGVListaVendedor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DGVListaProd)).BeginInit();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.SuspendLayout();
@@ -57,6 +58,7 @@
             // PGerente1
             // 
             this.PGerente1.BackColor = System.Drawing.Color.Gainsboro;
+            this.PGerente1.Controls.Add(this.bListarVentas);
             this.PGerente1.Controls.Add(this.Linformes);
             this.PGerente1.Controls.Add(this.BListarProductos);
             this.PGerente1.Controls.Add(this.LProductosGest);
@@ -68,6 +70,28 @@
             this.PGerente1.Size = new System.Drawing.Size(272, 446);
             this.PGerente1.TabIndex = 0;
             // 
+            // bListarVentas
+            // 
+            this.bListarVentas.Location = new System.Drawing.Point(27, 281);
+            this.bListarVentas.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.bListarVentas.Name = "bListarVentas";
+            this.bListarVentas.Size = new System.Drawing.Size(219, 33);
+            this.bListarVentas.TabIndex = 10;
+            this.bListarVentas.Text = "Listar ventas";
+            this.bListarVentas.UseVisualStyleBackColor = true;
+            this.bListarVentas.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // Linformes
+            // 
+            this.Linformes.AutoSize = true;
+            this.Linformes.BackColor = System.Drawing.Color.LightGray;
+            this.Linformes.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Linformes.Location = new System.Drawing.Point(87, 250);
+            this.Linformes.Name = "Linformes";
+            this.Linformes.Size = new System.Drawing.Size(87, 20);
+            this.Linformes.TabIndex = 9;
+            this.Linformes.Text = "Informes";
+            // 
             // BListarProductos
             // 
             this.BListarProductos.Location = new System.Drawing.Point(27, 156);
@@ -77,6 +101,7 @@
             this.BListarProductos.TabIndex = 8;
             this.BListarProductos.Text = "Listar Productos";
             this.BListarProductos.UseVisualStyleBackColor = true;
+            this.BListarProductos.Click += new System.EventHandler(this.BListarProductos_Click);
             // 
             // LProductosGest
             // 
@@ -127,28 +152,28 @@
             // PGerente2
             // 
             this.PGerente2.BackColor = System.Drawing.Color.Gainsboro;
-            this.PGerente2.Controls.Add(this.DGVListaVendedor);
+            this.PGerente2.Controls.Add(this.DGVListaProd);
             this.PGerente2.Location = new System.Drawing.Point(283, 57);
             this.PGerente2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.PGerente2.Name = "PGerente2";
             this.PGerente2.Size = new System.Drawing.Size(751, 446);
             this.PGerente2.TabIndex = 1;
+            this.PGerente2.Paint += new System.Windows.Forms.PaintEventHandler(this.PGerente2_Paint);
             // 
-            // DGVListaVendedor
+            // DGVListaProd
             // 
-            this.DGVListaVendedor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGVListaVendedor.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.DGVListaProd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGVListaProd.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Nombre,
             this.Dni,
             this.FechaIng});
-            this.DGVListaVendedor.Location = new System.Drawing.Point(27, 28);
-            this.DGVListaVendedor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.DGVListaVendedor.Name = "DGVListaVendedor";
-            this.DGVListaVendedor.RowHeadersWidth = 51;
-            this.DGVListaVendedor.RowTemplate.Height = 24;
-            this.DGVListaVendedor.Size = new System.Drawing.Size(707, 407);
-            this.DGVListaVendedor.TabIndex = 0;
-            this.DGVListaVendedor.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.DGVListaProd.Location = new System.Drawing.Point(27, 28);
+            this.DGVListaProd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.DGVListaProd.Name = "DGVListaProd";
+            this.DGVListaProd.RowHeadersWidth = 51;
+            this.DGVListaProd.RowTemplate.Height = 24;
+            this.DGVListaProd.Size = new System.Drawing.Size(707, 407);
+            this.DGVListaProd.TabIndex = 0;
             // 
             // Nombre
             // 
@@ -187,7 +212,6 @@
             this.toolStrip1.Size = new System.Drawing.Size(751, 48);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
-            this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked_1);
             // 
             // toolStripLabel1
             // 
@@ -221,17 +245,6 @@
             this.fileSystemWatcher1.EnableRaisingEvents = true;
             this.fileSystemWatcher1.SynchronizingObject = this;
             // 
-            // Linformes
-            // 
-            this.Linformes.AutoSize = true;
-            this.Linformes.BackColor = System.Drawing.Color.LightGray;
-            this.Linformes.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Linformes.Location = new System.Drawing.Point(87, 250);
-            this.Linformes.Name = "Linformes";
-            this.Linformes.Size = new System.Drawing.Size(87, 20);
-            this.Linformes.TabIndex = 9;
-            this.Linformes.Text = "Informes";
-            // 
             // FormMenuGerente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -249,7 +262,7 @@
             this.PGerente1.ResumeLayout(false);
             this.PGerente1.PerformLayout();
             this.PGerente2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.DGVListaVendedor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DGVListaProd)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
@@ -270,12 +283,13 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripTextBox toolStripTextBox1;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
-        private System.Windows.Forms.DataGridView DGVListaVendedor;
+        private System.Windows.Forms.DataGridView DGVListaProd;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Dni;
         private System.Windows.Forms.DataGridViewTextBoxColumn FechaIng;
         private System.Windows.Forms.Button BListarProductos;
         private System.IO.FileSystemWatcher fileSystemWatcher1;
         private System.Windows.Forms.Label Linformes;
+        private System.Windows.Forms.Button bListarVentas;
     }
 }
