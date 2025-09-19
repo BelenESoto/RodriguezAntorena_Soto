@@ -85,10 +85,10 @@
     <Compile Include="CPresentacion\SuperAdministrador\menuSuperAdm.Designer.cs">
       <DependentUpon>menuSuperAdm.cs</DependentUpon>
     </Compile>
-    <Compile Include="CPresentacion\Gerente\agregarVendedor.cs">
+    <Compile Include="CPresentacion\SuperAdministrador\agregarVendedor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CPresentacion\Gerente\agregarVendedor.Designer.cs">
+    <Compile Include="CPresentacion\SuperAdministrador\agregarVendedor.Designer.cs">
       <DependentUpon>agregarVendedor.cs</DependentUpon>
     </Compile>
     <Compile Include="CPresentacion\Gerente\AltaProductos.cs">
@@ -102,6 +102,12 @@
     </Compile>
     <Compile Include="CPresentacion\Gerente\FormMenuGerente.Designer.cs">
       <DependentUpon>FormMenuGerente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CPresentacion\Vendedor\agregarDatosCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CPresentacion\Vendedor\agregarDatosCliente.Designer.cs">
+      <DependentUpon>agregarDatosCliente.cs</DependentUpon>
     </Compile>
     <Compile Include="CPresentacion\Vendedor\menuVendedor.cs">
       <SubType>Form</SubType>
@@ -117,7 +123,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="CPresentacion\Gerente\agregarVendedor.resx">
+    <EmbeddedResource Include="CPresentacion\SuperAdministrador\agregarVendedor.resx">
       <DependentUpon>agregarVendedor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CPresentacion\Gerente\AltaProductos.resx">
