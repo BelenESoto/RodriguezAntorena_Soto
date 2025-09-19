@@ -73,6 +73,7 @@
             this.LAgregarProducto.TabIndex = 2;
             this.LAgregarProducto.Text = "AGREGAR PRODUCTO";
             this.LAgregarProducto.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LAgregarProducto.Click += new System.EventHandler(this.LAgregarProducto_Click);
             // 
             // PAgregarProducto
             // 
