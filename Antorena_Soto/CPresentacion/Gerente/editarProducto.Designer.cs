@@ -70,10 +70,10 @@
             // 
             this.BEliminarProd.BackColor = System.Drawing.Color.WhiteSmoke;
             this.BEliminarProd.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BEliminarProd.Location = new System.Drawing.Point(392, 268);
+            this.BEliminarProd.Location = new System.Drawing.Point(373, 247);
             this.BEliminarProd.Margin = new System.Windows.Forms.Padding(4);
             this.BEliminarProd.Name = "BEliminarProd";
-            this.BEliminarProd.Size = new System.Drawing.Size(212, 53);
+            this.BEliminarProd.Size = new System.Drawing.Size(158, 53);
             this.BEliminarProd.TabIndex = 9;
             this.BEliminarProd.Text = "ELIMINAR";
             this.BEliminarProd.UseVisualStyleBackColor = false;
@@ -83,10 +83,10 @@
             // 
             this.BEditarProd.BackColor = System.Drawing.Color.WhiteSmoke;
             this.BEditarProd.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BEditarProd.Location = new System.Drawing.Point(172, 268);
+            this.BEditarProd.Location = new System.Drawing.Point(191, 247);
             this.BEditarProd.Margin = new System.Windows.Forms.Padding(4);
             this.BEditarProd.Name = "BEditarProd";
-            this.BEditarProd.Size = new System.Drawing.Size(212, 53);
+            this.BEditarProd.Size = new System.Drawing.Size(162, 53);
             this.BEditarProd.TabIndex = 8;
             this.BEditarProd.Text = "EDITAR";
             this.BEditarProd.UseVisualStyleBackColor = false;
