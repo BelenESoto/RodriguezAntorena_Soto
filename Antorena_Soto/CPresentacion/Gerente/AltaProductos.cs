@@ -18,7 +18,11 @@ namespace Antorena_Soto.CPresentacion.Gerente
         {
             InitializeComponent();
         }
-
+        public AltaProductos(string codigo, string nombre, string precio)
+        { 
+            InitializeComponent();
+            
+        }
         //validadiones 
 
         private void TBNombreProductos_Validating(object sender, System.ComponentModel.CancelEventArgs e)
@@ -208,6 +212,16 @@ namespace Antorena_Soto.CPresentacion.Gerente
         }
 
         private void LAgregarProducto_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LPrecioProducto_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PAgregarProducto_Paint(object sender, PaintEventArgs e)
         {
 
         }

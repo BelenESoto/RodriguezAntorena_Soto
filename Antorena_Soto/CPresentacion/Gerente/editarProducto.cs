@@ -1,9 +1,9 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,19 +11,17 @@ using System.Windows.Forms;
 
 namespace Antorena_Soto.CPresentacion.Gerente
 {
-    public partial class listaProductos : Form
+    public partial class editarProducto : Form
     {
-        private string modoBusqueda = "Codigo"; 
-        private bool textoLimpiado = false;     
-
-        public listaProductos()
+        private string modoBusqueda = "Codigo";
+        private bool textoLimpiado = false;
+        public editarProducto()
         {
             InitializeComponent();
         }
 
-        private void listaProductos_Load(object sender, EventArgs e)
+        private void editarProducto_Load_1(object sender, EventArgs e)
         {
-            // columnas de prueba
             if (DGVListaProd.Columns.Count == 0)
             {
                 DGVListaProd.Columns.Add("Codigo", "Código Producto");
@@ -36,24 +34,14 @@ namespace Antorena_Soto.CPresentacion.Gerente
             DGVListaProd.Rows.Add("002", "Collar Eva", "8000");
         }
 
-        private void DGVListaProd_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void BBuscarPorEditar_ButtonClick_1(object sender, EventArgs e)
         {
-        }
-
-        private void pContenedorListaProd_Paint(object sender, PaintEventArgs e)
-        {
-        }
-
-        private void BBuscarPor_ButtonClick(object sender, EventArgs e)
-        {
-            string criterio = TBBuscarProd.Text.Trim();
-
+            string criterio = TBEditarProd.Text.Trim();
             if (string.IsNullOrEmpty(criterio))
             {
                 MessageBox.Show("Debe ingresar un criterio de búsqueda.");
                 return;
             }
-
             // Validaciones 
             if (modoBusqueda == "Codigo")
             {
@@ -80,7 +68,7 @@ namespace Antorena_Soto.CPresentacion.Gerente
 
             foreach (DataGridViewRow fila in DGVListaProd.Rows)
             {
-                if (fila.IsNewRow) continue; 
+                if (fila.IsNewRow) continue;
 
                 if (modoBusqueda == "Codigo")
                 {
@@ -107,7 +95,7 @@ namespace Antorena_Soto.CPresentacion.Gerente
                         }
                     }
                 }
-                else 
+                else
                 {
                     if (hasNombre)
                     {
@@ -132,62 +120,83 @@ namespace Antorena_Soto.CPresentacion.Gerente
                             break;
                         }
                     }
+
+
+                    if (!encontrado)
+                    {
+                        MessageBox.Show("No se encontró ningún producto con ese criterio.");
+                    }
+
+                    if (string.IsNullOrEmpty(modoBusqueda))
+                    {
+                        MessageBox.Show("Primero debe elegir un criterio de búsqueda (Código o Nombre).");
+                        return;
+                    }
+
+                    if (!textoLimpiado)
+                    {
+                        TBEditarProd.Clear();
+                        textoLimpiado = true;
+                    }
                 }
+
             }
-
-            if (!encontrado)
-                MessageBox.Show("No se encontró ningún producto con ese criterio.");
         }
-
-        private void TBBuscarProd_Click(object sender, EventArgs e)
+        private void BEditarProd_Click_1(object sender, EventArgs e)
         {
-            if (!textoLimpiado)
+            if (DGVListaProd.SelectedRows.Count == 0)
             {
-                TBBuscarProd.Clear();
-                textoLimpiado = true;
+                MessageBox.Show("Debe seleccionar un producto para editar.");
+                return;
             }
+
+            DataGridViewRow fila = DGVListaProd.SelectedRows[0];
+
+            string codigo = fila.Cells["Codigo"].Value.ToString();
+            string nombre = fila.Cells["Nombre"].Value.ToString();
+            string precio = fila.Cells["Precio"].Value.ToString();
+
+            AltaProductos formAlta = new AltaProductos(codigo, nombre, precio);
+            formAlta.ShowDialog();
         }
 
-        private void nombreProdToolStripMenuItem_Click(object sender, EventArgs e)
+        private void BEliminarProd_Click_1(object sender, EventArgs e)
         {
-            modoBusqueda = "Nombre";
-            BBuscarPor.Text = "Buscar por: Nombre";
-
-            textoLimpiado = false;
-            TBBuscarProd.Clear();
-        }
-
-        private void codigoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            modoBusqueda = "Codigo";
-            BBuscarPor.Text = "Buscar por: Código";
-            textoLimpiado = false;
-            TBBuscarProd.Clear();
-        }
-
-        private void TBBuscarProd_KeyPress(object sender, KeyPressEventArgs e)
-        { 
-            if (modoBusqueda == "Codigo")
+            if (DGVListaProd.SelectedRows.Count == 0)
             {
-                if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
-                {
-                    e.Handled = true;
-                    System.Media.SystemSounds.Beep.Play();  
-                }
+                MessageBox.Show("Debe seleccionar un producto para eliminar.");
+                return;
             }
-            else if (modoBusqueda == "Nombre")
+
+            DialogResult result = MessageBox.Show("¿Está seguro que desea eliminar el producto seleccionado?",
+                                                  "Confirmar eliminación",
+                                                  MessageBoxButtons.YesNo,
+                                                  MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes)
             {
-                if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar))
-                {
-                    e.Handled = true;
-                    System.Media.SystemSounds.Beep.Play();
-                }
+                DGVListaProd.Rows.RemoveAt(DGVListaProd.SelectedRows[0].Index);
+                MessageBox.Show("Producto eliminado correctamente.");
             }
         }
 
-        private void LListaUsuario_Click(object sender, EventArgs e)
+        private void LDatosBajaProd_Click(object sender, EventArgs e)
         {
 
         }
+
+        private void LBajaProducto_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TBuscador_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+      
     }
 }
+
+

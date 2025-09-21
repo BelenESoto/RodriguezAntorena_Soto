@@ -132,8 +132,8 @@ namespace Antorena_Soto.CPresentacion.Gerente
 
         private void BTListaVendedores_Click(object sender, EventArgs e)
         {
-            DGVListaProd.Show();
-            DGVListaProd.BringToFront();
+           // DGVListaProd.Show();
+           //DGVListaProd.BringToFront();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -143,15 +143,39 @@ namespace Antorena_Soto.CPresentacion.Gerente
 
         private void BListarProductos_Click(object sender, EventArgs e)
         {
-            FormMenuGerente formListaProd = new FormMenuGerente("Lista de productos");
-            AbrirFormEnPanel(formListaProd);
+
+            PGerente2.Controls.Clear();
+            listaProductos formListaProd = new listaProductos();
+            formListaProd.TopLevel = false;  // Importante: permite embebido dentro de otro contenedor
+            formListaProd.FormBorderStyle = FormBorderStyle.None; // Quita los bordes
+            formListaProd.Dock = DockStyle.Fill; // Se ajusta al tamaño del panel
+            PGerente2.Controls.Add(formListaProd);
+            formListaProd.Show();
         }
+
 
         private void PGerente2_Paint(object sender, PaintEventArgs e)
         {
 
         }
+
+        private void BEditarProducto_Click(object sender, EventArgs e)
+        {
+            PGerente2.Controls.Clear();
+            editarProducto formBaja = new editarProducto();
+            formBaja.TopLevel = false;  // Importante: permite embebido dentro de otro contenedor
+            formBaja.FormBorderStyle = FormBorderStyle.None; // Quita los bordes
+            formBaja.Dock = DockStyle.Fill; // Se ajusta al tamaño del panel
+            PGerente2.Controls.Add(formBaja);
+            formBaja.Show();
+        }
+
+        private void pBLogoHerram_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
+
 
 

@@ -29,7 +29,7 @@ namespace Antorena_Soto.CPresentacion.Vendedor
 
         private void BAgregarVenta_Click(object sender, EventArgs e)
         {
-            AbrirFormularioEnPanel(new agregarVenta());
+           // AbrirFormularioEnPanel(new agregarVenta()); donde esta este formulario?
         }
 
         private void BListarVenta_Click(object sender, EventArgs e)

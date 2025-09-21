@@ -19,9 +19,11 @@ namespace Antorena_Soto
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new FormMenuGerente());
       
         }
     }
 }
-//AltaProductos Form1()
+//AltaProductos
+// Form1()
+//FormMenuGerente

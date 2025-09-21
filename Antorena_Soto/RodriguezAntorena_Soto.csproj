@@ -79,6 +79,12 @@
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="CLogica\CN_Usuario.cs" />
+    <Compile Include="CPresentacion\Gerente\editarProducto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CPresentacion\Gerente\editarProducto.Designer.cs">
+      <DependentUpon>editarProducto.cs</DependentUpon>
+    </Compile>
     <Compile Include="CPresentacion\Gerente\listaProductos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -135,6 +141,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CPresentacion\Gerente\editarProducto.resx">
+      <DependentUpon>editarProducto.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CPresentacion\SuperAdministrador\agregarVendedor.resx">
       <DependentUpon>agregarVendedor.cs</DependentUpon>
     </EmbeddedResource>
@@ -214,6 +223,12 @@
       <DependentUpon>Modelo.edmx</DependentUpon>
       <LastGenOutput>Modelo.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\preferencesother_1037751.png" />
+    <None Include="Resources\config2.png" />
+    <None Include="Resources\preferencesother_103775.png" />
+    <None Include="Resources\config1.jpg" />
+    <None Include="Resources\config.png" />
+    <None Include="Resources\lupa.png" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
