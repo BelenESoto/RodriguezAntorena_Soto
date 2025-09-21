@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace Antorena_Soto.CDatos
@@ -12,6 +13,7 @@ namespace Antorena_Soto.CDatos
             this.conexionString = conexionString;
         }
 
+        //INSERTAR USUARIO
         public bool InsertarUsuario(int dni, string nombre, string provincia, string ciudad,
                                     string domicilio, string telefono, string correo, long cuit,
                                     DateTime fechaNacimiento, DateTime fechaIngreso, int tipoUsuario)
@@ -46,6 +48,31 @@ namespace Antorena_Soto.CDatos
             {
                 throw new Exception("Error al insertar el usuario en la base de datos", ex);
             }
+
         }
+        //LISTAR USUARIO
+
+        public DataTable ListarUsuarios()
+        {
+            try
+            {
+                using (SqlConnection conexionSql = new SqlConnection(conexionString))
+                {
+                    string consulta = "SELECT * FROM Usuario";
+                    SqlCommand comandoSql = new SqlCommand(consulta, conexionSql);
+                    SqlDataAdapter adaptador = new SqlDataAdapter(comandoSql);
+                    DataTable tablaUsuarios = new DataTable();
+                    adaptador.Fill(tablaUsuarios);
+                    return tablaUsuarios;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al listar los usuarios desde la base de datos", ex);
+            }
+        }
+
     }
+
+
 }

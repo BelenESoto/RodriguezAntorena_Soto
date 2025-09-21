@@ -1,5 +1,7 @@
 ﻿using Antorena_Soto.CPresentacion.Gerente;
 using Antorena_Soto.CPresentacion.Vendedor;
+using Antorena_Soto.CPresentacion.Administrador;
+using Antorena_Soto.CPresentacion.SuperAdministrador;
 using System;
 using System.Collections.Generic;
 using System.Drawing.Drawing2D;
@@ -19,7 +21,7 @@ namespace Antorena_Soto
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormMenuGerente());
+            Application.Run(new CPresentacion.Administrador.menuSuperAdm());
       
         }
     }

@@ -30,14 +30,6 @@
         {
             this.PMenuSuperAdmin = new System.Windows.Forms.Panel();
             this.PGerente2 = new System.Windows.Forms.Panel();
-            this.LListaUsuario = new System.Windows.Forms.Label();
-            this.DGVListaVendedor = new System.Windows.Forms.DataGridView();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cuit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Correo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TipoUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Dni = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FechaIng = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PGerente1 = new System.Windows.Forms.Panel();
             this.BTBajaUsuario = new System.Windows.Forms.Button();
             this.LPersonalGest = new System.Windows.Forms.Label();
@@ -45,8 +37,6 @@
             this.BTAltaUsuario = new System.Windows.Forms.Button();
             this.LMenuGerente = new System.Windows.Forms.Label();
             this.PMenuSuperAdmin.SuspendLayout();
-            this.PGerente2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DGVListaVendedor)).BeginInit();
             this.PGerente1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,97 +46,22 @@
             this.PMenuSuperAdmin.Controls.Add(this.PGerente2);
             this.PMenuSuperAdmin.Controls.Add(this.PGerente1);
             this.PMenuSuperAdmin.Controls.Add(this.LMenuGerente);
-            this.PMenuSuperAdmin.Location = new System.Drawing.Point(3, 2);
-            this.PMenuSuperAdmin.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.PMenuSuperAdmin.Location = new System.Drawing.Point(2, 2);
+            this.PMenuSuperAdmin.Margin = new System.Windows.Forms.Padding(2);
             this.PMenuSuperAdmin.Name = "PMenuSuperAdmin";
-            this.PMenuSuperAdmin.Size = new System.Drawing.Size(1040, 495);
+            this.PMenuSuperAdmin.Size = new System.Drawing.Size(780, 402);
             this.PMenuSuperAdmin.TabIndex = 0;
             // 
             // PGerente2
             // 
             this.PGerente2.BackColor = System.Drawing.Color.Gainsboro;
-            this.PGerente2.Controls.Add(this.LListaUsuario);
-            this.PGerente2.Controls.Add(this.DGVListaVendedor);
-            this.PGerente2.Location = new System.Drawing.Point(266, 9);
-            this.PGerente2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.PGerente2.BackgroundImage = global::Antorena_Soto.Properties.Resources.config2;
+            this.PGerente2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.PGerente2.Location = new System.Drawing.Point(200, 7);
+            this.PGerente2.Margin = new System.Windows.Forms.Padding(2);
             this.PGerente2.Name = "PGerente2";
-            this.PGerente2.Size = new System.Drawing.Size(764, 481);
+            this.PGerente2.Size = new System.Drawing.Size(573, 391);
             this.PGerente2.TabIndex = 4;
-            // 
-            // LListaUsuario
-            // 
-            this.LListaUsuario.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.LListaUsuario.BackColor = System.Drawing.Color.Gainsboro;
-            this.LListaUsuario.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.LListaUsuario.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.LListaUsuario.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LListaUsuario.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.LListaUsuario.Location = new System.Drawing.Point(16, 12);
-            this.LListaUsuario.Name = "LListaUsuario";
-            this.LListaUsuario.Size = new System.Drawing.Size(735, 48);
-            this.LListaUsuario.TabIndex = 5;
-            this.LListaUsuario.Text = "LISTA DE USUARIOS";
-            this.LListaUsuario.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // DGVListaVendedor
-            // 
-            this.DGVListaVendedor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGVListaVendedor.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Nombre,
-            this.Cuit,
-            this.Correo,
-            this.TipoUsuario,
-            this.Dni,
-            this.FechaIng});
-            this.DGVListaVendedor.Location = new System.Drawing.Point(16, 75);
-            this.DGVListaVendedor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.DGVListaVendedor.Name = "DGVListaVendedor";
-            this.DGVListaVendedor.RowHeadersWidth = 51;
-            this.DGVListaVendedor.RowTemplate.Height = 24;
-            this.DGVListaVendedor.Size = new System.Drawing.Size(735, 316);
-            this.DGVListaVendedor.TabIndex = 0;
-            // 
-            // Nombre
-            // 
-            this.Nombre.HeaderText = "Nombre y Apellido";
-            this.Nombre.MinimumWidth = 6;
-            this.Nombre.Name = "Nombre";
-            this.Nombre.Width = 125;
-            // 
-            // Cuit
-            // 
-            this.Cuit.HeaderText = "Cuit";
-            this.Cuit.MinimumWidth = 6;
-            this.Cuit.Name = "Cuit";
-            this.Cuit.Width = 125;
-            // 
-            // Correo
-            // 
-            this.Correo.HeaderText = "Correo";
-            this.Correo.MinimumWidth = 6;
-            this.Correo.Name = "Correo";
-            this.Correo.Width = 125;
-            // 
-            // TipoUsuario
-            // 
-            this.TipoUsuario.HeaderText = "Tipo Usuario";
-            this.TipoUsuario.MinimumWidth = 6;
-            this.TipoUsuario.Name = "TipoUsuario";
-            this.TipoUsuario.Width = 125;
-            // 
-            // Dni
-            // 
-            this.Dni.HeaderText = "Dni";
-            this.Dni.MinimumWidth = 6;
-            this.Dni.Name = "Dni";
-            this.Dni.Width = 125;
-            // 
-            // FechaIng
-            // 
-            this.FechaIng.HeaderText = "Fecha Ingreso";
-            this.FechaIng.MinimumWidth = 6;
-            this.FechaIng.Name = "FechaIng";
-            this.FechaIng.Width = 125;
             // 
             // PGerente1
             // 
@@ -155,49 +70,52 @@
             this.PGerente1.Controls.Add(this.LPersonalGest);
             this.PGerente1.Controls.Add(this.BTListaUsuario);
             this.PGerente1.Controls.Add(this.BTAltaUsuario);
-            this.PGerente1.Location = new System.Drawing.Point(0, 54);
-            this.PGerente1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.PGerente1.Location = new System.Drawing.Point(0, 44);
+            this.PGerente1.Margin = new System.Windows.Forms.Padding(2);
             this.PGerente1.Name = "PGerente1";
-            this.PGerente1.Size = new System.Drawing.Size(260, 434);
+            this.PGerente1.Size = new System.Drawing.Size(195, 353);
             this.PGerente1.TabIndex = 2;
             // 
             // BTBajaUsuario
             // 
-            this.BTBajaUsuario.Location = new System.Drawing.Point(27, 91);
-            this.BTBajaUsuario.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.BTBajaUsuario.Location = new System.Drawing.Point(20, 74);
+            this.BTBajaUsuario.Margin = new System.Windows.Forms.Padding(2);
             this.BTBajaUsuario.Name = "BTBajaUsuario";
-            this.BTBajaUsuario.Size = new System.Drawing.Size(219, 33);
+            this.BTBajaUsuario.Size = new System.Drawing.Size(164, 27);
             this.BTBajaUsuario.TabIndex = 7;
             this.BTBajaUsuario.Text = "Baja Usuario";
             this.BTBajaUsuario.UseVisualStyleBackColor = true;
+            this.BTBajaUsuario.Click += new System.EventHandler(this.BTBajaUsuario_Click_1);
             // 
             // LPersonalGest
             // 
             this.LPersonalGest.AutoSize = true;
             this.LPersonalGest.BackColor = System.Drawing.Color.LightGray;
             this.LPersonalGest.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LPersonalGest.Location = new System.Drawing.Point(99, 17);
+            this.LPersonalGest.Location = new System.Drawing.Point(74, 14);
+            this.LPersonalGest.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LPersonalGest.Name = "LPersonalGest";
-            this.LPersonalGest.Size = new System.Drawing.Size(81, 20);
+            this.LPersonalGest.Size = new System.Drawing.Size(67, 17);
             this.LPersonalGest.TabIndex = 5;
             this.LPersonalGest.Text = "Personal";
             // 
             // BTListaUsuario
             // 
-            this.BTListaUsuario.Location = new System.Drawing.Point(27, 129);
-            this.BTListaUsuario.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.BTListaUsuario.Location = new System.Drawing.Point(20, 105);
+            this.BTListaUsuario.Margin = new System.Windows.Forms.Padding(2);
             this.BTListaUsuario.Name = "BTListaUsuario";
-            this.BTListaUsuario.Size = new System.Drawing.Size(219, 33);
+            this.BTListaUsuario.Size = new System.Drawing.Size(164, 27);
             this.BTListaUsuario.TabIndex = 2;
             this.BTListaUsuario.Text = "Lista de Ususarios";
             this.BTListaUsuario.UseVisualStyleBackColor = true;
+            this.BTListaUsuario.Click += new System.EventHandler(this.BTListaUsuario_Click_1);
             // 
             // BTAltaUsuario
             // 
-            this.BTAltaUsuario.Location = new System.Drawing.Point(27, 53);
-            this.BTAltaUsuario.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.BTAltaUsuario.Location = new System.Drawing.Point(20, 43);
+            this.BTAltaUsuario.Margin = new System.Windows.Forms.Padding(2);
             this.BTAltaUsuario.Name = "BTAltaUsuario";
-            this.BTAltaUsuario.Size = new System.Drawing.Size(219, 33);
+            this.BTAltaUsuario.Size = new System.Drawing.Size(164, 27);
             this.BTAltaUsuario.TabIndex = 1;
             this.BTAltaUsuario.Text = "Alta Usuario";
             this.BTAltaUsuario.UseVisualStyleBackColor = true;
@@ -209,25 +127,24 @@
             this.LMenuGerente.BackColor = System.Drawing.Color.Gainsboro;
             this.LMenuGerente.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LMenuGerente.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.LMenuGerente.Location = new System.Drawing.Point(0, 4);
+            this.LMenuGerente.Location = new System.Drawing.Point(0, 3);
+            this.LMenuGerente.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LMenuGerente.Name = "LMenuGerente";
-            this.LMenuGerente.Size = new System.Drawing.Size(260, 48);
+            this.LMenuGerente.Size = new System.Drawing.Size(195, 39);
             this.LMenuGerente.TabIndex = 1;
             this.LMenuGerente.Text = "MENU SUPER-ADMIN";
             this.LMenuGerente.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // menuSuperAdm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1045, 503);
+            this.ClientSize = new System.Drawing.Size(784, 409);
             this.Controls.Add(this.PMenuSuperAdmin);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "menuSuperAdm";
-            this.Text = "Form1";
+            this.Text = "Menu Super Administrador";
             this.PMenuSuperAdmin.ResumeLayout(false);
-            this.PGerente2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.DGVListaVendedor)).EndInit();
             this.PGerente1.ResumeLayout(false);
             this.PGerente1.PerformLayout();
             this.ResumeLayout(false);
@@ -244,13 +161,5 @@
         private System.Windows.Forms.Button BTListaUsuario;
         private System.Windows.Forms.Button BTAltaUsuario;
         private System.Windows.Forms.Panel PGerente2;
-        private System.Windows.Forms.DataGridView DGVListaVendedor;
-        private System.Windows.Forms.Label LListaUsuario;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Cuit;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Correo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TipoUsuario;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Dni;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FechaIng;
     }
 }

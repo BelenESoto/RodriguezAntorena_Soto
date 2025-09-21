@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using Antorena_Soto.CDatos;
 
 namespace Antorena_Soto.CLogica
@@ -24,6 +25,11 @@ namespace Antorena_Soto.CLogica
                 throw new ArgumentException("El DNI debe ser numérico.");
 
             return usuarioDAL.InsertarUsuario(dniInt, nombre, provincia, ciudad, domicilio, telefono, correo, cuit, fechaNacimiento, fechaIngreso, tipoUsuario);
+        }
+
+        public DataTable ListarUsuariosBLL()
+        {
+            return usuarioDAL.ListarUsuarios();
         }
     }
 }
