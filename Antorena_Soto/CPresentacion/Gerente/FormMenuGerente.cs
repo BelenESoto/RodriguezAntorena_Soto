@@ -12,128 +12,48 @@ namespace Antorena_Soto.CPresentacion.Gerente
 {
     public partial class FormMenuGerente : Form
     {
-            private Form _formActual = null;
+        private List<Producto> _productos;
+
+        private Form _formActual = null;
             public FormMenuGerente()
         {
             InitializeComponent();
-        }
-        public FormMenuGerente(string titulo) : this()
+
+            // Inicializamos la lista con productos de ejemplo
+            _productos = new List<Producto>
         {
-            this.Text = titulo;
-        }
+            new Producto { Codigo = 1, Nombre = "Aros Mary", Precio = 5000, Categoria="Accesorios", Stock=10, Descripcion="Aros de acero", FechaModificacion=DateTime.Now, Imagen=null },
+            new Producto { Codigo = 2, Nombre = "Collar Eva", Precio = 8000, Categoria="Accesorios", Stock=5, Descripcion="Collar con piedra", FechaModificacion=DateTime.Now, Imagen=null }
+        };
+      }
+    
 
-        private void AbrirFormEnPanel(Form formHijo)
-        {
-            try
-            {
-                // Cierra el anterior si existe
-                if (_formActual != null)
-                {
-                    _formActual.Close();
-                    _formActual.Dispose();
-                    _formActual = null;
-                }
-
-                _formActual = formHijo;
-
-                formHijo.TopLevel = false;
-                formHijo.FormBorderStyle = FormBorderStyle.None;
-                formHijo.Dock = DockStyle.Fill;
-
-                PGerente2.Controls.Clear();
-                PGerente2.Controls.Add(formHijo);
-                PGerente2.Tag = formHijo;
-
-                formHijo.Show();
-                formHijo.BringToFront();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error abriendo formulario en panel:\n" + ex.Message + "\n\n" + ex.StackTrace,
-                                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-        }
-       /* }
-        private void BTAltaVendedor_Click(object sender, EventArgs e)
-        {
-            var form = new agregarVendedor(); 
-            AbrirFormEnPanel(form);
-        }
-
-        public void AgregarVendedor(string nombre, string dni, DateTime fechaNac)
-        {
-            DGVListaProd.Rows.Add(nombre, dni, fechaNac.ToShortDateString());
-            DGVListaProd.Show();
-            DGVListaProd.BringToFront();
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void toolStrip1_ItemClicked_1(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
-        private void BTBajaVendedor_Click(object sender, EventArgs e)
-        {
-            DialogResult ask = MessageBox.Show(
-                "¿Está a punto de eliminar los datos",
-                "Confirmar eliminación",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
-
-            if (ask == DialogResult.Yes)
-            {
-                MessageBox.Show("los datos se eliminaron correctamente.", "Eliminar", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                MessageBox.Show("Operación Cancelada", "Cancelar", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-        */
+       
         private void LMenuGerente_Click(object sender, EventArgs e)
         {
 
         }
-
-        private void BAltaProductos_Click(object sender, EventArgs e)
+          private void BAltaProductos_Click(object sender, EventArgs e)
         {
-
             PGerente2.Controls.Clear();
-            AltaProductos formAlta = new AltaProductos();
-            formAlta.TopLevel = false; 
-            formAlta.FormBorderStyle = FormBorderStyle.None; 
-            formAlta.Dock = DockStyle.Fill; // ajusta al tamaño del panel
-
-            PGerente2.Controls.Add(formAlta);
-            PGerente2.Tag = formAlta;
-            formAlta.Show();
+            using (var formAlta = new AltaProductos(_productos))  // 👈 le pasás la lista compartida
+            {
+                if (formAlta.ShowDialog() == DialogResult.OK)
+                {
+                    // Refrescar la lista si está cargada en el panel
+                    var listaForm = PGerente2.Controls.OfType<listaProductos>().FirstOrDefault();
+                    if (listaForm != null)
+                    {
+                        listaForm.CargarProductos();
+                    }
+                }
+            }
         }
+
 
         private void FormMenuGerente_Load(object sender, EventArgs e)
         {
 
-        }
-
-        private void BTListaVendedores_Click(object sender, EventArgs e)
-        {
-           // DGVListaProd.Show();
-           //DGVListaProd.BringToFront();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -143,14 +63,14 @@ namespace Antorena_Soto.CPresentacion.Gerente
 
         private void BListarProductos_Click(object sender, EventArgs e)
         {
-
             PGerente2.Controls.Clear();
-            listaProductos formListaProd = new listaProductos();
-            formListaProd.TopLevel = false;  // Importante: permite embebido dentro de otro contenedor
-            formListaProd.FormBorderStyle = FormBorderStyle.None; // Quita los bordes
-            formListaProd.Dock = DockStyle.Fill; // Se ajusta al tamaño del panel
+            listaProductos formListaProd = new listaProductos(_productos, "Ver");
+            formListaProd.TopLevel = false;
+            formListaProd.FormBorderStyle = FormBorderStyle.None;
+            formListaProd.Dock = DockStyle.Fill;
             PGerente2.Controls.Add(formListaProd);
             formListaProd.Show();
+
         }
 
 
@@ -162,12 +82,13 @@ namespace Antorena_Soto.CPresentacion.Gerente
         private void BEditarProducto_Click(object sender, EventArgs e)
         {
             PGerente2.Controls.Clear();
-            editarProducto formBaja = new editarProducto();
-            formBaja.TopLevel = false;  // Importante: permite embebido dentro de otro contenedor
-            formBaja.FormBorderStyle = FormBorderStyle.None; // Quita los bordes
-            formBaja.Dock = DockStyle.Fill; // Se ajusta al tamaño del panel
-            PGerente2.Controls.Add(formBaja);
-            formBaja.Show();
+            listaProductos formModif = new listaProductos(_productos, "Editar");
+            formModif.TopLevel = false;  //  embebido dentro de otro contenedor
+            formModif.FormBorderStyle = FormBorderStyle.None; // Quita los bordes
+            formModif.Dock = DockStyle.Fill; // Se ajusta al tamaño del panel
+            PGerente2.Controls.Add(formModif);
+            formModif.Show();
+          //  formModif.ShowDialog();
         }
 
         private void pBLogoHerram_Click(object sender, EventArgs e)

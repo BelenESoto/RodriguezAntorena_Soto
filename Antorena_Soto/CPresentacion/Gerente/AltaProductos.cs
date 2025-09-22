@@ -1,4 +1,5 @@
-﻿using Antorena_Soto.CLogica;
+﻿
+using Antorena_Soto.CLogica;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,16 +15,57 @@ namespace Antorena_Soto.CPresentacion.Gerente
 {
     public partial class AltaProductos : Form
     {
+        private bool esEdicion = false;           // Variable de clase
+        private int CodigoOriginal;            // Para mantener el código en edición
+        private List<Producto> _productos;
+     
+        /* Propiedades para devolver los cambios
+        public int CodigoEditado { get; private set; }
+        public string NombreEditado { get; private set; }
+        public string PrecioEditado { get; private set; }
+        public string CategoriaEditada { get; private set; }
+        public int StockEditado { get; private set; }
+        public string DescripcionEditada { get; private set; }
+        public Image ImagenEditada { get; private set; }
+        */
+        public string NombreProducto => TBNombreProducto.Text.Trim();
+        public decimal PrecioProducto => decimal.Parse(TBPrecioProducto.Text.Trim());
+        public string CategoriaProducto => CBCategoriaProducto.Text.Trim();
+        public int StockProducto => int.Parse(TBStockProducto.Text.Trim());
+        public string DescripcionProducto => TBDescripcionProducto.Text.Trim();
+        public Image ImagenProducto => PBImagenProducto.Image;
+
+        // Constructor para alta
         public AltaProductos()
         {
             InitializeComponent();
+            esEdicion = false;
         }
-        public AltaProductos(string codigo, string nombre, string precio)
-        { 
+       
+        public AltaProductos(List<Producto> productos)
+        {
             InitializeComponent();
-            
+            _productos = productos;
         }
-        //validadiones 
+
+        // Constructor para edición: recibe el producto existente
+        public AltaProductos(Producto prodExistente)
+        {
+            InitializeComponent();
+            esEdicion = true;
+
+            CodigoOriginal = prodExistente.Codigo;
+
+            TBNombreProducto.Text = prodExistente.Nombre;
+            TBPrecioProducto.Text = prodExistente.Precio.ToString();
+            CBCategoriaProducto.Text = prodExistente.Categoria;
+            TBStockProducto.Text = prodExistente.Stock.ToString();
+            TBDescripcionProducto.Text = prodExistente.Descripcion;
+            PBImagenProducto.Image = prodExistente.Imagen;
+
+            BAgregarProducto.Text = "Guardar Cambios";
+        }
+       
 
         private void TBNombreProductos_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
@@ -188,28 +230,51 @@ namespace Antorena_Soto.CPresentacion.Gerente
         }
 
         private void BAgregarProducto_Click(object sender, EventArgs e)
-        {
+        { 
             if (!ValidateChildren())
             {
-                MessageBox.Show("Por favor, corrija los errores antes de continuar.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Por favor, corrija los errores antes de continuar.",
+                    "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            /*
-                        Producto nuevoProducto = new Producto
-                        {
-                            nombreProd = TBNombreProducto.Text.Trim(),
-                            descripcionProd = TBDescripcionProducto.Text.Trim(),
-                            categoriaProd = CBCategoriaProducto.Text.Trim(),
-                            precioProd = decimal.Parse(TBPrecioProducto.Text.Trim()),
-                            stockProd = int.Parse(TBStockProducto.Text.Trim()),
-                            fechaModifProd = DTFechaModifProd.Value,
-                            imagen = PBImagenProducto.ImageLocation
-                        }
 
-                            );
+            // Genera el código incremental
+            int nuevoCodigo = 1;
+            if (!esEdicion && _productos != null && _productos.Count > 0)
+            {
+                nuevoCodigo = _productos.Max(p => p.Codigo) + 1;
+            }
+            // Crea el Producto
+            Producto nuevoProducto = new Producto()
+            {
+                Codigo = esEdicion ? CodigoOriginal : nuevoCodigo,
+                Nombre = TBNombreProducto.Text.Trim(),
+                Precio = decimal.Parse(TBPrecioProducto.Text.Trim()),
+                Categoria = CBCategoriaProducto.Text.Trim(),
+                Stock = int.Parse(TBStockProducto.Text.Trim()),
+                Descripcion = TBDescripcionProducto.Text.Trim(),
+                Imagen = PBImagenProducto.Image,
+                FechaModificacion = DateTime.Now.Date
+            };
 
-                    }*/
+            // Si estamos en Alta, agregamos a la lista compartida
+            if (!esEdicion && _productos != null)
+            {
+                _productos.Add(nuevoProducto);
+                MessageBox.Show($"Producto '{nuevoProducto.Nombre}' agregado correctamente");
+            }
+            else
+            {
+                MessageBox.Show($"Producto '{nuevoProducto.Nombre}' modificado correctamente");
+            }
+
+            // Devolver el objeto al formulario llamador
+            this.Tag = nuevoProducto;
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
+
+   
 
         private void LAgregarProducto_Click(object sender, EventArgs e)
         {
@@ -227,3 +292,6 @@ namespace Antorena_Soto.CPresentacion.Gerente
         }
     }
 }
+
+
+

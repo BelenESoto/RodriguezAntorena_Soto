@@ -39,9 +39,11 @@
             this.LBuscarPor = new System.Windows.Forms.ToolStripLabel();
             this.TBBuscarProd = new System.Windows.Forms.ToolStripTextBox();
             this.pContenedorListaProd = new System.Windows.Forms.Panel();
+            this.BEliminarProd = new System.Windows.Forms.Button();
+            this.BEditarProd = new System.Windows.Forms.Button();
             this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Correo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TipoUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Dni = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FechaIng = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -72,7 +74,6 @@
             this.LListaUsuario.TabIndex = 5;
             this.LListaUsuario.Text = "LISTA DE PRODUCTOS";
             this.LListaUsuario.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.LListaUsuario.Click += new System.EventHandler(this.LListaUsuario_Click);
             // 
             // DGVListaProd
             // 
@@ -81,7 +82,7 @@
             this.DGVListaProd.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Codigo,
             this.Nombre,
-            this.Correo,
+            this.Precio,
             this.TipoUsuario,
             this.Dni,
             this.FechaIng});
@@ -111,6 +112,7 @@
             this.TBuscadorProd.Size = new System.Drawing.Size(749, 48);
             this.TBuscadorProd.TabIndex = 6;
             this.TBuscadorProd.Text = "toolStrip1";
+            this.TBuscadorProd.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.TBuscadorProd_ItemClicked);
             // 
             // BBuscarPor
             // 
@@ -130,14 +132,14 @@
             // nombreProdToolStripMenuItem
             // 
             this.nombreProdToolStripMenuItem.Name = "nombreProdToolStripMenuItem";
-            this.nombreProdToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.nombreProdToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
             this.nombreProdToolStripMenuItem.Text = "Nombre";
             this.nombreProdToolStripMenuItem.Click += new System.EventHandler(this.nombreProdToolStripMenuItem_Click);
             // 
             // codigoToolStripMenuItem
             // 
             this.codigoToolStripMenuItem.Name = "codigoToolStripMenuItem";
-            this.codigoToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.codigoToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
             this.codigoToolStripMenuItem.Text = "Codigo";
             this.codigoToolStripMenuItem.Click += new System.EventHandler(this.codigoToolStripMenuItem_Click);
             // 
@@ -154,16 +156,18 @@
             // TBBuscarProd
             // 
             this.TBBuscarProd.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.TBBuscarProd.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.TBBuscarProd.ForeColor = System.Drawing.SystemColors.ControlDark;
             this.TBBuscarProd.Name = "TBBuscarProd";
             this.TBBuscarProd.Size = new System.Drawing.Size(367, 48);
-            this.TBBuscarProd.Text = "Codigo del producto";
+            this.TBBuscarProd.Text = "Seleccione una categoria de busqueda ";
             this.TBBuscarProd.Click += new System.EventHandler(this.TBBuscarProd_Click);
             // 
             // pContenedorListaProd
             // 
             this.pContenedorListaProd.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pContenedorListaProd.BackColor = System.Drawing.Color.Black;
+            this.pContenedorListaProd.Controls.Add(this.BEliminarProd);
+            this.pContenedorListaProd.Controls.Add(this.BEditarProd);
             this.pContenedorListaProd.Controls.Add(this.DGVListaProd);
             this.pContenedorListaProd.Controls.Add(this.TBuscadorProd);
             this.pContenedorListaProd.Controls.Add(this.LListaUsuario);
@@ -171,49 +175,70 @@
             this.pContenedorListaProd.Name = "pContenedorListaProd";
             this.pContenedorListaProd.Size = new System.Drawing.Size(760, 500);
             this.pContenedorListaProd.TabIndex = 7;
-            this.pContenedorListaProd.Paint += new System.Windows.Forms.PaintEventHandler(this.pContenedorListaProd_Paint);
+            // 
+            // BEliminarProd
+            // 
+            this.BEliminarProd.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BEliminarProd.Location = new System.Drawing.Point(388, 396);
+            this.BEliminarProd.Name = "BEliminarProd";
+            this.BEliminarProd.Size = new System.Drawing.Size(149, 49);
+            this.BEliminarProd.TabIndex = 8;
+            this.BEliminarProd.Text = "Eliminar";
+            this.BEliminarProd.UseVisualStyleBackColor = true;
+            this.BEliminarProd.Click += new System.EventHandler(this.BEliminarProd_Click_1);
+            // 
+            // BEditarProd
+            // 
+            this.BEditarProd.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BEditarProd.Location = new System.Drawing.Point(218, 396);
+            this.BEditarProd.Name = "BEditarProd";
+            this.BEditarProd.Size = new System.Drawing.Size(149, 49);
+            this.BEditarProd.TabIndex = 7;
+            this.BEditarProd.Text = "Editar";
+            this.BEditarProd.UseVisualStyleBackColor = true;
+            this.BEditarProd.Click += new System.EventHandler(this.BEditarProd_Click_1);
             // 
             // Codigo
             // 
+            this.Codigo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.Codigo.HeaderText = "Codigo";
             this.Codigo.MinimumWidth = 3;
             this.Codigo.Name = "Codigo";
-            this.Codigo.Width = 125;
             // 
             // Nombre
             // 
+            this.Nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.Nombre.HeaderText = "Nombre ";
             this.Nombre.MinimumWidth = 3;
             this.Nombre.Name = "Nombre";
-            this.Nombre.Width = 125;
             // 
-            // Correo
+            // Precio
             // 
-            this.Correo.HeaderText = "Precio";
-            this.Correo.MinimumWidth = 3;
-            this.Correo.Name = "Correo";
-            this.Correo.Width = 125;
+            this.Precio.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Precio.HeaderText = "Precio";
+            this.Precio.MinimumWidth = 3;
+            this.Precio.Name = "Precio";
             // 
             // TipoUsuario
             // 
+            this.TipoUsuario.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.TipoUsuario.HeaderText = "Categoria";
             this.TipoUsuario.MinimumWidth = 3;
             this.TipoUsuario.Name = "TipoUsuario";
-            this.TipoUsuario.Width = 125;
             // 
             // Dni
             // 
+            this.Dni.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.Dni.HeaderText = "Stock";
             this.Dni.MinimumWidth = 3;
             this.Dni.Name = "Dni";
-            this.Dni.Width = 125;
             // 
             // FechaIng
             // 
+            this.FechaIng.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.FechaIng.HeaderText = "Fecha Modif";
             this.FechaIng.MinimumWidth = 3;
             this.FechaIng.Name = "FechaIng";
-            this.FechaIng.Width = 125;
             // 
             // listaProductos
             // 
@@ -248,9 +273,11 @@
         private System.Windows.Forms.ToolStripLabel LBuscarPor;
         private System.Windows.Forms.ToolStripTextBox TBBuscarProd;
         private System.Windows.Forms.Panel pContenedorListaProd;
+        private System.Windows.Forms.Button BEliminarProd;
+        private System.Windows.Forms.Button BEditarProd;
         private System.Windows.Forms.DataGridViewTextBoxColumn Codigo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Correo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Precio;
         private System.Windows.Forms.DataGridViewTextBoxColumn TipoUsuario;
         private System.Windows.Forms.DataGridViewTextBoxColumn Dni;
         private System.Windows.Forms.DataGridViewTextBoxColumn FechaIng;
