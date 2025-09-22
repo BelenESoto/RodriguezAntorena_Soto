@@ -1,4 +1,6 @@
-﻿namespace Antorena_Soto.CPresentacion.Gerente
+﻿using System;
+
+namespace Antorena_Soto.CPresentacion.Gerente
 {
     partial class AltaProductos
     {
@@ -30,6 +32,7 @@
         {
             this.LAgregarProducto = new System.Windows.Forms.Label();
             this.PAgregarProducto = new System.Windows.Forms.Panel();
+            this.PBImagenProducto = new System.Windows.Forms.PictureBox();
             this.CBCategoriaProducto = new System.Windows.Forms.ComboBox();
             this.DTFechaModifProd = new System.Windows.Forms.DateTimePicker();
             this.LFechaModificacionProd = new System.Windows.Forms.Label();
@@ -45,10 +48,9 @@
             this.TBNombreProducto = new System.Windows.Forms.TextBox();
             this.LNombreProducto = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.PBImagenProducto = new System.Windows.Forms.PictureBox();
             this.PAgregarProducto.SuspendLayout();
-            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PBImagenProducto)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // LAgregarProducto
@@ -56,14 +58,13 @@
             this.LAgregarProducto.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.LAgregarProducto.BackColor = System.Drawing.Color.Gainsboro;
             this.LAgregarProducto.Font = new System.Drawing.Font("SimSun", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LAgregarProducto.Location = new System.Drawing.Point(8, 7);
+            this.LAgregarProducto.Location = new System.Drawing.Point(-1, 7);
             this.LAgregarProducto.Name = "LAgregarProducto";
             this.LAgregarProducto.Padding = new System.Windows.Forms.Padding(10, 4, 4, 4);
             this.LAgregarProducto.Size = new System.Drawing.Size(739, 44);
             this.LAgregarProducto.TabIndex = 2;
             this.LAgregarProducto.Text = "AGREGAR PRODUCTO";
             this.LAgregarProducto.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.LAgregarProducto.Click += new System.EventHandler(this.LAgregarProducto_Click);
             // 
             // PAgregarProducto
             // 
@@ -83,11 +84,21 @@
             this.PAgregarProducto.Controls.Add(this.LDescripcionProducto);
             this.PAgregarProducto.Controls.Add(this.TBNombreProducto);
             this.PAgregarProducto.Controls.Add(this.LNombreProducto);
-            this.PAgregarProducto.Location = new System.Drawing.Point(8, 57);
+            this.PAgregarProducto.Location = new System.Drawing.Point(-15, 57);
             this.PAgregarProducto.Name = "PAgregarProducto";
-            this.PAgregarProducto.Size = new System.Drawing.Size(739, 443);
+            this.PAgregarProducto.Size = new System.Drawing.Size(753, 421);
             this.PAgregarProducto.TabIndex = 1;
-            this.PAgregarProducto.Paint += new System.Windows.Forms.PaintEventHandler(this.PAgregarProducto_Paint);
+            // 
+            // PBImagenProducto
+            // 
+            this.PBImagenProducto.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.PBImagenProducto.Location = new System.Drawing.Point(21, 154);
+            this.PBImagenProducto.Name = "PBImagenProducto";
+            this.PBImagenProducto.Size = new System.Drawing.Size(242, 237);
+            this.PBImagenProducto.TabIndex = 37;
+            this.PBImagenProducto.TabStop = false;
+            this.PBImagenProducto.Click += new System.EventHandler(this.PBImagenProducto_Click);
+            this.PBImagenProducto.Validating += new System.ComponentModel.CancelEventHandler(this.PBImagenProducto_Validating);
             // 
             // CBCategoriaProducto
             // 
@@ -97,7 +108,7 @@
             "1-Collares",
             "2-Aros",
             "3-Otros"});
-            this.CBCategoriaProducto.Location = new System.Drawing.Point(273, 154);
+            this.CBCategoriaProducto.Location = new System.Drawing.Point(269, 154);
             this.CBCategoriaProducto.Name = "CBCategoriaProducto";
             this.CBCategoriaProducto.Size = new System.Drawing.Size(446, 24);
             this.CBCategoriaProducto.TabIndex = 36;
@@ -205,7 +216,7 @@
             // 
             this.TBDescripcionProducto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TBDescripcionProducto.Location = new System.Drawing.Point(19, 95);
-            this.TBDescripcionProducto.MaxLength = 8;
+            this.TBDescripcionProducto.MaxLength = 200;
             this.TBDescripcionProducto.Name = "TBDescripcionProducto";
             this.TBDescripcionProducto.Size = new System.Drawing.Size(700, 30);
             this.TBDescripcionProducto.TabIndex = 16;
@@ -226,7 +237,7 @@
             // 
             this.TBNombreProducto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TBNombreProducto.Location = new System.Drawing.Point(21, 36);
-            this.TBNombreProducto.MaxLength = 8;
+            this.TBNombreProducto.MaxLength = 100;
             this.TBNombreProducto.Name = "TBNombreProducto";
             this.TBNombreProducto.Size = new System.Drawing.Size(698, 30);
             this.TBNombreProducto.TabIndex = 14;
@@ -251,36 +262,26 @@
             this.panel1.Controls.Add(this.LAgregarProducto);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(762, 500);
+            this.panel1.Size = new System.Drawing.Size(745, 500);
             this.panel1.TabIndex = 3;
-            // 
-            // PBImagenProducto
-            // 
-            this.PBImagenProducto.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.PBImagenProducto.Location = new System.Drawing.Point(21, 154);
-            this.PBImagenProducto.Name = "PBImagenProducto";
-            this.PBImagenProducto.Size = new System.Drawing.Size(242, 237);
-            this.PBImagenProducto.TabIndex = 37;
-            this.PBImagenProducto.TabStop = false;
-            this.PBImagenProducto.Click += new System.EventHandler(this.PBImagenProducto_Click);
-            this.PBImagenProducto.Validating += new System.ComponentModel.CancelEventHandler(this.PBImagenProducto_Validating);
             // 
             // AltaProductos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(754, 463);
+            this.ClientSize = new System.Drawing.Size(742, 453);
             this.Controls.Add(this.panel1);
             this.Name = "AltaProductos";
             this.Text = "AltaProductos";
             this.PAgregarProducto.ResumeLayout(false);
             this.PAgregarProducto.PerformLayout();
-            this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PBImagenProducto)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
+
 
         #endregion
         public System.Windows.Forms.Label LAgregarProducto;

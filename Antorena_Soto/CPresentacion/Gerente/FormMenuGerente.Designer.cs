@@ -81,7 +81,7 @@
             // 
             // BListarProductos
             // 
-            this.BListarProductos.Location = new System.Drawing.Point(27, 156);
+            this.BListarProductos.Location = new System.Drawing.Point(27, 133);
             this.BListarProductos.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BListarProductos.Name = "BListarProductos";
             this.BListarProductos.Size = new System.Drawing.Size(219, 33);
@@ -103,7 +103,7 @@
             // 
             // BEditarProducto
             // 
-            this.BEditarProducto.Location = new System.Drawing.Point(27, 119);
+            this.BEditarProducto.Location = new System.Drawing.Point(27, 185);
             this.BEditarProducto.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BEditarProducto.Name = "BEditarProducto";
             this.BEditarProducto.Size = new System.Drawing.Size(219, 33);
@@ -130,7 +130,7 @@
             this.LMenuGerente.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.LMenuGerente.Font = new System.Drawing.Font("SimSun", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LMenuGerente.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.LMenuGerente.Location = new System.Drawing.Point(5, 7);
+            this.LMenuGerente.Location = new System.Drawing.Point(5, 6);
             this.LMenuGerente.Name = "LMenuGerente";
             this.LMenuGerente.Size = new System.Drawing.Size(272, 62);
             this.LMenuGerente.TabIndex = 0;
@@ -151,10 +151,10 @@
             this.PGerente2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.PGerente2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PGerente2.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.PGerente2.Location = new System.Drawing.Point(283, 6);
+            this.PGerente2.Location = new System.Drawing.Point(278, 6);
             this.PGerente2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.PGerente2.Name = "PGerente2";
-            this.PGerente2.Size = new System.Drawing.Size(762, 500);
+            this.PGerente2.Size = new System.Drawing.Size(790, 500);
             this.PGerente2.TabIndex = 1;
             this.PGerente2.Paint += new System.Windows.Forms.PaintEventHandler(this.PGerente2_Paint);
             // 
@@ -163,7 +163,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.ClientSize = new System.Drawing.Size(1045, 513);
+            this.ClientSize = new System.Drawing.Size(1068, 516);
             this.Controls.Add(this.LMenuGerente);
             this.Controls.Add(this.PGerente2);
             this.Controls.Add(this.PGerente1);
