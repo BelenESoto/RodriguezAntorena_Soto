@@ -113,28 +113,21 @@ namespace Antorena_Soto.CPresentacion.SuperAdministrador
                                       // No cargamos usuarios todavía; se hará al buscar
         }
 
-        // BOTONES DEL TOOLSTRIP PARA SELECCIONAR EL CRITERIO
-        private void BTSDni_Click(object sender, EventArgs e)
+
+        private void TBuscadorAdmin_Click(object sender, EventArgs e)
         {
-            buscarPorDni = true;
-            TBBuscador.Clear();
-            BTSDni.Checked = true;
-            BTSNomYApe.Checked = false;
+
         }
 
-        private void BTSNomyApe_Click(object sender, EventArgs e)
+        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            buscarPorDni = false;
-            TBBuscador.Clear();
-            BTSDni.Checked = false;
-            BTSNomYApe.Checked = true;
+
         }
 
+        
 
-        // BOTON DE BUSQUEDA
-        private void BTSBusqueda_Click(object sender, EventArgs e)
+        private void TBBuscador_Click(object sender, EventArgs e)
         {
-            
             try
             {
                 string criterio = TBBuscador.Text.Trim();
@@ -151,24 +144,31 @@ namespace Antorena_Soto.CPresentacion.SuperAdministrador
                     MessageBox.Show("Ingrese un DNI válido.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-
-                // Limpiar DataGridView antes de buscar
-                DGVListaUsuario.DataSource = null;
-
-                DataTable resultado = this.usuarioBLL.BuscarUsuariosBLL(criterio, buscarPorDni);
-                DGVListaUsuario.DataSource = resultado;
-
-                if (resultado.Rows.Count == 0)
-                    MessageBox.Show("No se encontraron usuarios con ese criterio.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al buscar usuario: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error al ingresar datos de búsqueda: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        // BOTON BORRAR USUARIO
-        private void BBorrar_Click(object sender, EventArgs e)
+        private void BTSDni_Click_1(object sender, EventArgs e)
+        {
+            buscarPorDni = true;
+            TBBuscador.Clear();
+            BTSDni.Checked = true;
+            BTSNomYApe.Checked = false;
+        }
+
+        private void BTSNomYApe_Click_1(object sender, EventArgs e)
+        {
+            buscarPorDni = false;
+            TBBuscador.Clear();
+            BTSDni.Checked = false;
+            BTSNomYApe.Checked = true;
+        }
+
+        private void BBorrar_Click_1(object sender, EventArgs e)
         {
             if (DGVListaUsuario.CurrentRow == null)
             {
@@ -202,14 +202,25 @@ namespace Antorena_Soto.CPresentacion.SuperAdministrador
             }
         }
 
-        private void TBuscadorAdmin_Click(object sender, EventArgs e)
+        private void BTSBusqueda_Click(object sender, EventArgs e)
         {
+            try
+            {
+                string criterio = TBBuscador.Text.Trim();
 
-        }
+                // Limpiar DataGridView antes de buscar
+                DGVListaUsuario.DataSource = null;
 
-        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
+                DataTable resultado = this.usuarioBLL.BuscarUsuariosBLL(criterio, buscarPorDni);
+                DGVListaUsuario.DataSource = resultado;
 
+                if (resultado.Rows.Count == 0)
+                    MessageBox.Show("No se encontraron usuarios con ese criterio.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al buscar usuario: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

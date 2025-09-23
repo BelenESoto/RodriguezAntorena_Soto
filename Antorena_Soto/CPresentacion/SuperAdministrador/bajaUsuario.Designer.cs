@@ -36,12 +36,8 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.LBuscarPor = new System.Windows.Forms.ToolStripLabel();
             this.TBBuscador = new System.Windows.Forms.ToolStripTextBox();
-            this.BTSBusqueda = new System.Windows.Forms.ToolStripButton();
             this.LBajaUsuario = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.BBorrar = new System.Windows.Forms.Button();
-            this.LDatosBajaUs = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.DGVListaUsuario = new System.Windows.Forms.DataGridView();
             this.Dni = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,10 +50,14 @@
             this.Cuit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FechaIng = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TipoUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BBorrar = new System.Windows.Forms.Button();
+            this.LDatosBajaUs = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.BTSBusqueda = new FontAwesome.Sharp.IconButton();
             this.TBuscador.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGVListaUsuario)).BeginInit();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // TBuscador
@@ -70,24 +70,24 @@
             this.BBuscarPor,
             this.toolStripSeparator1,
             this.LBuscarPor,
-            this.TBBuscador,
-            this.BTSBusqueda});
-            this.TBuscador.Location = new System.Drawing.Point(9, 50);
+            this.TBBuscador});
+            this.TBuscador.Location = new System.Drawing.Point(0, 50);
             this.TBuscador.Name = "TBuscador";
-            this.TBuscador.Size = new System.Drawing.Size(521, 39);
+            this.TBuscador.Size = new System.Drawing.Size(572, 39);
             this.TBuscador.TabIndex = 5;
             this.TBuscador.Text = "toolStrip1";
             this.TBuscador.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
             // 
             // BBuscarPor
             // 
+            this.BBuscarPor.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.BBuscarPor.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.BTSDni,
             this.BTSNomYApe});
             this.BBuscarPor.Image = ((System.Drawing.Image)(resources.GetObject("BBuscarPor.Image")));
             this.BBuscarPor.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.BBuscarPor.Name = "BBuscarPor";
-            this.BBuscarPor.Size = new System.Drawing.Size(113, 36);
+            this.BBuscarPor.Size = new System.Drawing.Size(93, 36);
             this.BBuscarPor.Text = "BUSCAR POR";
             // 
             // BTSDni
@@ -95,12 +95,14 @@
             this.BTSDni.Name = "BTSDni";
             this.BTSDni.Size = new System.Drawing.Size(174, 22);
             this.BTSDni.Text = "DNI";
+            this.BTSDni.Click += new System.EventHandler(this.BTSDni_Click_1);
             // 
             // BTSNomYApe
             // 
             this.BTSNomYApe.Name = "BTSNomYApe";
             this.BTSNomYApe.Size = new System.Drawing.Size(174, 22);
             this.BTSNomYApe.Text = "Apellido y Nombre";
+            this.BTSNomYApe.Click += new System.EventHandler(this.BTSNomYApe_Click_1);
             // 
             // toolStripSeparator1
             // 
@@ -117,16 +119,7 @@
             this.TBBuscador.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.TBBuscador.Name = "TBBuscador";
             this.TBBuscador.Size = new System.Drawing.Size(276, 39);
-            // 
-            // BTSBusqueda
-            // 
-            this.BTSBusqueda.AutoSize = false;
-            this.BTSBusqueda.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.BTSBusqueda.Image = ((System.Drawing.Image)(resources.GetObject("BTSBusqueda.Image")));
-            this.BTSBusqueda.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.BTSBusqueda.Name = "BTSBusqueda";
-            this.BTSBusqueda.Size = new System.Drawing.Size(29, 24);
-            this.BTSBusqueda.Text = "Buscar";
+            this.TBBuscador.Click += new System.EventHandler(this.TBBuscador_Click);
             // 
             // LBajaUsuario
             // 
@@ -135,10 +128,10 @@
             this.LBajaUsuario.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LBajaUsuario.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LBajaUsuario.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.LBajaUsuario.Location = new System.Drawing.Point(9, 9);
+            this.LBajaUsuario.Location = new System.Drawing.Point(0, 0);
             this.LBajaUsuario.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LBajaUsuario.Name = "LBajaUsuario";
-            this.LBajaUsuario.Size = new System.Drawing.Size(521, 39);
+            this.LBajaUsuario.Size = new System.Drawing.Size(573, 48);
             this.LBajaUsuario.TabIndex = 4;
             this.LBajaUsuario.Text = "BAJA DE USUARIO";
             this.LBajaUsuario.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -151,41 +144,8 @@
             this.panel1.Controls.Add(this.LDatosBajaUs);
             this.panel1.Location = new System.Drawing.Point(0, 92);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(530, 290);
+            this.panel1.Size = new System.Drawing.Size(572, 290);
             this.panel1.TabIndex = 6;
-            // 
-            // BBorrar
-            // 
-            this.BBorrar.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.BBorrar.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BBorrar.Location = new System.Drawing.Point(158, 121);
-            this.BBorrar.Name = "BBorrar";
-            this.BBorrar.Size = new System.Drawing.Size(159, 43);
-            this.BBorrar.TabIndex = 8;
-            this.BBorrar.Text = "ELIMINAR";
-            this.BBorrar.UseVisualStyleBackColor = false;
-            // 
-            // LDatosBajaUs
-            // 
-            this.LDatosBajaUs.AutoSize = true;
-            this.LDatosBajaUs.BackColor = System.Drawing.Color.LightGray;
-            this.LDatosBajaUs.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LDatosBajaUs.Location = new System.Drawing.Point(9, 10);
-            this.LDatosBajaUs.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.LDatosBajaUs.Name = "LDatosBajaUs";
-            this.LDatosBajaUs.Size = new System.Drawing.Size(182, 18);
-            this.LDatosBajaUs.TabIndex = 6;
-            this.LDatosBajaUs.Text = "DATOS DEL USUARIO";
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.panel1);
-            this.panel2.Controls.Add(this.TBuscador);
-            this.panel2.Controls.Add(this.LBajaUsuario);
-            this.panel2.Location = new System.Drawing.Point(2, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(542, 389);
-            this.panel2.TabIndex = 7;
             // 
             // DGVListaUsuario
             // 
@@ -207,7 +167,7 @@
             this.DGVListaUsuario.Name = "DGVListaUsuario";
             this.DGVListaUsuario.RowHeadersWidth = 51;
             this.DGVListaUsuario.RowTemplate.Height = 24;
-            this.DGVListaUsuario.Size = new System.Drawing.Size(552, 69);
+            this.DGVListaUsuario.Size = new System.Drawing.Size(552, 73);
             this.DGVListaUsuario.TabIndex = 9;
             // 
             // Dni
@@ -288,12 +248,66 @@
             this.TipoUsuario.Name = "TipoUsuario";
             this.TipoUsuario.Width = 125;
             // 
+            // BBorrar
+            // 
+            this.BBorrar.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.BBorrar.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BBorrar.Location = new System.Drawing.Point(194, 135);
+            this.BBorrar.Name = "BBorrar";
+            this.BBorrar.Size = new System.Drawing.Size(159, 43);
+            this.BBorrar.TabIndex = 8;
+            this.BBorrar.Text = "ELIMINAR";
+            this.BBorrar.UseVisualStyleBackColor = false;
+            this.BBorrar.Click += new System.EventHandler(this.BBorrar_Click_1);
+            // 
+            // LDatosBajaUs
+            // 
+            this.LDatosBajaUs.AutoSize = true;
+            this.LDatosBajaUs.BackColor = System.Drawing.Color.LightGray;
+            this.LDatosBajaUs.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LDatosBajaUs.Location = new System.Drawing.Point(9, 10);
+            this.LDatosBajaUs.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.LDatosBajaUs.Name = "LDatosBajaUs";
+            this.LDatosBajaUs.Size = new System.Drawing.Size(182, 18);
+            this.LDatosBajaUs.TabIndex = 6;
+            this.LDatosBajaUs.Text = "DATOS DEL USUARIO";
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.BTSBusqueda);
+            this.panel2.Controls.Add(this.panel1);
+            this.panel2.Controls.Add(this.TBuscador);
+            this.panel2.Controls.Add(this.LBajaUsuario);
+            this.panel2.Location = new System.Drawing.Point(2, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(575, 389);
+            this.panel2.TabIndex = 7;
+            // 
+            // BTSBusqueda
+            // 
+            this.BTSBusqueda.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.BTSBusqueda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTSBusqueda.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTSBusqueda.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.BTSBusqueda.IconChar = FontAwesome.Sharp.IconChar.Searchengin;
+            this.BTSBusqueda.IconColor = System.Drawing.Color.Black;
+            this.BTSBusqueda.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.BTSBusqueda.IconSize = 36;
+            this.BTSBusqueda.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BTSBusqueda.Location = new System.Drawing.Point(388, 51);
+            this.BTSBusqueda.Name = "BTSBusqueda";
+            this.BTSBusqueda.Size = new System.Drawing.Size(125, 35);
+            this.BTSBusqueda.TabIndex = 7;
+            this.BTSBusqueda.Text = "Buscar";
+            this.BTSBusqueda.UseVisualStyleBackColor = false;
+            this.BTSBusqueda.Click += new System.EventHandler(this.BTSBusqueda_Click);
+            // 
             // bajaUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.ClientSize = new System.Drawing.Size(543, 384);
+            this.ClientSize = new System.Drawing.Size(583, 384);
             this.Controls.Add(this.panel2);
             this.Name = "bajaUsuario";
             this.Text = "bajaUsuario";
@@ -301,8 +315,8 @@
             this.TBuscador.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DGVListaUsuario)).EndInit();
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -313,7 +327,6 @@
         private System.Windows.Forms.ToolStripSplitButton BBuscarPor;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripTextBox TBBuscador;
-        private System.Windows.Forms.ToolStripButton BTSBusqueda;
         private System.Windows.Forms.Label LBajaUsuario;
         private System.Windows.Forms.ToolStripMenuItem BTSDni;
         private System.Windows.Forms.ToolStripMenuItem BTSNomYApe;
@@ -334,5 +347,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Cuit;
         private System.Windows.Forms.DataGridViewTextBoxColumn FechaIng;
         private System.Windows.Forms.DataGridViewTextBoxColumn TipoUsuario;
+        private FontAwesome.Sharp.IconButton BTSBusqueda;
     }
 }
