@@ -21,5 +21,9 @@ namespace Antorena_Soto.CDatos
         public string domicilio { get; set; }
         public long telefono { get; set; }
         public string correo { get; set; }
+        public System.DateTime fecha_nacimiento { get; set; }
+        public long cuit { get; set; }
+        public System.DateTime fecha_ingreso { get; set; }
+        public string tipo_Usuario { get; set; }
     }
 }

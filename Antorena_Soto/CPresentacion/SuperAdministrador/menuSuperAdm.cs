@@ -86,7 +86,8 @@ namespace Antorena_Soto.CPresentacion.Administrador
 
             private void BTBajaUsuario_Click(object sender, EventArgs e)
             {
-                DialogResult ask = MessageBox.Show(
+
+            DialogResult ask = MessageBox.Show(
                     "¿Está a punto de eliminar los datos",
                     "Confirmar eliminación",
                     MessageBoxButtons.YesNo,
@@ -113,11 +114,13 @@ namespace Antorena_Soto.CPresentacion.Administrador
         {
             var form = new listaUsuarios();
             AbrirFormEnPanel(form);
+            form.CargarUsuarios();
         }
 
         private void BTBajaUsuario_Click_1(object sender, EventArgs e)
         {
             var form = new bajaUsuario();
+            form.ConfigurarDataGridView();
             AbrirFormEnPanel(form);
         }
     }

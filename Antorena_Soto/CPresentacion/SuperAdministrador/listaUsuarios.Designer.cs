@@ -34,11 +34,11 @@
             this.Dni = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Provincia = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ciuudad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ciudad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Domicilio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Correo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fecha_nac = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaNac = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cuit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FechaIng = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TipoUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -53,11 +53,11 @@
             this.Dni,
             this.Nombre,
             this.Provincia,
-            this.Ciuudad,
+            this.Ciudad,
             this.Domicilio,
             this.Tel,
             this.Correo,
-            this.fecha_nac,
+            this.FechaNac,
             this.Cuit,
             this.FechaIng,
             this.TipoUsuario});
@@ -99,6 +99,7 @@
             // 
             // Dni
             // 
+            this.Dni.DataPropertyName = "id_dni_usuario";
             this.Dni.HeaderText = "Dni";
             this.Dni.MinimumWidth = 6;
             this.Dni.Name = "Dni";
@@ -106,6 +107,7 @@
             // 
             // Nombre
             // 
+            this.Nombre.DataPropertyName = "nomYApe_usuario";
             this.Nombre.HeaderText = "Nombre y Apellido";
             this.Nombre.MinimumWidth = 6;
             this.Nombre.Name = "Nombre";
@@ -113,38 +115,45 @@
             // 
             // Provincia
             // 
+            this.Provincia.DataPropertyName = "provincia";
             this.Provincia.HeaderText = "Provincia";
             this.Provincia.Name = "Provincia";
             // 
-            // Ciuudad
+            // Ciudad
             // 
-            this.Ciuudad.HeaderText = "Ciudad";
-            this.Ciuudad.Name = "Ciuudad";
+            this.Ciudad.DataPropertyName = "ciudad";
+            this.Ciudad.HeaderText = "Ciudad";
+            this.Ciudad.Name = "Ciudad";
             // 
             // Domicilio
             // 
+            this.Domicilio.DataPropertyName = "domicilio";
             this.Domicilio.HeaderText = "Domicilio";
             this.Domicilio.Name = "Domicilio";
             // 
             // Tel
             // 
+            this.Tel.DataPropertyName = "telefono";
             this.Tel.HeaderText = "Telefono";
             this.Tel.Name = "Tel";
             // 
             // Correo
             // 
+            this.Correo.DataPropertyName = "correo";
             this.Correo.HeaderText = "Correo";
             this.Correo.MinimumWidth = 6;
             this.Correo.Name = "Correo";
             this.Correo.Width = 125;
             // 
-            // fecha_nac
+            // FechaNac
             // 
-            this.fecha_nac.HeaderText = "Edad";
-            this.fecha_nac.Name = "fecha_nac";
+            this.FechaNac.DataPropertyName = "fecha_nacimiento";
+            this.FechaNac.HeaderText = "Edad";
+            this.FechaNac.Name = "FechaNac";
             // 
             // Cuit
             // 
+            this.Cuit.DataPropertyName = "cuit";
             this.Cuit.HeaderText = "Cuit";
             this.Cuit.MinimumWidth = 6;
             this.Cuit.Name = "Cuit";
@@ -152,6 +161,7 @@
             // 
             // FechaIng
             // 
+            this.FechaIng.DataPropertyName = "fecha_ingreso";
             this.FechaIng.HeaderText = "Fecha Ingreso";
             this.FechaIng.MinimumWidth = 6;
             this.FechaIng.Name = "FechaIng";
@@ -159,6 +169,7 @@
             // 
             // TipoUsuario
             // 
+            this.TipoUsuario.DataPropertyName = "tipo_Usuario";
             this.TipoUsuario.HeaderText = "Tipo Usuario";
             this.TipoUsuario.MinimumWidth = 6;
             this.TipoUsuario.Name = "TipoUsuario";
@@ -186,11 +197,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Dni;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Provincia;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Ciuudad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Ciudad;
         private System.Windows.Forms.DataGridViewTextBoxColumn Domicilio;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tel;
         private System.Windows.Forms.DataGridViewTextBoxColumn Correo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fecha_nac;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaNac;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cuit;
         private System.Windows.Forms.DataGridViewTextBoxColumn FechaIng;
         private System.Windows.Forms.DataGridViewTextBoxColumn TipoUsuario;

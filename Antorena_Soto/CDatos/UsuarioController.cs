@@ -15,16 +15,16 @@ namespace Antorena_Soto.CDatos
 
         //INSERTAR USUARIO
         public bool InsertarUsuario(int dni, string nombre, string provincia, string ciudad,
-                                    string domicilio, string telefono, string correo, long cuit,
-                                    DateTime fechaNacimiento, DateTime fechaIngreso, int tipoUsuario)
+                                    string domicilio, long telefono, string correo,
+                                    DateTime fechaNacimiento, long cuit, DateTime fechaIngreso, int tipoUsuario)
         {
             try
             {
                 using (SqlConnection conexionSql = new SqlConnection(conexionString))
                 {
                     string consulta = @"INSERT INTO Usuario
-                                    (id_dni_usuario, nomYApe_usuario, provincia, ciudad, domicilio, telefono, correo, cuit, fechaNacimiento, fechaIngreso,tipoUsuario)
-                                     VALUES (@dni, @nombre, @provincia, @ciudad, @domicilio, @telefono, @correo, @cuit, @fechaNacimiento, @fechaIngreso, @tipoUsuario)";
+                                    (id_dni_usuario, nomYApe_usuario, provincia, ciudad, domicilio, telefono, correo, fecha_nacimiento, cuit, fecha_ingreso,tipo_Usuario)
+                                     VALUES (@dni, @nombre, @provincia, @ciudad, @domicilio, @telefono, @correo, @fecha_nacimiento, @cuit, @fecha_ingreso, @tipo_Usuario)";
 
                     SqlCommand comandoSql = new SqlCommand(consulta, conexionSql);
                     comandoSql.Parameters.AddWithValue("@dni", dni);
@@ -33,11 +33,11 @@ namespace Antorena_Soto.CDatos
                     comandoSql.Parameters.AddWithValue("@ciudad", ciudad);
                     comandoSql.Parameters.AddWithValue("@domicilio", domicilio);
                     comandoSql.Parameters.AddWithValue("@telefono", telefono);
-                    comandoSql.Parameters.AddWithValue("@correo", correo);
+                    comandoSql.Parameters.AddWithValue("@correo", correo);                   
+                    comandoSql.Parameters.AddWithValue("@fecha_nacimiento", fechaNacimiento);
                     comandoSql.Parameters.AddWithValue("@cuit", cuit);
-                    comandoSql.Parameters.AddWithValue("@fechaNacimiento", fechaNacimiento);
-                    comandoSql.Parameters.AddWithValue("@fechaIngreso", fechaIngreso);
-                    comandoSql.Parameters.AddWithValue("@tipoUsuario", tipoUsuario);
+                    comandoSql.Parameters.AddWithValue("@fecha_ingreso", fechaIngreso);
+                    comandoSql.Parameters.AddWithValue("@tipo_Usuario", tipoUsuario);
 
                     conexionSql.Open();
                     int filasAfectadas = comandoSql.ExecuteNonQuery();
@@ -58,7 +58,8 @@ namespace Antorena_Soto.CDatos
             {
                 using (SqlConnection conexionSql = new SqlConnection(conexionString))
                 {
-                    string consulta = "SELECT * FROM Usuario";
+                    string consulta = @"SELECT id_dni_usuario, nomYApe_usuario, provincia, ciudad, domicilio, telefono, correo, fecha_nacimiento, cuit, fecha_ingreso, tipo_Usuario
+                                        FROM Usuario";
                     SqlCommand comandoSql = new SqlCommand(consulta, conexionSql);
                     SqlDataAdapter adaptador = new SqlDataAdapter(comandoSql);
                     DataTable tablaUsuarios = new DataTable();
@@ -69,6 +70,72 @@ namespace Antorena_Soto.CDatos
             catch (Exception ex)
             {
                 throw new Exception("Error al listar los usuarios desde la base de datos", ex);
+            }
+        }
+
+        public DataTable BuscarUsuarios(string criterio, bool buscarPorDni)
+        {
+            if (string.IsNullOrWhiteSpace(criterio))
+                throw new ArgumentException("Debe ingresar un criterio de búsqueda.");
+
+            try
+            {
+                using (SqlConnection conexionSql = new SqlConnection(conexionString))
+                {
+                    string consulta;
+
+                    if (buscarPorDni)
+                    {
+                        consulta = @"SELECT id_dni_usuario, nomYApe_usuario, provincia, ciudad, domicilio, telefono, correo, fecha_nacimiento, cuit, fecha_ingreso, tipo_Usuario
+                             FROM Usuario WHERE id_dni_usuario = @criterio";
+                    }
+                    else
+                    {
+                        consulta = @"SELECT id_dni_usuario, nomYApe_usuario, provincia, ciudad, domicilio, telefono, correo, fecha_nacimiento, cuit, fecha_ingreso, tipo_Usuario
+                             FROM Usuario WHERE nomYApe_usuario LIKE '%' + @criterio + '%'";
+                    }
+
+                    using (SqlCommand comandoSql = new SqlCommand(consulta, conexionSql))
+                    {
+                        if (buscarPorDni)
+                            comandoSql.Parameters.AddWithValue("@criterio", int.Parse(criterio));
+                        else
+                            comandoSql.Parameters.AddWithValue("@criterio", criterio);
+
+                        using (SqlDataAdapter adaptador = new SqlDataAdapter(comandoSql))
+                        {
+                            DataTable tablaUsuarios = new DataTable();
+                            adaptador.Fill(tablaUsuarios);
+                            return tablaUsuarios;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al buscar usuarios en la base de datos", ex);
+            }
+        }
+
+        // ELIMINAR USUARIO POR DNI
+        public bool EliminarUsuario(int dni)
+        {
+            try
+            {
+                using (SqlConnection conexionSql = new SqlConnection(conexionString))
+                {
+                    string consulta = "DELETE FROM Usuario WHERE id_dni_usuario = @dni";
+                    SqlCommand comandoSql = new SqlCommand(consulta, conexionSql);
+                    comandoSql.Parameters.AddWithValue("@dni", dni);
+
+                    conexionSql.Open();
+                    int filasAfectadas = comandoSql.ExecuteNonQuery();
+                    return filasAfectadas > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al eliminar el usuario de la base de datos", ex);
             }
         }
 

@@ -255,8 +255,14 @@ namespace Antorena_Soto.CPresentacion.Gerente
 
             try
             {
-                string connectionString = "Data Source=DESKTOP-IDH7B7D/SQLEXPRESS;Initial Catalog=RodriguezAntorena_Soto;Integrated Security=True";
+                string connectionString = "Data Source=DESKTOP-IDH7B7D\\SQLEXPRESS;Initial Catalog=RodriguezAntorena_Soto;Integrated Security=True";
                 UsuarioBLL usuarioBLL = new UsuarioBLL(connectionString);
+
+                if (!long.TryParse(TBCuitVendedor.Text.Trim(), out long cuitUsuario))
+                {
+                    MessageBox.Show("CUIT inválido");
+                    return;
+                }
 
                 bool ok = usuarioBLL.AgregarUsuario(
                     dni: TBDniVendedor.Text.Trim(),
@@ -264,12 +270,12 @@ namespace Antorena_Soto.CPresentacion.Gerente
                     provincia: TBProvinciaVendedor.Text.Trim(),
                     ciudad: TBCiudadVendedor.Text.Trim(),
                     domicilio: TBDomicilioVendedor.Text.Trim(),
-                    telefono: TBNumVendedor.Text.Trim(),
-                    correo: TBCorreoVendedor.Text.Trim(),
-                    cuit: long.Parse(TBCuitVendedor.Text.Trim()),
+                    telefono: long.Parse(TBNumVendedor.Text.Trim()),
+                    correo: TBCorreoVendedor.Text.Trim(),                    
                     fechaNacimiento: DTFechaNacVendedor.Value,
+                    cuit: long.Parse(TBCuitVendedor.Text.Trim()),
                     fechaIngreso: DTFechaIngVendedor.Value,
-                    tipoUsuario: int.Parse(CBTipoUsuario.Text.Trim())
+                    tipoUsuario: Convert.ToInt32(CBTipoUsuario.SelectedValue)
                 );
 
                 if (ok)
@@ -281,50 +287,12 @@ namespace Antorena_Soto.CPresentacion.Gerente
                     MessageBox.Show("No se pudo agregar el vendedor.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            catch (Exception ex){
+                MessageBox.Show($"Error al agregar vendedor: {ex.Message}",
+                                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            /* ANTERIOR:
-           if (!ValidateChildren())
-           {
-               MessageBox.Show("Por favor, corrija los errores antes de continuar.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-               return;
-           }
-           string nombre = TBNombreVendedor.Text.Trim();
-           string dni = TBDniVendedor.Text.Trim();
-           string provincia = TBProvinciaVendedor.Text.Trim();
-           string ciudad = TBCiudadVendedor.Text.Trim();
-           string domicilio = TBDomicilioVendedor.Text.Trim();
-           string telefono = TBNumVendedor.Text.Trim();
-           string correo = TBCorreoVendedor.Text.Trim();
-           DateTime fechaNac = DTFechaNacVendedor.Value;
-           DateTime fechaIng = DTFechaIngVendedor.Value;
-           string cuit = TBCuitVendedor.Text.Trim();
-           // con estos nombres guardo en la base de datos 
 
-
-           FormMenuGerente formGerente = Application.OpenForms.OfType<FormMenuGerente>().FirstOrDefault();
-           if (formGerente == null)
-           {
-               formGerente = new FormMenuGerente(); //si no hay lo creo
-           }
-           formGerente.AgregarVendedor(nombre, dni, fechaNac);
-           formGerente.Show();
-           formGerente.BringToFront();
-           //con esto cargo y muestro los datos 
-
-
-           MessageBox.Show("Cliente agregado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-          TBNombreVendedor.Clear();
-           TBDniVendedor.Clear();
-           TBProvinciaVendedor.Clear();
-           TBCiudadVendedor.Clear();
-           TBDomicilioVendedor.Clear();
-           TBNumVendedor.Clear();
-           TBCorreoVendedor.Clear();
-           TBCuitVendedor.Clear(); */
         }
 
         private void PAgregarVendedor_Paint(object sender, PaintEventArgs e)
