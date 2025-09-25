@@ -1,5 +1,4 @@
 ﻿using Antorena_Soto.CPresentacion.Gerente;
-using Antorena_Soto.CPresentacion.SuperAdministrador;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,7 +17,7 @@ namespace Antorena_Soto.CPresentacion.Administrador
         public menuSuperAdm()
         {
             InitializeComponent();
-           
+            BTAltaUsuario.Click += BTAltaUsuario_Click;
         }
     
             private void AbrirFormEnPanel(Form formHijo)
@@ -61,7 +60,9 @@ namespace Antorena_Soto.CPresentacion.Administrador
 
             public void AgregarUsuario(string nombre, string dni, DateTime fechaNac)
             {
-            
+            DGVListaVendedor.Rows.Add(nombre, dni, fechaNac.ToShortDateString());
+            DGVListaVendedor.Show();
+            DGVListaVendedor.BringToFront();
             }
 
             private void label1_Click(object sender, EventArgs e)
@@ -86,8 +87,7 @@ namespace Antorena_Soto.CPresentacion.Administrador
 
             private void BTBajaUsuario_Click(object sender, EventArgs e)
             {
-
-            DialogResult ask = MessageBox.Show(
+                DialogResult ask = MessageBox.Show(
                     "¿Está a punto de eliminar los datos",
                     "Confirmar eliminación",
                     MessageBoxButtons.YesNo,
@@ -104,24 +104,30 @@ namespace Antorena_Soto.CPresentacion.Administrador
             }
 
 
+            private void BTListaUsuario_Click(object sender, EventArgs e)
+            {
+                DGVListaVendedor.Show();
+                DGVListaVendedor.BringToFront();
+            }
 
         private void DGVListaUsuario_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
 
-        private void BTListaUsuario_Click_1(object sender, EventArgs e)
-        {
-            var form = new listaUsuarios();
-            AbrirFormEnPanel(form);
-            form.CargarUsuarios();
-        }
-
         private void BTBajaUsuario_Click_1(object sender, EventArgs e)
         {
-            var form = new bajaUsuario();
-            form.ConfigurarDataGridView();
-            AbrirFormEnPanel(form);
+
+        }
+
+        private void DGVListaVendedor_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void apellidoToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
         }
     }
     }

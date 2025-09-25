@@ -42,18 +42,12 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="FontAwesome.Sharp, Version=6.6.0.0, Culture=neutral, PublicKeyToken=d16d1e4e568ec10f, processorArchitecture=MSIL">
-      <HintPath>..\packages\FontAwesome.Sharp.6.6.0\lib\net472\FontAwesome.Sharp.dll</HintPath>
-    </Reference>
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
-    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -63,7 +57,6 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CDatos\UsuarioController.cs" />
@@ -86,24 +79,11 @@
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="CLogica\CN_Usuario.cs" />
-    <Compile Include="CPresentacion\Gerente\listaProductos.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CPresentacion\Gerente\listaProductos.Designer.cs">
-      <DependentUpon>listaProductos.cs</DependentUpon>
-    </Compile>
-    <Compile Include="CPresentacion\Gerente\Producto.cs" />
     <Compile Include="CPresentacion\SuperAdministrador\bajaUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CPresentacion\SuperAdministrador\bajaUsuario.Designer.cs">
       <DependentUpon>bajaUsuario.cs</DependentUpon>
-    </Compile>
-    <Compile Include="CPresentacion\SuperAdministrador\listaUsuarios.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CPresentacion\SuperAdministrador\listaUsuarios.Designer.cs">
-      <DependentUpon>listaUsuarios.cs</DependentUpon>
     </Compile>
     <Compile Include="CPresentacion\SuperAdministrador\menuSuperAdm.cs">
       <SubType>Form</SubType>
@@ -129,18 +109,6 @@
     <Compile Include="CPresentacion\Gerente\FormMenuGerente.Designer.cs">
       <DependentUpon>FormMenuGerente.cs</DependentUpon>
     </Compile>
-    <Compile Include="CPresentacion\Vendedor\agregarDatosCliente.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CPresentacion\Vendedor\agregarDatosCliente.Designer.cs">
-      <DependentUpon>agregarDatosCliente.cs</DependentUpon>
-    </Compile>
-    <Compile Include="CPresentacion\Vendedor\verProductos.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CPresentacion\Vendedor\verProductos.Designer.cs">
-      <DependentUpon>verProductos.cs</DependentUpon>
-    </Compile>
     <Compile Include="CPresentacion\Vendedor\menuVendedor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -164,23 +132,11 @@
     <EmbeddedResource Include="CPresentacion\Gerente\FormMenuGerente.resx">
       <DependentUpon>FormMenuGerente.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CPresentacion\Gerente\listaProductos.resx">
-      <DependentUpon>listaProductos.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="CPresentacion\SuperAdministrador\bajaUsuario.resx">
       <DependentUpon>bajaUsuario.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CPresentacion\SuperAdministrador\listaUsuarios.resx">
-      <DependentUpon>listaUsuarios.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="CPresentacion\SuperAdministrador\menuSuperAdm.resx">
       <DependentUpon>menuSuperAdm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CPresentacion\Vendedor\agregarDatosCliente.resx">
-      <DependentUpon>agregarDatosCliente.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CPresentacion\Vendedor\verProductos.resx">
-      <DependentUpon>verProductos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CPresentacion\Vendedor\menuVendedor.resx">
       <DependentUpon>menuVendedor.cs</DependentUpon>
@@ -243,14 +199,6 @@
       <DependentUpon>Modelo.edmx</DependentUpon>
       <LastGenOutput>Modelo.cs</LastGenOutput>
     </Content>
-    <None Include="Resources\cart_icon_147474.png" />
-    <None Include="Resources\carrito.png" />
-    <None Include="Resources\preferencesother_1037751.png" />
-    <None Include="Resources\config2.png" />
-    <None Include="Resources\preferencesother_103775.png" />
-    <None Include="Resources\config1.jpg" />
-    <None Include="Resources\config.png" />
-    <None Include="Resources\lupa.png" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
