@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Antorena_Soto.CPresentacion.Gerente;
+using Antorena_Soto.CPresentacion.Vendedor;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -76,10 +78,10 @@ namespace Antorena_Soto
 
               else if (dni.Equals(dniVendedor, StringComparison.Ordinal) && contrasenia.Equals(contraseniaVendedor, StringComparison.Ordinal))
               {
-                    MessageBox.Show("Abriendo perfil vendedor");
-                    CPresentacion.Vendedor.menuVendedor formVendedor = new CPresentacion.Vendedor.menuVendedor();
-                    formVendedor.Show();
-                    this.Hide();
+                
+                menuVendedor formVendedor = new menuVendedor();
+                formVendedor.Show();
+                this.Hide();
                 }
              else if (dni.Equals(dniSuperAdmin, StringComparison.Ordinal) && contrasenia.Equals(contraseniaSuperAdmin, StringComparison.Ordinal))
             {

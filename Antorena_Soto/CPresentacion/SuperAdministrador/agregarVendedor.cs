@@ -309,6 +309,16 @@ namespace Antorena_Soto.CPresentacion.Gerente
         {
 
         }
+
+        private void TBDniVendedor_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TBDomicilioVendedor_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
     

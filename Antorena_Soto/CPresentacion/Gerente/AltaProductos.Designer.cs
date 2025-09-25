@@ -113,6 +113,7 @@ namespace Antorena_Soto.CPresentacion.Gerente
             this.CBCategoriaProducto.Size = new System.Drawing.Size(446, 24);
             this.CBCategoriaProducto.TabIndex = 36;
             this.CBCategoriaProducto.SelectedIndexChanged += new System.EventHandler(this.CBCategoriaProducto_SelectedIndexChanged);
+            this.CBCategoriaProducto.Validating += new System.ComponentModel.CancelEventHandler(this.TBCategoriaProducto_Validating);
             // 
             // DTFechaModifProd
             // 
@@ -156,6 +157,7 @@ namespace Antorena_Soto.CPresentacion.Gerente
             this.TBStockProducto.Size = new System.Drawing.Size(450, 30);
             this.TBStockProducto.TabIndex = 24;
             this.TBStockProducto.TextChanged += new System.EventHandler(this.TBStockProducto_TextChanged);
+            this.TBStockProducto.Validating += new System.ComponentModel.CancelEventHandler(this.TBStockProducto_Validating);
             // 
             // LStockProducto
             // 
@@ -188,6 +190,7 @@ namespace Antorena_Soto.CPresentacion.Gerente
             this.TBPrecioProducto.Size = new System.Drawing.Size(446, 30);
             this.TBPrecioProducto.TabIndex = 20;
             this.TBPrecioProducto.TextChanged += new System.EventHandler(this.TBPrecioProducto_TextChanged);
+            this.TBPrecioProducto.Validating += new System.ComponentModel.CancelEventHandler(this.TBPrecioProducto_Validating);
             // 
             // LPrecioProducto
             // 
@@ -221,6 +224,7 @@ namespace Antorena_Soto.CPresentacion.Gerente
             this.TBDescripcionProducto.Size = new System.Drawing.Size(700, 30);
             this.TBDescripcionProducto.TabIndex = 16;
             this.TBDescripcionProducto.TextChanged += new System.EventHandler(this.TBDescripcionProducto_TextChanged);
+            this.TBDescripcionProducto.Validating += new System.ComponentModel.CancelEventHandler(this.TBNombreProductos_Validating);
             // 
             // LDescripcionProducto
             // 

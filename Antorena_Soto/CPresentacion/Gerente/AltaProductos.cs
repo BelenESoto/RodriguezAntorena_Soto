@@ -18,16 +18,6 @@ namespace Antorena_Soto.CPresentacion.Gerente
         private bool esEdicion = false;           // Variable de clase
         private int CodigoOriginal;            // Para mantener el código en edición
         private List<Producto> _productos;
-     
-        /* Propiedades para devolver los cambios
-        public int CodigoEditado { get; private set; }
-        public string NombreEditado { get; private set; }
-        public string PrecioEditado { get; private set; }
-        public string CategoriaEditada { get; private set; }
-        public int StockEditado { get; private set; }
-        public string DescripcionEditada { get; private set; }
-        public Image ImagenEditada { get; private set; }
-        */
         public string NombreProducto => TBNombreProducto.Text.Trim();
         public decimal PrecioProducto => decimal.Parse(TBPrecioProducto.Text.Trim());
         public string CategoriaProducto => CBCategoriaProducto.Text.Trim();

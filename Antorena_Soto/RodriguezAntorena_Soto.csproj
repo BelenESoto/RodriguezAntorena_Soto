@@ -135,6 +135,12 @@
     <Compile Include="CPresentacion\Vendedor\agregarDatosCliente.Designer.cs">
       <DependentUpon>agregarDatosCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="CPresentacion\Vendedor\verProductos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CPresentacion\Vendedor\verProductos.Designer.cs">
+      <DependentUpon>verProductos.cs</DependentUpon>
+    </Compile>
     <Compile Include="CPresentacion\Vendedor\menuVendedor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -169,6 +175,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CPresentacion\SuperAdministrador\menuSuperAdm.resx">
       <DependentUpon>menuSuperAdm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CPresentacion\Vendedor\agregarDatosCliente.resx">
+      <DependentUpon>agregarDatosCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CPresentacion\Vendedor\verProductos.resx">
+      <DependentUpon>verProductos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CPresentacion\Vendedor\menuVendedor.resx">
       <DependentUpon>menuVendedor.cs</DependentUpon>
@@ -231,6 +243,8 @@
       <DependentUpon>Modelo.edmx</DependentUpon>
       <LastGenOutput>Modelo.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\cart_icon_147474.png" />
+    <None Include="Resources\carrito.png" />
     <None Include="Resources\preferencesother_1037751.png" />
     <None Include="Resources\config2.png" />
     <None Include="Resources\preferencesother_103775.png" />
