@@ -51,8 +51,18 @@ namespace Antorena_Soto.CPresentacion.Vendedor
 
         private void BAgregarVenta_Click(object sender, EventArgs e)
         {
-           
+            PVendedor2.Controls.Clear();
+            ventaAgregar formVenta = new ventaAgregar();
+            formVenta.TopLevel = false;                  
+            formVenta.FormBorderStyle = FormBorderStyle.None; // Sin borde
+            formVenta.Dock = DockStyle.Fill;             // Ocupa todo el panel
+
+            // Agregar al panel
+            PVendedor2.Controls.Add(formVenta);
+            formVenta.Show();
         }
+
+        
 
         private void BListarVenta_Click(object sender, EventArgs e)
         {
