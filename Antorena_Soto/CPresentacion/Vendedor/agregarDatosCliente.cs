@@ -1,4 +1,4 @@
-﻿using Antorena_Soto.CLogica;
+﻿using CPresentacion.Vendedor;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,61 +13,52 @@ namespace Antorena_Soto.CPresentacion.Vendedor
 {
     public partial class agregarDatosCliente : Form
     {
-        private List<Cliente> listaClientes = new List<Cliente>();
-        public event Action<Cliente> ClienteAgregado;
-
+        public event EventHandler<ClienteEventArgs> ClienteAgregado;
         public agregarDatosCliente()
         {
             InitializeComponent();
         }
-        public class Cliente
+
+        private void agregarDatosCliente_Load(object sender, EventArgs e)
         {
-            public string Dni { get; set; }
-            public string Nombre { get; set; }
-            public string Provincia { get; set; }
-            public string Ciudad { get; set; }
-            public string Domicilio { get; set; }
-            public long Telefono { get; set; }
-            public string Correo { get; set; }
-            public DateTime FechaNacimiento { get; set; }
-            public DateTime FechaIngreso { get; set; }
+
         }
-       
-            private void TBNombreCliente_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        //validaciopnes
+        private void TBNombreCliente_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string nombreCliente = TBNombreCliente.Text.Trim();
-            if (string.IsNullOrEmpty(nombreCliente))
+            string nombre = TBNombreCliente.Text.Trim();
+
+            if (string.IsNullOrEmpty(nombre))
             {
                 MessageBox.Show("El campo nombre no puede estar vacío.", "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 e.Cancel = true;
             }
-            else if (nombreCliente.All(char.IsDigit))
+            else if (nombre.All(char.IsDigit))
             {
                 MessageBox.Show("El nombre no puede ser númerico.", "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 e.Cancel = true;
             }
         }
 
+
         private void TBDniCliente_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string dniCliente = TBDniCliente.Text.Trim();
-            if (String.IsNullOrEmpty(dniCliente))
+            if (String.IsNullOrEmpty(TBDniCliente.Text))
             {
                 MessageBox.Show("El campo DNI no puede estar vacío.", "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 e.Cancel = true;
             }
-            else if (!int.TryParse(dniCliente, out _))
+            else if (!int.TryParse(TBDniCliente.Text, out _))
             {
                 MessageBox.Show("El campo DNI solo acepta números.", "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 e.Cancel = true;
             }
-            else if (dniCliente.Length != 8)
+            else if (TBDniCliente.Text.Length != 8)
             {
                 MessageBox.Show("El campo DNI debe tener exactamente 8 dígitos.", "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 e.Cancel = true;
             }
         }
-
 
         private void TBProvinciaCliente_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
@@ -84,7 +75,6 @@ namespace Antorena_Soto.CPresentacion.Vendedor
                 e.Cancel = true;
             }
         }
-
         private void TBCiudadCliente_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             string ciudad = TBCiudadCliente.Text.Trim();
@@ -138,7 +128,6 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             }
         }
 
-
         private void TBCorreoCliente_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             string correo = TBCorreoCliente.Text.Trim();
@@ -157,78 +146,110 @@ namespace Antorena_Soto.CPresentacion.Vendedor
                 e.Cancel = true;
             }
         }
-
-        private void DTFechaNacCliente_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            DateTime fechaNacimiento = DTFechaNacCliente.Value;
-            DateTime hoy = DateTime.Today;
-            int edad = hoy.Year - fechaNacimiento.Year;
-            if (fechaNacimiento > hoy.AddYears(-edad)) edad--;
-            if (edad < 18)
-            {
-                MessageBox.Show("El cliente debe ser mayor de 18 años.", "Error de Validación",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                e.Cancel = true;
-            }
+
+        }
+        private void PAgregarCliente_Paint(object sender, PaintEventArgs e)
+        {
+
         }
 
-        private void DTFechaIngCliente_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        private void PAgregarClienteFondo_Paint(object sender, PaintEventArgs e)
         {
-            DateTime fechaIngreso = DTFechaIngCliente.Value;
-            DateTime hoy = DateTime.Now;
-            if (fechaIngreso > hoy)
-            {
-                MessageBox.Show("La fecha de ingreso no puede ser futura.", "Error de Validación",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                e.Cancel = true;
-            }
+
         }
 
         private void TBNombreCliente_TextChanged(object sender, EventArgs e)
         {
 
         }
-       
 
-            private void BAgregarCliente_Click(object sender, EventArgs e)
-            {
-                if (!ValidateChildren())
-                {
-                    MessageBox.Show("Por favor, corrija los errores antes de continuar.",
-                                    "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                // Crear el objeto cliente
-                Cliente nuevoCliente = new Cliente()
-                {
-                    Dni = TBDniCliente.Text.Trim(),
-                    Nombre = TBNombreCliente.Text.Trim(),
-                    Provincia = TBProvinciaCliente.Text.Trim(),
-                    Ciudad = TBCiudadCliente.Text.Trim(),
-                    Domicilio = TBDomicilioCliente.Text.Trim(),
-                    Telefono = long.TryParse(TBNumCliente.Text.Trim(), out long tel) ? tel : 0,
-                    Correo = TBCorreoCliente.Text.Trim(),
-                    FechaNacimiento = DTFechaNacCliente.Value,
-                    FechaIngreso = DTFechaIngCliente.Value
-                };
-
-                MessageBox.Show("Cliente agregado correctamente.",
-                                "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                // Disparar el evento al menú
-                ClienteAgregado?.Invoke(nuevoCliente);
-
-                this.Close(); 
-            }
-
-        private void DTFechaIngCliente_ValueChanged(object sender, EventArgs e)
+        private void TBDniCliente_TextChanged(object sender, EventArgs e)
         {
 
         }
-    }
+
+        private void TBDomicilioCliente_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void TBNumCliente_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TBProvinciaCliente_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LAgregarVendedor_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PAgregarProducto_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+        protected virtual void OnClienteAgregado(Cliente cliente)
+        {
+            ClienteAgregado?.Invoke(this, new ClienteEventArgs(cliente));
+        }
 
 
-    }
+        private void BAgregarCliente_Click_1(object sender, EventArgs e)
+        {
+            {
+                if (!ValidateChildren())
+                {
+                    MessageBox.Show("Por favor, corrija los errores antes de continuar.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                Cliente nuevoCliente = new Cliente
+                {
+                    Nombre = TBNombreCliente.Text,
+                    DNI = TBDniCliente.Text,
+                    Provincia = TBProvinciaCliente.Text,
+                    Ciudad = TBCiudadCliente.Text,
+                    Domicilio = TBDomicilioCliente.Text,
+                    NumeroTelefono = TBNumCliente.Text,
+                    Correo = TBCorreoCliente.Text
+                };
+
+                // Disparar el evento 
+                OnClienteAgregado(nuevoCliente);
+                MessageBox.Show("Cliente agregado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Limpiar los TextBox
+                TBNombreCliente.Clear();
+                TBDniCliente.Clear();
+                TBProvinciaCliente.Clear();
+                TBCiudadCliente.Clear();
+                TBDomicilioCliente.Clear();
+                TBNumCliente.Clear();
+                TBCorreoCliente.Clear();
+            }
+        }
+        // Clase para pasar información del cliente en el evento
+        public class ClienteEventArgs : EventArgs
+        {
+            public Cliente Cliente { get; }
+
+            public ClienteEventArgs(Cliente cliente)
+            {
+                Cliente = cliente;
+            }
+        }
+
+        private void TBNombreCliente_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+    } }
 
 
+        

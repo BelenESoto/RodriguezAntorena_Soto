@@ -79,6 +79,13 @@
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="CLogica\CN_Usuario.cs" />
+    <Compile Include="CPresentacion\Gerente\listaProductos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CPresentacion\Gerente\listaProductos.Designer.cs">
+      <DependentUpon>listaProductos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CPresentacion\Gerente\Producto.cs" />
     <Compile Include="CPresentacion\SuperAdministrador\bajaUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,11 +116,24 @@
     <Compile Include="CPresentacion\Gerente\FormMenuGerente.Designer.cs">
       <DependentUpon>FormMenuGerente.cs</DependentUpon>
     </Compile>
+    <Compile Include="CPresentacion\Vendedor\agregarDatosCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CPresentacion\Vendedor\agregarDatosCliente.Designer.cs">
+      <DependentUpon>agregarDatosCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CPresentacion\Vendedor\Cliente.cs" />
     <Compile Include="CPresentacion\Vendedor\menuVendedor.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CPresentacion\Vendedor\menuVendedor.Designer.cs">
       <DependentUpon>menuVendedor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CPresentacion\Vendedor\verProductos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CPresentacion\Vendedor\verProductos.Designer.cs">
+      <DependentUpon>verProductos.cs</DependentUpon>
     </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -123,6 +143,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CPresentacion\Gerente\listaProductos.resx">
+      <DependentUpon>listaProductos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CPresentacion\SuperAdministrador\agregarVendedor.resx">
       <DependentUpon>agregarVendedor.cs</DependentUpon>
     </EmbeddedResource>
@@ -138,8 +161,14 @@
     <EmbeddedResource Include="CPresentacion\SuperAdministrador\menuSuperAdm.resx">
       <DependentUpon>menuSuperAdm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CPresentacion\Vendedor\agregarDatosCliente.resx">
+      <DependentUpon>agregarDatosCliente.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CPresentacion\Vendedor\menuVendedor.resx">
       <DependentUpon>menuVendedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CPresentacion\Vendedor\verProductos.resx">
+      <DependentUpon>verProductos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

@@ -1,6 +1,4 @@
-﻿
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
@@ -39,9 +37,9 @@ namespace Antorena_Soto.CPresentacion.Gerente
                 DGVListaProd.Columns.Add("Imagen", "Imagen");
             }
 
-            CargarProductos(); 
+            CargarProductos();
         }
-          
+
         public void CargarProductos()
         {
             if (modo == "Ver")
@@ -64,38 +62,7 @@ namespace Antorena_Soto.CPresentacion.Gerente
                     p.Categoria,
                     p.Stock,
                     p.FechaModificacion
-                   // p.Imagen 
-                );
-            }
-        }
-       
-        public void MostrarProductos(DataGridView dgvDestino, List<Producto> lista)
-        {
-            
-            if (dgvDestino.Columns.Count == 0)
-            {
-                dgvDestino.Columns.Add("Codigo", "Código Producto");
-                dgvDestino.Columns.Add("Nombre", "Nombre Producto");
-                dgvDestino.Columns.Add("Precio", "Precio");
-                dgvDestino.Columns.Add("Categoria", "Categoría");
-                dgvDestino.Columns.Add("Stock", "Stock");
-                dgvDestino.Columns.Add("Descripcion", "Descripción");
-                dgvDestino.Columns.Add("FechaModificacion", "Última Modificación");
-                // dgvDestino.Columns.Add("Imagen", "Imagen");  
-            }
-
-            dgvDestino.Rows.Clear();
-
-            foreach (var p in lista)
-            {
-                dgvDestino.Rows.Add(
-                    p.Codigo,
-                    p.Nombre,
-                    p.Precio,
-                    p.Categoria,
-                    p.Stock,
-                    p.FechaModificacion
-                // p.Imagen
+                // p.Imagen 
                 );
             }
         }
