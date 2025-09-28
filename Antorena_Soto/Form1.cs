@@ -71,29 +71,29 @@ namespace Antorena_Soto
                 //aca redirigir a ventana admin
                 MessageBox.Show("Abriendo perfil Gerente");
 
-            CPresentacion.Gerente.FormMenuGerente formGerente = new CPresentacion.Gerente.FormMenuGerente();
-            formGerente.Show();
-            this.Hide(); // oculta el formulario actual
-        }
+                CPresentacion.Gerente.FormMenuGerente formGerente = new CPresentacion.Gerente.FormMenuGerente();
+                formGerente.Show();
+                this.Hide(); // oculta el formulario actual
+            }
 
-              else if (dni.Equals(dniVendedor, StringComparison.Ordinal) && contrasenia.Equals(contraseniaVendedor, StringComparison.Ordinal))
-              {
-                
+            else if (dni.Equals(dniVendedor, StringComparison.Ordinal) && contrasenia.Equals(contraseniaVendedor, StringComparison.Ordinal))
+            {
+
                 menuVendedor formVendedor = new menuVendedor();
                 formVendedor.Show();
                 this.Hide();
-                }
-             else if (dni.Equals(dniSuperAdmin, StringComparison.Ordinal) && contrasenia.Equals(contraseniaSuperAdmin, StringComparison.Ordinal))
+            }
+            else if (dni.Equals(dniSuperAdmin, StringComparison.Ordinal) && contrasenia.Equals(contraseniaSuperAdmin, StringComparison.Ordinal))
             {
                 MessageBox.Show("Abriendo perfil Administrador");
                 CPresentacion.Administrador.menuSuperAdm formSuperAdm = new CPresentacion.Administrador.menuSuperAdm();
                 formSuperAdm.Show();
                 this.Hide();
             }
-             else
+            else
             {
                 MessageBox.Show("Dni y/o contraseña no son correctos");
-               
+
             }
         }
 
@@ -170,5 +170,43 @@ namespace Antorena_Soto
         {
 
         }
+
+        private void PFondo_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void PFondoLogin_Click(object sender, EventArgs e)
+        {
+            PFondoLogin.Image = Image.FromFile("C:\\Users\\belen\\source\\repos\\Proy_RodriguezA_Soto\\Antorena_Soto\\Resources\\DSC08269 (1) (1).jpg");
+
+            PFondoLogin.SizeMode = PictureBoxSizeMode.Zoom;
+
+            HacerPictureBoxRedondo(PFondoLogin);
+        }
+
+        private void HacerPictureBoxRedondo(PictureBox pictureBox)
+        {
+
+            int size = Math.Min(pictureBox.Width, pictureBox.Height);
+            pictureBox.Width = size;
+            pictureBox.Height = size;
+
+            GraphicsPath path = new GraphicsPath();
+            path.AddEllipse(0, 0, size, size);
+            pictureBox.Region = new Region(path);
+        }
+
+        private void FormLogin_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        
     }
 }
