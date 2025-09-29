@@ -30,8 +30,8 @@ namespace Antorena_Soto.CPresentacion.Gerente
         /// </summary>
         private void InitializeComponent()
         {
-            this.LAgregarProducto = new System.Windows.Forms.Label();
             this.PAgregarProducto = new System.Windows.Forms.Panel();
+            this.lAltaProd = new System.Windows.Forms.Label();
             this.PBImagenProducto = new System.Windows.Forms.PictureBox();
             this.CBCategoriaProducto = new System.Windows.Forms.ComboBox();
             this.DTFechaModifProd = new System.Windows.Forms.DateTimePicker();
@@ -47,28 +47,16 @@ namespace Antorena_Soto.CPresentacion.Gerente
             this.LDescripcionProducto = new System.Windows.Forms.Label();
             this.TBNombreProducto = new System.Windows.Forms.TextBox();
             this.LNombreProducto = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panelProd = new System.Windows.Forms.Panel();
             this.PAgregarProducto.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PBImagenProducto)).BeginInit();
-            this.panel1.SuspendLayout();
+            this.panelProd.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // LAgregarProducto
-            // 
-            this.LAgregarProducto.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.LAgregarProducto.BackColor = System.Drawing.Color.Gainsboro;
-            this.LAgregarProducto.Font = new System.Drawing.Font("SimSun", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LAgregarProducto.Location = new System.Drawing.Point(-1, 7);
-            this.LAgregarProducto.Name = "LAgregarProducto";
-            this.LAgregarProducto.Padding = new System.Windows.Forms.Padding(10, 4, 4, 4);
-            this.LAgregarProducto.Size = new System.Drawing.Size(739, 44);
-            this.LAgregarProducto.TabIndex = 2;
-            this.LAgregarProducto.Text = "AGREGAR PRODUCTO";
-            this.LAgregarProducto.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // PAgregarProducto
             // 
-            this.PAgregarProducto.BackColor = System.Drawing.Color.Gainsboro;
+            this.PAgregarProducto.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.PAgregarProducto.Controls.Add(this.lAltaProd);
             this.PAgregarProducto.Controls.Add(this.PBImagenProducto);
             this.PAgregarProducto.Controls.Add(this.CBCategoriaProducto);
             this.PAgregarProducto.Controls.Add(this.DTFechaModifProd);
@@ -84,17 +72,30 @@ namespace Antorena_Soto.CPresentacion.Gerente
             this.PAgregarProducto.Controls.Add(this.LDescripcionProducto);
             this.PAgregarProducto.Controls.Add(this.TBNombreProducto);
             this.PAgregarProducto.Controls.Add(this.LNombreProducto);
-            this.PAgregarProducto.Location = new System.Drawing.Point(-15, 57);
+            this.PAgregarProducto.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PAgregarProducto.Location = new System.Drawing.Point(0, 0);
             this.PAgregarProducto.Name = "PAgregarProducto";
-            this.PAgregarProducto.Size = new System.Drawing.Size(753, 421);
+            this.PAgregarProducto.Size = new System.Drawing.Size(755, 718);
             this.PAgregarProducto.TabIndex = 1;
+            // 
+            // lAltaProd
+            // 
+            this.lAltaProd.AutoSize = true;
+            this.lAltaProd.BackColor = System.Drawing.Color.White;
+            this.lAltaProd.Font = new System.Drawing.Font("SimSun", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lAltaProd.Location = new System.Drawing.Point(259, 23);
+            this.lAltaProd.Name = "lAltaProd";
+            this.lAltaProd.Size = new System.Drawing.Size(297, 28);
+            this.lAltaProd.TabIndex = 38;
+            this.lAltaProd.Text = "   Alta Producto   ";
+            this.lAltaProd.Click += new System.EventHandler(this.lAltaProd_Click);
             // 
             // PBImagenProducto
             // 
             this.PBImagenProducto.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.PBImagenProducto.Location = new System.Drawing.Point(21, 154);
+            this.PBImagenProducto.Location = new System.Drawing.Point(36, 280);
             this.PBImagenProducto.Name = "PBImagenProducto";
-            this.PBImagenProducto.Size = new System.Drawing.Size(242, 237);
+            this.PBImagenProducto.Size = new System.Drawing.Size(282, 365);
             this.PBImagenProducto.TabIndex = 37;
             this.PBImagenProducto.TabStop = false;
             this.PBImagenProducto.Click += new System.EventHandler(this.PBImagenProducto_Click);
@@ -108,18 +109,18 @@ namespace Antorena_Soto.CPresentacion.Gerente
             "1-Collares",
             "2-Aros",
             "3-Otros"});
-            this.CBCategoriaProducto.Location = new System.Drawing.Point(269, 154);
+            this.CBCategoriaProducto.Location = new System.Drawing.Point(348, 303);
             this.CBCategoriaProducto.Name = "CBCategoriaProducto";
-            this.CBCategoriaProducto.Size = new System.Drawing.Size(446, 24);
+            this.CBCategoriaProducto.Size = new System.Drawing.Size(356, 24);
             this.CBCategoriaProducto.TabIndex = 36;
             this.CBCategoriaProducto.SelectedIndexChanged += new System.EventHandler(this.CBCategoriaProducto_SelectedIndexChanged);
             this.CBCategoriaProducto.Validating += new System.ComponentModel.CancelEventHandler(this.TBCategoriaProducto_Validating);
             // 
             // DTFechaModifProd
             // 
-            this.DTFechaModifProd.Location = new System.Drawing.Point(268, 325);
+            this.DTFechaModifProd.Location = new System.Drawing.Point(358, 565);
             this.DTFechaModifProd.Name = "DTFechaModifProd";
-            this.DTFechaModifProd.Size = new System.Drawing.Size(451, 22);
+            this.DTFechaModifProd.Size = new System.Drawing.Size(346, 22);
             this.DTFechaModifProd.TabIndex = 35;
             this.DTFechaModifProd.ValueChanged += new System.EventHandler(this.DTFechaModifProd_ValueChanged);
             this.DTFechaModifProd.Validating += new System.ComponentModel.CancelEventHandler(this.DTFechaModifProd_Validating);
@@ -129,7 +130,7 @@ namespace Antorena_Soto.CPresentacion.Gerente
             this.LFechaModificacionProd.AutoSize = true;
             this.LFechaModificacionProd.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LFechaModificacionProd.ForeColor = System.Drawing.Color.Black;
-            this.LFechaModificacionProd.Location = new System.Drawing.Point(269, 299);
+            this.LFechaModificacionProd.Location = new System.Drawing.Point(354, 528);
             this.LFechaModificacionProd.Name = "LFechaModificacionProd";
             this.LFechaModificacionProd.Size = new System.Drawing.Size(226, 23);
             this.LFechaModificacionProd.TabIndex = 30;
@@ -140,7 +141,7 @@ namespace Antorena_Soto.CPresentacion.Gerente
             this.BAgregarProducto.BackColor = System.Drawing.Color.DarkGray;
             this.BAgregarProducto.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BAgregarProducto.ForeColor = System.Drawing.Color.Black;
-            this.BAgregarProducto.Location = new System.Drawing.Point(383, 354);
+            this.BAgregarProducto.Location = new System.Drawing.Point(442, 634);
             this.BAgregarProducto.Name = "BAgregarProducto";
             this.BAgregarProducto.Size = new System.Drawing.Size(191, 40);
             this.BAgregarProducto.TabIndex = 25;
@@ -151,10 +152,10 @@ namespace Antorena_Soto.CPresentacion.Gerente
             // TBStockProducto
             // 
             this.TBStockProducto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TBStockProducto.Location = new System.Drawing.Point(269, 266);
+            this.TBStockProducto.Location = new System.Drawing.Point(358, 477);
             this.TBStockProducto.MaxLength = 10;
             this.TBStockProducto.Name = "TBStockProducto";
-            this.TBStockProducto.Size = new System.Drawing.Size(450, 30);
+            this.TBStockProducto.Size = new System.Drawing.Size(346, 30);
             this.TBStockProducto.TabIndex = 24;
             this.TBStockProducto.TextChanged += new System.EventHandler(this.TBStockProducto_TextChanged);
             this.TBStockProducto.Validating += new System.ComponentModel.CancelEventHandler(this.TBStockProducto_Validating);
@@ -164,18 +165,19 @@ namespace Antorena_Soto.CPresentacion.Gerente
             this.LStockProducto.AutoSize = true;
             this.LStockProducto.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LStockProducto.ForeColor = System.Drawing.Color.Black;
-            this.LStockProducto.Location = new System.Drawing.Point(269, 240);
+            this.LStockProducto.Location = new System.Drawing.Point(354, 435);
             this.LStockProducto.Name = "LStockProducto";
             this.LStockProducto.Size = new System.Drawing.Size(70, 23);
             this.LStockProducto.TabIndex = 23;
             this.LStockProducto.Text = "Stock";
+            this.LStockProducto.Click += new System.EventHandler(this.LStockProducto_Click);
             // 
             // LImagenProducto
             // 
             this.LImagenProducto.AutoSize = true;
             this.LImagenProducto.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LImagenProducto.ForeColor = System.Drawing.Color.Black;
-            this.LImagenProducto.Location = new System.Drawing.Point(17, 128);
+            this.LImagenProducto.Location = new System.Drawing.Point(32, 244);
             this.LImagenProducto.Name = "LImagenProducto";
             this.LImagenProducto.Size = new System.Drawing.Size(82, 23);
             this.LImagenProducto.TabIndex = 21;
@@ -184,10 +186,10 @@ namespace Antorena_Soto.CPresentacion.Gerente
             // TBPrecioProducto
             // 
             this.TBPrecioProducto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TBPrecioProducto.Location = new System.Drawing.Point(273, 207);
+            this.TBPrecioProducto.Location = new System.Drawing.Point(358, 393);
             this.TBPrecioProducto.MaxLength = 8;
             this.TBPrecioProducto.Name = "TBPrecioProducto";
-            this.TBPrecioProducto.Size = new System.Drawing.Size(446, 30);
+            this.TBPrecioProducto.Size = new System.Drawing.Size(346, 30);
             this.TBPrecioProducto.TabIndex = 20;
             this.TBPrecioProducto.TextChanged += new System.EventHandler(this.TBPrecioProducto_TextChanged);
             this.TBPrecioProducto.Validating += new System.ComponentModel.CancelEventHandler(this.TBPrecioProducto_Validating);
@@ -197,7 +199,7 @@ namespace Antorena_Soto.CPresentacion.Gerente
             this.LPrecioProducto.AutoSize = true;
             this.LPrecioProducto.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LPrecioProducto.ForeColor = System.Drawing.Color.Black;
-            this.LPrecioProducto.Location = new System.Drawing.Point(269, 181);
+            this.LPrecioProducto.Location = new System.Drawing.Point(354, 353);
             this.LPrecioProducto.Name = "LPrecioProducto";
             this.LPrecioProducto.Size = new System.Drawing.Size(82, 23);
             this.LPrecioProducto.TabIndex = 18;
@@ -209,7 +211,7 @@ namespace Antorena_Soto.CPresentacion.Gerente
             this.LCategoriaProducto.AutoSize = true;
             this.LCategoriaProducto.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LCategoriaProducto.ForeColor = System.Drawing.Color.Black;
-            this.LCategoriaProducto.Location = new System.Drawing.Point(269, 128);
+            this.LCategoriaProducto.Location = new System.Drawing.Point(354, 265);
             this.LCategoriaProducto.Name = "LCategoriaProducto";
             this.LCategoriaProducto.Size = new System.Drawing.Size(118, 23);
             this.LCategoriaProducto.TabIndex = 17;
@@ -218,10 +220,10 @@ namespace Antorena_Soto.CPresentacion.Gerente
             // TBDescripcionProducto
             // 
             this.TBDescripcionProducto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TBDescripcionProducto.Location = new System.Drawing.Point(19, 95);
+            this.TBDescripcionProducto.Location = new System.Drawing.Point(36, 200);
             this.TBDescripcionProducto.MaxLength = 200;
             this.TBDescripcionProducto.Name = "TBDescripcionProducto";
-            this.TBDescripcionProducto.Size = new System.Drawing.Size(700, 30);
+            this.TBDescripcionProducto.Size = new System.Drawing.Size(668, 30);
             this.TBDescripcionProducto.TabIndex = 16;
             this.TBDescripcionProducto.TextChanged += new System.EventHandler(this.TBDescripcionProducto_TextChanged);
             this.TBDescripcionProducto.Validating += new System.ComponentModel.CancelEventHandler(this.TBNombreProductos_Validating);
@@ -231,7 +233,7 @@ namespace Antorena_Soto.CPresentacion.Gerente
             this.LDescripcionProducto.AutoSize = true;
             this.LDescripcionProducto.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LDescripcionProducto.ForeColor = System.Drawing.Color.Black;
-            this.LDescripcionProducto.Location = new System.Drawing.Point(17, 69);
+            this.LDescripcionProducto.Location = new System.Drawing.Point(32, 157);
             this.LDescripcionProducto.Name = "LDescripcionProducto";
             this.LDescripcionProducto.Size = new System.Drawing.Size(142, 23);
             this.LDescripcionProducto.TabIndex = 15;
@@ -240,10 +242,10 @@ namespace Antorena_Soto.CPresentacion.Gerente
             // TBNombreProducto
             // 
             this.TBNombreProducto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TBNombreProducto.Location = new System.Drawing.Point(21, 36);
+            this.TBNombreProducto.Location = new System.Drawing.Point(36, 113);
             this.TBNombreProducto.MaxLength = 100;
             this.TBNombreProducto.Name = "TBNombreProducto";
-            this.TBNombreProducto.Size = new System.Drawing.Size(698, 30);
+            this.TBNombreProducto.Size = new System.Drawing.Size(668, 30);
             this.TBNombreProducto.TabIndex = 14;
             this.TBNombreProducto.TextChanged += new System.EventHandler(this.TBNombreProducto_TextChanged);
             this.TBNombreProducto.Validating += new System.ComponentModel.CancelEventHandler(this.TBNombreProductos_Validating);
@@ -253,42 +255,42 @@ namespace Antorena_Soto.CPresentacion.Gerente
             this.LNombreProducto.AutoSize = true;
             this.LNombreProducto.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LNombreProducto.ForeColor = System.Drawing.Color.Black;
-            this.LNombreProducto.Location = new System.Drawing.Point(17, 10);
+            this.LNombreProducto.Location = new System.Drawing.Point(32, 69);
             this.LNombreProducto.Name = "LNombreProducto";
             this.LNombreProducto.Size = new System.Drawing.Size(190, 23);
             this.LNombreProducto.TabIndex = 11;
             this.LNombreProducto.Text = "Nombre Producto";
             // 
-            // panel1
+            // panelProd
             // 
-            this.panel1.BackColor = System.Drawing.Color.Black;
-            this.panel1.Controls.Add(this.PAgregarProducto);
-            this.panel1.Controls.Add(this.LAgregarProducto);
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(745, 500);
-            this.panel1.TabIndex = 3;
+            this.panelProd.BackColor = System.Drawing.Color.Black;
+            this.panelProd.Controls.Add(this.PAgregarProducto);
+            this.panelProd.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelProd.Location = new System.Drawing.Point(0, 0);
+            this.panelProd.Name = "panelProd";
+            this.panelProd.Size = new System.Drawing.Size(755, 718);
+            this.panelProd.TabIndex = 3;
+            this.panelProd.Paint += new System.Windows.Forms.PaintEventHandler(this.panelProd_Paint);
             // 
             // AltaProductos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(742, 453);
-            this.Controls.Add(this.panel1);
+            this.ClientSize = new System.Drawing.Size(755, 718);
+            this.Controls.Add(this.panelProd);
             this.Name = "AltaProductos";
             this.Text = "AltaProductos";
             this.PAgregarProducto.ResumeLayout(false);
             this.PAgregarProducto.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PBImagenProducto)).EndInit();
-            this.panel1.ResumeLayout(false);
+            this.panelProd.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
 
         #endregion
-        public System.Windows.Forms.Label LAgregarProducto;
         private System.Windows.Forms.Panel PAgregarProducto;
         private System.Windows.Forms.DateTimePicker DTFechaModifProd;
         private System.Windows.Forms.Label LFechaModificacionProd;
@@ -305,6 +307,7 @@ namespace Antorena_Soto.CPresentacion.Gerente
         private System.Windows.Forms.Label LNombreProducto;
         private System.Windows.Forms.ComboBox CBCategoriaProducto;
         private System.Windows.Forms.PictureBox PBImagenProducto;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panelProd;
+        private System.Windows.Forms.Label lAltaProd;
     }
 }

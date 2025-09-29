@@ -10,12 +10,12 @@ using System.Windows.Forms;
 
 namespace Antorena_Soto.CPresentacion.Gerente
 {
-    public partial class FormMenuGerente : Form
+    public partial class menuAdmin : Form
     {
         private List<Producto> _productos;
 
         private Form _formActual = null;
-            public FormMenuGerente()
+            public menuAdmin()
         {
             InitializeComponent();
 
@@ -35,20 +35,20 @@ namespace Antorena_Soto.CPresentacion.Gerente
         }
           private void BAltaProductos_Click(object sender, EventArgs e)
         {
-            PGerente2.Controls.Clear();
-            using (var formAlta = new AltaProductos(_productos))  // 👈 le pasás la lista compartida
-            {
-                if (formAlta.ShowDialog() == DialogResult.OK)
-                {
-                    // Refrescar la lista si está cargada en el panel
-                    var listaForm = PGerente2.Controls.OfType<listaProductos>().FirstOrDefault();
-                    if (listaForm != null)
-                    {
-                        listaForm.CargarProductos();
-                    }
-                }
-            }
+            
+            PAdmin.Controls.Clear();
+
+            AltaProductos formAlta = new AltaProductos(_productos);
+
+            formAlta.TopLevel = false;
+            formAlta.FormBorderStyle = FormBorderStyle.None;
+            formAlta.Dock = DockStyle.Fill;
+
+            PAdmin.Controls.Add(formAlta);
+            formAlta.Show();
         }
+
+        
 
 
         private void FormMenuGerente_Load(object sender, EventArgs e)
@@ -63,12 +63,12 @@ namespace Antorena_Soto.CPresentacion.Gerente
 
         private void BListarProductos_Click(object sender, EventArgs e)
         {
-            PGerente2.Controls.Clear();
+            PAdmin.Controls.Clear();
             listaProductos formListaProd = new listaProductos(_productos, "Ver");
             formListaProd.TopLevel = false;
             formListaProd.FormBorderStyle = FormBorderStyle.None;
             formListaProd.Dock = DockStyle.Fill;
-            PGerente2.Controls.Add(formListaProd);
+            PAdmin.Controls.Add(formListaProd);
             formListaProd.Show();
 
         }
@@ -81,17 +81,32 @@ namespace Antorena_Soto.CPresentacion.Gerente
 
         private void BEditarProducto_Click(object sender, EventArgs e)
         {
-            PGerente2.Controls.Clear();
+            PAdmin.Controls.Clear();
             listaProductos formModif = new listaProductos(_productos, "Editar");
             formModif.TopLevel = false;  //  embebido dentro de otro contenedor
             formModif.FormBorderStyle = FormBorderStyle.None; // Quita los bordes
             formModif.Dock = DockStyle.Fill; // Se ajusta al tamaño del panel
-            PGerente2.Controls.Add(formModif);
+            PAdmin.Controls.Add(formModif);
             formModif.Show();
           //  formModif.ShowDialog();
         }
 
         private void pBLogoHerram_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LProductosGest_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lAdministrador_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PGerente1_Paint(object sender, PaintEventArgs e)
         {
 
         }

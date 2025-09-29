@@ -280,6 +280,21 @@ namespace Antorena_Soto.CPresentacion.Gerente
         {
 
         }
+
+        private void LStockProducto_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lAltaProd_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panelProd_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
 

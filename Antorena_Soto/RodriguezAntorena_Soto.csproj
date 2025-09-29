@@ -86,13 +86,25 @@
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="CLogica\CN_Usuario.cs" />
-    <Compile Include="CPresentacion\Gerente\listaProductos.cs">
+    <Compile Include="CPresentacion\Administrador\listaProductos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CPresentacion\Gerente\listaProductos.Designer.cs">
+    <Compile Include="CPresentacion\Administrador\listaProductos.Designer.cs">
       <DependentUpon>listaProductos.cs</DependentUpon>
     </Compile>
-    <Compile Include="CPresentacion\Gerente\Producto.cs" />
+    <Compile Include="CPresentacion\Administrador\Producto.cs" />
+    <Compile Include="CPresentacion\Gerente\menuGerente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CPresentacion\Gerente\menuGerente.Designer.cs">
+      <DependentUpon>menuGerente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CPresentacion\Gerente\reporteVentas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CPresentacion\Gerente\reporteVentas.Designer.cs">
+      <DependentUpon>reporteVentas.cs</DependentUpon>
+    </Compile>
     <Compile Include="CPresentacion\SuperAdministrador\bajaUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -111,17 +123,17 @@
     <Compile Include="CPresentacion\SuperAdministrador\agregarVendedor.Designer.cs">
       <DependentUpon>agregarVendedor.cs</DependentUpon>
     </Compile>
-    <Compile Include="CPresentacion\Gerente\AltaProductos.cs">
+    <Compile Include="CPresentacion\Administrador\AltaProductos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CPresentacion\Gerente\AltaProductos.Designer.cs">
+    <Compile Include="CPresentacion\Administrador\AltaProductos.Designer.cs">
       <DependentUpon>AltaProductos.cs</DependentUpon>
     </Compile>
-    <Compile Include="CPresentacion\Gerente\FormMenuGerente.cs">
+    <Compile Include="CPresentacion\Administrador\menuAdmin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CPresentacion\Gerente\FormMenuGerente.Designer.cs">
-      <DependentUpon>FormMenuGerente.cs</DependentUpon>
+    <Compile Include="CPresentacion\Administrador\menuAdmin.Designer.cs">
+      <DependentUpon>menuAdmin.cs</DependentUpon>
     </Compile>
     <Compile Include="CPresentacion\Vendedor\agregarDatosCliente.cs">
       <SubType>Form</SubType>
@@ -162,17 +174,23 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="CPresentacion\Gerente\listaProductos.resx">
+    <EmbeddedResource Include="CPresentacion\Administrador\listaProductos.resx">
       <DependentUpon>listaProductos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CPresentacion\Gerente\menuGerente.resx">
+      <DependentUpon>menuGerente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CPresentacion\Gerente\reporteVentas.resx">
+      <DependentUpon>reporteVentas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CPresentacion\SuperAdministrador\agregarVendedor.resx">
       <DependentUpon>agregarVendedor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CPresentacion\Gerente\AltaProductos.resx">
+    <EmbeddedResource Include="CPresentacion\Administrador\AltaProductos.resx">
       <DependentUpon>AltaProductos.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CPresentacion\Gerente\FormMenuGerente.resx">
-      <DependentUpon>FormMenuGerente.cs</DependentUpon>
+    <EmbeddedResource Include="CPresentacion\Administrador\menuAdmin.resx">
+      <DependentUpon>menuAdmin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CPresentacion\SuperAdministrador\bajaUsuario.resx">
       <DependentUpon>bajaUsuario.cs</DependentUpon>
