@@ -34,7 +34,7 @@
             this.BEditarProducto = new System.Windows.Forms.Button();
             this.BVerReportes = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.PAdmin = new System.Windows.Forms.Panel();
+            this.PGerente = new System.Windows.Forms.Panel();
             this.PGerente1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -78,6 +78,7 @@
             this.BListarProductos.TabIndex = 8;
             this.BListarProductos.Text = "Reporte de Productos";
             this.BListarProductos.UseVisualStyleBackColor = true;
+            this.BListarProductos.Click += new System.EventHandler(this.BListarProductos_Click);
             // 
             // BEditarProducto
             // 
@@ -100,31 +101,32 @@
             this.BVerReportes.TabIndex = 3;
             this.BVerReportes.Text = "Reportes de ventas";
             this.BVerReportes.UseVisualStyleBackColor = true;
+            this.BVerReportes.Click += new System.EventHandler(this.BVerReportes_Click);
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Black;
-            this.panel1.Controls.Add(this.PAdmin);
+            this.panel1.Controls.Add(this.PGerente);
             this.panel1.Location = new System.Drawing.Point(291, 1);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(793, 765);
             this.panel1.TabIndex = 2;
             // 
-            // PAdmin
+            // PGerente
             // 
-            this.PAdmin.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.PAdmin.BackgroundImage = global::Antorena_Soto.Properties.Resources.config2;
-            this.PAdmin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.PAdmin.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.PAdmin.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PAdmin.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PAdmin.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.PAdmin.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.PAdmin.Location = new System.Drawing.Point(0, 0);
-            this.PAdmin.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.PAdmin.Name = "PAdmin";
-            this.PAdmin.Size = new System.Drawing.Size(793, 765);
-            this.PAdmin.TabIndex = 2;
+            this.PGerente.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.PGerente.BackgroundImage = global::Antorena_Soto.Properties.Resources.config2;
+            this.PGerente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.PGerente.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.PGerente.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PGerente.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PGerente.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.PGerente.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.PGerente.Location = new System.Drawing.Point(0, 0);
+            this.PGerente.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.PGerente.Name = "PGerente";
+            this.PGerente.Size = new System.Drawing.Size(793, 765);
+            this.PGerente.TabIndex = 2;
             // 
             // menuGerente
             // 
@@ -156,6 +158,6 @@
         private System.Windows.Forms.Button BEditarProducto;
         private System.Windows.Forms.Button BVerReportes;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel PAdmin;
+        private System.Windows.Forms.Panel PGerente;
     }
 }

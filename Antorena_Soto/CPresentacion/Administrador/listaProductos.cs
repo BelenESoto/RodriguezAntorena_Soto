@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 
 namespace Antorena_Soto.CPresentacion.Gerente
@@ -15,6 +19,8 @@ namespace Antorena_Soto.CPresentacion.Gerente
 
         private string modo; // "Ver" o "Editar"
         private int codigo;
+        private PrintDocument printDocument;
+        private string textoAImprimir;
 
         public listaProductos(List<Producto> productos, string modo = "Ver")
         {
@@ -28,6 +34,7 @@ namespace Antorena_Soto.CPresentacion.Gerente
         {
             if (DGVListaProd.Columns.Count == 0)
             {
+                DGVListaProd.Columns.Add("nOrden", "Orden Producto");
                 DGVListaProd.Columns.Add("Codigo", "Código Producto");
                 DGVListaProd.Columns.Add("Nombre", "Nombre Producto");
                 DGVListaProd.Columns.Add("Precio", "Precio");
@@ -35,8 +42,10 @@ namespace Antorena_Soto.CPresentacion.Gerente
                 DGVListaProd.Columns.Add("Stock", "Stock");
                 DGVListaProd.Columns.Add("Descripcion", "Descripción");
                 DGVListaProd.Columns.Add("Imagen", "Imagen");
+                DGVListaProd.Columns.Add("Estado", "Estado");
             }
-
+            modoBusqueda = "Codigo";
+            BBuscarProducto.Text = "Buscar por: Código";
             CargarProductos();
         }
 
@@ -52,158 +61,43 @@ namespace Antorena_Soto.CPresentacion.Gerente
                 BEditarProd.Visible = true;
                 BEliminarProd.Visible = true;
             }
+
+            int contador = 1;
+
             DGVListaProd.Rows.Clear();
             foreach (var p in Productos)
             {
                 DGVListaProd.Rows.Add(
+
+                    contador,
                     p.Codigo,
                     p.Nombre,
                     p.Precio,
                     p.Categoria,
                     p.Stock,
-                    p.FechaModificacion
-                // p.Imagen 
+                    p.FechaModificacion,
+                    p.Imagen,
+                    p.Estado ? "Activo" : "Inactivo"
                 );
+                contador++;
             }
         }
 
-        private void BBuscarPor_ButtonClick(object sender, EventArgs e)
+        private void DGVListaProd_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            string criterio = TBBuscarProd.Text.Trim();
 
-            if (string.IsNullOrEmpty(criterio))
-            {
-                MessageBox.Show("Debe ingresar un criterio de búsqueda.");
-                return;
-            }
-
-            // Validaciones 
-            if (modoBusqueda == "Codigo")
-            {
-                if (!criterio.All(char.IsDigit))
-                {
-                    MessageBox.Show("Cuando busca por CÓDIGO, solo se permiten números.");
-                    return;
-                }
-            }
-            else if (modoBusqueda == "Nombre")
-            {
-                if (!criterio.All(c => char.IsLetter(c) || char.IsWhiteSpace(c)))
-                {
-                    MessageBox.Show("Cuando busca por NOMBRE, solo se permiten letras y espacios.");
-                    return;
-                }
-            }
-            DGVListaProd.ClearSelection();
-
-            bool encontrado = false;
-
-            bool hasCodigo = DGVListaProd.Columns.Contains("Codigo");
-            bool hasNombre = DGVListaProd.Columns.Contains("Nombre");
-
-            foreach (DataGridViewRow fila in DGVListaProd.Rows)
-            {
-                if (fila.IsNewRow) continue;
-
-                if (modoBusqueda == "Codigo")
-                {
-                    if (hasCodigo)
-                    {
-                        var val = fila.Cells["Codigo"].Value;
-                        if (val != null && val.ToString().Contains(criterio))
-                        {
-                            fila.Selected = true;
-                            DGVListaProd.CurrentCell = fila.Cells[0];
-                            encontrado = true;
-                            break;
-                        }
-                    }
-                    else
-                    {
-                        if (fila.Cells.Count > 0 && fila.Cells[0].Value != null &&
-                            fila.Cells[0].Value.ToString().Contains(criterio))
-                        {
-                            fila.Selected = true;
-                            DGVListaProd.CurrentCell = fila.Cells[0];
-                            encontrado = true;
-                            break;
-                        }
-                    }
-                }
-                else
-                {
-                    if (hasNombre)
-                    {
-                        var val = fila.Cells["Nombre"].Value;
-                        if (val != null && val.ToString().IndexOf(criterio, StringComparison.OrdinalIgnoreCase) >= 0)
-                        {
-                            fila.Selected = true;
-                            int idx = hasCodigo ? DGVListaProd.Columns["Codigo"].Index : 0;
-                            if (fila.Cells.Count > idx) DGVListaProd.CurrentCell = fila.Cells[idx];
-                            encontrado = true;
-                            break;
-                        }
-                    }
-                    else
-                    {
-                        if (fila.Cells.Count > 1 && fila.Cells[1].Value != null &&
-                            fila.Cells[1].Value.ToString().IndexOf(criterio, StringComparison.OrdinalIgnoreCase) >= 0)
-                        {
-                            fila.Selected = true;
-                            DGVListaProd.CurrentCell = fila.Cells[1];
-                            encontrado = true;
-                            break;
-                        }
-                    }
-                }
-            }
-
-            if (!encontrado)
-                MessageBox.Show("No se encontró ningún producto con ese criterio.");
         }
 
-        /*private void BEditarProd_Click_1(object sender, EventArgs e)
+        private void TBBuscarProd_Click(object sender, EventArgs e)
         {
-            if (DGVListaProd.SelectedRows.Count == 0)
-            {
-                MessageBox.Show("Debe seleccionar un producto para editar.");
-                return;
-            }
 
-            DataGridViewRow fila = DGVListaProd.SelectedRows[0];
-            int codigoInt;
-            if (!int.TryParse(fila.Cells["Codigo"].Value.ToString(), out codigoInt))
-            {
-                MessageBox.Show("Código de producto inválido.");
-                return;
-            }
-
-            var prod = Productos.FirstOrDefault(p => p.Codigo == codigoInt);
-
-
-
-
-            if (prod != null)
-            {
-                using (AltaProductos formAlta = new AltaProductos(prod))
-                {
-                    if (formAlta.ShowDialog() == DialogResult.OK)
-                    {
-                        prod.Nombre = formAlta.NombreEditado;
-                        prod.Precio = decimal.Parse(formAlta.PrecioEditado);
-                        prod.Categoria = formAlta.CategoriaEditada;
-                        prod.Stock = formAlta.StockEditado;
-                        prod.Descripcion = formAlta.DescripcionEditada;
-                        prod.Imagen = formAlta.ImagenEditada;
-
-                        CargarProductos();
-                    }
-                }
-            }
         }
-        */
+        private void TBuscadorProd_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
 
-        private void BEditarProd_Click_1(object sender, EventArgs e)
+        }
+
+        private void BEditarProd_Click(object sender, EventArgs e)
         {
             if (DGVListaProd.SelectedRows.Count == 0)
             {
@@ -233,12 +127,15 @@ namespace Antorena_Soto.CPresentacion.Gerente
                     if (formAlta.ShowDialog() == DialogResult.OK)
                     {
                         // Asignamos los valores editados al producto original
+                        prod.Codigo = formAlta.CodigoProducto;
                         prod.Nombre = formAlta.NombreProducto;
                         prod.Precio = formAlta.PrecioProducto;
                         prod.Categoria = formAlta.CategoriaProducto;
                         prod.Stock = formAlta.StockProducto;
                         prod.Descripcion = formAlta.DescripcionProducto;
+                        prod.FechaModificacion = DateTime.Now;
                         prod.Imagen = formAlta.ImagenProducto;
+                        prod.Estado = (bool)formAlta.EstadoProducto;
 
                         // Refrescamos la grilla
                         CargarProductos();
@@ -248,7 +145,103 @@ namespace Antorena_Soto.CPresentacion.Gerente
         }
 
 
-        private void BEliminarProd_Click_1(object sender, EventArgs e)
+        private void BBuscarProducto_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void TBBuscarCliente_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolCodigoProd_Click(object sender, EventArgs e)
+        {
+            modoBusqueda = "Codigo";
+            BBuscarProducto.Text = "Buscar por: Código";
+            TBBuscarProducto.Clear();
+            textoLimpiado = false;
+        }
+
+        private void toolNombreProd_Click(object sender, EventArgs e)
+        {
+            modoBusqueda = "Nombre";
+            BBuscarProducto.Text = "Buscar por: Nombre";
+            TBBuscarProducto.Clear();
+            textoLimpiado = false;
+        }
+
+        private void BTSBusquedaProd_Click(object sender, EventArgs e)
+        {
+            string criterio = TBBuscarProducto.Text.Trim();
+            if (string.IsNullOrWhiteSpace(criterio))
+            {
+                MessageBox.Show("Ingrese un valor para buscar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            // Validaciones
+            if (modoBusqueda == "Codigo" && !int.TryParse(criterio, out _))
+            {
+                MessageBox.Show("Ingrese un código numérico válido.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (modoBusqueda == "Nombre" && !criterio.All(c => char.IsLetter(c) || char.IsWhiteSpace(c)))
+            {
+                MessageBox.Show("Ingrese un nombre válido.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Buscar en la lista
+            List<Producto> resultado;
+            if (modoBusqueda == "Codigo")
+            {
+                resultado = Productos.Where(p => p.Codigo.ToString().Contains(criterio)).ToList();
+            }
+            else
+            {
+                resultado = Productos.Where(p => p.Nombre.IndexOf(criterio, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            }
+
+            // Mostrar resultados
+            DGVListaProd.Rows.Clear();
+            if (resultado.Count == 0)
+            {
+                MessageBox.Show("No se encontraron productos con ese criterio.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            int contador = 1;
+            foreach (var p in resultado)
+            {
+                DGVListaProd.Rows.Add(
+                    contador++,
+                    p.Codigo,
+                    p.Nombre,
+                    p.Precio,
+                    p.Categoria,
+                    p.Stock,
+                    p.Descripcion,
+                    p.Imagen,
+                    p.Estado ? "Activo" : "Inactivo"
+                );
+            }
+        }
+
+
+        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            if (e.ClickedItem.Text == "Código")
+            {
+                modoBusqueda = "Codigo";
+            }
+            else if (e.ClickedItem.Text == "Nombre")
+            {
+                modoBusqueda = "Nombre";
+            }
+        }
+
+        private void BEliminarProd_Click(object sender, EventArgs e)
         {
             if (DGVListaProd.SelectedRows.Count == 0)
             {
@@ -257,63 +250,124 @@ namespace Antorena_Soto.CPresentacion.Gerente
             }
 
             var fila = DGVListaProd.SelectedRows[0];
-            int codigoInt;
-            if (!int.TryParse(fila.Cells["Codigo"].Value.ToString(), out codigoInt))
+
+            if (!int.TryParse(fila.Cells["Codigo"].Value.ToString(), out int codigoInt))
             {
                 MessageBox.Show("Código de producto inválido.");
                 return;
             }
 
-            var prod = Productos.FirstOrDefault(p => p.Codigo == codigoInt); // <-- usar codigoInt
+            var prod = Productos.FirstOrDefault(p => p.Codigo == codigoInt);
 
             if (prod != null)
             {
                 DialogResult result = MessageBox.Show(
-                    "¿Está seguro que desea eliminar el producto seleccionado?",
-                    "Confirmar eliminación",
+                    "¿Está seguro que desea dar de baja este producto?",
+                    "Confirmar baja",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Warning
                 );
 
                 if (result == DialogResult.Yes)
                 {
-                    Productos.Remove(prod);
+                    prod.Estado = false;
+                    prod.FechaModificacion = DateTime.Now;
+
                     CargarProductos(); // refresca la grilla
-                    MessageBox.Show("Producto eliminado correctamente.");
+                    MessageBox.Show("Producto dado de baja correctamente.", "Baja lógica", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
 
-
-        private void nombreProdToolStripMenuItem_Click(object sender, EventArgs e)
+        private void bImprimir_Click(object sender, EventArgs e)
         {
-            modoBusqueda = "Nombre";
-            BBuscarPor.Text = "Buscar por: Nombre";
-            TBBuscarProd.Clear();
-            textoLimpiado = false;
+            if (DGVListaProd.Rows.Count == 0)
+            {
+                MessageBox.Show("No hay productos para imprimir.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            // Elegir qué imprimir
+            DialogResult dr = MessageBox.Show("¿Desea imprimir solo la selección?\n\n(Si selecciona NO, se imprimirá toda la lista)",
+                                              "Imprimir productos",
+                                              MessageBoxButtons.YesNoCancel,
+                                              MessageBoxIcon.Question);
+
+            if (dr == DialogResult.Cancel) return;
+
+            // Construir el texto a imprimir
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine("LISTADO DE PRODUCTOS");
+            sb.AppendLine(new string('=', 70));
+
+            // Encabezados
+            sb.AppendLine($"{"Código",-10} {"Nombre",-20} {"Precio",-10} {"Categoría",-15} {"Stock",-8} {"Estado",-10}");
+            sb.AppendLine(new string('-', 70));
+
+            // Filas a imprimir
+            var filas = dr == DialogResult.Yes && DGVListaProd.SelectedRows.Count > 0
+                ? DGVListaProd.SelectedRows.Cast<DataGridViewRow>()
+                : DGVListaProd.Rows.Cast<DataGridViewRow>();
+
+            foreach (DataGridViewRow row in filas)
+            {
+                if (row.IsNewRow) continue;
+
+                sb.AppendLine(
+                    $"{row.Cells["Codigo"].Value,-10} " +
+                    $"{row.Cells["Nombre"].Value,-20} " +
+                    $"{row.Cells["Precio"].Value,-10} " +
+                    $"{row.Cells["Categoria"].Value,-15} " +
+                    $"{row.Cells["Stock"].Value,-8} " +
+                    $"{row.Cells["Estado"].Value,-10}"
+                );
+            }
+
+            textoAImprimir = sb.ToString();
+
+            // Crear y configurar el PrintDocument
+            printDocument = new PrintDocument();
+            printDocument.PrintPage += PrintDocument_PrintPage;
+
+            // Mostrar vista previa
+            PrintPreviewDialog preview = new PrintPreviewDialog();
+            preview.Document = printDocument;
+            preview.Width = 800;
+            preview.Height = 600;
+            preview.StartPosition = FormStartPosition.CenterScreen;
+
+            preview.ShowDialog();
         }
 
-        private void codigoToolStripMenuItem_Click(object sender, EventArgs e)
+
+        private void PrintDocument_PrintPage(object sender, PrintPageEventArgs e)
         {
-            modoBusqueda = "Codigo";
-            BBuscarPor.Text = "Buscar por: Código";
-            TBBuscarProd.Clear();
-            textoLimpiado = false;
+            // Fuente y posición inicial
+            Font fuente = new Font("Consolas", 10);
+            float x = e.MarginBounds.Left;
+            float y = e.MarginBounds.Top;
+
+            // Dibujar el texto
+            e.Graphics.DrawString(textoAImprimir, fuente, Brushes.Black, new RectangleF(x, y, e.MarginBounds.Width, e.MarginBounds.Height));
+
+            // Si el texto no entra en una sola página, podrías manejar paginación aquí.
+            e.HasMorePages = false;
         }
 
-        private void DGVListaProd_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-
-        private void TBBuscarProd_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void TBuscadorProd_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        private void DGVListaProd_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
 
         }
     }
 }
+    
+
+
+    
+
+
+
+
+
+

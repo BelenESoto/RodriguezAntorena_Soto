@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.PGerente1 = new System.Windows.Forms.Panel();
+            this.pAdmin2 = new System.Windows.Forms.Panel();
+            this.pAdmin1 = new System.Windows.Forms.Panel();
             this.lAdministrador = new System.Windows.Forms.Label();
             this.BListarProductos = new System.Windows.Forms.Button();
             this.BEditarProducto = new System.Windows.Forms.Button();
             this.BAltaProductos = new System.Windows.Forms.Button();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
-            this.pAdmin1 = new System.Windows.Forms.Panel();
             this.PAdmin = new System.Windows.Forms.Panel();
-            this.pAdmin2 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.PGerente1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
@@ -59,6 +59,20 @@
             this.PGerente1.Size = new System.Drawing.Size(285, 957);
             this.PGerente1.TabIndex = 0;
             this.PGerente1.Paint += new System.Windows.Forms.PaintEventHandler(this.PGerente1_Paint);
+            // 
+            // pAdmin2
+            // 
+            this.pAdmin2.Location = new System.Drawing.Point(304, 3);
+            this.pAdmin2.Name = "pAdmin2";
+            this.pAdmin2.Size = new System.Drawing.Size(793, 765);
+            this.pAdmin2.TabIndex = 2;
+            // 
+            // pAdmin1
+            // 
+            this.pAdmin1.Location = new System.Drawing.Point(307, 3);
+            this.pAdmin1.Name = "pAdmin1";
+            this.pAdmin1.Size = new System.Drawing.Size(793, 765);
+            this.pAdmin1.TabIndex = 2;
             // 
             // lAdministrador
             // 
@@ -115,13 +129,6 @@
             this.fileSystemWatcher1.EnableRaisingEvents = true;
             this.fileSystemWatcher1.SynchronizingObject = this;
             // 
-            // pAdmin1
-            // 
-            this.pAdmin1.Location = new System.Drawing.Point(307, 3);
-            this.pAdmin1.Name = "pAdmin1";
-            this.pAdmin1.Size = new System.Drawing.Size(793, 765);
-            this.pAdmin1.TabIndex = 2;
-            // 
             // PAdmin
             // 
             this.PAdmin.BackColor = System.Drawing.Color.LightSteelBlue;
@@ -135,16 +142,9 @@
             this.PAdmin.Location = new System.Drawing.Point(0, 0);
             this.PAdmin.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.PAdmin.Name = "PAdmin";
-            this.PAdmin.Size = new System.Drawing.Size(810, 765);
+            this.PAdmin.Size = new System.Drawing.Size(850, 765);
             this.PAdmin.TabIndex = 1;
             this.PAdmin.Paint += new System.Windows.Forms.PaintEventHandler(this.PGerente2_Paint);
-            // 
-            // pAdmin2
-            // 
-            this.pAdmin2.Location = new System.Drawing.Point(304, 3);
-            this.pAdmin2.Name = "pAdmin2";
-            this.pAdmin2.Size = new System.Drawing.Size(793, 765);
-            this.pAdmin2.TabIndex = 2;
             // 
             // panel1
             // 
@@ -152,7 +152,7 @@
             this.panel1.Controls.Add(this.PAdmin);
             this.panel1.Location = new System.Drawing.Point(284, 1);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(810, 765);
+            this.panel1.Size = new System.Drawing.Size(850, 765);
             this.panel1.TabIndex = 0;
             // 
             // menuAdmin
@@ -163,11 +163,13 @@
             this.ClientSize = new System.Drawing.Size(1082, 753);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.PGerente1);
+            this.IsMdiContainer = true;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.MaximumSize = new System.Drawing.Size(1100, 800);
+            this.MaximumSize = new System.Drawing.Size(1200, 800);
             this.MinimumSize = new System.Drawing.Size(1100, 800);
             this.Name = "menuAdmin";
             this.Text = "menuAdmin";
+            this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
             this.Load += new System.EventHandler(this.FormMenuGerente_Load);
             this.PGerente1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();

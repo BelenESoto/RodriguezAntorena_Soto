@@ -13,6 +13,7 @@ namespace Antorena_Soto.CPresentacion.Gerente
         public string Descripcion { get; set; }
         public Image Imagen { get; set; }
         public DateTime FechaModificacion { get; set; }
+        public bool Estado { get; set; } = true;
     }
 
 }

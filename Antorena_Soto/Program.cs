@@ -21,7 +21,7 @@ namespace Antorena_Soto
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new reporteVentas());
+            Application.Run(new menuGerente());
 
 
         }

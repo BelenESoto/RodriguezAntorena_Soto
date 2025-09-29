@@ -18,17 +18,19 @@ namespace Antorena_Soto.CPresentacion.Gerente
             public menuAdmin()
         {
             InitializeComponent();
-
-            // Inicializamos la lista con productos de ejemplo
             _productos = new List<Producto>
-        {
-            new Producto { Codigo = 1, Nombre = "Aros Mary", Precio = 5000, Categoria="Accesorios", Stock=10, Descripcion="Aros de acero", FechaModificacion=DateTime.Now, Imagen=null },
-            new Producto { Codigo = 2, Nombre = "Collar Eva", Precio = 8000, Categoria="Accesorios", Stock=5, Descripcion="Collar con piedra", FechaModificacion=DateTime.Now, Imagen=null }
+    {
+    new Producto { Codigo = 123, Nombre = "Aros Mary", Precio = 5000, Categoria = "Accesorios", Stock = 10, Descripcion = "Aros de acero", FechaModificacion = DateTime.Now, Imagen = null, Estado = true },
+    new Producto { Codigo = 456, Nombre = "Collar Eva", Precio = 8000, Categoria = "Accesorios", Stock = 5, Descripcion = "Collar con piedra", FechaModificacion = DateTime.Now, Imagen = null, Estado = true },
+    new Producto { Codigo = 789, Nombre = "Pulsera Luna", Precio = 3500, Categoria = "Accesorios", Stock = 15, Descripcion = "Pulsera de cuero", FechaModificacion = DateTime.Now, Imagen = null, Estado = true },
+    new Producto { Codigo = 321, Nombre = "Anillo Sol", Precio = 6000, Categoria = "Accesorios", Stock = 8, Descripcion = "Anillo de plata", FechaModificacion = DateTime.Now, Imagen = null, Estado = true },
+    new Producto { Codigo = 654, Nombre = "Broche Estrella", Precio = 2000, Categoria = "Accesorios", Stock = 20, Descripcion = "Broche esmaltado", FechaModificacion = DateTime.Now, Imagen = null, Estado = true }
         };
-      }
-    
 
-       
+      }
+
+
+
         private void LMenuGerente_Click(object sender, EventArgs e)
         {
 
@@ -64,14 +66,21 @@ namespace Antorena_Soto.CPresentacion.Gerente
         private void BListarProductos_Click(object sender, EventArgs e)
         {
             PAdmin.Controls.Clear();
+
             listaProductos formListaProd = new listaProductos(_productos, "Ver");
+
+            // Form hijo dentro del panel
             formListaProd.TopLevel = false;
             formListaProd.FormBorderStyle = FormBorderStyle.None;
             formListaProd.Dock = DockStyle.Fill;
-            PAdmin.Controls.Add(formListaProd);
-            formListaProd.Show();
 
+            PAdmin.Controls.Add(formListaProd);
+            PAdmin.Tag = formListaProd; 
+            formListaProd.Show();
         }
+
+
+        
 
 
         private void PGerente2_Paint(object sender, PaintEventArgs e)

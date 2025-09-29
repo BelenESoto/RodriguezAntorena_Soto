@@ -211,5 +211,10 @@ namespace Antorena_Soto.CPresentacion.SuperAdministrador
         {
 
         }
+
+        private void BBuscarPor_ButtonClick(object sender, EventArgs e)
+        {
+
+        }
     }
 }

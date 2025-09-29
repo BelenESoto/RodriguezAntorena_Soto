@@ -31,8 +31,19 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(menuSuperAdm));
             this.PMenuSuperAdmin = new System.Windows.Forms.Panel();
             this.PGerente2 = new System.Windows.Forms.Panel();
+            this.LListaUsuarios = new System.Windows.Forms.Label();
             this.DGVListaVendedor = new System.Windows.Forms.DataGridView();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cuit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Correo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TipoUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Dni = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaIng = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.BBuscarPor = new System.Windows.Forms.ToolStripSplitButton();
+            this.bUSCARPORToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.apellidoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.tipoUsuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
             this.PGerente1 = new System.Windows.Forms.Panel();
@@ -41,17 +52,6 @@
             this.BTListaUsuario = new System.Windows.Forms.Button();
             this.BTAltaUsuario = new System.Windows.Forms.Button();
             this.LMenuGerente = new System.Windows.Forms.Label();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cuit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Correo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TipoUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Dni = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FechaIng = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LListaUsuarios = new System.Windows.Forms.Label();
-            this.BBuscarPor = new System.Windows.Forms.ToolStripSplitButton();
-            this.bUSCARPORToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.apellidoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.tipoUsuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PMenuSuperAdmin.SuspendLayout();
             this.PGerente2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGVListaVendedor)).BeginInit();
@@ -66,10 +66,10 @@
             this.PMenuSuperAdmin.Controls.Add(this.toolStrip1);
             this.PMenuSuperAdmin.Controls.Add(this.PGerente1);
             this.PMenuSuperAdmin.Controls.Add(this.LMenuGerente);
-            this.PMenuSuperAdmin.Location = new System.Drawing.Point(2, 2);
-            this.PMenuSuperAdmin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.PMenuSuperAdmin.Location = new System.Drawing.Point(3, 2);
+            this.PMenuSuperAdmin.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.PMenuSuperAdmin.Name = "PMenuSuperAdmin";
-            this.PMenuSuperAdmin.Size = new System.Drawing.Size(780, 402);
+            this.PMenuSuperAdmin.Size = new System.Drawing.Size(1040, 495);
             this.PMenuSuperAdmin.TabIndex = 0;
             // 
             // PGerente2
@@ -77,11 +77,27 @@
             this.PGerente2.BackColor = System.Drawing.Color.Gainsboro;
             this.PGerente2.Controls.Add(this.LListaUsuarios);
             this.PGerente2.Controls.Add(this.DGVListaVendedor);
-            this.PGerente2.Location = new System.Drawing.Point(209, 46);
-            this.PGerente2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.PGerente2.Location = new System.Drawing.Point(279, 57);
+            this.PGerente2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.PGerente2.Name = "PGerente2";
-            this.PGerente2.Size = new System.Drawing.Size(563, 352);
+            this.PGerente2.Size = new System.Drawing.Size(751, 433);
             this.PGerente2.TabIndex = 4;
+            // 
+            // LListaUsuarios
+            // 
+            this.LListaUsuarios.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.LListaUsuarios.BackColor = System.Drawing.Color.Gainsboro;
+            this.LListaUsuarios.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.LListaUsuarios.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.LListaUsuarios.Font = new System.Drawing.Font("SimSun", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LListaUsuarios.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.LListaUsuarios.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.LListaUsuarios.Location = new System.Drawing.Point(17, 10);
+            this.LListaUsuarios.Name = "LListaUsuarios";
+            this.LListaUsuarios.Size = new System.Drawing.Size(706, 55);
+            this.LListaUsuarios.TabIndex = 9;
+            this.LListaUsuarios.Text = "LISTA DE USUARIOS";
+            this.LListaUsuarios.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // DGVListaVendedor
             // 
@@ -93,112 +109,14 @@
             this.TipoUsuario,
             this.Dni,
             this.FechaIng});
-            this.DGVListaVendedor.Location = new System.Drawing.Point(15, 60);
-            this.DGVListaVendedor.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.DGVListaVendedor.Location = new System.Drawing.Point(20, 74);
+            this.DGVListaVendedor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.DGVListaVendedor.Name = "DGVListaVendedor";
             this.DGVListaVendedor.RowHeadersWidth = 51;
             this.DGVListaVendedor.RowTemplate.Height = 24;
-            this.DGVListaVendedor.Size = new System.Drawing.Size(530, 279);
+            this.DGVListaVendedor.Size = new System.Drawing.Size(707, 343);
             this.DGVListaVendedor.TabIndex = 0;
             this.DGVListaVendedor.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGVListaVendedor_CellContentClick);
-            // 
-            // toolStrip1
-            // 
-            this.toolStrip1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.toolStrip1.AutoSize = false;
-            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
-            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.BBuscarPor,
-            this.toolStripSeparator1,
-            this.toolStripTextBox1});
-            this.toolStrip1.Location = new System.Drawing.Point(208, 5);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(563, 39);
-            this.toolStrip1.TabIndex = 3;
-            this.toolStrip1.Text = "toolStrip1";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 39);
-            // 
-            // toolStripTextBox1
-            // 
-            this.toolStripTextBox1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.toolStripTextBox1.Name = "toolStripTextBox1";
-            this.toolStripTextBox1.Size = new System.Drawing.Size(367, 39);
-            // 
-            // PGerente1
-            // 
-            this.PGerente1.BackColor = System.Drawing.Color.Gainsboro;
-            this.PGerente1.Controls.Add(this.BTBajaUsuario);
-            this.PGerente1.Controls.Add(this.LPersonalGest);
-            this.PGerente1.Controls.Add(this.BTListaUsuario);
-            this.PGerente1.Controls.Add(this.BTAltaUsuario);
-            this.PGerente1.Location = new System.Drawing.Point(0, 44);
-            this.PGerente1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.PGerente1.Name = "PGerente1";
-            this.PGerente1.Size = new System.Drawing.Size(204, 353);
-            this.PGerente1.TabIndex = 2;
-            // 
-            // BTBajaUsuario
-            // 
-            this.BTBajaUsuario.Location = new System.Drawing.Point(20, 74);
-            this.BTBajaUsuario.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.BTBajaUsuario.Name = "BTBajaUsuario";
-            this.BTBajaUsuario.Size = new System.Drawing.Size(164, 27);
-            this.BTBajaUsuario.TabIndex = 7;
-            this.BTBajaUsuario.Text = "Baja Usuario";
-            this.BTBajaUsuario.UseVisualStyleBackColor = true;
-            this.BTBajaUsuario.Click += new System.EventHandler(this.BTBajaUsuario_Click_1);
-            // 
-            // LPersonalGest
-            // 
-            this.LPersonalGest.AutoSize = true;
-            this.LPersonalGest.BackColor = System.Drawing.Color.LightGray;
-            this.LPersonalGest.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LPersonalGest.Location = new System.Drawing.Point(74, 14);
-            this.LPersonalGest.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.LPersonalGest.Name = "LPersonalGest";
-            this.LPersonalGest.Size = new System.Drawing.Size(67, 17);
-            this.LPersonalGest.TabIndex = 5;
-            this.LPersonalGest.Text = "Personal";
-            // 
-            // BTListaUsuario
-            // 
-            this.BTListaUsuario.Location = new System.Drawing.Point(20, 105);
-            this.BTListaUsuario.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.BTListaUsuario.Name = "BTListaUsuario";
-            this.BTListaUsuario.Size = new System.Drawing.Size(164, 27);
-            this.BTListaUsuario.TabIndex = 2;
-            this.BTListaUsuario.Text = "Lista de Ususarios";
-            this.BTListaUsuario.UseVisualStyleBackColor = true;
-            // 
-            // BTAltaUsuario
-            // 
-            this.BTAltaUsuario.Location = new System.Drawing.Point(20, 43);
-            this.BTAltaUsuario.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.BTAltaUsuario.Name = "BTAltaUsuario";
-            this.BTAltaUsuario.Size = new System.Drawing.Size(164, 27);
-            this.BTAltaUsuario.TabIndex = 1;
-            this.BTAltaUsuario.Text = "Alta Usuario";
-            this.BTAltaUsuario.UseVisualStyleBackColor = true;
-            this.BTAltaUsuario.Click += new System.EventHandler(this.BTAltaUsuario_Click);
-            // 
-            // LMenuGerente
-            // 
-            this.LMenuGerente.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.LMenuGerente.BackColor = System.Drawing.Color.Gainsboro;
-            this.LMenuGerente.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LMenuGerente.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.LMenuGerente.Location = new System.Drawing.Point(0, 3);
-            this.LMenuGerente.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.LMenuGerente.Name = "LMenuGerente";
-            this.LMenuGerente.Size = new System.Drawing.Size(204, 39);
-            this.LMenuGerente.TabIndex = 1;
-            this.LMenuGerente.Text = "MENU SUPER-ADMIN";
-            this.LMenuGerente.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Nombre
             // 
@@ -210,17 +128,23 @@
             // Cuit
             // 
             this.Cuit.HeaderText = "Cuit";
+            this.Cuit.MinimumWidth = 6;
             this.Cuit.Name = "Cuit";
+            this.Cuit.Width = 125;
             // 
             // Correo
             // 
             this.Correo.HeaderText = "Correo";
+            this.Correo.MinimumWidth = 6;
             this.Correo.Name = "Correo";
+            this.Correo.Width = 125;
             // 
             // TipoUsuario
             // 
             this.TipoUsuario.HeaderText = "Tipo Usuario";
+            this.TipoUsuario.MinimumWidth = 6;
             this.TipoUsuario.Name = "TipoUsuario";
+            this.TipoUsuario.Width = 125;
             // 
             // Dni
             // 
@@ -236,22 +160,21 @@
             this.FechaIng.Name = "FechaIng";
             this.FechaIng.Width = 125;
             // 
-            // LListaUsuarios
+            // toolStrip1
             // 
-            this.LListaUsuarios.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.LListaUsuarios.BackColor = System.Drawing.Color.Gainsboro;
-            this.LListaUsuarios.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.LListaUsuarios.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.LListaUsuarios.Font = new System.Drawing.Font("SimSun", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LListaUsuarios.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.LListaUsuarios.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.LListaUsuarios.Location = new System.Drawing.Point(13, 8);
-            this.LListaUsuarios.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.LListaUsuarios.Name = "LListaUsuarios";
-            this.LListaUsuarios.Size = new System.Drawing.Size(530, 45);
-            this.LListaUsuarios.TabIndex = 9;
-            this.LListaUsuarios.Text = "LISTA DE USUARIOS";
-            this.LListaUsuarios.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolStrip1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.toolStrip1.AutoSize = false;
+            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.BBuscarPor,
+            this.toolStripSeparator1,
+            this.toolStripTextBox1});
+            this.toolStrip1.Location = new System.Drawing.Point(277, 6);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(751, 48);
+            this.toolStrip1.TabIndex = 3;
+            this.toolStrip1.Text = "toolStrip1";
             // 
             // BBuscarPor
             // 
@@ -262,36 +185,118 @@
             this.BBuscarPor.Image = ((System.Drawing.Image)(resources.GetObject("BBuscarPor.Image")));
             this.BBuscarPor.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.BBuscarPor.Name = "BBuscarPor";
-            this.BBuscarPor.Size = new System.Drawing.Size(113, 36);
+            this.BBuscarPor.Size = new System.Drawing.Size(135, 45);
             this.BBuscarPor.Text = "BUSCAR POR";
             this.BBuscarPor.ToolTipText = "BUSCAR POR";
+            this.BBuscarPor.ButtonClick += new System.EventHandler(this.BBuscarPor_ButtonClick);
             // 
             // bUSCARPORToolStripMenuItem1
             // 
             this.bUSCARPORToolStripMenuItem1.Name = "bUSCARPORToolStripMenuItem1";
-            this.bUSCARPORToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.bUSCARPORToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
             this.bUSCARPORToolStripMenuItem1.Text = "DNI";
             // 
             // apellidoToolStripMenuItem1
             // 
             this.apellidoToolStripMenuItem1.Name = "apellidoToolStripMenuItem1";
-            this.apellidoToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.apellidoToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
             this.apellidoToolStripMenuItem1.Text = "Apellido";
             this.apellidoToolStripMenuItem1.Click += new System.EventHandler(this.apellidoToolStripMenuItem1_Click);
             // 
             // tipoUsuarioToolStripMenuItem
             // 
             this.tipoUsuarioToolStripMenuItem.Name = "tipoUsuarioToolStripMenuItem";
-            this.tipoUsuarioToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.tipoUsuarioToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.tipoUsuarioToolStripMenuItem.Text = "Tipo Usuario";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 48);
+            // 
+            // toolStripTextBox1
+            // 
+            this.toolStripTextBox1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.toolStripTextBox1.Name = "toolStripTextBox1";
+            this.toolStripTextBox1.Size = new System.Drawing.Size(488, 48);
+            this.toolStripTextBox1.Click += new System.EventHandler(this.toolStripTextBox1_Click);
+            // 
+            // PGerente1
+            // 
+            this.PGerente1.BackColor = System.Drawing.Color.Gainsboro;
+            this.PGerente1.Controls.Add(this.BTBajaUsuario);
+            this.PGerente1.Controls.Add(this.LPersonalGest);
+            this.PGerente1.Controls.Add(this.BTListaUsuario);
+            this.PGerente1.Controls.Add(this.BTAltaUsuario);
+            this.PGerente1.Location = new System.Drawing.Point(0, 54);
+            this.PGerente1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.PGerente1.Name = "PGerente1";
+            this.PGerente1.Size = new System.Drawing.Size(272, 434);
+            this.PGerente1.TabIndex = 2;
+            // 
+            // BTBajaUsuario
+            // 
+            this.BTBajaUsuario.Location = new System.Drawing.Point(27, 91);
+            this.BTBajaUsuario.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.BTBajaUsuario.Name = "BTBajaUsuario";
+            this.BTBajaUsuario.Size = new System.Drawing.Size(219, 33);
+            this.BTBajaUsuario.TabIndex = 7;
+            this.BTBajaUsuario.Text = "Baja Usuario";
+            this.BTBajaUsuario.UseVisualStyleBackColor = true;
+            this.BTBajaUsuario.Click += new System.EventHandler(this.BTBajaUsuario_Click_1);
+            // 
+            // LPersonalGest
+            // 
+            this.LPersonalGest.AutoSize = true;
+            this.LPersonalGest.BackColor = System.Drawing.Color.LightGray;
+            this.LPersonalGest.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LPersonalGest.Location = new System.Drawing.Point(99, 17);
+            this.LPersonalGest.Name = "LPersonalGest";
+            this.LPersonalGest.Size = new System.Drawing.Size(81, 20);
+            this.LPersonalGest.TabIndex = 5;
+            this.LPersonalGest.Text = "Personal";
+            // 
+            // BTListaUsuario
+            // 
+            this.BTListaUsuario.Location = new System.Drawing.Point(27, 129);
+            this.BTListaUsuario.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.BTListaUsuario.Name = "BTListaUsuario";
+            this.BTListaUsuario.Size = new System.Drawing.Size(219, 33);
+            this.BTListaUsuario.TabIndex = 2;
+            this.BTListaUsuario.Text = "Lista de Ususarios";
+            this.BTListaUsuario.UseVisualStyleBackColor = true;
+            // 
+            // BTAltaUsuario
+            // 
+            this.BTAltaUsuario.Location = new System.Drawing.Point(27, 53);
+            this.BTAltaUsuario.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.BTAltaUsuario.Name = "BTAltaUsuario";
+            this.BTAltaUsuario.Size = new System.Drawing.Size(219, 33);
+            this.BTAltaUsuario.TabIndex = 1;
+            this.BTAltaUsuario.Text = "Alta Usuario";
+            this.BTAltaUsuario.UseVisualStyleBackColor = true;
+            this.BTAltaUsuario.Click += new System.EventHandler(this.BTAltaUsuario_Click);
+            // 
+            // LMenuGerente
+            // 
+            this.LMenuGerente.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.LMenuGerente.BackColor = System.Drawing.Color.Gainsboro;
+            this.LMenuGerente.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LMenuGerente.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.LMenuGerente.Location = new System.Drawing.Point(0, 4);
+            this.LMenuGerente.Name = "LMenuGerente";
+            this.LMenuGerente.Size = new System.Drawing.Size(272, 48);
+            this.LMenuGerente.TabIndex = 1;
+            this.LMenuGerente.Text = "MENU SUPER-ADMIN";
+            this.LMenuGerente.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // menuSuperAdm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 409);
+            this.ClientSize = new System.Drawing.Size(1045, 503);
             this.Controls.Add(this.PMenuSuperAdmin);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "menuSuperAdm";
             this.Text = "Form1";
             this.PMenuSuperAdmin.ResumeLayout(false);
