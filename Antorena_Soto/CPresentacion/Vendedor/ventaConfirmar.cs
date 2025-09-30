@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FontAwesome.Sharp;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 
 namespace Antorena_Soto.CPresentacion.Vendedor
 {
@@ -182,6 +184,65 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             // Si todo está correcto:
             MessageBox.Show("Factura creada con éxito.");
             MessageBox.Show("Venta agregada exitosamente.");
+
+            CrearBotonesFactura();
+
+        }
+
+       
+
+        private void CrearBotonesFactura()
+        {
+            // Botón Imprimir Factura
+            IconButton BImprimirFact = new IconButton
+            {
+                Text = "Imprimir Factura",
+                IconChar = IconChar.Print,
+                IconColor = Color.Black,
+                TextImageRelation = TextImageRelation.ImageBeforeText,
+                Dock = DockStyle.Left,
+                Height = 50,
+                Width = 280,
+                Name = "BImprimirFact"
+            };
+            // 🚫 Por ahora sin funcionalidad
+            BImprimirFact.Click += (s, e) =>
+            {
+                MessageBox.Show("Funcionalidad de impresión aún no implementada.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            };
+
+            // Botón Ver Factura
+            IconButton BVerFactura = new IconButton
+            {
+                Text = "Ver Factura",
+                IconChar = IconChar.FileInvoiceDollar,
+                IconColor = Color.Black,
+                TextImageRelation = TextImageRelation.ImageBeforeText,
+                Dock = DockStyle.Right,
+                Height = 40,
+                Width = 280,
+                Name = "BVerFactura"
+            };
+            BVerFactura.Click += (s, e) =>
+            {
+                // Abrir el form facturaVenta
+                facturaVenta formFactura = new facturaVenta();
+                formFactura.ShowDialog();
+            };
+
+            // 🔹 Agregar los botones al formulario (podés usar un panel si lo preferís)
+            PFacturaOpciones.Controls.Add(BVerFactura);
+            PFacturaOpciones.Controls.Add(BImprimirFact);
+
+            // Los pongo arriba de todo
+            BVerFactura.BringToFront();
+            BImprimirFact.BringToFront();
+        }
+
+
+        private void ventaConfirmar_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

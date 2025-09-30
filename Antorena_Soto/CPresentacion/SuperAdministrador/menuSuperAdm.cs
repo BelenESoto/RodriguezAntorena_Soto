@@ -1,4 +1,5 @@
 ﻿using Antorena_Soto.CPresentacion.Gerente;
+using Antorena_Soto.CPresentacion.SuperAdministrador;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -60,12 +61,12 @@ namespace Antorena_Soto.CPresentacion.Administrador
 
             public void AgregarUsuario(string nombre, string dni, DateTime fechaNac)
             {
-            DGVListaVendedor.Rows.Add(nombre, dni, fechaNac.ToShortDateString());
-            DGVListaVendedor.Show();
-            DGVListaVendedor.BringToFront();
-            }
+            //DGVListaVendedor.Rows.Add(nombre, dni, fechaNac.ToShortDateString());
+            //DGVListaVendedor.Show();
+            //DGVListaVendedor.BringToFront();
+        }
 
-            private void label1_Click(object sender, EventArgs e)
+        private void label1_Click(object sender, EventArgs e)
             {
 
             }
@@ -106,9 +107,9 @@ namespace Antorena_Soto.CPresentacion.Administrador
 
             private void BTListaUsuario_Click(object sender, EventArgs e)
             {
-                DGVListaVendedor.Show();
-                DGVListaVendedor.BringToFront();
-            }
+            //DGVListaVendedor.Show();
+            //DGVListaVendedor.BringToFront();
+        }
 
         private void DGVListaUsuario_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {

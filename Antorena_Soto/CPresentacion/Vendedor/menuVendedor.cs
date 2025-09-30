@@ -66,7 +66,15 @@ namespace Antorena_Soto.CPresentacion.Vendedor
 
         private void BListarVenta_Click(object sender, EventArgs e)
         {
+            PVendedor2.Controls.Clear();
+           listaVentas formVenta = new listaVentas();
+            formVenta.TopLevel = false;
+            formVenta.FormBorderStyle = FormBorderStyle.None; // Sin borde
+            formVenta.Dock = DockStyle.Fill;             // Ocupa todo el panel
 
+            // Agregar al panel
+            PVendedor2.Controls.Add(formVenta);
+            formVenta.Show();
         }
 
            private void BAgregarDatoCliente_Click(object sender, EventArgs e)
@@ -94,31 +102,17 @@ namespace Antorena_Soto.CPresentacion.Vendedor
         {
             PVendedor2.Controls.Clear();
 
-            Label lblTitulo = new Label
+            // Crear instancia del formulario listaClientes
+            listaClientes frmClientes = new listaClientes
             {
-                Text = "CLIENTES",
-                Dock = DockStyle.Top,
-                Font = new Font("SimSun", 16),
-                TextAlign = ContentAlignment.MiddleCenter,
-                Height = 40
+                TopLevel = false,
+                FormBorderStyle = FormBorderStyle.None,
+                Dock = DockStyle.Fill
             };
 
-            // Crear el DataGridView
-            DataGridView dgv = new DataGridView
-            {
-                Dock = DockStyle.Fill,
-                AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
-                ReadOnly = true,
-                AllowUserToAddRows = false,
-                SelectionMode = DataGridViewSelectionMode.FullRowSelect
-            };
-
-            dgv.DataSource = null;
-            dgv.DataSource = listaClientes;
-
-            // Agregar primero el label y luego el DataGridView
-            PVendedor2.Controls.Add(dgv);
-            PVendedor2.Controls.Add(lblTitulo);
+            // Agregar al panel
+            PVendedor2.Controls.Add(frmClientes);
+            frmClientes.Show();
         }
 /*
         private void BVerInfoCliente_Click(object sender, EventArgs e)
@@ -188,9 +182,22 @@ namespace Antorena_Soto.CPresentacion.Vendedor
 
         }
 
-        private void PGerente2_Paint(object sender, PaintEventArgs e)
+        public void PVendedor2_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void BEditarCliente_Click(object sender, EventArgs e)
+        {
+            PVendedor2.Controls.Clear();
+
+            listaClientes formLista = new listaClientes();
+            formLista.TopLevel = false;
+            formLista.FormBorderStyle = FormBorderStyle.None;
+            formLista.Dock = DockStyle.Fill;
+
+            PVendedor2.Controls.Add(formLista);
+            formLista.Show();
         }
     }
 }

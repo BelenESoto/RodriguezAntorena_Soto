@@ -99,6 +99,12 @@
     <Compile Include="CPresentacion\SuperAdministrador\bajaUsuario.Designer.cs">
       <DependentUpon>bajaUsuario.cs</DependentUpon>
     </Compile>
+    <Compile Include="CPresentacion\SuperAdministrador\listaUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CPresentacion\SuperAdministrador\listaUsuario.Designer.cs">
+      <DependentUpon>listaUsuario.cs</DependentUpon>
+    </Compile>
     <Compile Include="CPresentacion\SuperAdministrador\menuSuperAdm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -130,6 +136,24 @@
       <DependentUpon>agregarDatosCliente.cs</DependentUpon>
     </Compile>
     <Compile Include="CPresentacion\Vendedor\Cliente.cs" />
+    <Compile Include="CPresentacion\Vendedor\facturaVenta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CPresentacion\Vendedor\facturaVenta.Designer.cs">
+      <DependentUpon>facturaVenta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CPresentacion\Vendedor\listaClientes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CPresentacion\Vendedor\listaClientes.Designer.cs">
+      <DependentUpon>listaClientes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CPresentacion\Vendedor\listaVentas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CPresentacion\Vendedor\listaVentas.Designer.cs">
+      <DependentUpon>listaVentas.cs</DependentUpon>
+    </Compile>
     <Compile Include="CPresentacion\Vendedor\menuVendedor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -177,11 +201,23 @@
     <EmbeddedResource Include="CPresentacion\SuperAdministrador\bajaUsuario.resx">
       <DependentUpon>bajaUsuario.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CPresentacion\SuperAdministrador\listaUsuario.resx">
+      <DependentUpon>listaUsuario.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CPresentacion\SuperAdministrador\menuSuperAdm.resx">
       <DependentUpon>menuSuperAdm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CPresentacion\Vendedor\agregarDatosCliente.resx">
       <DependentUpon>agregarDatosCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CPresentacion\Vendedor\facturaVenta.resx">
+      <DependentUpon>facturaVenta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CPresentacion\Vendedor\listaClientes.resx">
+      <DependentUpon>listaClientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CPresentacion\Vendedor\listaVentas.resx">
+      <DependentUpon>listaVentas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CPresentacion\Vendedor\menuVendedor.resx">
       <DependentUpon>menuVendedor.cs</DependentUpon>

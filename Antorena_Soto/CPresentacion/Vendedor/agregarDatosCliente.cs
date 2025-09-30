@@ -1,4 +1,5 @@
 ﻿using CPresentacion.Vendedor;
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,12 +14,34 @@ namespace Antorena_Soto.CPresentacion.Vendedor
 {
     public partial class agregarDatosCliente : Form
     {
+        private Cliente clienteEnEdicion;  // 🚀 guarda referencia del cliente en edición
+        private bool esEdicion = false;
         public event EventHandler<ClienteEventArgs> ClienteAgregado;
         public agregarDatosCliente()
         {
             InitializeComponent();
         }
 
+        // 🚀 Constructor para EDICIÓN
+        public agregarDatosCliente(Cliente cliente) : this()
+        {
+            esEdicion = true;
+            clienteEnEdicion = cliente;
+
+            // cargar datos del cliente en los textboxes
+            TBNombreCliente.Text = cliente.Nombre;
+            TBDniCliente.Text = cliente.DNI;
+            TBProvinciaCliente.Text = cliente.Provincia;
+            TBCiudadCliente.Text = cliente.Ciudad;
+            TBDomicilioCliente.Text = cliente.Domicilio;
+            TBCuitCliente.Text = cliente.Cuit.ToString();
+            TBNumCliente.Text = cliente.NumeroTelefono;
+            TBCorreoCliente.Text = cliente.Correo;
+            DTFechaModifCliente.Value = cliente.FechaIng;
+
+            // opcional: cambiar el texto del botón para que diga "Guardar cambios"
+            BAgregarCliente.Text = "Guardar cambios";
+        }
         private void agregarDatosCliente_Load(object sender, EventArgs e)
         {
 
@@ -201,36 +224,58 @@ namespace Antorena_Soto.CPresentacion.Vendedor
 
         private void BAgregarCliente_Click_1(object sender, EventArgs e)
         {
+            if (!ValidateChildren())
             {
-                if (!ValidateChildren())
+                MessageBox.Show("Por favor, corrija los errores antes de continuar.", "Validación",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                if (esEdicion)
                 {
-                    MessageBox.Show("Por favor, corrija los errores antes de continuar.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
+                    // 🚀 actualizar cliente existente
+                    clienteEnEdicion.Nombre = TBNombreCliente.Text.Trim();
+                    clienteEnEdicion.DNI = TBDniCliente.Text.Trim();
+                    clienteEnEdicion.Provincia = TBProvinciaCliente.Text.Trim();
+                    clienteEnEdicion.Ciudad = TBCiudadCliente.Text.Trim();
+                    clienteEnEdicion.Domicilio = TBDomicilioCliente.Text.Trim();
+                    clienteEnEdicion.Cuit = long.Parse(TBCuitCliente.Text.Trim());
+                    clienteEnEdicion.NumeroTelefono = TBNumCliente.Text.Trim();
+                    clienteEnEdicion.Correo = TBCorreoCliente.Text.Trim();
+                    clienteEnEdicion.FechaIng = DTFechaModifCliente.Value;
+
+                    MessageBox.Show("Cliente actualizado con éxito.", "Éxito",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    // 🚀 alta de nuevo cliente
+                    Cliente nuevo = new Cliente
+                    {
+                        Nombre = TBNombreCliente.Text.Trim(),
+                        DNI = TBDniCliente.Text.Trim(),
+                        Provincia = TBProvinciaCliente.Text.Trim(),
+                        Ciudad = TBCiudadCliente.Text.Trim(),
+                        Domicilio = TBDomicilioCliente.Text.Trim(),
+                        Cuit = long.Parse(TBCuitCliente.Text.Trim()),
+                        NumeroTelefono = TBNumCliente.Text.Trim(),
+                        Correo = TBCorreoCliente.Text.Trim(),
+                        FechaIng = DTFechaModifCliente.Value
+                    };
+
+                    RepositorioClientes.ListaClientes.Add(nuevo);
+                    MessageBox.Show("Cliente agregado con éxito.", "Éxito",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
-                Cliente nuevoCliente = new Cliente
-                {
-                    Nombre = TBNombreCliente.Text,
-                    DNI = TBDniCliente.Text,
-                    Provincia = TBProvinciaCliente.Text,
-                    Ciudad = TBCiudadCliente.Text,
-                    Domicilio = TBDomicilioCliente.Text,
-                    NumeroTelefono = TBNumCliente.Text,
-                    Correo = TBCorreoCliente.Text
-                };
-
-                // Disparar el evento 
-                OnClienteAgregado(nuevoCliente);
-                MessageBox.Show("Cliente agregado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                // Limpiar los TextBox
-                TBNombreCliente.Clear();
-                TBDniCliente.Clear();
-                TBProvinciaCliente.Clear();
-                TBCiudadCliente.Clear();
-                TBDomicilioCliente.Clear();
-                TBNumCliente.Clear();
-                TBCorreoCliente.Clear();
+                this.Close(); // cerrar form
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al guardar cliente: " + ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         // Clase para pasar información del cliente en el evento
@@ -249,6 +294,36 @@ namespace Antorena_Soto.CPresentacion.Vendedor
 
         }
 
+        private void LDescripcionProducto_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TBCiudadCliente_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TBCuitCliente_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (String.IsNullOrEmpty(TBCuitCliente.Text))
+            {
+                MessageBox.Show("El campo CUIT no puede estar vacío.", "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                e.Cancel = true;
+            }
+            else if (!long.TryParse(TBCuitCliente.Text, out _))
+            {
+                MessageBox.Show("El campo CUIT solo acepta números.", "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                e.Cancel = true;
+            }
+            else if (TBCuitCliente.Text.Length != 11)
+            {
+                MessageBox.Show("El campo CUIT debe tener exactamente 11 dígitos.", "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                e.Cancel = true;
+            }
+        }
+
+        
     } }
 
 

@@ -1,4 +1,6 @@
-﻿namespace CPresentacion.Vendedor  // ajustá según tu proyecto
+﻿using System;
+
+namespace CPresentacion.Vendedor  // ajustá según tu proyecto
 {
     public class Cliente
     {
@@ -6,23 +8,27 @@
         public string DNI { get; set; }
         public string Provincia { get; set; }
         public string Ciudad { get; set; }
+        public long Cuit { get; set; }
         public string Domicilio { get; set; }
         public string NumeroTelefono { get; set; }
         public string Correo { get; set; }
+        public DateTime FechaIng { get; set; }
 
         // Constructor vacío
         public Cliente() { }
 
         // Constructor con parámetros opcional
-        public Cliente(string nombre, string dni, string provincia, string ciudad, string domicilio, string numero, string correo)
+        public Cliente(string nombre, string dni, string provincia, string ciudad, string domicilio, long cuit, string numero, string correo, DateTime fechaIng)
         {
             Nombre = nombre;
             DNI = dni;
             Provincia = provincia;
             Ciudad = ciudad;
             Domicilio = domicilio;
+            Cuit = cuit;
             NumeroTelefono = numero;
             Correo = correo;
+            FechaIng = fechaIng;
         }
     }
 }

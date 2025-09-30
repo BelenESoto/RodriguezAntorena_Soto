@@ -1,4 +1,6 @@
 ﻿using System;
+
+using Antorena_Soto.CPresentacion.Vendedor;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -37,25 +39,25 @@ namespace Antorena_Soto.CPresentacion.Vendedor
         private void BBuscarPor_ButtonClick(object sender, EventArgs e)
         { 
         }
-        private void TBNombreVendedor_TextChanged(object sender, EventArgs e)
+        private void TBNombreProd_TextChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void TBCantidad_TextChanged(object sender, EventArgs e)
+        private void TBCantidadProd_TextChanged(object sender, EventArgs e)
         {
 
         }
 
         private void BAgregarProd_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(TBNombreVendedor.Text))
+            if (string.IsNullOrWhiteSpace(TBNombreProd.Text))
             {
                 MessageBox.Show("El campo 'Nombre Vendedor' es obligatorio.");
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(TBCantidad.Text) || !int.TryParse(TBCantidad.Text, out _))
+            if (string.IsNullOrWhiteSpace(TBCantidadProd.Text) || !int.TryParse(TBCantidadProd.Text, out _))
             {
                 MessageBox.Show("Debe ingresar una CANTIDAD válida (número entero).");
                 return;
@@ -74,12 +76,34 @@ namespace Antorena_Soto.CPresentacion.Vendedor
 
         }
 
-        private void BContinuar_Click(object sender, EventArgs e)
+        public void BContinuar_Click(object sender, EventArgs e)
         {
-            // Oculta este formulario y abre ventaConfirmar
-            ventaConfirmar confirmar = new ventaConfirmar();
-            confirmar.Show();
-            this.Hide();
+
+            string nombreProd = TBNombreProd.Text.Trim();
+            string cantidadProd = TBCantidadProd.Text.Trim();
+            if (string.IsNullOrWhiteSpace(nombreProd))
+            {
+                MessageBox.Show("El campo 'Nombre Producto' es obligatorio.");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(cantidadProd) || !int.TryParse(cantidadProd, out _))
+            {
+                MessageBox.Show("Debe ingresar una CANTIDAD válida (número entero).");
+                return;
+            } else
+            {
+                
+                PAgregarVendedor.Controls.Clear();
+                ventaConfirmar formVenta = new ventaConfirmar();
+                formVenta.TopLevel = false;
+                formVenta.FormBorderStyle = FormBorderStyle.None; // Sin borde
+                formVenta.Dock = DockStyle.Fill;
+
+                PAgregarVendedor.Controls.Add(formVenta);
+                formVenta.Show();
+            }
+            
         }
 
         private void DGVListaProd_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -119,7 +143,7 @@ namespace Antorena_Soto.CPresentacion.Vendedor
         private void BTSBusquedaCliente_Click(object sender, EventArgs e)
         {
 
-            string input = TBBuscadorProd.Text.Trim();
+            string input = TBBuscarCliente.Text.Trim();
 
             if (string.IsNullOrEmpty(input))
             {
@@ -154,6 +178,19 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             }
         }
 
+        private void BTSPorNombreV_Click(object sender, EventArgs e)
+        {
+            buscarPorCodigo = false;
+            buscarPorNombre = true;
+            MessageBox.Show("Búsqueda configurada por NOMBRE.");
+        }
+
+        private void BTSCodigoV_Click(object sender, EventArgs e)
+        {
+            buscarPorCodigo = true;
+            buscarPorNombre = false;
+            MessageBox.Show("Búsqueda configurada por CÓDIGO.");
+        }
     }
 }
 
