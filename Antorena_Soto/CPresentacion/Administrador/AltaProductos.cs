@@ -17,13 +17,17 @@ namespace Antorena_Soto.CPresentacion.Gerente
     {
         private bool esEdicion = false;           // Variable de clase
         private int CodigoOriginal;            // Para mantener el código en edición
-        private List<Producto> _productos;
+        private List<Productox> _productos;
+
+
+        public int CodigoProducto { get; internal set; }
         public string NombreProducto => TBNombreProducto.Text.Trim();
         public decimal PrecioProducto => decimal.Parse(TBPrecioProducto.Text.Trim());
         public string CategoriaProducto => CBCategoriaProducto.Text.Trim();
         public int StockProducto => int.Parse(TBStockProducto.Text.Trim());
         public string DescripcionProducto => TBDescripcionProducto.Text.Trim();
         public Image ImagenProducto => PBImagenProducto.Image;
+        public object EstadoProducto { get; internal set; }
 
         // Constructor para alta
         public AltaProductos()
@@ -32,30 +36,78 @@ namespace Antorena_Soto.CPresentacion.Gerente
             esEdicion = false;
         }
        
-        public AltaProductos(List<Producto> productos)
+        public AltaProductos(List<Productox> productos)
         {
             InitializeComponent();
             _productos = productos;
         }
 
         // Constructor para edición: recibe el producto existente
-        public AltaProductos(Producto prodExistente)
+        public AltaProductos(Productox prodExistente)
         {
             InitializeComponent();
             esEdicion = true;
 
             CodigoOriginal = prodExistente.Codigo;
-
             TBNombreProducto.Text = prodExistente.Nombre;
             TBPrecioProducto.Text = prodExistente.Precio.ToString();
             CBCategoriaProducto.Text = prodExistente.Categoria;
             TBStockProducto.Text = prodExistente.Stock.ToString();
             TBDescripcionProducto.Text = prodExistente.Descripcion;
             PBImagenProducto.Image = prodExistente.Imagen;
+            DTFechaModifProd.Value = DateTime.Now;
+            CBEstadoProd.Text = prodExistente.Estado ? "Activo" : "Inactivo";
 
             BAgregarProducto.Text = "Guardar Cambios";
         }
-       
+
+        private bool ValidarCodigoProducto()
+        {
+            string texto = tbCodigoProducto.Text.Trim();
+
+            if (string.IsNullOrEmpty(texto))
+            {
+                MessageBox.Show("El código del producto no puede estar vacío.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                tbCodigoProducto.Focus();
+                return false;
+            }
+            if (!int.TryParse(texto, out int codigo))
+            {
+                MessageBox.Show("El código del producto debe ser un número entero.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                tbCodigoProducto.Focus();
+                return false;
+            }
+
+            if (_productos != null)
+            {
+                if (!esEdicion) 
+                {
+                    if (_productos.Any(p => p.Codigo == codigo))
+                    {
+                        MessageBox.Show("El código ya existe. Debe ingresar un código diferente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        tbCodigoProducto.Focus();
+                        return false;
+                    }
+                }
+                else 
+                {
+                    if (_productos.Any(p => p.Codigo == codigo && p.Codigo != CodigoOriginal))
+                    {
+                        MessageBox.Show("El código ya pertenece a otro producto. Cambie el código.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        tbCodigoProducto.Focus();
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        private void TBCodigoProducto_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (!ValidarCodigoProducto())
+                e.Cancel = true; 
+        }
+
 
         private void TBNombreProductos_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
@@ -71,6 +123,23 @@ namespace Antorena_Soto.CPresentacion.Gerente
                 e.Cancel = true;
             }
         }
+        private void CBEstadoProd_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            var cb = sender as ComboBox;
+            if (cb == null) return;
+
+            if (cb.SelectedIndex < 0 || string.IsNullOrWhiteSpace(cb.Text))
+            {
+                MessageBox.Show("Seleccione un estado (Activo/Inactivo).", "Error de validación",
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                e.Cancel = true;
+            }
+            else
+            {
+                e.Cancel = false;
+            }
+        }
+
         private void TBCategoriaProducto_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             string categoriaProducto = CBCategoriaProducto.Text.Trim();
@@ -181,7 +250,6 @@ namespace Antorena_Soto.CPresentacion.Gerente
                 e.Cancel = true;
                 return;
             }
-
         }
 
         private void CBCategoriaProducto_SelectedIndexChanged(object sender, EventArgs e)
@@ -218,52 +286,60 @@ namespace Antorena_Soto.CPresentacion.Gerente
         {
 
         }
-
+          
         private void BAgregarProducto_Click(object sender, EventArgs e)
-        { 
+        {
+            if (!ValidarCodigoProducto())
+                return;
+
             if (!ValidateChildren())
             {
                 MessageBox.Show("Por favor, corrija los errores antes de continuar.",
                     "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+              int codigo = int.Parse(tbCodigoProducto.Text.Trim());
 
-            // Genera el código incremental
-            int nuevoCodigo = 1;
-            if (!esEdicion && _productos != null && _productos.Count > 0)
+            if (esEdicion)
             {
-                nuevoCodigo = _productos.Max(p => p.Codigo) + 1;
-            }
-            // Crea el Producto
-            Producto nuevoProducto = new Producto()
-            {
-                Codigo = esEdicion ? CodigoOriginal : nuevoCodigo,
-                Nombre = TBNombreProducto.Text.Trim(),
-                Precio = decimal.Parse(TBPrecioProducto.Text.Trim()),
-                Categoria = CBCategoriaProducto.Text.Trim(),
-                Stock = int.Parse(TBStockProducto.Text.Trim()),
-                Descripcion = TBDescripcionProducto.Text.Trim(),
-                Imagen = PBImagenProducto.Image,
-                FechaModificacion = DateTime.Now.Date
-            };
-
-            // Si estamos en Alta, agregamos a la lista compartida
-            if (!esEdicion && _productos != null)
-            {
-                _productos.Add(nuevoProducto);
-                MessageBox.Show($"Producto '{nuevoProducto.Nombre}' agregado correctamente");
+                // Modificar el producto existente
+                Productox prod = _productos.First(p => p.Codigo == CodigoOriginal);
+                prod.Codigo = codigo;
+                prod.Nombre = NombreProducto;
+                prod.Precio = PrecioProducto;
+                prod.Categoria = CategoriaProducto;
+                prod.Stock = StockProducto;
+                prod.Descripcion = DescripcionProducto;
+                prod.Imagen = ImagenProducto;
+                prod.FechaModificacion = DateTime.Now;
+                prod.Estado = CBEstadoProd.Text == "Activo";
             }
             else
             {
-                MessageBox.Show($"Producto '{nuevoProducto.Nombre}' modificado correctamente");
+                // Crear nuevo producto
+                Productox nuevo = new Productox
+                {
+                    Codigo = codigo,
+                    Nombre = NombreProducto,
+                    Precio = PrecioProducto,
+                    Categoria = CategoriaProducto,
+                    Stock = StockProducto,
+                    Descripcion = DescripcionProducto,
+                    Imagen = ImagenProducto,
+                    FechaModificacion = DateTime.Now,
+                    Estado = CBEstadoProd.Text == "Activo"
+
+                };
+                MessageBox.Show($"Producto modificado correctamente");
+
+                _productos.Add(nuevo);
             }
 
-            // Devolver el objeto al formulario llamador
-            this.Tag = nuevoProducto;
-            this.DialogResult = DialogResult.OK;
+            MessageBox.Show("Producto guardado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.Close();
-        }
+            }
 
+           
    
 
         private void LAgregarProducto_Click(object sender, EventArgs e)
@@ -277,6 +353,47 @@ namespace Antorena_Soto.CPresentacion.Gerente
         }
 
         private void PAgregarProducto_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void LStockProducto_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lAltaProd_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panelProd_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tBEstado_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CBEstadoProd_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            bool activo = CBEstadoProd.Text == "Activo";
+
+        }
+
+        private void tbCodigo_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PAgregarProducto_Paint_1(object sender, PaintEventArgs e)
         {
 
         }

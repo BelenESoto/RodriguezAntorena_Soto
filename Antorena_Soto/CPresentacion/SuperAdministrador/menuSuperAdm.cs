@@ -130,5 +130,15 @@ namespace Antorena_Soto.CPresentacion.Administrador
         {
 
         }
+
+        private void BBuscarPor_ButtonClick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripTextBox1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
     }
