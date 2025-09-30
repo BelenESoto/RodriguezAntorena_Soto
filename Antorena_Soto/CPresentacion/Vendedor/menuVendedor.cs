@@ -1,4 +1,5 @@
 ﻿using Antorena_Soto.CPresentacion.Gerente;
+using Antorena_Soto.CPresentacion.Administrador;
 using CPresentacion.Vendedor;
 using System;
 using System.Collections.Generic;
@@ -15,11 +16,23 @@ namespace Antorena_Soto.CPresentacion.Vendedor
 {
     public partial class menuVendedor : Form
     {
+
+        private List<Productox> _productos; //EL DE BELEN
         public menuVendedor()
         {
+
             InitializeComponent();
+            _productos = new List<Productox>
+    {
+    new Productox { Codigo = 123, Nombre = "Aros Mary", Precio = 5000, Categoria = "Accesorios", Stock = 10, Descripcion = "Aros de acero", FechaModificacion = DateTime.Now, Imagen = null, Estado = true },
+    new Productox { Codigo = 456, Nombre = "Collar Eva", Precio = 8000, Categoria = "Accesorios", Stock = 5, Descripcion = "Collar con piedra", FechaModificacion = DateTime.Now, Imagen = null, Estado = true },
+    new Productox { Codigo = 789, Nombre = "Pulsera Luna", Precio = 3500, Categoria = "Accesorios", Stock = 15, Descripcion = "Pulsera de cuero", FechaModificacion = DateTime.Now, Imagen = null, Estado = true },
+    new Productox { Codigo = 321, Nombre = "Anillo Sol", Precio = 6000, Categoria = "Accesorios", Stock = 8, Descripcion = "Anillo de plata", FechaModificacion = DateTime.Now, Imagen = null, Estado = true },
+    new Productox { Codigo = 654, Nombre = "Broche Estrella", Precio = 2000, Categoria = "Accesorios", Stock = 20, Descripcion = "Broche esmaltado", FechaModificacion = DateTime.Now, Imagen = null, Estado = true }
+        };
         }
 
+ 
         private List<Producto> productos;
         private List<Cliente> listaClientes = new List<Cliente>();
         public static class ListaProductosHelper
@@ -145,13 +158,17 @@ namespace Antorena_Soto.CPresentacion.Vendedor
         private void BVerProducto_Click(object sender, EventArgs e)
         {
             PVendedor2.Controls.Clear();
-            verProductos verProd = new verProductos();
 
-            verProd.TopLevel = false;  //  embebido dentro de otro contenedor
-            verProd.FormBorderStyle = FormBorderStyle.None; // Quita los bordes
-            verProd.Dock = DockStyle.Fill; // Se ajusta al tamaño del panel
-            PVendedor2.Controls.Add(verProd);
-            verProd.Show();
+            listaProductos formListaProd = new listaProductos(_productos, "Ver");
+
+            // Form hijo dentro del panel
+            formListaProd.TopLevel = false;
+            formListaProd.FormBorderStyle = FormBorderStyle.None;
+            formListaProd.Dock = DockStyle.Fill;
+
+            PVendedor2.Controls.Add(formListaProd);
+            PVendedor2.Tag = formListaProd;
+            formListaProd.Show();
 
         }
      

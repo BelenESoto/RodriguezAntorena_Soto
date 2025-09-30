@@ -265,7 +265,7 @@ namespace Antorena_Soto.CPresentacion.Vendedor
                         FechaIng = DTFechaModifCliente.Value
                     };
 
-                    RepositorioClientes.ListaClientes.Add(nuevo);
+                   // RepositorioClientes.ListaClientes.Add(nuevo);
                     MessageBox.Show("Cliente agregado con éxito.", "Éxito",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }

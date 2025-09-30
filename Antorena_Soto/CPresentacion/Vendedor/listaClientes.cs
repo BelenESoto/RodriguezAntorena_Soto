@@ -20,7 +20,7 @@ namespace Antorena_Soto.CPresentacion.Vendedor
         {
             InitializeComponent();
             ConfigurarDataGrid();
-            DGVListaCliente.DataSource = RepositorioClientes.ListaClientes;
+           // DGVListaCliente.DataSource = RepositorioClientes.ListaClientes;
 
             BEditCliente = new Button
             {
