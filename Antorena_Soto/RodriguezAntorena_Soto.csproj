@@ -92,7 +92,7 @@
     <Compile Include="CPresentacion\Administrador\listaProductos.Designer.cs">
       <DependentUpon>listaProductos.cs</DependentUpon>
     </Compile>
-    <Compile Include="CPresentacion\Administrador\Producto.cs" />
+    <Compile Include="CPresentacion\Administrador\Productox.cs" />
     <Compile Include="CPresentacion\Gerente\menuGerente.cs">
       <SubType>Form</SubType>
     </Compile>

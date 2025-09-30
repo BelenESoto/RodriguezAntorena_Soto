@@ -17,7 +17,7 @@ namespace Antorena_Soto.CPresentacion.Gerente
     {
         private bool esEdicion = false;           // Variable de clase
         private int CodigoOriginal;            // Para mantener el código en edición
-        private List<Producto> _productos;
+        private List<Productox> _productos;
 
 
         public int CodigoProducto { get; internal set; }
@@ -36,14 +36,14 @@ namespace Antorena_Soto.CPresentacion.Gerente
             esEdicion = false;
         }
        
-        public AltaProductos(List<Producto> productos)
+        public AltaProductos(List<Productox> productos)
         {
             InitializeComponent();
             _productos = productos;
         }
 
         // Constructor para edición: recibe el producto existente
-        public AltaProductos(Producto prodExistente)
+        public AltaProductos(Productox prodExistente)
         {
             InitializeComponent();
             esEdicion = true;
@@ -303,7 +303,7 @@ namespace Antorena_Soto.CPresentacion.Gerente
             if (esEdicion)
             {
                 // Modificar el producto existente
-                Producto prod = _productos.First(p => p.Codigo == CodigoOriginal);
+                Productox prod = _productos.First(p => p.Codigo == CodigoOriginal);
                 prod.Codigo = codigo;
                 prod.Nombre = NombreProducto;
                 prod.Precio = PrecioProducto;
@@ -317,7 +317,7 @@ namespace Antorena_Soto.CPresentacion.Gerente
             else
             {
                 // Crear nuevo producto
-                Producto nuevo = new Producto
+                Productox nuevo = new Productox
                 {
                     Codigo = codigo,
                     Nombre = NombreProducto,
@@ -389,6 +389,11 @@ namespace Antorena_Soto.CPresentacion.Gerente
         }
 
         private void tbCodigo_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PAgregarProducto_Paint_1(object sender, PaintEventArgs e)
         {
 
         }

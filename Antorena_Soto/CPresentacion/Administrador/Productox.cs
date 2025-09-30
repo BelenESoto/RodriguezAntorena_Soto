@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace Antorena_Soto.CPresentacion.Gerente
 {
-    public class Producto
+    public class Productox
     {
         public int Codigo { get; set; }
         public string Nombre { get; set; }

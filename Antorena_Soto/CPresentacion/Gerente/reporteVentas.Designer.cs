@@ -33,14 +33,14 @@
             this.BTSBusquedaProd = new FontAwesome.Sharp.IconButton();
             this.toolStripRepVenta = new System.Windows.Forms.ToolStrip();
             this.tsdFiltroBusqueda = new System.Windows.Forms.ToolStripDropDownButton();
-            this.toolCodigoProd = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolCodigoVenta = new System.Windows.Forms.ToolStripMenuItem();
             this.toolNombreProd = new System.Windows.Forms.ToolStripMenuItem();
             this.pORFECHAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pORVENDEDORToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.TBBuscarProducto = new System.Windows.Forms.ToolStripTextBox();
-            this.bExportar = new System.Windows.Forms.Button();
+            this.bImprimir = new System.Windows.Forms.Button();
             this.DGVentas = new System.Windows.Forms.DataGridView();
             this.BLimpiar = new System.Windows.Forms.Button();
             this.pReporteVenta.SuspendLayout();
@@ -53,7 +53,7 @@
             this.pReporteVenta.BackColor = System.Drawing.Color.LightSteelBlue;
             this.pReporteVenta.Controls.Add(this.BTSBusquedaProd);
             this.pReporteVenta.Controls.Add(this.toolStripRepVenta);
-            this.pReporteVenta.Controls.Add(this.bExportar);
+            this.pReporteVenta.Controls.Add(this.bImprimir);
             this.pReporteVenta.Controls.Add(this.DGVentas);
             this.pReporteVenta.Controls.Add(this.BLimpiar);
             this.pReporteVenta.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -97,13 +97,13 @@
             this.toolStripRepVenta.Size = new System.Drawing.Size(755, 48);
             this.toolStripRepVenta.TabIndex = 8;
             this.toolStripRepVenta.Text = "toolStrip1";
-            this.toolStripRepVenta.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
+            this.toolStripRepVenta.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStripRepVenta_ItemClicked);
             // 
             // tsdFiltroBusqueda
             // 
             this.tsdFiltroBusqueda.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.tsdFiltroBusqueda.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolCodigoProd,
+            this.toolCodigoVenta,
             this.toolNombreProd,
             this.pORFECHAToolStripMenuItem,
             this.pORVENDEDORToolStripMenuItem});
@@ -112,35 +112,39 @@
             this.tsdFiltroBusqueda.Image = ((System.Drawing.Image)(resources.GetObject("tsdFiltroBusqueda.Image")));
             this.tsdFiltroBusqueda.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsdFiltroBusqueda.Name = "tsdFiltroBusqueda";
-            this.tsdFiltroBusqueda.Size = new System.Drawing.Size(188, 45);
-            this.tsdFiltroBusqueda.Text = "BUSCAR PRODUCTO";
-            this.tsdFiltroBusqueda.Click += new System.EventHandler(this.BBuscarProducto_Click);
+            this.tsdFiltroBusqueda.Size = new System.Drawing.Size(144, 45);
+            this.tsdFiltroBusqueda.Text = "BUSCAR POR:";
+            this.tsdFiltroBusqueda.Click += new System.EventHandler(this.tsdFiltroBusqueda_Click);
             // 
-            // toolCodigoProd
+            // toolCodigoVenta
             // 
-            this.toolCodigoProd.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.toolCodigoProd.Name = "toolCodigoProd";
-            this.toolCodigoProd.Size = new System.Drawing.Size(224, 26);
-            this.toolCodigoProd.Text = "POR CODIGO";
+            this.toolCodigoVenta.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.toolCodigoVenta.Name = "toolCodigoVenta";
+            this.toolCodigoVenta.Size = new System.Drawing.Size(257, 26);
+            this.toolCodigoVenta.Text = "Codigo de Venta";
+            this.toolCodigoVenta.Click += new System.EventHandler(this.toolProducto_Click);
             // 
             // toolNombreProd
             // 
             this.toolNombreProd.ForeColor = System.Drawing.Color.MidnightBlue;
             this.toolNombreProd.Name = "toolNombreProd";
-            this.toolNombreProd.Size = new System.Drawing.Size(224, 26);
-            this.toolNombreProd.Text = "POR NOMBRE";
+            this.toolNombreProd.Size = new System.Drawing.Size(257, 26);
+            this.toolNombreProd.Text = "Cliente";
+            this.toolNombreProd.Click += new System.EventHandler(this.toolCliente_Click);
             // 
             // pORFECHAToolStripMenuItem
             // 
             this.pORFECHAToolStripMenuItem.Name = "pORFECHAToolStripMenuItem";
-            this.pORFECHAToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.pORFECHAToolStripMenuItem.Text = "POR FECHA";
+            this.pORFECHAToolStripMenuItem.Size = new System.Drawing.Size(257, 26);
+            this.pORFECHAToolStripMenuItem.Text = "Vendedor";
+            this.pORFECHAToolStripMenuItem.Click += new System.EventHandler(this.toolVendedor_Click);
             // 
             // pORVENDEDORToolStripMenuItem
             // 
             this.pORVENDEDORToolStripMenuItem.Name = "pORVENDEDORToolStripMenuItem";
-            this.pORVENDEDORToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.pORVENDEDORToolStripMenuItem.Text = "POR VENDEDOR";
+            this.pORVENDEDORToolStripMenuItem.Size = new System.Drawing.Size(257, 26);
+            this.pORVENDEDORToolStripMenuItem.Text = "Fecha venta";
+            this.pORVENDEDORToolStripMenuItem.Click += new System.EventHandler(this.toolFecha_Click);
             // 
             // toolStripSeparator2
             // 
@@ -157,15 +161,17 @@
             this.TBBuscarProducto.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.TBBuscarProducto.Name = "TBBuscarProducto";
             this.TBBuscarProducto.Size = new System.Drawing.Size(367, 48);
+            this.TBBuscarProducto.Click += new System.EventHandler(this.TBBuscarProducto_Click);
             // 
-            // bExportar
+            // bImprimir
             // 
-            this.bExportar.Location = new System.Drawing.Point(428, 575);
-            this.bExportar.Name = "bExportar";
-            this.bExportar.Size = new System.Drawing.Size(128, 37);
-            this.bExportar.TabIndex = 5;
-            this.bExportar.Text = "button1";
-            this.bExportar.UseVisualStyleBackColor = true;
+            this.bImprimir.Location = new System.Drawing.Point(428, 575);
+            this.bImprimir.Name = "bImprimir";
+            this.bImprimir.Size = new System.Drawing.Size(128, 37);
+            this.bImprimir.TabIndex = 5;
+            this.bImprimir.Text = "IMPRIMIR";
+            this.bImprimir.UseVisualStyleBackColor = true;
+            this.bImprimir.Click += new System.EventHandler(this.bImprimir_Click);
             // 
             // DGVentas
             // 
@@ -176,7 +182,6 @@
             this.DGVentas.RowTemplate.Height = 24;
             this.DGVentas.Size = new System.Drawing.Size(677, 433);
             this.DGVentas.TabIndex = 4;
-            this.DGVentas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGVentas_CellContentClick);
             // 
             // BLimpiar
             // 
@@ -186,7 +191,6 @@
             this.BLimpiar.TabIndex = 3;
             this.BLimpiar.Text = "BLimpiar";
             this.BLimpiar.UseVisualStyleBackColor = true;
-            this.BLimpiar.Click += new System.EventHandler(this.BLimpiar_Click_1);
             // 
             // reporteVentas
             // 
@@ -210,10 +214,10 @@
         private System.Windows.Forms.Panel pReporteVenta;
         private System.Windows.Forms.DataGridView DGVentas;
         private System.Windows.Forms.Button BLimpiar;
-        private System.Windows.Forms.Button bExportar;
+        private System.Windows.Forms.Button bImprimir;
         private System.Windows.Forms.ToolStrip toolStripRepVenta;
         private System.Windows.Forms.ToolStripDropDownButton tsdFiltroBusqueda;
-        private System.Windows.Forms.ToolStripMenuItem toolCodigoProd;
+        private System.Windows.Forms.ToolStripMenuItem toolCodigoVenta;
         private System.Windows.Forms.ToolStripMenuItem toolNombreProd;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;

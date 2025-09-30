@@ -15,14 +15,14 @@ namespace Antorena_Soto.CPresentacion.Gerente
         private string modoBusqueda = "Codigo";
         private bool textoLimpiado = false;
 
-        public List<Producto> Productos { get; private set; }
+        public List<Productox> Productos { get; private set; }
 
         private string modo; // "Ver" o "Editar"
         private int codigo;
         private PrintDocument printDocument;
         private string textoAImprimir;
 
-        public listaProductos(List<Producto> productos, string modo = "Ver")
+        public listaProductos(List<Productox> productos, string modo = "Ver")
         {
             InitializeComponent();
             this.modo = modo;
@@ -193,7 +193,7 @@ namespace Antorena_Soto.CPresentacion.Gerente
             }
 
             // Buscar en la lista
-            List<Producto> resultado;
+            List<Productox> resultado;
             if (modoBusqueda == "Codigo")
             {
                 resultado = Productos.Where(p => p.Codigo.ToString().Contains(criterio)).ToList();
