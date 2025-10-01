@@ -118,7 +118,8 @@ namespace Antorena_Soto.CPresentacion.Administrador
 
         private void BTBajaUsuario_Click_1(object sender, EventArgs e)
         {
-
+            var form = new bajaUsuario();
+            AbrirFormEnPanel(form);
         }
 
         private void DGVListaVendedor_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -137,6 +138,20 @@ namespace Antorena_Soto.CPresentacion.Administrador
         }
 
         private void toolStripTextBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BTListaUsuario_Click_1(object sender, EventArgs e)
+        {
+            var form = new listaUsuario();
+            AbrirFormEnPanel(form);
+
+            form.CargarUsuarios();
+
+        }
+
+        private void PGerente2_Paint(object sender, PaintEventArgs e)
         {
 
         }

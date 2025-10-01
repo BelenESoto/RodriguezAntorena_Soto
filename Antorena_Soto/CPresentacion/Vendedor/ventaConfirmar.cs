@@ -183,9 +183,37 @@ namespace Antorena_Soto.CPresentacion.Vendedor
 
             // Si todo está correcto:
             MessageBox.Show("Factura creada con éxito.");
-            MessageBox.Show("Venta agregada exitosamente.");
+            
 
             CrearBotonesFactura();
+
+            try
+            {
+                Venta nuevaVenta = new Venta
+                {
+                    Codigo_Venta = listaVentas.ListaVentas.Count + 1, // 🚀 autoincremental
+                    Fecha_Venta = DTFechaAct.Value,
+                    Vendedor_Resp = "", // vacío por ahora
+                    Cliente_Venta = TBNombreFact.Text.Trim(),
+                    Ciudad_Venta = TBCiudadFact.Text.Trim(),
+                    Medio_Pago_Venta = TBMedioPagoFact.Text.Trim(),
+                    Detalle_Prod_Venta = "", // vacío por ahora
+                    Total_Venta = decimal.TryParse(TBMontoFact.Text, out decimal total) ? total : 0
+                };
+
+                // 🚀 Guardar en la lista compartida
+                listaVentas.ListaVentas.Add(nuevaVenta);
+
+                MessageBox.Show("Venta registrada con éxito.", "Éxito",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al registrar venta: " + ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
         }
 
@@ -198,6 +226,7 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             {
                 Text = "Imprimir Factura",
                 IconChar = IconChar.Print,
+                ForeColor = Color.MidnightBlue,
                 IconColor = Color.Black,
                 TextImageRelation = TextImageRelation.ImageBeforeText,
                 Dock = DockStyle.Left,
@@ -215,6 +244,7 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             IconButton BVerFactura = new IconButton
             {
                 Text = "Ver Factura",
+                ForeColor = Color.MidnightBlue,
                 IconChar = IconChar.FileInvoiceDollar,
                 IconColor = Color.Black,
                 TextImageRelation = TextImageRelation.ImageBeforeText,

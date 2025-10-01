@@ -1,6 +1,6 @@
-﻿using System;
-
+﻿using Antorena_Soto.CPresentacion.Gerente;
 using Antorena_Soto.CPresentacion.Vendedor;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,14 +17,60 @@ namespace Antorena_Soto.CPresentacion.Vendedor
 
         private bool buscarPorCodigo = false;
         private bool buscarPorNombre = false;
-        public ventaAgregar()
+
+        // ⭐ Nueva propiedad para recibir la lista de productos
+        private List<Productox> productos; // ⭐
+
+        // ⭐ Constructor que recibe la lista de productos
+        public ventaAgregar(List<Productox> productos) // ⭐
         {
             InitializeComponent();
+            this.productos = productos; // ⭐ Guardamos la lista recibida
         }
 
         private void ventaAgregar_Load(object sender, EventArgs e)
         {
+            // ⭐ Cargar la lista de productos al iniciar el form
+            CargarProductosEnVenta(); // ⭐
+        }
 
+        // ⭐ Método para cargar los productos en DGVListaProdVentas
+        private void CargarProductosEnVenta()
+        {
+            if (DGVListaProdVentas.Columns.Count == 0) // Evita columnas duplicadas
+            {
+                DGVListaProdVentas.Columns.Add("nOrden", "Orden Producto");
+                DGVListaProdVentas.Columns.Add("Codigo", "Código Producto");
+                DGVListaProdVentas.Columns.Add("Nombre", "Nombre Producto");
+                DGVListaProdVentas.Columns.Add("Precio", "Precio");
+                DGVListaProdVentas.Columns.Add("Categoria", "Categoría");
+                DGVListaProdVentas.Columns.Add("Stock", "Stock");
+                DGVListaProdVentas.Columns.Add("Descripcion", "Descripción");
+                DGVListaProdVentas.Columns.Add("Imagen", "Imagen");
+                DGVListaProdVentas.Columns.Add("Estado", "Estado");
+
+                // ⭐ Nuevas columnas para venta
+                DGVListaProdVentas.Columns.Add("Cantidad", "Cantidad");
+                DGVListaProdVentas.Columns.Add("Subtotal", "Subtotal");
+            }
+
+            DGVListaProdVentas.Rows.Clear(); // Limpia antes de cargar
+            int contador = 1;
+
+            foreach (var p in productos) // ⭐ usamos la lista recibida
+            {
+                DGVListaProdVentas.Rows.Add(
+                    contador++,
+                    p.Codigo,
+                    p.Nombre,
+                    p.Precio,
+                    p.Categoria,
+                    p.Stock,
+                    p.Descripcion,
+                    p.Imagen,
+                    p.Estado ? "Activo" : "Inactivo"
+                );
+            }
         }
 
         private void BBuscarProd_ButtonClick(object sender, EventArgs e)
@@ -37,7 +83,7 @@ namespace Antorena_Soto.CPresentacion.Vendedor
 
         }
         private void BBuscarPor_ButtonClick(object sender, EventArgs e)
-        { 
+        {
         }
         private void TBNombreProd_TextChanged(object sender, EventArgs e)
         {
@@ -51,6 +97,8 @@ namespace Antorena_Soto.CPresentacion.Vendedor
 
         private void BAgregarProd_Click(object sender, EventArgs e)
         {
+            int codigo = int.Parse(TBNombreProd.Text.Trim());
+            int cantidad = int.Parse(TBCantidadProd.Text.Trim());
             if (string.IsNullOrWhiteSpace(TBNombreProd.Text))
             {
                 MessageBox.Show("El campo 'Nombre Vendedor' es obligatorio.");
@@ -64,11 +112,67 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             }
 
             MessageBox.Show("Producto agregado correctamente.");
+
+            var producto = productos.FirstOrDefault(p => p.Codigo == codigo);
+            if (producto == null)
+            {
+                MessageBox.Show("No se encontró un producto con ese CÓDIGO.");
+                return;
+            }
+
+            // Calcular subtotal
+            decimal subtotal = producto.Precio * cantidad;
+
+            // Agregar fila al DGV
+            int nOrden = DGVListaProdVentas.Rows.Count + 1;
+            DGVListaProdVentas.Rows.Add(
+                nOrden,
+                producto.Codigo,
+                producto.Nombre,
+                producto.Precio,
+                producto.Categoria,
+                producto.Stock,
+                producto.Descripcion,
+                producto.Imagen,
+                producto.Estado ? "Activo" : "Inactivo",
+                cantidad,       // ⭐ Cantidad
+                subtotal        // ⭐ Subtotal
+            );
+
+            // Recalcular total
+            CalcularTotal();
+
+            // Limpiar campos de entrada
+            TBNombreProd.Clear();
+            TBCantidadProd.Clear();
         }
 
         private void BEditarProd_Click(object sender, EventArgs e)
         {
+            if (DGVListaProdVentas.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Debe seleccionar una fila para editar.");
+                return;
+            }
 
+            var fila = DGVListaProdVentas.SelectedRows[0];
+
+            // Validar cantidad nueva
+            if (string.IsNullOrWhiteSpace(TBCantidadProd.Text) || !int.TryParse(TBCantidadProd.Text, out int nuevaCantidad) || nuevaCantidad <= 0)
+            {
+                MessageBox.Show("Debe ingresar una CANTIDAD válida para editar.");
+                return;
+            }
+
+            // Actualizar cantidad y subtotal
+            decimal precio = Convert.ToDecimal(fila.Cells["Precio"].Value);
+            fila.Cells["Cantidad"].Value = nuevaCantidad;
+            fila.Cells["Subtotal"].Value = precio * nuevaCantidad;
+
+            // Recalcular total
+            CalcularTotal();
+
+            TBCantidadProd.Clear();
         }
 
         private void TBTotalVenta_TextChanged(object sender, EventArgs e)
@@ -76,24 +180,38 @@ namespace Antorena_Soto.CPresentacion.Vendedor
 
         }
 
+        // ⭐ Método para calcular total de la venta
+        private void CalcularTotal()
+        {
+            decimal total = 0;
+            foreach (DataGridViewRow row in DGVListaProdVentas.Rows)
+            {
+                if (row.Cells["Subtotal"].Value != null)
+                {
+                    total += Convert.ToDecimal(row.Cells["Subtotal"].Value);
+                }
+            }
+
+            TBTotalVenta.Text = total.ToString("0.00");
+        }
+
         public void BContinuar_Click(object sender, EventArgs e)
         {
-
             string nombreProd = TBNombreProd.Text.Trim();
             string cantidadProd = TBCantidadProd.Text.Trim();
-            if (string.IsNullOrWhiteSpace(nombreProd))
+            if (!int.TryParse(nombreProd, out _))
             {
-                MessageBox.Show("El campo 'Nombre Producto' es obligatorio.");
+                MessageBox.Show("El campo 'Codigo Producto' debe ser numérico.");
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(cantidadProd) || !int.TryParse(cantidadProd, out _))
+            if (!int.TryParse(cantidadProd, out _))
             {
                 MessageBox.Show("Debe ingresar una CANTIDAD válida (número entero).");
                 return;
-            } else
+            }
+            else
             {
-                
                 PAgregarVendedor.Controls.Clear();
                 ventaConfirmar formVenta = new ventaConfirmar();
                 formVenta.TopLevel = false;
@@ -103,7 +221,6 @@ namespace Antorena_Soto.CPresentacion.Vendedor
                 PAgregarVendedor.Controls.Add(formVenta);
                 formVenta.Show();
             }
-            
         }
 
         private void DGVListaProd_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -158,18 +275,15 @@ namespace Antorena_Soto.CPresentacion.Vendedor
                     MessageBox.Show("Debe ingresar un valor numérico válido para el CÓDIGO.");
                     return;
                 }
-                // Aquí iría la lógica real de búsqueda en BD por código
                 MessageBox.Show($"Buscando producto por código: {input}");
             }
             else if (buscarPorNombre)
             {
-                // Validación básica de texto
                 if (int.TryParse(input, out _))
                 {
                     MessageBox.Show("El NOMBRE no puede ser un número.");
                     return;
                 }
-                // Aquí iría la lógica real de búsqueda en BD por nombre
                 MessageBox.Show($"Buscando producto por nombre: {input}");
             }
             else
@@ -190,6 +304,11 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             buscarPorCodigo = true;
             buscarPorNombre = false;
             MessageBox.Show("Búsqueda configurada por CÓDIGO.");
+        }
+
+        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
         }
     }
 }

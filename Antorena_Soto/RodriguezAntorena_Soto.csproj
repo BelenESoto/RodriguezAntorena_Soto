@@ -172,6 +172,7 @@
     <Compile Include="CPresentacion\Vendedor\menuVendedor.Designer.cs">
       <DependentUpon>menuVendedor.cs</DependentUpon>
     </Compile>
+    <Compile Include="CPresentacion\Vendedor\Venta.cs" />
     <Compile Include="CPresentacion\Vendedor\ventaAgregar.cs">
       <SubType>Form</SubType>
     </Compile>

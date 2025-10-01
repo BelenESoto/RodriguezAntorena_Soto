@@ -15,25 +15,31 @@ namespace Antorena_Soto.CPresentacion.Vendedor
     public partial class listaClientes : Form
     {
         Button BEditCliente;
-        
+        public static BindingList<Cliente> ListaClientes { get; } = new BindingList<Cliente>();
+
+
         public listaClientes()
         {
             InitializeComponent();
             ConfigurarDataGrid();
-           // DGVListaCliente.DataSource = RepositorioClientes.ListaClientes;
+            DGVListaCliente.DataSource = ListaClientes;
 
             BEditCliente = new Button
             {
-                Text = "Editar Cliente",
+                Text = "EDITAR CLIENTE",
+                BackColor = Color.White,
+                ForeColor = Color.MidnightBlue,
+                Font = new Font("Verdana", 10, FontStyle.Bold),
                 Dock = DockStyle.Bottom,
-                Height = 40
+                Height = 40,
+                Width = 120,
             };
 
             // Asociar evento
             BEditCliente.Click += BEditCliente_Click;
 
             // Agregar al formulario
-            this.Controls.Add(BEditCliente);
+            PGerente2.Controls.Add(BEditCliente);
         }
         private void ConfigurarDataGrid()
         {

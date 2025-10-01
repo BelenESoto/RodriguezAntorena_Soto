@@ -255,8 +255,8 @@ namespace Antorena_Soto.CPresentacion.Gerente
 
             try
             {
-                string connectionString = "Data Source=DESKTOP-IDH7B7D\\SQLEXPRESS;Initial Catalog=RodriguezAntorena_Soto;Integrated Security=True";
-                UsuarioBLL usuarioBLL = new UsuarioBLL(connectionString);
+                string conexionString = "Data Source=DESKTOP-IDH7B7D\\SQLEXPRESS;Initial Catalog=RodriguezAntorena_Soto;Integrated Security=True";
+                UsuarioBLL usuarioBLL = new UsuarioBLL(conexionString);
 
                 if (!long.TryParse(TBCuitVendedor.Text.Trim(), out long cuitUsuario))
                 {
@@ -275,7 +275,8 @@ namespace Antorena_Soto.CPresentacion.Gerente
                     fechaNacimiento: DTFechaNacVendedor.Value,
                     cuit: long.Parse(TBCuitVendedor.Text.Trim()),
                     fechaIngreso: DTFechaIngVendedor.Value,
-                    tipoUsuario: Convert.ToInt32(CBTipoUsuario.SelectedValue)
+                    tipoUsuario: Convert.ToInt32(CBTipoUsuario.SelectedValue),
+                    Estado: "Activo"
                 );
 
                 if (ok)
@@ -316,6 +317,21 @@ namespace Antorena_Soto.CPresentacion.Gerente
         }
 
         private void TBDomicilioVendedor_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void agregarVendedor_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TBNumVendedor_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TBCorreoVendedor_TextChanged(object sender, EventArgs e)
         {
 
         }

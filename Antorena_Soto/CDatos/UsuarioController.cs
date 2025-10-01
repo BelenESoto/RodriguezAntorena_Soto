@@ -16,15 +16,15 @@ namespace Antorena_Soto.CDatos
         //INSERTAR USUARIO
         public bool InsertarUsuario(int dni, string nombre, string provincia, string ciudad,
                                     string domicilio, long telefono, string correo,
-                                    DateTime fechaNacimiento, long cuit, DateTime fechaIngreso, int tipoUsuario)
+                                    DateTime fechaNacimiento, long cuit, DateTime fechaIngreso, int tipoUsuario, string Estado)
         {
             try
             {
                 using (SqlConnection conexionSql = new SqlConnection(conexionString))
                 {
                     string consulta = @"INSERT INTO Usuario
-                                    (id_dni_usuario, nomYApe_usuario, provincia, ciudad, domicilio, telefono, correo, fecha_nacimiento, cuit, fecha_ingreso,tipo_Usuario)
-                                     VALUES (@dni, @nombre, @provincia, @ciudad, @domicilio, @telefono, @correo, @fecha_nacimiento, @cuit, @fecha_ingreso, @tipo_Usuario)";
+                                    (id_dni_usuario, nomYApe_usuario, provincia, ciudad, domicilio, telefono, correo, fecha_nacimiento, cuit, fecha_ingreso,tipo_Usuario,Estado)
+                                     VALUES (@dni, @nombre, @provincia, @ciudad, @domicilio, @telefono, @correo, @fecha_nacimiento, @cuit, @fecha_ingreso, @tipo_Usuario,@estado)";
 
                     SqlCommand comandoSql = new SqlCommand(consulta, conexionSql);
                     comandoSql.Parameters.AddWithValue("@dni", dni);
@@ -38,7 +38,7 @@ namespace Antorena_Soto.CDatos
                     comandoSql.Parameters.AddWithValue("@cuit", cuit);
                     comandoSql.Parameters.AddWithValue("@fecha_ingreso", fechaIngreso);
                     comandoSql.Parameters.AddWithValue("@tipo_Usuario", tipoUsuario);
-
+                    comandoSql.Parameters.AddWithValue("@estado", Estado);
                     conexionSql.Open();
                     int filasAfectadas = comandoSql.ExecuteNonQuery();
                     return filasAfectadas > 0;
@@ -58,8 +58,8 @@ namespace Antorena_Soto.CDatos
             {
                 using (SqlConnection conexionSql = new SqlConnection(conexionString))
                 {
-                    string consulta = @"SELECT id_dni_usuario, nomYApe_usuario, provincia, ciudad, domicilio, telefono, correo, fecha_nacimiento, cuit, fecha_ingreso, tipo_Usuario
-                                        FROM Usuario";
+                    string consulta = @"SELECT id_dni_usuario, nomYApe_usuario, provincia, ciudad, domicilio, telefono, correo, fecha_nacimiento, cuit, fecha_ingreso, tipo_Usuario,Estado
+                                        FROM Usuario ";
                     SqlCommand comandoSql = new SqlCommand(consulta, conexionSql);
                     SqlDataAdapter adaptador = new SqlDataAdapter(comandoSql);
                     DataTable tablaUsuarios = new DataTable();
@@ -86,12 +86,12 @@ namespace Antorena_Soto.CDatos
 
                     if (buscarPorDni)
                     {
-                        consulta = @"SELECT id_dni_usuario, nomYApe_usuario, provincia, ciudad, domicilio, telefono, correo, fecha_nacimiento, cuit, fecha_ingreso, tipo_Usuario
-                             FROM Usuario WHERE id_dni_usuario = @criterio";
+                        consulta = @"SELECT id_dni_usuario, nomYApe_usuario, provincia, ciudad, domicilio, telefono, correo, fecha_nacimiento, cuit, fecha_ingreso, tipo_Usuario,Estado
+                             FROM Usuario WHERE id_dni_usuario = @criterio ";
                     }
                     else
                     {
-                        consulta = @"SELECT id_dni_usuario, nomYApe_usuario, provincia, ciudad, domicilio, telefono, correo, fecha_nacimiento, cuit, fecha_ingreso, tipo_Usuario
+                        consulta = @"SELECT id_dni_usuario, nomYApe_usuario, provincia, ciudad, domicilio, telefono, correo, fecha_nacimiento, cuit, fecha_ingreso, tipo_Usuario,Estado
                              FROM Usuario WHERE nomYApe_usuario LIKE '%' + @criterio + '%'";
                     }
 
@@ -118,24 +118,26 @@ namespace Antorena_Soto.CDatos
         }
 
         // ELIMINAR USUARIO POR DNI
-        public bool EliminarUsuario(int dni)
+        public bool BajaUsuario(int idUsuario)
         {
             try
             {
-                using (SqlConnection conexionSql = new SqlConnection(conexionString))
+                using (SqlConnection conn = new SqlConnection(conexionString))
                 {
-                    string consulta = "DELETE FROM Usuario WHERE id_dni_usuario = @dni";
-                    SqlCommand comandoSql = new SqlCommand(consulta, conexionSql);
-                    comandoSql.Parameters.AddWithValue("@dni", dni);
-
-                    conexionSql.Open();
-                    int filasAfectadas = comandoSql.ExecuteNonQuery();
-                    return filasAfectadas > 0;
+                    conn.Open();
+                    string query = "UPDATE Usuario SET Estado = 'Inactivo' WHERE id_dni_usuario = @dni";
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@dni", idUsuario);
+                        int rows = cmd.ExecuteNonQuery();
+                        return rows > 0; // true si eliminó, false si no
+                    }
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al eliminar el usuario de la base de datos", ex);
+                // Podés loguear o lanzar una excepción personalizada
+                throw new Exception("Error en BajaUsuario DAL", ex);
             }
         }
 

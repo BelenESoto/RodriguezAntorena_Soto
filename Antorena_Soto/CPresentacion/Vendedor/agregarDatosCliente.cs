@@ -222,7 +222,7 @@ namespace Antorena_Soto.CPresentacion.Vendedor
         }
 
 
-        private void BAgregarCliente_Click_1(object sender, EventArgs e)
+         void BAgregarCliente_Click_1(object sender, EventArgs e)
         {
             if (!ValidateChildren())
             {
@@ -265,7 +265,7 @@ namespace Antorena_Soto.CPresentacion.Vendedor
                         FechaIng = DTFechaModifCliente.Value
                     };
 
-                   // RepositorioClientes.ListaClientes.Add(nuevo);
+                    listaClientes.ListaClientes.Add(nuevo);
                     MessageBox.Show("Cliente agregado con éxito.", "Éxito",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }

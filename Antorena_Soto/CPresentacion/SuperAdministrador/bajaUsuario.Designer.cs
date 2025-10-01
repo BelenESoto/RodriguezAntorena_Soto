@@ -37,8 +37,8 @@
             this.LBuscarPor = new System.Windows.Forms.ToolStripLabel();
             this.TBBuscador = new System.Windows.Forms.ToolStripTextBox();
             this.BTSBusqueda = new System.Windows.Forms.ToolStripButton();
-            this.LBajaUsuario = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.LDatosBajaUs = new System.Windows.Forms.Label();
             this.DGVListaUsuario = new System.Windows.Forms.DataGridView();
             this.Dni = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -51,9 +51,10 @@
             this.Cuit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FechaIng = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TipoUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BBorrar = new System.Windows.Forms.Button();
-            this.LDatosBajaUs = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.LAgregarventas = new System.Windows.Forms.Label();
             this.TBuscador.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGVListaUsuario)).BeginInit();
@@ -72,91 +73,98 @@
             this.LBuscarPor,
             this.TBBuscador,
             this.BTSBusqueda});
-            this.TBuscador.Location = new System.Drawing.Point(12, 62);
+            this.TBuscador.Location = new System.Drawing.Point(0, 79);
             this.TBuscador.Name = "TBuscador";
-            this.TBuscador.Size = new System.Drawing.Size(695, 48);
+            this.TBuscador.Size = new System.Drawing.Size(580, 84);
             this.TBuscador.TabIndex = 5;
             this.TBuscador.Text = "toolStrip1";
             this.TBuscador.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
             // 
             // BBuscarPor
             // 
+            this.BBuscarPor.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.BBuscarPor.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.BTSDni,
             this.BTSNomYApe});
+            this.BBuscarPor.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BBuscarPor.Image = ((System.Drawing.Image)(resources.GetObject("BBuscarPor.Image")));
             this.BBuscarPor.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.BBuscarPor.Name = "BBuscarPor";
-            this.BBuscarPor.Size = new System.Drawing.Size(135, 45);
+            this.BBuscarPor.Size = new System.Drawing.Size(103, 81);
             this.BBuscarPor.Text = "BUSCAR POR";
             this.BBuscarPor.ButtonClick += new System.EventHandler(this.BBuscarPor_ButtonClick);
             // 
             // BTSDni
             // 
             this.BTSDni.Name = "BTSDni";
-            this.BTSDni.Size = new System.Drawing.Size(224, 26);
+            this.BTSDni.Size = new System.Drawing.Size(193, 22);
             this.BTSDni.Text = "DNI";
+            this.BTSDni.Click += new System.EventHandler(this.BTSDni_Click);
             // 
             // BTSNomYApe
             // 
             this.BTSNomYApe.Name = "BTSNomYApe";
-            this.BTSNomYApe.Size = new System.Drawing.Size(224, 26);
+            this.BTSNomYApe.Size = new System.Drawing.Size(193, 22);
             this.BTSNomYApe.Text = "Apellido y Nombre";
+            this.BTSNomYApe.Click += new System.EventHandler(this.BTSNomyApe_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 48);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 84);
             // 
             // LBuscarPor
             // 
             this.LBuscarPor.Name = "LBuscarPor";
-            this.LBuscarPor.Size = new System.Drawing.Size(0, 45);
+            this.LBuscarPor.Size = new System.Drawing.Size(0, 81);
             // 
             // TBBuscador
             // 
             this.TBBuscador.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.TBBuscador.Name = "TBBuscador";
-            this.TBBuscador.Size = new System.Drawing.Size(367, 48);
+            this.TBBuscador.Size = new System.Drawing.Size(276, 84);
+            this.TBBuscador.Click += new System.EventHandler(this.TBuscadorAdmin_Click);
             // 
             // BTSBusqueda
             // 
             this.BTSBusqueda.AutoSize = false;
-            this.BTSBusqueda.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.BTSBusqueda.BackColor = System.Drawing.Color.White;
+            this.BTSBusqueda.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTSBusqueda.Image = ((System.Drawing.Image)(resources.GetObject("BTSBusqueda.Image")));
             this.BTSBusqueda.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.BTSBusqueda.Name = "BTSBusqueda";
-            this.BTSBusqueda.Size = new System.Drawing.Size(29, 24);
+            this.BTSBusqueda.Size = new System.Drawing.Size(70, 50);
             this.BTSBusqueda.Text = "Buscar";
-            // 
-            // LBajaUsuario
-            // 
-            this.LBajaUsuario.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.LBajaUsuario.BackColor = System.Drawing.Color.Gainsboro;
-            this.LBajaUsuario.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.LBajaUsuario.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LBajaUsuario.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.LBajaUsuario.Location = new System.Drawing.Point(12, 11);
-            this.LBajaUsuario.Name = "LBajaUsuario";
-            this.LBajaUsuario.Size = new System.Drawing.Size(694, 48);
-            this.LBajaUsuario.TabIndex = 4;
-            this.LBajaUsuario.Text = "BAJA DE USUARIO";
-            this.LBajaUsuario.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.BTSBusqueda.Click += new System.EventHandler(this.BTSBusqueda_Click);
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel1.BackColor = System.Drawing.Color.Lavender;
+            this.panel1.Controls.Add(this.LDatosBajaUs);
             this.panel1.Controls.Add(this.DGVListaUsuario);
             this.panel1.Controls.Add(this.BBorrar);
-            this.panel1.Controls.Add(this.LDatosBajaUs);
-            this.panel1.Location = new System.Drawing.Point(0, 113);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Location = new System.Drawing.Point(0, 166);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(707, 357);
+            this.panel1.Size = new System.Drawing.Size(580, 408);
             this.panel1.TabIndex = 6;
+            // 
+            // LDatosBajaUs
+            // 
+            this.LDatosBajaUs.BackColor = System.Drawing.Color.White;
+            this.LDatosBajaUs.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.LDatosBajaUs.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LDatosBajaUs.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.LDatosBajaUs.Location = new System.Drawing.Point(2, 47);
+            this.LDatosBajaUs.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.LDatosBajaUs.Name = "LDatosBajaUs";
+            this.LDatosBajaUs.Size = new System.Drawing.Size(572, 64);
+            this.LDatosBajaUs.TabIndex = 10;
+            this.LDatosBajaUs.Text = "DATOS USUARIO";
+            this.LDatosBajaUs.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // DGVListaUsuario
             // 
+            this.DGVListaUsuario.BackgroundColor = System.Drawing.Color.Lavender;
             this.DGVListaUsuario.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGVListaUsuario.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Dni,
@@ -169,13 +177,14 @@
             this.FechaNac,
             this.Cuit,
             this.FechaIng,
-            this.TipoUsuario});
-            this.DGVListaUsuario.Location = new System.Drawing.Point(12, 37);
-            this.DGVListaUsuario.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.TipoUsuario,
+            this.Estado});
+            this.DGVListaUsuario.Location = new System.Drawing.Point(0, 114);
+            this.DGVListaUsuario.Margin = new System.Windows.Forms.Padding(2);
             this.DGVListaUsuario.Name = "DGVListaUsuario";
             this.DGVListaUsuario.RowHeadersWidth = 51;
             this.DGVListaUsuario.RowTemplate.Height = 24;
-            this.DGVListaUsuario.Size = new System.Drawing.Size(736, 85);
+            this.DGVListaUsuario.Size = new System.Drawing.Size(574, 87);
             this.DGVListaUsuario.TabIndex = 9;
             // 
             // Dni
@@ -266,54 +275,67 @@
             this.TipoUsuario.Name = "TipoUsuario";
             this.TipoUsuario.Width = 125;
             // 
+            // Estado
+            // 
+            this.Estado.DataPropertyName = "Estado";
+            this.Estado.HeaderText = "Estado";
+            this.Estado.Name = "Estado";
+            // 
             // BBorrar
             // 
-            this.BBorrar.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.BBorrar.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BBorrar.Location = new System.Drawing.Point(211, 149);
-            this.BBorrar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BBorrar.BackColor = System.Drawing.Color.White;
+            this.BBorrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BBorrar.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BBorrar.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.BBorrar.Location = new System.Drawing.Point(209, 252);
             this.BBorrar.Name = "BBorrar";
-            this.BBorrar.Size = new System.Drawing.Size(212, 53);
+            this.BBorrar.Size = new System.Drawing.Size(165, 68);
             this.BBorrar.TabIndex = 8;
             this.BBorrar.Text = "ELIMINAR";
             this.BBorrar.UseVisualStyleBackColor = false;
-            // 
-            // LDatosBajaUs
-            // 
-            this.LDatosBajaUs.AutoSize = true;
-            this.LDatosBajaUs.BackColor = System.Drawing.Color.LightGray;
-            this.LDatosBajaUs.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LDatosBajaUs.Location = new System.Drawing.Point(12, 12);
-            this.LDatosBajaUs.Name = "LDatosBajaUs";
-            this.LDatosBajaUs.Size = new System.Drawing.Size(231, 25);
-            this.LDatosBajaUs.TabIndex = 6;
-            this.LDatosBajaUs.Text = "DATOS DEL USUARIO";
+            this.BBorrar.Click += new System.EventHandler(this.BBorrar_Click_1);
             // 
             // panel2
             // 
+            this.panel2.BackColor = System.Drawing.Color.Lavender;
+            this.panel2.Controls.Add(this.LAgregarventas);
             this.panel2.Controls.Add(this.panel1);
             this.panel2.Controls.Add(this.TBuscador);
-            this.panel2.Controls.Add(this.LBajaUsuario);
-            this.panel2.Location = new System.Drawing.Point(3, 0);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel2.Location = new System.Drawing.Point(2, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(723, 479);
+            this.panel2.Size = new System.Drawing.Size(595, 609);
             this.panel2.TabIndex = 7;
+            // 
+            // LAgregarventas
+            // 
+            this.LAgregarventas.BackColor = System.Drawing.Color.MidnightBlue;
+            this.LAgregarventas.Dock = System.Windows.Forms.DockStyle.Top;
+            this.LAgregarventas.Font = new System.Drawing.Font("SimSun", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LAgregarventas.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.LAgregarventas.Image = ((System.Drawing.Image)(resources.GetObject("LAgregarventas.Image")));
+            this.LAgregarventas.Location = new System.Drawing.Point(0, 0);
+            this.LAgregarventas.Margin = new System.Windows.Forms.Padding(0);
+            this.LAgregarventas.Name = "LAgregarventas";
+            this.LAgregarventas.Padding = new System.Windows.Forms.Padding(8, 3, 3, 3);
+            this.LAgregarventas.Size = new System.Drawing.Size(595, 79);
+            this.LAgregarventas.TabIndex = 13;
+            this.LAgregarventas.Text = "BAJA USUARIO";
+            this.LAgregarventas.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // bajaUsuario
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.ClientSize = new System.Drawing.Size(724, 473);
+            this.BackColor = System.Drawing.Color.Lavender;
+            this.ClientSize = new System.Drawing.Size(579, 570);
             this.Controls.Add(this.panel2);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "bajaUsuario";
             this.Text = "bajaUsuario";
+            this.Load += new System.EventHandler(this.bajaUsuario_Load_1);
+            this.Click += new System.EventHandler(this.bajaUsuario_Load);
             this.TBuscador.ResumeLayout(false);
             this.TBuscador.PerformLayout();
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGVListaUsuario)).EndInit();
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -327,15 +349,15 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripTextBox TBBuscador;
         private System.Windows.Forms.ToolStripButton BTSBusqueda;
-        private System.Windows.Forms.Label LBajaUsuario;
         private System.Windows.Forms.ToolStripMenuItem BTSDni;
         private System.Windows.Forms.ToolStripMenuItem BTSNomYApe;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ToolStripLabel LBuscarPor;
-        private System.Windows.Forms.Label LDatosBajaUs;
         private System.Windows.Forms.Button BBorrar;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.DataGridView DGVListaUsuario;
+        public System.Windows.Forms.Label LAgregarventas;
+        private System.Windows.Forms.Label LDatosBajaUs;
         private System.Windows.Forms.DataGridViewTextBoxColumn Dni;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Provincia;
@@ -347,5 +369,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Cuit;
         private System.Windows.Forms.DataGridViewTextBoxColumn FechaIng;
         private System.Windows.Forms.DataGridViewTextBoxColumn TipoUsuario;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
     }
 }

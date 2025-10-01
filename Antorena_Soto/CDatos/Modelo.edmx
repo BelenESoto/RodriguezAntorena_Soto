@@ -19,7 +19,8 @@
           <Property Name="fecha_nacimiento" Type="datetime" Nullable="false" />
           <Property Name="cuit" Type="bigint" Nullable="false" />
           <Property Name="fecha_ingreso" Type="datetime" Nullable="false" />
-          <Property Name="tipo_Usuario" Type="varchar" MaxLength="200" />
+          <Property Name="tipo_Usuario" Type="int" Nullable="false" />
+          <Property Name="Estado" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityContainer Name="RodriguezAntorena_SotoModelStoreContainer">
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
@@ -42,7 +43,8 @@
           <Property Name="fecha_nacimiento" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="cuit" Type="Int64" Nullable="false" />
           <Property Name="fecha_ingreso" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="tipo_Usuario" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="tipo_Usuario" Type="Int32" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
 			<!--   <Property Name="tipoUsuario" Type="String" Nullable="false" /> -->
         </EntityType>
         <EntityContainer Name="RodriguezAntorena_SotoEntities" annotation:LazyLoadingEnabled="true">
@@ -57,6 +59,7 @@
           <EntitySetMapping Name="Usuario">
             <EntityTypeMapping TypeName="RodriguezAntorena_SotoModel.Usuario">
               <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="tipo_Usuario" ColumnName="tipo_Usuario" />
                 <ScalarProperty Name="fecha_ingreso" ColumnName="fecha_ingreso" />
                 <ScalarProperty Name="cuit" ColumnName="cuit" />

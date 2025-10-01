@@ -104,8 +104,18 @@ namespace Antorena_Soto.CPresentacion.SuperAdministrador
                 HeaderText = "Tipo Usuario",
                 DataPropertyName = "tipo_Usuario"
             });
+            DGVListaUsuario.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                Name = "Estado",
+                HeaderText = "Estado",
+                DataPropertyName = "Estado"
+            });
 
             DGVListaUsuario.AutoGenerateColumns = false; // Muy importante para que use solo estas columnas
+        }
+        private void bajaUsuario_Load_1(object sender, EventArgs e)
+        {
+            ConfigurarDataGridView();
         }
         private void bajaUsuario_Load(object sender, EventArgs e)
         {
@@ -168,36 +178,57 @@ namespace Antorena_Soto.CPresentacion.SuperAdministrador
         }
 
         // BOTON BORRAR USUARIO
-        private void BBorrar_Click(object sender, EventArgs e)
+        private void BBorrar_Click_1(object sender, EventArgs e)
         {
             if (DGVListaUsuario.CurrentRow == null)
             {
-                MessageBox.Show("Seleccione un usuario de la lista para borrar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Seleccione un usuario de la lista para borrar.",
+                                "Advertencia",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
                 return;
             }
 
+            // Tomar el valor de la celda "Dni"
             int dniUsuario = Convert.ToInt32(DGVListaUsuario.CurrentRow.Cells["Dni"].Value);
 
-            DialogResult confirmacion = MessageBox.Show("¿Seguro que desea eliminar a este Usuario?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult confirmacion = MessageBox.Show(
+                "¿Seguro que desea eliminar a este Usuario?",
+                "Confirmar eliminación",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
+
             if (confirmacion == DialogResult.Yes)
             {
                 try
                 {
-                    bool eliminado = usuarioBLL.EliminarUsuarioBLL(dniUsuario);
+                    bool eliminado = usuarioBLL.BajaUsuarioBLL(dniUsuario);
+
                     if (eliminado)
                     {
-                        MessageBox.Show("Usuario eliminado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        // Recargar DataGridView
-                        BTSBusqueda_Click(null, null);
+                        MessageBox.Show("Usuario eliminado correctamente.",
+                                        "Éxito",
+                                        MessageBoxButtons.OK,
+                                        MessageBoxIcon.Information);
+
+                        DataTable usuarioActualizado = usuarioBLL.BuscarUsuariosBLL(dniUsuario.ToString(), true);
+                        DGVListaUsuario.DataSource = usuarioActualizado;
                     }
                     else
                     {
-                        MessageBox.Show("No se pudo eliminar el usuario.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("No se pudo eliminar el usuario.",
+                                        "Error",
+                                        MessageBoxButtons.OK,
+                                        MessageBoxIcon.Error);
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Error al eliminar usuario: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Error al eliminar usuario: {ex.Message}",
+                                    "Error",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Error);
                 }
             }
         }
@@ -216,5 +247,9 @@ namespace Antorena_Soto.CPresentacion.SuperAdministrador
         {
 
         }
+
+       
+
+        
     }
 }

@@ -28,10 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(agregarDatosCliente));
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.LAgregarCliente = new System.Windows.Forms.Label();
             this.PAgregarProducto = new System.Windows.Forms.Panel();
+            this.LCuitVendedor = new System.Windows.Forms.Label();
+            this.TBCuitCliente = new System.Windows.Forms.TextBox();
             this.LCorreoCliente = new System.Windows.Forms.Label();
             this.LNumCliente = new System.Windows.Forms.Label();
             this.TBCorreoCliente = new System.Windows.Forms.TextBox();
@@ -49,10 +51,11 @@
             this.LDescripcionProducto = new System.Windows.Forms.Label();
             this.TBNombreCliente = new System.Windows.Forms.TextBox();
             this.LNombreCliente = new System.Windows.Forms.Label();
-            this.LCuitVendedor = new System.Windows.Forms.Label();
-            this.TBCuitCliente = new System.Windows.Forms.TextBox();
+            this.LAgregarventas = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             this.PAgregarProducto.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // backgroundWorker1
@@ -62,31 +65,18 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.panel1.Controls.Add(this.LAgregarCliente);
+            this.panel1.Controls.Add(this.LAgregarventas);
             this.panel1.Controls.Add(this.PAgregarProducto);
-            this.panel1.Location = new System.Drawing.Point(2, 10);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Location = new System.Drawing.Point(-9, -1);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(590, 366);
+            this.panel1.Size = new System.Drawing.Size(605, 585);
             this.panel1.TabIndex = 0;
-            // 
-            // LAgregarCliente
-            // 
-            this.LAgregarCliente.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.LAgregarCliente.BackColor = System.Drawing.Color.Gainsboro;
-            this.LAgregarCliente.Font = new System.Drawing.Font("SimSun", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LAgregarCliente.Location = new System.Drawing.Point(9, 7);
-            this.LAgregarCliente.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.LAgregarCliente.Name = "LAgregarCliente";
-            this.LAgregarCliente.Padding = new System.Windows.Forms.Padding(8, 3, 3, 3);
-            this.LAgregarCliente.Size = new System.Drawing.Size(578, 36);
-            this.LAgregarCliente.TabIndex = 42;
-            this.LAgregarCliente.Text = "AGREGAR CLIENTE";
-            this.LAgregarCliente.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // PAgregarProducto
             // 
-            this.PAgregarProducto.BackColor = System.Drawing.Color.Gainsboro;
+            this.PAgregarProducto.BackColor = System.Drawing.Color.Lavender;
+            this.PAgregarProducto.Controls.Add(this.pictureBox1);
             this.PAgregarProducto.Controls.Add(this.LCuitVendedor);
             this.PAgregarProducto.Controls.Add(this.TBCuitCliente);
             this.PAgregarProducto.Controls.Add(this.LCorreoCliente);
@@ -106,19 +96,42 @@
             this.PAgregarProducto.Controls.Add(this.LDescripcionProducto);
             this.PAgregarProducto.Controls.Add(this.TBNombreCliente);
             this.PAgregarProducto.Controls.Add(this.LNombreCliente);
-            this.PAgregarProducto.Location = new System.Drawing.Point(8, 46);
-            this.PAgregarProducto.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.PAgregarProducto.Location = new System.Drawing.Point(2, 75);
+            this.PAgregarProducto.Margin = new System.Windows.Forms.Padding(2);
             this.PAgregarProducto.Name = "PAgregarProducto";
-            this.PAgregarProducto.Size = new System.Drawing.Size(580, 306);
+            this.PAgregarProducto.Size = new System.Drawing.Size(595, 609);
             this.PAgregarProducto.TabIndex = 2;
             this.PAgregarProducto.Paint += new System.Windows.Forms.PaintEventHandler(this.PAgregarProducto_Paint);
+            // 
+            // LCuitVendedor
+            // 
+            this.LCuitVendedor.AutoSize = true;
+            this.LCuitVendedor.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LCuitVendedor.ForeColor = System.Drawing.Color.Black;
+            this.LCuitVendedor.Location = new System.Drawing.Point(304, 190);
+            this.LCuitVendedor.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.LCuitVendedor.Name = "LCuitVendedor";
+            this.LCuitVendedor.Size = new System.Drawing.Size(49, 19);
+            this.LCuitVendedor.TabIndex = 50;
+            this.LCuitVendedor.Text = "CUIT";
+            // 
+            // TBCuitCliente
+            // 
+            this.TBCuitCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TBCuitCliente.Location = new System.Drawing.Point(302, 213);
+            this.TBCuitCliente.Margin = new System.Windows.Forms.Padding(2);
+            this.TBCuitCliente.MaxLength = 11;
+            this.TBCuitCliente.Name = "TBCuitCliente";
+            this.TBCuitCliente.Size = new System.Drawing.Size(202, 26);
+            this.TBCuitCliente.TabIndex = 51;
+            this.TBCuitCliente.Validating += new System.ComponentModel.CancelEventHandler(this.TBCuitCliente_Validating);
             // 
             // LCorreoCliente
             // 
             this.LCorreoCliente.AutoSize = true;
             this.LCorreoCliente.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LCorreoCliente.ForeColor = System.Drawing.Color.Black;
-            this.LCorreoCliente.Location = new System.Drawing.Point(284, 162);
+            this.LCorreoCliente.Location = new System.Drawing.Point(303, 271);
             this.LCorreoCliente.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LCorreoCliente.Name = "LCorreoCliente";
             this.LCorreoCliente.Size = new System.Drawing.Size(69, 19);
@@ -130,7 +143,7 @@
             this.LNumCliente.AutoSize = true;
             this.LNumCliente.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LNumCliente.ForeColor = System.Drawing.Color.Black;
-            this.LNumCliente.Location = new System.Drawing.Point(13, 162);
+            this.LNumCliente.Location = new System.Drawing.Point(23, 272);
             this.LNumCliente.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LNumCliente.Name = "LNumCliente";
             this.LNumCliente.Size = new System.Drawing.Size(69, 19);
@@ -140,8 +153,8 @@
             // TBCorreoCliente
             // 
             this.TBCorreoCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TBCorreoCliente.Location = new System.Drawing.Point(287, 183);
-            this.TBCorreoCliente.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.TBCorreoCliente.Location = new System.Drawing.Point(302, 294);
+            this.TBCorreoCliente.Margin = new System.Windows.Forms.Padding(2);
             this.TBCorreoCliente.MaxLength = 100;
             this.TBCorreoCliente.Name = "TBCorreoCliente";
             this.TBCorreoCliente.Size = new System.Drawing.Size(266, 26);
@@ -151,8 +164,8 @@
             // TBNumCliente
             // 
             this.TBNumCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TBNumCliente.Location = new System.Drawing.Point(8, 183);
-            this.TBNumCliente.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.TBNumCliente.Location = new System.Drawing.Point(23, 294);
+            this.TBNumCliente.Margin = new System.Windows.Forms.Padding(2);
             this.TBNumCliente.MaxLength = 100;
             this.TBNumCliente.Name = "TBNumCliente";
             this.TBNumCliente.Size = new System.Drawing.Size(258, 26);
@@ -164,7 +177,7 @@
             this.LDomicilioCliente.AutoSize = true;
             this.LDomicilioCliente.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LDomicilioCliente.ForeColor = System.Drawing.Color.Black;
-            this.LDomicilioCliente.Location = new System.Drawing.Point(8, 105);
+            this.LDomicilioCliente.Location = new System.Drawing.Point(23, 191);
             this.LDomicilioCliente.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LDomicilioCliente.Name = "LDomicilioCliente";
             this.LDomicilioCliente.Size = new System.Drawing.Size(99, 19);
@@ -174,8 +187,8 @@
             // TBDomicilioCliente
             // 
             this.TBDomicilioCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TBDomicilioCliente.Location = new System.Drawing.Point(8, 126);
-            this.TBDomicilioCliente.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.TBDomicilioCliente.Location = new System.Drawing.Point(23, 213);
+            this.TBDomicilioCliente.Margin = new System.Windows.Forms.Padding(2);
             this.TBDomicilioCliente.MaxLength = 100;
             this.TBDomicilioCliente.Name = "TBDomicilioCliente";
             this.TBDomicilioCliente.Size = new System.Drawing.Size(258, 26);
@@ -183,8 +196,8 @@
             // 
             // DTFechaModifCliente
             // 
-            this.DTFechaModifCliente.Location = new System.Drawing.Point(8, 231);
-            this.DTFechaModifCliente.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.DTFechaModifCliente.Location = new System.Drawing.Point(23, 390);
+            this.DTFechaModifCliente.Margin = new System.Windows.Forms.Padding(2);
             this.DTFechaModifCliente.Name = "DTFechaModifCliente";
             this.DTFechaModifCliente.Size = new System.Drawing.Size(339, 20);
             this.DTFechaModifCliente.TabIndex = 35;
@@ -194,7 +207,7 @@
             this.LFechaModificacionCliente.AutoSize = true;
             this.LFechaModificacionCliente.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LFechaModificacionCliente.ForeColor = System.Drawing.Color.Black;
-            this.LFechaModificacionCliente.Location = new System.Drawing.Point(13, 210);
+            this.LFechaModificacionCliente.Location = new System.Drawing.Point(23, 352);
             this.LFechaModificacionCliente.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LFechaModificacionCliente.Name = "LFechaModificacionCliente";
             this.LFechaModificacionCliente.Size = new System.Drawing.Size(189, 19);
@@ -203,13 +216,14 @@
             // 
             // BAgregarCliente
             // 
-            this.BAgregarCliente.BackColor = System.Drawing.Color.DarkGray;
-            this.BAgregarCliente.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BAgregarCliente.ForeColor = System.Drawing.Color.Black;
-            this.BAgregarCliente.Location = new System.Drawing.Point(409, 223);
-            this.BAgregarCliente.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BAgregarCliente.BackColor = System.Drawing.Color.White;
+            this.BAgregarCliente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BAgregarCliente.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BAgregarCliente.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.BAgregarCliente.Location = new System.Drawing.Point(389, 371);
+            this.BAgregarCliente.Margin = new System.Windows.Forms.Padding(2);
             this.BAgregarCliente.Name = "BAgregarCliente";
-            this.BAgregarCliente.Size = new System.Drawing.Size(143, 32);
+            this.BAgregarCliente.Size = new System.Drawing.Size(169, 58);
             this.BAgregarCliente.TabIndex = 25;
             this.BAgregarCliente.Text = "Agregar Cliente";
             this.BAgregarCliente.UseVisualStyleBackColor = false;
@@ -218,8 +232,8 @@
             // TBCiudadCliente
             // 
             this.TBCiudadCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TBCiudadCliente.Location = new System.Drawing.Point(296, 78);
-            this.TBCiudadCliente.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.TBCiudadCliente.Location = new System.Drawing.Point(302, 137);
+            this.TBCiudadCliente.Margin = new System.Windows.Forms.Padding(2);
             this.TBCiudadCliente.MaxLength = 10;
             this.TBCiudadCliente.Name = "TBCiudadCliente";
             this.TBCiudadCliente.Size = new System.Drawing.Size(233, 26);
@@ -230,8 +244,8 @@
             // TBProvinciaCliente
             // 
             this.TBProvinciaCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TBProvinciaCliente.Location = new System.Drawing.Point(8, 78);
-            this.TBProvinciaCliente.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.TBProvinciaCliente.Location = new System.Drawing.Point(23, 137);
+            this.TBProvinciaCliente.Margin = new System.Windows.Forms.Padding(2);
             this.TBProvinciaCliente.MaxLength = 8;
             this.TBProvinciaCliente.Name = "TBProvinciaCliente";
             this.TBProvinciaCliente.Size = new System.Drawing.Size(248, 26);
@@ -243,7 +257,7 @@
             this.LCiudadCliente.AutoSize = true;
             this.LCiudadCliente.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LCiudadCliente.ForeColor = System.Drawing.Color.Black;
-            this.LCiudadCliente.Location = new System.Drawing.Point(297, 57);
+            this.LCiudadCliente.Location = new System.Drawing.Point(303, 114);
             this.LCiudadCliente.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LCiudadCliente.Name = "LCiudadCliente";
             this.LCiudadCliente.Size = new System.Drawing.Size(79, 19);
@@ -255,7 +269,7 @@
             this.LProvinviaCliente.AutoSize = true;
             this.LProvinviaCliente.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LProvinviaCliente.ForeColor = System.Drawing.Color.Black;
-            this.LProvinviaCliente.Location = new System.Drawing.Point(7, 57);
+            this.LProvinviaCliente.Location = new System.Drawing.Point(24, 114);
             this.LProvinviaCliente.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LProvinviaCliente.Name = "LProvinviaCliente";
             this.LProvinviaCliente.Size = new System.Drawing.Size(99, 19);
@@ -265,8 +279,8 @@
             // TBDniCliente
             // 
             this.TBDniCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TBDniCliente.Location = new System.Drawing.Point(296, 30);
-            this.TBDniCliente.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.TBDniCliente.Location = new System.Drawing.Point(302, 60);
+            this.TBDniCliente.Margin = new System.Windows.Forms.Padding(2);
             this.TBDniCliente.MaxLength = 200;
             this.TBDniCliente.Name = "TBDniCliente";
             this.TBDniCliente.Size = new System.Drawing.Size(247, 26);
@@ -278,7 +292,7 @@
             this.LDescripcionProducto.AutoSize = true;
             this.LDescripcionProducto.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LDescripcionProducto.ForeColor = System.Drawing.Color.Black;
-            this.LDescripcionProducto.Location = new System.Drawing.Point(301, 9);
+            this.LDescripcionProducto.Location = new System.Drawing.Point(306, 34);
             this.LDescripcionProducto.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LDescripcionProducto.Name = "LDescripcionProducto";
             this.LDescripcionProducto.Size = new System.Drawing.Size(39, 19);
@@ -289,8 +303,8 @@
             // TBNombreCliente
             // 
             this.TBNombreCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TBNombreCliente.Location = new System.Drawing.Point(9, 30);
-            this.TBNombreCliente.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.TBNombreCliente.Location = new System.Drawing.Point(23, 60);
+            this.TBNombreCliente.Margin = new System.Windows.Forms.Padding(2);
             this.TBNombreCliente.MaxLength = 100;
             this.TBNombreCliente.Name = "TBNombreCliente";
             this.TBNombreCliente.Size = new System.Drawing.Size(261, 26);
@@ -303,49 +317,55 @@
             this.LNombreCliente.AutoSize = true;
             this.LNombreCliente.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LNombreCliente.ForeColor = System.Drawing.Color.Black;
-            this.LNombreCliente.Location = new System.Drawing.Point(8, 9);
+            this.LNombreCliente.Location = new System.Drawing.Point(23, 36);
             this.LNombreCliente.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LNombreCliente.Name = "LNombreCliente";
             this.LNombreCliente.Size = new System.Drawing.Size(149, 19);
             this.LNombreCliente.TabIndex = 11;
             this.LNombreCliente.Text = "Nombre Cliente";
             // 
-            // LCuitVendedor
+            // LAgregarventas
             // 
-            this.LCuitVendedor.AutoSize = true;
-            this.LCuitVendedor.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LCuitVendedor.ForeColor = System.Drawing.Color.Black;
-            this.LCuitVendedor.Location = new System.Drawing.Point(297, 105);
-            this.LCuitVendedor.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.LCuitVendedor.Name = "LCuitVendedor";
-            this.LCuitVendedor.Size = new System.Drawing.Size(49, 19);
-            this.LCuitVendedor.TabIndex = 50;
-            this.LCuitVendedor.Text = "CUIT";
+            this.LAgregarventas.BackColor = System.Drawing.Color.MidnightBlue;
+            this.LAgregarventas.Dock = System.Windows.Forms.DockStyle.Top;
+            this.LAgregarventas.Font = new System.Drawing.Font("SimSun", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LAgregarventas.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.LAgregarventas.Image = ((System.Drawing.Image)(resources.GetObject("LAgregarventas.Image")));
+            this.LAgregarventas.Location = new System.Drawing.Point(0, 0);
+            this.LAgregarventas.Margin = new System.Windows.Forms.Padding(0);
+            this.LAgregarventas.Name = "LAgregarventas";
+            this.LAgregarventas.Padding = new System.Windows.Forms.Padding(8, 3, 3, 3);
+            this.LAgregarventas.Size = new System.Drawing.Size(605, 79);
+            this.LAgregarventas.TabIndex = 13;
+            this.LAgregarventas.Text = "AGREGAR CLIENTE";
+            this.LAgregarventas.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // TBCuitCliente
+            // pictureBox1
             // 
-            this.TBCuitCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TBCuitCliente.Location = new System.Drawing.Point(296, 126);
-            this.TBCuitCliente.Margin = new System.Windows.Forms.Padding(2);
-            this.TBCuitCliente.MaxLength = 11;
-            this.TBCuitCliente.Name = "TBCuitCliente";
-            this.TBCuitCliente.Size = new System.Drawing.Size(202, 26);
-            this.TBCuitCliente.TabIndex = 51;
-            this.TBCuitCliente.Validating += new System.ComponentModel.CancelEventHandler(this.TBCuitCliente_Validating);
+            this.pictureBox1.BackColor = System.Drawing.Color.AliceBlue;
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.Location = new System.Drawing.Point(395, 378);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(36, 41);
+            this.pictureBox1.TabIndex = 52;
+            this.pictureBox1.TabStop = false;
             // 
             // agregarDatosCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(600, 366);
+            this.BackColor = System.Drawing.Color.Lavender;
+            this.ClientSize = new System.Drawing.Size(579, 570);
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "agregarDatosCliente";
             this.Text = "agregarDatosCliente";
             this.Load += new System.EventHandler(this.agregarDatosCliente_Load);
             this.panel1.ResumeLayout(false);
             this.PAgregarProducto.ResumeLayout(false);
             this.PAgregarProducto.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -372,8 +392,9 @@
         private System.Windows.Forms.TextBox TBNumCliente;
         private System.Windows.Forms.Label LCorreoCliente;
         private System.Windows.Forms.Label LNumCliente;
-        public System.Windows.Forms.Label LAgregarCliente;
         private System.Windows.Forms.Label LCuitVendedor;
         private System.Windows.Forms.TextBox TBCuitCliente;
+        public System.Windows.Forms.Label LAgregarventas;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

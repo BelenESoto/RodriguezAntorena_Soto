@@ -65,8 +65,15 @@ namespace Antorena_Soto.CPresentacion.Vendedor
         private void BAgregarVenta_Click(object sender, EventArgs e)
         {
             PVendedor2.Controls.Clear();
-            ventaAgregar formVenta = new ventaAgregar();
-            formVenta.TopLevel = false;                  
+
+            // ⭐ Obtener o instanciar la lista de productos
+            // Lo ideal es que esta lista venga de listaProductos o de una capa lógica común
+            List<Productox> listaProductos = ObtenerProductos(); // ⭐ Método que devuelve la lista
+
+            // ⭐ Pasamos la lista al constructor de ventaAgregar
+            ventaAgregar formVenta = new ventaAgregar(listaProductos); // ⭐
+
+            formVenta.TopLevel = false;
             formVenta.FormBorderStyle = FormBorderStyle.None; // Sin borde
             formVenta.Dock = DockStyle.Fill;             // Ocupa todo el panel
 
@@ -75,7 +82,19 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             formVenta.Show();
         }
 
-        
+        // ⭐ Método de ejemplo para recuperar productos (puede ser de BD, lista estática, etc.)
+        private List<Productox> ObtenerProductos()
+        {
+            // 🔹 Si ya tenés la lista cargada en listaProductos, la podés pasar directamente.
+            // 🔹 Aquí te pongo un ejemplo básico:
+            return new List<Productox>
+    {
+        new Productox { Codigo = 1, Nombre = "Producto A", Precio = 100, Categoria = "Cat1", Stock = 10, Descripcion = "Desc A", Estado = true },
+        new Productox { Codigo = 2, Nombre = "Producto B", Precio = 200, Categoria = "Cat2", Stock = 5, Descripcion = "Desc B", Estado = true }
+    };
+        }
+
+
 
         private void BListarVenta_Click(object sender, EventArgs e)
         {

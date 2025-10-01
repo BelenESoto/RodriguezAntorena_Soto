@@ -16,7 +16,7 @@ namespace Antorena_Soto.CLogica
 
         public bool AgregarUsuario(string dni, string nombre, string provincia, string ciudad,
                                    string domicilio, long telefono, string correo,
-                                   DateTime fechaNacimiento, long cuit, DateTime fechaIngreso, int tipoUsuario)
+                                   DateTime fechaNacimiento, long cuit, DateTime fechaIngreso, int tipoUsuario,string Estado)
         {
             if (string.IsNullOrWhiteSpace(nombre))
                 throw new ArgumentException("El nombre es obligatorio.");
@@ -24,7 +24,7 @@ namespace Antorena_Soto.CLogica
             if (!int.TryParse(dni, out int dniInt))
                 throw new ArgumentException("El DNI debe ser numérico.");
 
-            return usuarioDAL.InsertarUsuario(dniInt, nombre, provincia, ciudad, domicilio, telefono, correo, fechaNacimiento, cuit, fechaIngreso, tipoUsuario);
+            return usuarioDAL.InsertarUsuario(dniInt, nombre, provincia, ciudad, domicilio, telefono, correo, fechaNacimiento, cuit, fechaIngreso, tipoUsuario, Estado);
         }
 
         public DataTable ListarUsuariosBLL()
@@ -42,12 +42,15 @@ namespace Antorena_Soto.CLogica
         }
 
         // ELIMINAR USUARIO
-        public bool EliminarUsuarioBLL(int dni)
+        public bool BajaUsuarioBLL(int idUsuario)
         {
-            if (dni <= 0)
-                throw new ArgumentException("DNI inválido.");
+            // Acá podrías agregar validaciones de negocio antes de llamar al DAL
+            if (idUsuario <= 0)
+            {
+                throw new ArgumentException("El ID de usuario no es válido.");
+            }
 
-            return usuarioDAL.EliminarUsuario(dni);
+            return usuarioDAL.BajaUsuario(idUsuario);
         }
     }
 }
