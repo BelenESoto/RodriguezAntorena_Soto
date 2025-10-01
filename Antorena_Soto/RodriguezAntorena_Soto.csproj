@@ -93,6 +93,12 @@
       <DependentUpon>listaProductos.cs</DependentUpon>
     </Compile>
     <Compile Include="CPresentacion\Administrador\Productox.cs" />
+    <Compile Include="CPresentacion\Gerente\FormRecaudacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CPresentacion\Gerente\FormRecaudacion.Designer.cs">
+      <DependentUpon>FormRecaudacion.cs</DependentUpon>
+    </Compile>
     <Compile Include="CPresentacion\Gerente\menuGerente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -200,6 +206,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="CPresentacion\Administrador\listaProductos.resx">
       <DependentUpon>listaProductos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CPresentacion\Gerente\FormRecaudacion.resx">
+      <DependentUpon>FormRecaudacion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CPresentacion\Gerente\menuGerente.resx">
       <DependentUpon>menuGerente.cs</DependentUpon>

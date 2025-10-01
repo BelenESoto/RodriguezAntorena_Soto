@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.PGerente1 = new System.Windows.Forms.Panel();
-            this.lMenuGerente = new System.Windows.Forms.Label();
-            this.BListarProductos = new System.Windows.Forms.Button();
+            this.btEstadVenta = new System.Windows.Forms.Button();
             this.BVerReportes = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.PGerente = new System.Windows.Forms.Panel();
+            this.lMenuGerente = new System.Windows.Forms.Label();
             this.PGerente1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -43,7 +43,7 @@
             this.PGerente1.BackColor = System.Drawing.Color.MidnightBlue;
             this.PGerente1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.PGerente1.Controls.Add(this.lMenuGerente);
-            this.PGerente1.Controls.Add(this.BListarProductos);
+            this.PGerente1.Controls.Add(this.btEstadVenta);
             this.PGerente1.Controls.Add(this.BVerReportes);
             this.PGerente1.Location = new System.Drawing.Point(3, 1);
             this.PGerente1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -52,32 +52,17 @@
             this.PGerente1.TabIndex = 1;
             this.PGerente1.Paint += new System.Windows.Forms.PaintEventHandler(this.PGerente1_Paint);
             // 
-            // lMenuGerente
+            // btEstadVenta
             // 
-            this.lMenuGerente.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lMenuGerente.BackColor = System.Drawing.Color.White;
-            this.lMenuGerente.Font = new System.Drawing.Font("SimSun", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lMenuGerente.ForeColor = System.Drawing.Color.Black;
-            this.lMenuGerente.Image = global::Antorena_Soto.Properties.Resources.config2;
-            this.lMenuGerente.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.lMenuGerente.Location = new System.Drawing.Point(37, 31);
-            this.lMenuGerente.Name = "lMenuGerente";
-            this.lMenuGerente.Size = new System.Drawing.Size(220, 110);
-            this.lMenuGerente.TabIndex = 0;
-            this.lMenuGerente.Text = "Menu Gerente";
-            this.lMenuGerente.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // BListarProductos
-            // 
-            this.BListarProductos.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Bold);
-            this.BListarProductos.Location = new System.Drawing.Point(27, 360);
-            this.BListarProductos.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.BListarProductos.Name = "BListarProductos";
-            this.BListarProductos.Size = new System.Drawing.Size(240, 61);
-            this.BListarProductos.TabIndex = 8;
-            this.BListarProductos.Text = "Estadisticas de ventas";
-            this.BListarProductos.UseVisualStyleBackColor = true;
-            this.BListarProductos.Click += new System.EventHandler(this.BListarProductos_Click);
+            this.btEstadVenta.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Bold);
+            this.btEstadVenta.Location = new System.Drawing.Point(27, 360);
+            this.btEstadVenta.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btEstadVenta.Name = "btEstadVenta";
+            this.btEstadVenta.Size = new System.Drawing.Size(240, 61);
+            this.btEstadVenta.TabIndex = 8;
+            this.btEstadVenta.Text = "Reporte de Recaudacion";
+            this.btEstadVenta.UseVisualStyleBackColor = true;
+            this.btEstadVenta.Click += new System.EventHandler(this.BListarProductos_Click);
             // 
             // BVerReportes
             // 
@@ -117,6 +102,21 @@
             this.PGerente.TabIndex = 2;
             this.PGerente.Paint += new System.Windows.Forms.PaintEventHandler(this.PGerente_Paint);
             // 
+            // lMenuGerente
+            // 
+            this.lMenuGerente.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lMenuGerente.BackColor = System.Drawing.Color.White;
+            this.lMenuGerente.Font = new System.Drawing.Font("SimSun", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lMenuGerente.ForeColor = System.Drawing.Color.Black;
+            this.lMenuGerente.Image = global::Antorena_Soto.Properties.Resources.config2;
+            this.lMenuGerente.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.lMenuGerente.Location = new System.Drawing.Point(37, 31);
+            this.lMenuGerente.Name = "lMenuGerente";
+            this.lMenuGerente.Size = new System.Drawing.Size(220, 110);
+            this.lMenuGerente.TabIndex = 0;
+            this.lMenuGerente.Text = "Menu Gerente";
+            this.lMenuGerente.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // menuGerente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -143,7 +143,7 @@
 
         private System.Windows.Forms.Panel PGerente1;
         private System.Windows.Forms.Label lMenuGerente;
-        private System.Windows.Forms.Button BListarProductos;
+        private System.Windows.Forms.Button btEstadVenta;
         private System.Windows.Forms.Button BVerReportes;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel PGerente;
