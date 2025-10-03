@@ -38,6 +38,7 @@ namespace Antorena_Soto.CPresentacion.SuperAdministrador
         {
             try
             {
+                DGVListaUsuarios.DefaultCellStyle.ForeColor = Color.Black;
                 // Traer datos desde la BLL
                 DataTable usuarios = usuarioBLL.ListarUsuariosBLL();
 
@@ -159,6 +160,11 @@ namespace Antorena_Soto.CPresentacion.SuperAdministrador
 
             DataTable dtFiltrado = filasFiltradas.CopyToDataTable();
             return dtFiltrado;
+        }
+
+        private void LAgregarventas_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -27,10 +27,19 @@ namespace Antorena_Soto.CPresentacion.Gerente
 
         private void BListarProductos_Click(object sender, EventArgs e)
         {
+            // Limpiar panel
+            PGerente.Controls.Clear();
 
-        }
+            // Crear instancia del formulario
+            FormRecaudacion FormRecaudacion = new FormRecaudacion();
+            FormRecaudacion.TopLevel = false;            // Esto es clave para poder incrustarlo en un Panel
+            FormRecaudacion.FormBorderStyle = FormBorderStyle.None;
+            FormRecaudacion.Dock = DockStyle.Fill;
 
-       
+            // Agregar al panel
+            PGerente.Controls.Add(FormRecaudacion);
+            FormRecaudacion.Show();
+        }       
             private void BVerReportes_Click(object sender, EventArgs e)
         {
             PGerente.Controls.Clear();

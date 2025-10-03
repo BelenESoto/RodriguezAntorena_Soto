@@ -42,7 +42,6 @@
             this.TBBuscarProducto = new System.Windows.Forms.ToolStripTextBox();
             this.bImprimir = new System.Windows.Forms.Button();
             this.DGVentas = new System.Windows.Forms.DataGridView();
-            this.BLimpiar = new System.Windows.Forms.Button();
             this.pReporteVenta.SuspendLayout();
             this.toolStripRepVenta.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGVentas)).BeginInit();
@@ -55,7 +54,6 @@
             this.pReporteVenta.Controls.Add(this.toolStripRepVenta);
             this.pReporteVenta.Controls.Add(this.bImprimir);
             this.pReporteVenta.Controls.Add(this.DGVentas);
-            this.pReporteVenta.Controls.Add(this.BLimpiar);
             this.pReporteVenta.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pReporteVenta.Location = new System.Drawing.Point(0, 0);
             this.pReporteVenta.Name = "pReporteVenta";
@@ -165,7 +163,9 @@
             // 
             // bImprimir
             // 
-            this.bImprimir.Location = new System.Drawing.Point(428, 575);
+            this.bImprimir.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bImprimir.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.bImprimir.Location = new System.Drawing.Point(300, 583);
             this.bImprimir.Name = "bImprimir";
             this.bImprimir.Size = new System.Drawing.Size(128, 37);
             this.bImprimir.TabIndex = 5;
@@ -182,15 +182,6 @@
             this.DGVentas.RowTemplate.Height = 24;
             this.DGVentas.Size = new System.Drawing.Size(677, 433);
             this.DGVentas.TabIndex = 4;
-            // 
-            // BLimpiar
-            // 
-            this.BLimpiar.Location = new System.Drawing.Point(201, 575);
-            this.BLimpiar.Name = "BLimpiar";
-            this.BLimpiar.Size = new System.Drawing.Size(128, 37);
-            this.BLimpiar.TabIndex = 3;
-            this.BLimpiar.Text = "BLimpiar";
-            this.BLimpiar.UseVisualStyleBackColor = true;
             // 
             // reporteVentas
             // 
@@ -213,7 +204,6 @@
 
         private System.Windows.Forms.Panel pReporteVenta;
         private System.Windows.Forms.DataGridView DGVentas;
-        private System.Windows.Forms.Button BLimpiar;
         private System.Windows.Forms.Button bImprimir;
         private System.Windows.Forms.ToolStrip toolStripRepVenta;
         private System.Windows.Forms.ToolStripDropDownButton tsdFiltroBusqueda;

@@ -66,6 +66,7 @@ namespace Antorena_Soto
             string dniSuperAdmin = "22222222";
             string contraseniaSuperAdmin = "222222";
 
+
             if (dni.Equals(dniGerente, StringComparison.Ordinal) && contrasenia.Equals(contraseniaGerente, StringComparison.Ordinal))
             {
                 //aca redirigir a ventana admin

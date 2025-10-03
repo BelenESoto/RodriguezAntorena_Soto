@@ -85,6 +85,7 @@
             this.LAgregarventas.TabIndex = 13;
             this.LAgregarventas.Text = "LISTA USUARIOS";
             this.LAgregarventas.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LAgregarventas.Click += new System.EventHandler(this.LAgregarventas_Click);
             // 
             // BTListaUsuario
             // 
@@ -281,21 +282,21 @@
             // BBuscarDni
             // 
             this.BBuscarDni.Name = "BBuscarDni";
-            this.BBuscarDni.Size = new System.Drawing.Size(180, 22);
+            this.BBuscarDni.Size = new System.Drawing.Size(128, 22);
             this.BBuscarDni.Text = "DNI";
             this.BBuscarDni.Click += new System.EventHandler(this.BBuscarDni_Click);
             // 
             // BBuscarApe
             // 
             this.BBuscarApe.Name = "BBuscarApe";
-            this.BBuscarApe.Size = new System.Drawing.Size(180, 22);
+            this.BBuscarApe.Size = new System.Drawing.Size(128, 22);
             this.BBuscarApe.Text = "Apellido";
             this.BBuscarApe.Click += new System.EventHandler(this.BBuscarApe_Click);
             // 
             // BBuscarEstado
             // 
             this.BBuscarEstado.Name = "BBuscarEstado";
-            this.BBuscarEstado.Size = new System.Drawing.Size(180, 22);
+            this.BBuscarEstado.Size = new System.Drawing.Size(128, 22);
             this.BBuscarEstado.Text = "Estado";
             this.BBuscarEstado.Click += new System.EventHandler(this.BBuscarEstado_Click);
             // 
