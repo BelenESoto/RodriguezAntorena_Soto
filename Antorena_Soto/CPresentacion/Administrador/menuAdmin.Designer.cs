@@ -38,6 +38,8 @@
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.PAdmin = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.BVerReportes = new System.Windows.Forms.Button();
+            this.btEstadVenta = new System.Windows.Forms.Button();
             this.PGerente1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -47,6 +49,8 @@
             // 
             this.PGerente1.BackColor = System.Drawing.Color.MidnightBlue;
             this.PGerente1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PGerente1.Controls.Add(this.btEstadVenta);
+            this.PGerente1.Controls.Add(this.BVerReportes);
             this.PGerente1.Controls.Add(this.pAdmin2);
             this.PGerente1.Controls.Add(this.pAdmin1);
             this.PGerente1.Controls.Add(this.lAdministrador);
@@ -155,6 +159,30 @@
             this.panel1.Size = new System.Drawing.Size(850, 765);
             this.panel1.TabIndex = 0;
             // 
+            // BVerReportes
+            // 
+            this.BVerReportes.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Bold);
+            this.BVerReportes.Location = new System.Drawing.Point(27, 560);
+            this.BVerReportes.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.BVerReportes.Name = "BVerReportes";
+            this.BVerReportes.Size = new System.Drawing.Size(240, 62);
+            this.BVerReportes.TabIndex = 9;
+            this.BVerReportes.Text = "Reportes de ventas";
+            this.BVerReportes.UseVisualStyleBackColor = true;
+            this.BVerReportes.Click += new System.EventHandler(this.BVerReportes_Click);
+            // 
+            // btEstadVenta
+            // 
+            this.btEstadVenta.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Bold);
+            this.btEstadVenta.Location = new System.Drawing.Point(27, 662);
+            this.btEstadVenta.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btEstadVenta.Name = "btEstadVenta";
+            this.btEstadVenta.Size = new System.Drawing.Size(240, 61);
+            this.btEstadVenta.TabIndex = 10;
+            this.btEstadVenta.Text = "Reporte de Recaudacion";
+            this.btEstadVenta.UseVisualStyleBackColor = true;
+            this.btEstadVenta.Click += new System.EventHandler(this.btEstadVenta_Click);
+            // 
             // menuAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -190,5 +218,7 @@
         private System.Windows.Forms.Label lAdministrador;
         private System.Windows.Forms.Panel pAdmin2;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button BVerReportes;
+        private System.Windows.Forms.Button btEstadVenta;
     }
 }

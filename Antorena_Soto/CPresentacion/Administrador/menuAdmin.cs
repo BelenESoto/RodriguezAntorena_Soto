@@ -119,8 +119,70 @@ namespace Antorena_Soto.CPresentacion.Gerente
         {
 
         }
+
+    
+        private void BVerReportes_Click(object sender, EventArgs e)
+        {
+            PAdmin.Controls.Clear();
+
+
+            List<Venta> ventas = new List<Venta>();
+            ventas.Add(new Venta
+            {
+                CodigoVenta = 123,
+                NombreCliente = "Juan Perez",
+                FechaVenta = DateTime.Now.AddDays(-2),
+                NombreVendedor = "Carlos Gomez",
+                Productos = new List<Productox>
+                {
+                   new Productox { Nombre = "Aros Mary", Precio = 5000 },
+                   new Productox { Nombre = "Collar Eva", Precio = 8000 }
+                },
+                Total = 13000
+            });
+            ventas.Add(new Venta
+            {
+                CodigoVenta = 456,
+                NombreCliente = "Maria Lopez",
+                FechaVenta = DateTime.Now.AddDays(-1),
+                NombreVendedor = "Ana Torres",
+                Productos = new List<Productox>
+                {
+                   new Productox { Nombre = "Pulsera Luna", Precio = 3500 },
+                   new Productox { Nombre = "Anillo Sol", Precio = 6000 }
+                },
+                Total = 9500
+            });
+
+            reporteVentas formReporte = new reporteVentas(ventas);
+            formReporte.TopLevel = false;
+            formReporte.FormBorderStyle = FormBorderStyle.None;
+            formReporte.Dock = DockStyle.Fill;
+
+            PAdmin.Controls.Add(formReporte);
+            PAdmin.Tag = formReporte;
+            formReporte.Show();
+        }
+
+        private void btEstadVenta_Click(object sender, EventArgs e)
+        {
+            // Limpiar panel
+            PAdmin.Controls.Clear();
+
+            // Crear instancia del formulario
+            FormRecaudacion FormRecaudacion = new FormRecaudacion();
+            FormRecaudacion.TopLevel = false;            // Esto es clave para poder incrustarlo en un Panel
+            FormRecaudacion.FormBorderStyle = FormBorderStyle.None;
+            FormRecaudacion.Dock = DockStyle.Fill;
+
+            // Agregar al panel
+            PAdmin.Controls.Add(FormRecaudacion);
+            FormRecaudacion.Show();
+        }
     }
-}
+    }
+    
+
 
 
 
