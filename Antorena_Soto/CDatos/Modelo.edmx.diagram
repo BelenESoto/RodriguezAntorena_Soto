@@ -4,8 +4,17 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="80e98aaf60174ab5a5ffc8b275b5383a" Name="Diagram1" ZoomLevel="62">
-        <EntityTypeShape EntityType="RodriguezAntorena_SotoModel.Usuario" Width="3" PointX="2" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="80e98aaf60174ab5a5ffc8b275b5383a" Name="Diagram1" ZoomLevel="118">
+        <EntityTypeShape EntityType="RodriguezAntorena_SotoModel.Usuario" Width="2.125" PointX="0.5" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="RodriguezAntorena_SotoModel.Cliente" Width="2.375" PointX="5.5" PointY="0.75" />
+        <EntityTypeShape EntityType="RodriguezAntorena_SotoModel.Categoria" Width="1.5" PointX="1.25" PointY="5.625" />
+        <EntityTypeShape EntityType="RodriguezAntorena_SotoModel.Detalle_venta" Width="1.5" PointX="5.25" PointY="5.5" />
+        <EntityTypeShape EntityType="RodriguezAntorena_SotoModel.Factura" Width="1.5" PointX="8" PointY="6" />
+        <EntityTypeShape EntityType="RodriguezAntorena_SotoModel.Producto" Width="1.5" PointX="3.25" PointY="5.125" />
+        <AssociationConnector Association="RodriguezAntorena_SotoModel.FK_categoria_prod" />
+        <AssociationConnector Association="RodriguezAntorena_SotoModel.FK_id_cliente" />
+        <AssociationConnector Association="RodriguezAntorena_SotoModel.FK_id_factura" />
+        <AssociationConnector Association="RodriguezAntorena_SotoModel.FK_id_producto" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -5,6 +5,63 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="RodriguezAntorena_SotoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="id_categoria" />
+          </Key>
+          <Property Name="id_categoria" Type="int" Nullable="false" />
+          <Property Name="nombre_categoria" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="dni_cliente" />
+          </Key>
+          <Property Name="nomYApe_cliente" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="dni_cliente" Type="int" Nullable="false" />
+          <Property Name="provincia" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="ciudad" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="domicilio" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="cuit" Type="bigint" Nullable="false" />
+          <Property Name="telefono" Type="bigint" Nullable="false" />
+          <Property Name="correo" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="fecha_ingreso" Type="datetime" Nullable="false" />
+          <Property Name="estado" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Detalle_venta">
+          <Key>
+            <PropertyRef Name="id_factura" />
+            <PropertyRef Name="id_producto" />
+          </Key>
+          <Property Name="id_factura" Type="bigint" Nullable="false" />
+          <Property Name="id_producto" Type="int" Nullable="false" />
+          <Property Name="cantidad" Type="int" Nullable="false" />
+          <Property Name="precio" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Factura">
+          <Key>
+            <PropertyRef Name="nro_factura" />
+          </Key>
+          <Property Name="nro_factura" Type="bigint" Nullable="false" />
+          <Property Name="tipo_factura" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="id_cliente" Type="int" Nullable="false" />
+          <Property Name="fecha_factura" Type="datetime" Nullable="false" />
+          <Property Name="forma_pago" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="monto_total" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="codigo_prod" />
+          </Key>
+          <Property Name="nombre_prod" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="codigo_prod" Type="int" Nullable="false" />
+          <Property Name="estado_prod" Type="bit" Nullable="false" />
+          <Property Name="descripcion_prod" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="categoria_prod" Type="int" Nullable="false" />
+          <Property Name="precio_prod" Type="float" Nullable="false" />
+          <Property Name="stock_prod" Type="int" Nullable="false" />
+          <Property Name="imagen_prod" Type="varbinary(max)" />
+          <Property Name="fechaModif_prod" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="Usuario">
           <Key>
             <PropertyRef Name="id_dni_usuario" />
@@ -22,8 +79,108 @@
           <Property Name="tipo_Usuario" Type="int" Nullable="false" />
           <Property Name="Estado" Type="varchar" MaxLength="10" />
         </EntityType>
+        <Association Name="FK_categoria_prod">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="id_categoria" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="categoria_prod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_id_cliente">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Factura" Type="Self.Factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="dni_cliente" />
+            </Principal>
+            <Dependent Role="Factura">
+              <PropertyRef Name="id_cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_id_factura">
+          <End Role="Factura" Type="Self.Factura" Multiplicity="1" />
+          <End Role="Detalle_venta" Type="Self.Detalle_venta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Factura">
+              <PropertyRef Name="nro_factura" />
+            </Principal>
+            <Dependent Role="Detalle_venta">
+              <PropertyRef Name="id_factura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_id_producto">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="Detalle_venta" Type="Self.Detalle_venta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="codigo_prod" />
+            </Principal>
+            <Dependent Role="Detalle_venta">
+              <PropertyRef Name="id_producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="RodriguezAntorena_SotoModelStoreContainer">
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Detalle_venta" EntityType="Self.Detalle_venta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Factura" EntityType="Self.Factura" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Producto" EntityType="Self.Producto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_categoria_prod" Association="Self.FK_categoria_prod">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_id_cliente" Association="Self.FK_id_cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Factura" EntitySet="Factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_id_factura" Association="Self.FK_id_factura">
+            <End Role="Factura" EntitySet="Factura" />
+            <End Role="Detalle_venta" EntitySet="Detalle_venta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_id_producto" Association="Self.FK_id_producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="Detalle_venta" EntitySet="Detalle_venta" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -49,7 +206,182 @@
         </EntityType>
         <EntityContainer Name="RodriguezAntorena_SotoEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <EntitySet Name="Categoria" EntityType="RodriguezAntorena_SotoModel.Categoria" />
+          <EntitySet Name="Cliente" EntityType="RodriguezAntorena_SotoModel.Cliente" />
+          <EntitySet Name="Detalle_venta" EntityType="RodriguezAntorena_SotoModel.Detalle_venta" />
+          <EntitySet Name="Factura" EntityType="RodriguezAntorena_SotoModel.Factura" />
+          <EntitySet Name="Producto" EntityType="RodriguezAntorena_SotoModel.Producto" />
+          <AssociationSet Name="FK_categoria_prod" Association="RodriguezAntorena_SotoModel.FK_categoria_prod">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_id_cliente" Association="RodriguezAntorena_SotoModel.FK_id_cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Factura" EntitySet="Factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_id_factura" Association="RodriguezAntorena_SotoModel.FK_id_factura">
+            <End Role="Factura" EntitySet="Factura" />
+            <End Role="Detalle_venta" EntitySet="Detalle_venta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_id_producto" Association="RodriguezAntorena_SotoModel.FK_id_producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="Detalle_venta" EntitySet="Detalle_venta" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(RodriguezAntorena_SotoModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(RodriguezAntorena_SotoModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
         </EntityContainer>
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="id_categoria" />
+          </Key>
+          <Property Name="id_categoria" Type="Int32" Nullable="false" />
+          <Property Name="nombre_categoria" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Producto" Relationship="RodriguezAntorena_SotoModel.FK_categoria_prod" FromRole="Categoria" ToRole="Producto" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="dni_cliente" />
+          </Key>
+          <Property Name="nomYApe_cliente" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="dni_cliente" Type="Int32" Nullable="false" />
+          <Property Name="provincia" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ciudad" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="domicilio" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="cuit" Type="Int64" Nullable="false" />
+          <Property Name="telefono" Type="Int64" Nullable="false" />
+          <Property Name="correo" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_ingreso" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="estado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Factura" Relationship="RodriguezAntorena_SotoModel.FK_id_cliente" FromRole="Cliente" ToRole="Factura" />
+        </EntityType>
+        <EntityType Name="Detalle_venta">
+          <Key>
+            <PropertyRef Name="id_factura" />
+            <PropertyRef Name="id_producto" />
+          </Key>
+          <Property Name="id_factura" Type="Int64" Nullable="false" />
+          <Property Name="id_producto" Type="Int32" Nullable="false" />
+          <Property Name="cantidad" Type="Int32" Nullable="false" />
+          <Property Name="precio" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Factura" Relationship="RodriguezAntorena_SotoModel.FK_id_factura" FromRole="Detalle_venta" ToRole="Factura" />
+          <NavigationProperty Name="Producto" Relationship="RodriguezAntorena_SotoModel.FK_id_producto" FromRole="Detalle_venta" ToRole="Producto" />
+        </EntityType>
+        <EntityType Name="Factura">
+          <Key>
+            <PropertyRef Name="nro_factura" />
+          </Key>
+          <Property Name="nro_factura" Type="Int64" Nullable="false" />
+          <Property Name="tipo_factura" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="id_cliente" Type="Int32" Nullable="false" />
+          <Property Name="fecha_factura" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="forma_pago" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="monto_total" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Cliente" Relationship="RodriguezAntorena_SotoModel.FK_id_cliente" FromRole="Factura" ToRole="Cliente" />
+          <NavigationProperty Name="Detalle_venta" Relationship="RodriguezAntorena_SotoModel.FK_id_factura" FromRole="Factura" ToRole="Detalle_venta" />
+        </EntityType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="codigo_prod" />
+          </Key>
+          <Property Name="nombre_prod" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="codigo_prod" Type="Int32" Nullable="false" />
+          <Property Name="estado_prod" Type="Boolean" Nullable="false" />
+          <Property Name="descripcion_prod" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="categoria_prod" Type="Int32" Nullable="false" />
+          <Property Name="precio_prod" Type="Double" Nullable="false" />
+          <Property Name="stock_prod" Type="Int32" Nullable="false" />
+          <Property Name="imagen_prod" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="fechaModif_prod" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Categoria" Relationship="RodriguezAntorena_SotoModel.FK_categoria_prod" FromRole="Producto" ToRole="Categoria" />
+          <NavigationProperty Name="Detalle_venta" Relationship="RodriguezAntorena_SotoModel.FK_id_producto" FromRole="Producto" ToRole="Detalle_venta" />
+        </EntityType>
+        <Association Name="FK_categoria_prod">
+          <End Type="RodriguezAntorena_SotoModel.Categoria" Role="Categoria" Multiplicity="1" />
+          <End Type="RodriguezAntorena_SotoModel.Producto" Role="Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="id_categoria" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="categoria_prod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_id_cliente">
+          <End Type="RodriguezAntorena_SotoModel.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="RodriguezAntorena_SotoModel.Factura" Role="Factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="dni_cliente" />
+            </Principal>
+            <Dependent Role="Factura">
+              <PropertyRef Name="id_cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_id_factura">
+          <End Type="RodriguezAntorena_SotoModel.Factura" Role="Factura" Multiplicity="1" />
+          <End Type="RodriguezAntorena_SotoModel.Detalle_venta" Role="Detalle_venta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Factura">
+              <PropertyRef Name="nro_factura" />
+            </Principal>
+            <Dependent Role="Detalle_venta">
+              <PropertyRef Name="id_factura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_id_producto">
+          <End Type="RodriguezAntorena_SotoModel.Producto" Role="Producto" Multiplicity="1" />
+          <End Type="RodriguezAntorena_SotoModel.Detalle_venta" Role="Detalle_venta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="codigo_prod" />
+            </Principal>
+            <Dependent Role="Detalle_venta">
+              <PropertyRef Name="id_producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -74,6 +406,91 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Categoria">
+            <EntityTypeMapping TypeName="RodriguezAntorena_SotoModel.Categoria">
+              <MappingFragment StoreEntitySet="Categoria">
+                <ScalarProperty Name="nombre_categoria" ColumnName="nombre_categoria" />
+                <ScalarProperty Name="id_categoria" ColumnName="id_categoria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cliente">
+            <EntityTypeMapping TypeName="RodriguezAntorena_SotoModel.Cliente">
+              <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="fecha_ingreso" ColumnName="fecha_ingreso" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="cuit" ColumnName="cuit" />
+                <ScalarProperty Name="domicilio" ColumnName="domicilio" />
+                <ScalarProperty Name="ciudad" ColumnName="ciudad" />
+                <ScalarProperty Name="provincia" ColumnName="provincia" />
+                <ScalarProperty Name="dni_cliente" ColumnName="dni_cliente" />
+                <ScalarProperty Name="nomYApe_cliente" ColumnName="nomYApe_cliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Detalle_venta">
+            <EntityTypeMapping TypeName="RodriguezAntorena_SotoModel.Detalle_venta">
+              <MappingFragment StoreEntitySet="Detalle_venta">
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="id_producto" ColumnName="id_producto" />
+                <ScalarProperty Name="id_factura" ColumnName="id_factura" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Factura">
+            <EntityTypeMapping TypeName="RodriguezAntorena_SotoModel.Factura">
+              <MappingFragment StoreEntitySet="Factura">
+                <ScalarProperty Name="monto_total" ColumnName="monto_total" />
+                <ScalarProperty Name="forma_pago" ColumnName="forma_pago" />
+                <ScalarProperty Name="fecha_factura" ColumnName="fecha_factura" />
+                <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
+                <ScalarProperty Name="tipo_factura" ColumnName="tipo_factura" />
+                <ScalarProperty Name="nro_factura" ColumnName="nro_factura" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Producto">
+            <EntityTypeMapping TypeName="RodriguezAntorena_SotoModel.Producto">
+              <MappingFragment StoreEntitySet="Producto">
+                <ScalarProperty Name="fechaModif_prod" ColumnName="fechaModif_prod" />
+                <ScalarProperty Name="imagen_prod" ColumnName="imagen_prod" />
+                <ScalarProperty Name="stock_prod" ColumnName="stock_prod" />
+                <ScalarProperty Name="precio_prod" ColumnName="precio_prod" />
+                <ScalarProperty Name="categoria_prod" ColumnName="categoria_prod" />
+                <ScalarProperty Name="descripcion_prod" ColumnName="descripcion_prod" />
+                <ScalarProperty Name="estado_prod" ColumnName="estado_prod" />
+                <ScalarProperty Name="codigo_prod" ColumnName="codigo_prod" />
+                <ScalarProperty Name="nombre_prod" ColumnName="nombre_prod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="RodriguezAntorena_SotoModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="RodriguezAntorena_SotoModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="RodriguezAntorena_SotoModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="RodriguezAntorena_SotoModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RodriguezAntorena_SotoModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="RodriguezAntorena_SotoModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RodriguezAntorena_SotoModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="RodriguezAntorena_SotoModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="RodriguezAntorena_SotoModel.Store.sp_upgraddiagrams" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
