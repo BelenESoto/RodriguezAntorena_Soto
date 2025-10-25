@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Antorena_Soto.CPresentacion.Gerente
+namespace Antorena_Soto.CPresentacion.Administrador
 {
     partial class AltaProductos
     {
@@ -85,7 +85,7 @@ namespace Antorena_Soto.CPresentacion.Gerente
             this.PAgregarProducto.Name = "PAgregarProducto";
             this.PAgregarProducto.Size = new System.Drawing.Size(755, 718);
             this.PAgregarProducto.TabIndex = 1;
-            this.PAgregarProducto.Paint += new System.Windows.Forms.PaintEventHandler(this.PAgregarProducto_Paint_1);
+            this.PAgregarProducto.Paint += new System.Windows.Forms.PaintEventHandler(this.PAgregarProducto_Paint);
             // 
             // tbCodigoProducto
             // 
@@ -95,7 +95,7 @@ namespace Antorena_Soto.CPresentacion.Gerente
             this.tbCodigoProducto.Name = "tbCodigoProducto";
             this.tbCodigoProducto.Size = new System.Drawing.Size(400, 30);
             this.tbCodigoProducto.TabIndex = 42;
-            this.tbCodigoProducto.TextChanged += new System.EventHandler(this.tbCodigo_TextChanged);
+            this.tbCodigoProducto.TextChanged += new System.EventHandler(this.tbCodigoProducto_TextChanged);
             this.tbCodigoProducto.Validating += new System.ComponentModel.CancelEventHandler(this.TBCodigoProducto_Validating);
             // 
             // lCodigo
@@ -119,8 +119,6 @@ namespace Antorena_Soto.CPresentacion.Gerente
             this.CBEstadoProd.Name = "CBEstadoProd";
             this.CBEstadoProd.Size = new System.Drawing.Size(270, 24);
             this.CBEstadoProd.TabIndex = 40;
-            this.CBEstadoProd.SelectedIndexChanged += new System.EventHandler(this.CBEstadoProd_SelectedIndexChanged);
-            this.CBEstadoProd.Validating += new System.ComponentModel.CancelEventHandler(this.CBEstadoProd_Validating);
             // 
             // lEstado
             // 
@@ -132,7 +130,6 @@ namespace Antorena_Soto.CPresentacion.Gerente
             this.lEstado.Size = new System.Drawing.Size(82, 23);
             this.lEstado.TabIndex = 39;
             this.lEstado.Text = "Estado";
-            this.lEstado.Click += new System.EventHandler(this.label1_Click);
             // 
             // lAltaProd
             // 
@@ -144,7 +141,6 @@ namespace Antorena_Soto.CPresentacion.Gerente
             this.lAltaProd.Size = new System.Drawing.Size(297, 28);
             this.lAltaProd.TabIndex = 38;
             this.lAltaProd.Text = "   Alta Producto   ";
-            this.lAltaProd.Click += new System.EventHandler(this.lAltaProd_Click);
             // 
             // PBImagenProducto
             // 
@@ -154,22 +150,20 @@ namespace Antorena_Soto.CPresentacion.Gerente
             this.PBImagenProducto.Size = new System.Drawing.Size(282, 342);
             this.PBImagenProducto.TabIndex = 37;
             this.PBImagenProducto.TabStop = false;
-            this.PBImagenProducto.Click += new System.EventHandler(this.PBImagenProducto_Click);
-            this.PBImagenProducto.Validating += new System.ComponentModel.CancelEventHandler(this.PBImagenProducto_Validating);
             // 
             // CBCategoriaProducto
             // 
             this.CBCategoriaProducto.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.CBCategoriaProducto.FormattingEnabled = true;
             this.CBCategoriaProducto.Items.AddRange(new object[] {
-            "1-Collares",
-            "2-Aros",
-            "3-Otros"});
+            "1 - Collares",
+            "2 - Aros",
+            "3 - Otros"});
             this.CBCategoriaProducto.Location = new System.Drawing.Point(348, 303);
             this.CBCategoriaProducto.Name = "CBCategoriaProducto";
             this.CBCategoriaProducto.Size = new System.Drawing.Size(356, 24);
             this.CBCategoriaProducto.TabIndex = 36;
-            this.CBCategoriaProducto.SelectedIndexChanged += new System.EventHandler(this.CBCategoriaProducto_SelectedIndexChanged);
+            this.CBCategoriaProducto.SelectedIndexChanged += new System.EventHandler(this.CBCategoriaProducto_SelectedIndexChanged_1);
             this.CBCategoriaProducto.Validating += new System.ComponentModel.CancelEventHandler(this.TBCategoriaProducto_Validating);
             // 
             // DTFechaModifProd
@@ -178,8 +172,6 @@ namespace Antorena_Soto.CPresentacion.Gerente
             this.DTFechaModifProd.Name = "DTFechaModifProd";
             this.DTFechaModifProd.Size = new System.Drawing.Size(346, 22);
             this.DTFechaModifProd.TabIndex = 35;
-            this.DTFechaModifProd.ValueChanged += new System.EventHandler(this.DTFechaModifProd_ValueChanged);
-            this.DTFechaModifProd.Validating += new System.ComponentModel.CancelEventHandler(this.DTFechaModifProd_Validating);
             // 
             // LFechaModificacionProd
             // 
@@ -197,7 +189,7 @@ namespace Antorena_Soto.CPresentacion.Gerente
             this.BAgregarProducto.BackColor = System.Drawing.Color.DarkGray;
             this.BAgregarProducto.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BAgregarProducto.ForeColor = System.Drawing.Color.Black;
-            this.BAgregarProducto.Location = new System.Drawing.Point(442, 634);
+            this.BAgregarProducto.Location = new System.Drawing.Point(442, 633);
             this.BAgregarProducto.Name = "BAgregarProducto";
             this.BAgregarProducto.Size = new System.Drawing.Size(191, 40);
             this.BAgregarProducto.TabIndex = 25;
@@ -213,8 +205,6 @@ namespace Antorena_Soto.CPresentacion.Gerente
             this.TBStockProducto.Name = "TBStockProducto";
             this.TBStockProducto.Size = new System.Drawing.Size(346, 30);
             this.TBStockProducto.TabIndex = 24;
-            this.TBStockProducto.TextChanged += new System.EventHandler(this.TBStockProducto_TextChanged);
-            this.TBStockProducto.Validating += new System.ComponentModel.CancelEventHandler(this.TBStockProducto_Validating);
             // 
             // LStockProducto
             // 
@@ -226,7 +216,6 @@ namespace Antorena_Soto.CPresentacion.Gerente
             this.LStockProducto.Size = new System.Drawing.Size(70, 23);
             this.LStockProducto.TabIndex = 23;
             this.LStockProducto.Text = "Stock";
-            this.LStockProducto.Click += new System.EventHandler(this.LStockProducto_Click);
             // 
             // LImagenProducto
             // 
@@ -247,8 +236,6 @@ namespace Antorena_Soto.CPresentacion.Gerente
             this.TBPrecioProducto.Name = "TBPrecioProducto";
             this.TBPrecioProducto.Size = new System.Drawing.Size(346, 30);
             this.TBPrecioProducto.TabIndex = 20;
-            this.TBPrecioProducto.TextChanged += new System.EventHandler(this.TBPrecioProducto_TextChanged);
-            this.TBPrecioProducto.Validating += new System.ComponentModel.CancelEventHandler(this.TBPrecioProducto_Validating);
             // 
             // LPrecioProducto
             // 
@@ -260,7 +247,6 @@ namespace Antorena_Soto.CPresentacion.Gerente
             this.LPrecioProducto.Size = new System.Drawing.Size(82, 23);
             this.LPrecioProducto.TabIndex = 18;
             this.LPrecioProducto.Text = "Precio";
-            this.LPrecioProducto.Click += new System.EventHandler(this.LPrecioProducto_Click);
             // 
             // LCategoriaProducto
             // 
@@ -281,8 +267,6 @@ namespace Antorena_Soto.CPresentacion.Gerente
             this.TBDescripcionProducto.Name = "TBDescripcionProducto";
             this.TBDescripcionProducto.Size = new System.Drawing.Size(668, 30);
             this.TBDescripcionProducto.TabIndex = 16;
-            this.TBDescripcionProducto.TextChanged += new System.EventHandler(this.TBDescripcionProducto_TextChanged);
-            this.TBDescripcionProducto.Validating += new System.ComponentModel.CancelEventHandler(this.TBNombreProductos_Validating);
             // 
             // LDescripcionProducto
             // 
@@ -303,8 +287,7 @@ namespace Antorena_Soto.CPresentacion.Gerente
             this.TBNombreProducto.Name = "TBNombreProducto";
             this.TBNombreProducto.Size = new System.Drawing.Size(676, 30);
             this.TBNombreProducto.TabIndex = 14;
-            this.TBNombreProducto.TextChanged += new System.EventHandler(this.TBNombreProducto_TextChanged);
-            this.TBNombreProducto.Validating += new System.ComponentModel.CancelEventHandler(this.TBNombreProductos_Validating);
+            this.TBNombreProducto.TextChanged += new System.EventHandler(this.TBNombreProducto_TextChanged_1);
             // 
             // LNombreProducto
             // 
@@ -326,7 +309,6 @@ namespace Antorena_Soto.CPresentacion.Gerente
             this.panelProd.Name = "panelProd";
             this.panelProd.Size = new System.Drawing.Size(755, 718);
             this.panelProd.TabIndex = 3;
-            this.panelProd.Paint += new System.Windows.Forms.PaintEventHandler(this.panelProd_Paint);
             // 
             // AltaProductos
             // 

@@ -1,0 +1,168 @@
+﻿using Antorena_Soto.CPresentacion.Administrador;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+
+namespace Antorena_Soto.CDatos
+{
+    public class CD_Producto
+    {
+        private readonly string conexionString;
+
+        public CD_Producto(string conexionString)
+        {
+            this.conexionString = conexionString;
+        }
+
+      
+        // LISTAR PRODUCTOS (TODOS o solo activos)
+     
+        public DataTable ListarProductos(bool soloActivos = true)
+        {
+            using (SqlConnection conn = new SqlConnection(conexionString))
+            {
+                string query = soloActivos
+                    ? "SELECT * FROM Producto WHERE estado_prod = 1"
+                    : "SELECT * FROM Producto";
+
+                SqlDataAdapter da = new SqlDataAdapter(query, conn);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+            }
+        }
+
+        // INSERTAR PRODUCTO BD
+        public bool InsertarProducto(string nombre, int codigo, int categoria, decimal precio,
+                                     string descripcion, int stock, bool estado,
+                                     DateTime fechaModif, byte[] imagen)
+        {
+            using (SqlConnection conn = new SqlConnection(conexionString))
+            {
+                string query = @"INSERT INTO Producto 
+                                 (nombre_prod, codigo_prod, estado_prod, descripcion_prod, 
+                                  categoria_prod, precio_prod, stock_prod, imagen_prod, fechaModif_prod)
+                                 VALUES 
+                                 (@nombre, @codigo, @estado, @descripcion, 
+                                  @categoria, @precio, @stock, @imagen, @fechaModif)";
+
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@nombre", nombre);
+                cmd.Parameters.AddWithValue("@codigo", codigo);
+                cmd.Parameters.AddWithValue("@estado", estado);
+                cmd.Parameters.AddWithValue("@descripcion", descripcion);
+                cmd.Parameters.AddWithValue("@categoria", categoria);
+                cmd.Parameters.AddWithValue("@precio", precio);
+                cmd.Parameters.AddWithValue("@stock", stock);
+                cmd.Parameters.AddWithValue("@fechaModif", fechaModif);
+
+                if (imagen != null)
+                    cmd.Parameters.Add("@imagen", SqlDbType.VarBinary).Value = imagen;
+                else
+                    cmd.Parameters.Add("@imagen", SqlDbType.VarBinary).Value = DBNull.Value;
+
+                conn.Open();
+                return cmd.ExecuteNonQuery() > 0;
+            }
+        }
+
+        //LISTAR PRODUCTOS FUNCION CON BD
+        public DataTable ListarProductosBD()
+        {
+            try
+            {
+                using (SqlConnection conexionSql = new SqlConnection(conexionString))
+                {
+                    string consulta = @"SELECT nombre_prod, codigo_prod, estado_prod, descripcion_prod, categoria_prod, precio_prod, stock_prod fechaModif_prod 
+                                        FROM Producto ";
+                    SqlCommand comandoSql = new SqlCommand(consulta, conexionSql);
+                    SqlDataAdapter adaptador = new SqlDataAdapter(comandoSql);
+                    DataTable tablaProducto = new DataTable();
+                    adaptador.Fill(tablaProducto);
+                    return tablaProducto;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al listar los productos desde la base de datos", ex);
+            }
+        }
+
+
+        // MODIFICAR PRODUCTO
+
+        public bool ModificarProducto(int codigo, string nombre, int categoria, decimal precio,
+                                      string descripcion, int stock, bool estado,
+                                      DateTime fechaModif, byte[] imagen)
+        {
+            using (SqlConnection conn = new SqlConnection(conexionString))
+            {
+                string query = @"UPDATE Producto 
+                                 SET nombre_prod=@nombre,
+                                     categoria_prod=@categoria,
+                                     precio_prod=@precio,
+                                     descripcion_prod=@descripcion,
+                                     stock_prod=@stock,
+                                     estado_prod=@estado,
+                                     fechaModif_prod=@fechaModif,
+                                     imagen_prod=@imagen
+                                 WHERE codigo_prod=@codigo";
+
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@codigo", codigo);
+                cmd.Parameters.AddWithValue("@nombre", nombre);
+                cmd.Parameters.AddWithValue("@categoria", categoria);
+                cmd.Parameters.AddWithValue("@precio", precio);
+                cmd.Parameters.AddWithValue("@descripcion", descripcion);
+                cmd.Parameters.AddWithValue("@stock", stock);
+                cmd.Parameters.AddWithValue("@estado", estado);
+                cmd.Parameters.AddWithValue("@fechaModif", fechaModif);
+
+                if (imagen != null)
+                    cmd.Parameters.Add("@imagen", SqlDbType.VarBinary).Value = imagen;
+                else
+                    cmd.Parameters.Add("@imagen", SqlDbType.VarBinary).Value = DBNull.Value;
+
+                conn.Open();
+                return cmd.ExecuteNonQuery() > 0;
+            }
+        }
+
+      
+        // BAJA LÓGICA DEL PRODUCTO (estado = 0)
+      
+        public bool BajaProducto(int codigo)
+        {
+            using (SqlConnection conn = new SqlConnection(conexionString))
+            {
+                string query = "UPDATE Producto SET estado_prod = 0 WHERE codigo_prod = @codigo";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@codigo", codigo);
+
+                conn.Open();
+                return cmd.ExecuteNonQuery() > 0;
+            }
+        }
+
+
+        // REPORTE DE VENTAS POR PRODUCTO
+      
+        public DataTable ReporteVentas()
+        {
+            using (SqlConnection conn = new SqlConnection(conexionString))
+            {
+                string query = @"SELECT p.nombre_prod AS Producto, 
+                                        SUM(v.cantidad) AS TotalVendido, 
+                                        SUM(v.total) AS TotalImporte
+                                 FROM Venta v
+                                 INNER JOIN Producto p ON v.codigo_prod = p.codigo_prod
+                                 GROUP BY p.nombre_prod";
+                SqlDataAdapter da = new SqlDataAdapter(query, conn);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+            }
+        }
+    }
+}
