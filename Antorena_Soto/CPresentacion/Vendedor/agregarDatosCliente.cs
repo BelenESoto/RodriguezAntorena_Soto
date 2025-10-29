@@ -1,5 +1,4 @@
-﻿using CPresentacion.Vendedor;
-
+﻿using Antorena_Soto.CLogica;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,37 +13,33 @@ namespace Antorena_Soto.CPresentacion.Vendedor
 {
     public partial class agregarDatosCliente : Form
     {
-        private Cliente clienteEnEdicion;  // 🚀 guarda referencia del cliente en edición
-        private bool esEdicion = false;
-        public event EventHandler<ClienteEventArgs> ClienteAgregado;
+        // 1. CREA ESTA PROPIEDAD PÚBLICA
+        // Esta propiedad recibirá la fila desde 'listaClientes'
+        public DataRow ClienteParaEditar { get; set; }
         public agregarDatosCliente()
         {
             InitializeComponent();
         }
 
-        // 🚀 Constructor para EDICIÓN
-        public agregarDatosCliente(Cliente cliente) : this()
-        {
-            esEdicion = true;
-            clienteEnEdicion = cliente;
-
-            // cargar datos del cliente en los textboxes
-            TBNombreCliente.Text = cliente.Nombre;
-            TBDniCliente.Text = cliente.DNI;
-            TBProvinciaCliente.Text = cliente.Provincia;
-            TBCiudadCliente.Text = cliente.Ciudad;
-            TBDomicilioCliente.Text = cliente.Domicilio;
-            TBCuitCliente.Text = cliente.Cuit.ToString();
-            TBNumCliente.Text = cliente.NumeroTelefono;
-            TBCorreoCliente.Text = cliente.Correo;
-            DTFechaModifCliente.Value = cliente.FechaIng;
-
-            // opcional: cambiar el texto del botón para que diga "Guardar cambios"
-            BAgregarCliente.Text = "Guardar cambios";
-        }
+        
         private void agregarDatosCliente_Load(object sender, EventArgs e)
         {
+            // Comprueba si la propiedad 'ClienteParaEditar' fue seteada
+            if (ClienteParaEditar != null)
+            {
+                // MODO EDICIÓN
+                this.Text = "Editar Cliente"; // Opcional: cambia el título del form
+                BAgregarCliente.Text = "Editar Cliente"; // Cambia el texto del botón
 
+                // Carga los datos de la fila en los controles
+                CargarDatosParaEdicion();
+            }
+            else
+            {
+                // MODO AGREGAR
+                this.Text = "Agregar Nuevo Cliente";
+                BAgregarCliente.Text = "Agregar Cliente";
+            }
         }
         //validaciopnes
         private void TBNombreCliente_Validating(object sender, System.ComponentModel.CancelEventArgs e)
@@ -216,78 +211,95 @@ namespace Antorena_Soto.CPresentacion.Vendedor
         {
 
         }
-        protected virtual void OnClienteAgregado(Cliente cliente)
-        {
-            ClienteAgregado?.Invoke(this, new ClienteEventArgs(cliente));
-        }
 
 
          void BAgregarCliente_Click_1(object sender, EventArgs e)
         {
             if (!ValidateChildren())
             {
-                MessageBox.Show("Por favor, corrija los errores antes de continuar.", "Validación",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Por favor, corrija los errores antes de continuar.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             try
             {
-                if (esEdicion)
-                {
-                    // 🚀 actualizar cliente existente
-                    clienteEnEdicion.Nombre = TBNombreCliente.Text.Trim();
-                    clienteEnEdicion.DNI = TBDniCliente.Text.Trim();
-                    clienteEnEdicion.Provincia = TBProvinciaCliente.Text.Trim();
-                    clienteEnEdicion.Ciudad = TBCiudadCliente.Text.Trim();
-                    clienteEnEdicion.Domicilio = TBDomicilioCliente.Text.Trim();
-                    clienteEnEdicion.Cuit = long.Parse(TBCuitCliente.Text.Trim());
-                    clienteEnEdicion.NumeroTelefono = TBNumCliente.Text.Trim();
-                    clienteEnEdicion.Correo = TBCorreoCliente.Text.Trim();
-                    clienteEnEdicion.FechaIng = DTFechaModifCliente.Value;
+                string conexionString = "Data Source=DESKTOP-IDH7B7D\\SQLEXPRESS;Initial Catalog=RodriguezAntorena_Soto;Integrated Security=True";
+                ClienteBLL clienteBLL = new ClienteBLL(conexionString);
 
-                    MessageBox.Show("Cliente actualizado con éxito.", "Éxito",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // --- LÓGICA DE DECISIÓN ---
+                // AHORA COMPRUEBA LA PROPIEDAD PÚBLICA
+                if (ClienteParaEditar == null)
+                {
+                    // MODO AGREGAR
+                    bool ok = clienteBLL.AgregarCliente(
+                        TBNombreCliente.Text.Trim(),
+                        TBDniCliente.Text.Trim(),
+                        // ... (resto de parámetros de agregar) ...
+                        TBProvinciaCliente.Text.Trim(),
+                        TBCiudadCliente.Text.Trim(),
+                        TBDomicilioCliente.Text.Trim(),
+                        long.Parse(TBCuitCliente.Text.Trim()),
+                        long.Parse(TBNumCliente.Text.Trim()),
+                        TBCorreoCliente.Text.Trim(),
+                        DTFechaModifCliente.Value,
+                        1 // Estado Activo
+                    );
+
+                    if (ok)
+                    {
+                        MessageBox.Show("Cliente agregado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se pudo agregar al Cliente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 else
                 {
-                    // 🚀 alta de nuevo cliente
-                    Cliente nuevo = new Cliente
+                    // MODO EDITAR
+                    // Lee el estado actual (o de un control si lo tienes)
+                    int estado = Convert.ToInt32(ClienteParaEditar["estado"]);
+
+                    bool ok = clienteBLL.ActualizarCliente(
+                        TBNombreCliente.Text.Trim(),
+                        TBDniCliente.Text.Trim(), // El DNI (PK) no cambia
+                                                  // ... (resto de parámetros de actualizar) ...
+                        TBProvinciaCliente.Text.Trim(),
+                        TBCiudadCliente.Text.Trim(),
+                        TBDomicilioCliente.Text.Trim(),
+                        long.Parse(TBCuitCliente.Text.Trim()),
+                        long.Parse(TBNumCliente.Text.Trim()),
+                        TBCorreoCliente.Text.Trim(),
+                        DTFechaModifCliente.Value,
+                        estado
+                    );
+
+                    if (ok)
                     {
-                        Nombre = TBNombreCliente.Text.Trim(),
-                        DNI = TBDniCliente.Text.Trim(),
-                        Provincia = TBProvinciaCliente.Text.Trim(),
-                        Ciudad = TBCiudadCliente.Text.Trim(),
-                        Domicilio = TBDomicilioCliente.Text.Trim(),
-                        Cuit = long.Parse(TBCuitCliente.Text.Trim()),
-                        NumeroTelefono = TBNumCliente.Text.Trim(),
-                        Correo = TBCorreoCliente.Text.Trim(),
-                        FechaIng = DTFechaModifCliente.Value
-                    };
-
-                    listaClientes.ListaClientes.Add(nuevo);
-                    MessageBox.Show("Cliente agregado con éxito.", "Éxito",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Cliente actualizado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se pudo actualizar al Cliente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-
-                this.Close(); // cerrar form
+            }
+            catch (FormatException ex)
+            {
+                // ... (tu manejo de excepciones) ...
+                MessageBox.Show("Error de formato: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al guardar cliente: " + ex.Message, "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // ... (tu manejo de excepciones) ...
+                MessageBox.Show("Error al guardar: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        
         }
-        // Clase para pasar información del cliente en el evento
-        public class ClienteEventArgs : EventArgs
-        {
-            public Cliente Cliente { get; }
-
-            public ClienteEventArgs(Cliente cliente)
-            {
-                Cliente = cliente;
-            }
-        }
+        
+     
 
         private void TBNombreCliente_TextChanged_1(object sender, EventArgs e)
         {
@@ -323,7 +335,34 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             }
         }
 
-        
+        private void LAgregarventas_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CargarDatosParaEdicion()
+        {
+            // Este método ahora lee de la PROPIEDAD PÚBLICA
+            if (ClienteParaEditar == null) return;
+
+            TBNombreCliente.Text = Convert.ToString(ClienteParaEditar["nomYApe_cliente"]);
+            TBDniCliente.Text = Convert.ToString(ClienteParaEditar["dni_cliente"]);
+            TBProvinciaCliente.Text = Convert.ToString(ClienteParaEditar["provincia"]);
+            TBCiudadCliente.Text = Convert.ToString(ClienteParaEditar["ciudad"]);
+            TBDomicilioCliente.Text = Convert.ToString(ClienteParaEditar["domicilio"]);
+            TBCuitCliente.Text = Convert.ToString(ClienteParaEditar["cuit"]);
+            TBNumCliente.Text = Convert.ToString(ClienteParaEditar["telefono"]);
+            TBCorreoCliente.Text = Convert.ToString(ClienteParaEditar["correo"]);
+
+            if (ClienteParaEditar["fecha_ingreso"] != DBNull.Value)
+            {
+                DTFechaModifCliente.Value = Convert.ToDateTime(ClienteParaEditar["fecha_ingreso"]);
+            }
+
+            // Importante: Hacer el DNI (PK) de solo lectura
+            TBDniCliente.ReadOnly = true;
+            TBDniCliente.BackColor = System.Drawing.Color.LightGray;
+        }
     } }
 
 

@@ -1,6 +1,6 @@
 ﻿using Antorena_Soto.CPresentacion.Gerente;
 using Antorena_Soto.CPresentacion.Administrador;
-using CPresentacion.Vendedor;
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -34,7 +34,7 @@ namespace Antorena_Soto.CPresentacion.Vendedor
 
  
         private List<Producto> productos;
-        private List<Cliente> listaClientes = new List<Cliente>();
+        
         public static class ListaProductosHelper
         {
         public static List<Producto> listaProductos()
@@ -114,7 +114,13 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             PVendedor2.Controls.Clear();
 
             agregarDatosCliente agregarCliente = new agregarDatosCliente();
+            agregarCliente.TopLevel = false;
+            agregarCliente.FormBorderStyle = FormBorderStyle.None;
+            agregarCliente.Dock = DockStyle.Fill;
 
+            PVendedor2.Controls.Add(agregarCliente);
+            agregarCliente.Show();
+            /*
             // Suscribirse correctamente al evento
             agregarCliente.ClienteAgregado += (s, eArgs) =>
             {
@@ -122,12 +128,7 @@ namespace Antorena_Soto.CPresentacion.Vendedor
                 listaClientes.Add(eArgs.Cliente);
             };
 
-            agregarCliente.TopLevel = false;
-            agregarCliente.FormBorderStyle = FormBorderStyle.None;
-            agregarCliente.Dock = DockStyle.Fill;
-
-            PVendedor2.Controls.Add(agregarCliente);
-            agregarCliente.Show();
+           ;*/
         }
 
         private void BVerInfoCliente_Click(object sender, EventArgs e)

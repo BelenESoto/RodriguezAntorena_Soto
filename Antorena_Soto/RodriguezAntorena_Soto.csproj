@@ -72,6 +72,7 @@
     <Compile Include="CDatos\Cliente.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="CDatos\ClienteController.cs" />
     <Compile Include="CDatos\Detalle_venta.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
@@ -106,6 +107,7 @@
     <Compile Include="CDatos\Usuario.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="CLogica\CN_Cliente.cs" />
     <Compile Include="CLogica\CN_Usuario.cs" />
     <Compile Include="CPresentacion\Administrador\listaProductos.cs">
       <SubType>Form</SubType>
@@ -174,7 +176,6 @@
     <Compile Include="CPresentacion\Vendedor\agregarDatosCliente.Designer.cs">
       <DependentUpon>agregarDatosCliente.cs</DependentUpon>
     </Compile>
-    <Compile Include="CPresentacion\Vendedor\Cliente.cs" />
     <Compile Include="CPresentacion\Vendedor\facturaVenta.cs">
       <SubType>Form</SubType>
     </Compile>

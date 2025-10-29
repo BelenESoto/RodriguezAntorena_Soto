@@ -31,7 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(agregarDatosCliente));
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.LAgregarventas = new System.Windows.Forms.Label();
             this.PAgregarProducto = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.LCuitVendedor = new System.Windows.Forms.Label();
             this.TBCuitCliente = new System.Windows.Forms.TextBox();
             this.LCorreoCliente = new System.Windows.Forms.Label();
@@ -51,8 +53,6 @@
             this.LDescripcionProducto = new System.Windows.Forms.Label();
             this.TBNombreCliente = new System.Windows.Forms.TextBox();
             this.LNombreCliente = new System.Windows.Forms.Label();
-            this.LAgregarventas = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             this.PAgregarProducto.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -72,6 +72,23 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(605, 585);
             this.panel1.TabIndex = 0;
+            // 
+            // LAgregarventas
+            // 
+            this.LAgregarventas.BackColor = System.Drawing.Color.MidnightBlue;
+            this.LAgregarventas.Dock = System.Windows.Forms.DockStyle.Top;
+            this.LAgregarventas.Font = new System.Drawing.Font("SimSun", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LAgregarventas.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.LAgregarventas.Image = ((System.Drawing.Image)(resources.GetObject("LAgregarventas.Image")));
+            this.LAgregarventas.Location = new System.Drawing.Point(0, 0);
+            this.LAgregarventas.Margin = new System.Windows.Forms.Padding(0);
+            this.LAgregarventas.Name = "LAgregarventas";
+            this.LAgregarventas.Padding = new System.Windows.Forms.Padding(8, 3, 3, 3);
+            this.LAgregarventas.Size = new System.Drawing.Size(605, 79);
+            this.LAgregarventas.TabIndex = 13;
+            this.LAgregarventas.Text = "AGREGAR CLIENTE";
+            this.LAgregarventas.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LAgregarventas.Click += new System.EventHandler(this.LAgregarventas_Click);
             // 
             // PAgregarProducto
             // 
@@ -102,6 +119,17 @@
             this.PAgregarProducto.Size = new System.Drawing.Size(595, 609);
             this.PAgregarProducto.TabIndex = 2;
             this.PAgregarProducto.Paint += new System.Windows.Forms.PaintEventHandler(this.PAgregarProducto_Paint);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.AliceBlue;
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.Location = new System.Drawing.Point(395, 378);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(36, 41);
+            this.pictureBox1.TabIndex = 52;
+            this.pictureBox1.TabStop = false;
             // 
             // LCuitVendedor
             // 
@@ -323,33 +351,6 @@
             this.LNombreCliente.Size = new System.Drawing.Size(149, 19);
             this.LNombreCliente.TabIndex = 11;
             this.LNombreCliente.Text = "Nombre Cliente";
-            // 
-            // LAgregarventas
-            // 
-            this.LAgregarventas.BackColor = System.Drawing.Color.MidnightBlue;
-            this.LAgregarventas.Dock = System.Windows.Forms.DockStyle.Top;
-            this.LAgregarventas.Font = new System.Drawing.Font("SimSun", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LAgregarventas.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.LAgregarventas.Image = ((System.Drawing.Image)(resources.GetObject("LAgregarventas.Image")));
-            this.LAgregarventas.Location = new System.Drawing.Point(0, 0);
-            this.LAgregarventas.Margin = new System.Windows.Forms.Padding(0);
-            this.LAgregarventas.Name = "LAgregarventas";
-            this.LAgregarventas.Padding = new System.Windows.Forms.Padding(8, 3, 3, 3);
-            this.LAgregarventas.Size = new System.Drawing.Size(605, 79);
-            this.LAgregarventas.TabIndex = 13;
-            this.LAgregarventas.Text = "AGREGAR CLIENTE";
-            this.LAgregarventas.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.AliceBlue;
-            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(395, 378);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(36, 41);
-            this.pictureBox1.TabIndex = 52;
-            this.pictureBox1.TabStop = false;
             // 
             // agregarDatosCliente
             // 
