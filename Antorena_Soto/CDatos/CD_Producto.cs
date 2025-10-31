@@ -15,9 +15,55 @@ namespace Antorena_Soto.CDatos
             this.conexionString = conexionString;
         }
 
-      
+        //BUSCAR PRODUCTOS BD 
+        public DataTable BuscarProductosBD(string criterio, bool buscarPorCod)
+        {
+            if (string.IsNullOrWhiteSpace(criterio))
+                throw new ArgumentException("Debe ingresar un criterio de búsqueda.");
+
+            try
+            {
+                using (SqlConnection conexionSql = new SqlConnection(conexionString))
+                {
+                    string consulta;
+
+                    if (buscarPorCod)
+                    {
+                
+                        consulta = @"SELECT nombre_prod, codigo_prod, estado_prod, descripcion_prod, 
+                                  categoria_prod, precio_prod, stock_prod, imagen_prod, fechaModif_prod 
+                             FROM Producto WHERE codigo_prod = @criterio ";
+                    }
+                    else
+                    {
+                        consulta = @"SELECT nombre_prod, codigo_prod, estado_prod, descripcion_prod, 
+                                  categoria_prod, precio_prod, stock_prod, imagen_prod, fechaModif_prod 
+                             FROM Producto WHERE nombre_prod LIKE '%' + @criterio + '%'";
+                    }
+
+                    using (SqlCommand comandoSql = new SqlCommand(consulta, conexionSql))
+                    { 
+                        if (buscarPorCod)
+                            comandoSql.Parameters.AddWithValue("@criterio", int.Parse(criterio));
+                        else
+                            comandoSql.Parameters.AddWithValue("@criterio", criterio);
+
+                        using (SqlDataAdapter adaptador = new SqlDataAdapter(comandoSql))
+                        {
+                            DataTable tablaProductos = new DataTable();
+                            adaptador.Fill(tablaProductos);
+                            return tablaProductos;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al buscar usuarios en la base de datos", ex);
+            }
+        }
         // LISTAR PRODUCTOS (TODOS o solo activos)
-     
+
         public DataTable ListarProductos(bool soloActivos = true)
         {
             using (SqlConnection conn = new SqlConnection(conexionString))
@@ -89,6 +135,45 @@ namespace Antorena_Soto.CDatos
             }
         }
 
+        // ELIMINAR PRODUCTO POR CODIGO (BAJA LÓGICA) BD
+        public bool BajaProductoBD(int codigoP)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(conexionString))
+                {
+                    conn.Open();
+                    string query = "UPDATE Producto SET estado_prod = 0 WHERE codigo_prod = @codigo_prod";
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@codigo_prod", codigoP);
+                        int rows = cmd.ExecuteNonQuery();
+                        return rows > 0; // true si eliminó, false si no
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Podés loguear o lanzar una excepción personalizada
+                throw new Exception("Error en BajaProducto ", ex);
+            }
+        }
+
+        // BAJA LÓGICA DEL PRODUCTO (estado = 0)
+
+        public bool BajaProducto(int codigo)
+        {
+            using (SqlConnection conn = new SqlConnection(conexionString))
+            {
+                string query = "UPDATE Producto SET estado_prod = 0 WHERE codigo_prod = @codigo";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@codigo", codigo);
+
+                conn.Open();
+                return cmd.ExecuteNonQuery() > 0;
+            }
+        }
+
 
         // MODIFICAR PRODUCTO
 
@@ -130,20 +215,7 @@ namespace Antorena_Soto.CDatos
         }
 
       
-        // BAJA LÓGICA DEL PRODUCTO (estado = 0)
-      
-        public bool BajaProducto(int codigo)
-        {
-            using (SqlConnection conn = new SqlConnection(conexionString))
-            {
-                string query = "UPDATE Producto SET estado_prod = 0 WHERE codigo_prod = @codigo";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@codigo", codigo);
-
-                conn.Open();
-                return cmd.ExecuteNonQuery() > 0;
-            }
-        }
+     
 
 
         // REPORTE DE VENTAS POR PRODUCTO
