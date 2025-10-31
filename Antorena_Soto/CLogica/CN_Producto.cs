@@ -20,7 +20,7 @@ namespace Antorena_Soto.CLogica
             cd_Producto = new CD_Producto(conexionString); // capa de acceso a datos
         }
 
-            //   ALTA DE PRODUCTO
+            //   ALTA DE PRODUCTO en bd 
 
             public bool AgregarProducto(string nombre, string codigo, string categoria,
                                     string precio, string descripcion, string stock,
@@ -79,23 +79,56 @@ namespace Antorena_Soto.CLogica
              codigoInt, nombre, categoriaInt, precioDec, descripcion, stockInt, estado, fechaModif, imagen);
         }
 
-        //   BAJA LÓGICA (estado = 0)
+        //   BAJA LÓGICA (estado = 0) 
 
         public bool BajaProducto(string codigo)
         {
             if (string.IsNullOrWhiteSpace(codigo) || !int.TryParse(codigo, out int codigoInt) || codigoInt <= 0)
                 throw new ArgumentException("Debe seleccionar un producto válido para dar de baja.");
-            return cd_Producto.BajaProducto(codigoInt);
+            return cd_Producto.BajaProductoBD(codigoInt);
 
         }
 
-        //   LISTAR PRODUCTOS
-    
-        public DataTable ListarProductos()
+        // ELIMINAR PRODUCTO EN BD 
+        public bool BajaProductoBLL(int codigoP)
         {
-            return cd_Producto.ListarProductos();
+            if (codigoP <= 0)
+            {
+                throw new ArgumentException("El codigo no es válido.");
+            }
+            return cd_Producto.BajaProductoBD(codigoP);
         }
 
+        // BUSCAR PRODUCTOS EN BD
+        public DataTable BuscarProductosBLL(string criterio, bool buscarPorCod)
+        {
+            if (string.IsNullOrWhiteSpace(criterio))
+                throw new ArgumentException("Debe ingresar un valor para la búsqueda.");
+
+            return cd_Producto.BuscarProductosBD(criterio, buscarPorCod);
+        }
+
+        // ELIMINAR USUARIO
+        public bool BajaUsuarioBLL(int idUsuario)
+        {
+            // Acá podrías agregar validaciones de negocio antes de llamar al DAL
+            if (idUsuario <= 0)
+            {
+                throw new ArgumentException("El ID de usuario no es válido.");
+            }
+
+            return cd_Producto.BajaProductoBD(idUsuario);
+        }
+    
+
+//   LISTAR PRODUCTOS BD
+
+public DataTable ListarProductos()
+        {
+            return cd_Producto.ListarProductosBD();
+        }
+
+        // este de abajo se va <---
         public List<Productox> ListaProductos()
         {
             DataTable tabla = cd_Producto.ListarProductos(); // devuelve DataTable
