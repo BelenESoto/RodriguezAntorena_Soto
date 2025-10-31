@@ -144,7 +144,6 @@ namespace Antorena_Soto.CPresentacion.SuperAdministrador
         // BOTON DE BUSQUEDA
         private void BTSBusqueda_Click(object sender, EventArgs e)
         {
-            
             try
             {
                 string criterio = TBBuscador.Text.Trim();
@@ -248,8 +247,14 @@ namespace Antorena_Soto.CPresentacion.SuperAdministrador
 
         }
 
-       
+        private void DGVListaUsuario_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
 
-        
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

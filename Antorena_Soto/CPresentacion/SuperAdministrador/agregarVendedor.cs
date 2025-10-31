@@ -335,6 +335,11 @@ namespace Antorena_Soto.CPresentacion.Gerente
         {
 
         }
+
+        private void LAgregarventas_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
     

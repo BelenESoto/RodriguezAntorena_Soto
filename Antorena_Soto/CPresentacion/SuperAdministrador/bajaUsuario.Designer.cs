@@ -73,9 +73,9 @@
             this.LBuscarPor,
             this.TBBuscador,
             this.BTSBusqueda});
-            this.TBuscador.Location = new System.Drawing.Point(0, 79);
+            this.TBuscador.Location = new System.Drawing.Point(0, 100);
             this.TBuscador.Name = "TBuscador";
-            this.TBuscador.Size = new System.Drawing.Size(580, 84);
+            this.TBuscador.Size = new System.Drawing.Size(773, 103);
             this.TBuscador.TabIndex = 5;
             this.TBuscador.Text = "toolStrip1";
             this.TBuscador.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
@@ -90,39 +90,39 @@
             this.BBuscarPor.Image = ((System.Drawing.Image)(resources.GetObject("BBuscarPor.Image")));
             this.BBuscarPor.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.BBuscarPor.Name = "BBuscarPor";
-            this.BBuscarPor.Size = new System.Drawing.Size(103, 81);
+            this.BBuscarPor.Size = new System.Drawing.Size(135, 100);
             this.BBuscarPor.Text = "BUSCAR POR";
             this.BBuscarPor.ButtonClick += new System.EventHandler(this.BBuscarPor_ButtonClick);
             // 
             // BTSDni
             // 
             this.BTSDni.Name = "BTSDni";
-            this.BTSDni.Size = new System.Drawing.Size(193, 22);
+            this.BTSDni.Size = new System.Drawing.Size(247, 28);
             this.BTSDni.Text = "DNI";
             this.BTSDni.Click += new System.EventHandler(this.BTSDni_Click);
             // 
             // BTSNomYApe
             // 
             this.BTSNomYApe.Name = "BTSNomYApe";
-            this.BTSNomYApe.Size = new System.Drawing.Size(193, 22);
+            this.BTSNomYApe.Size = new System.Drawing.Size(247, 28);
             this.BTSNomYApe.Text = "Apellido y Nombre";
             this.BTSNomYApe.Click += new System.EventHandler(this.BTSNomyApe_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 84);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 103);
             // 
             // LBuscarPor
             // 
             this.LBuscarPor.Name = "LBuscarPor";
-            this.LBuscarPor.Size = new System.Drawing.Size(0, 81);
+            this.LBuscarPor.Size = new System.Drawing.Size(0, 100);
             // 
             // TBBuscador
             // 
             this.TBBuscador.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.TBBuscador.Name = "TBBuscador";
-            this.TBBuscador.Size = new System.Drawing.Size(276, 84);
+            this.TBBuscador.Size = new System.Drawing.Size(367, 103);
             this.TBBuscador.Click += new System.EventHandler(this.TBuscadorAdmin_Click);
             // 
             // BTSBusqueda
@@ -143,10 +143,12 @@
             this.panel1.Controls.Add(this.LDatosBajaUs);
             this.panel1.Controls.Add(this.DGVListaUsuario);
             this.panel1.Controls.Add(this.BBorrar);
-            this.panel1.Location = new System.Drawing.Point(0, 166);
+            this.panel1.Location = new System.Drawing.Point(0, 204);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(580, 408);
+            this.panel1.Size = new System.Drawing.Size(773, 502);
             this.panel1.TabIndex = 6;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // LDatosBajaUs
             // 
@@ -154,10 +156,9 @@
             this.LDatosBajaUs.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LDatosBajaUs.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LDatosBajaUs.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.LDatosBajaUs.Location = new System.Drawing.Point(2, 47);
-            this.LDatosBajaUs.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.LDatosBajaUs.Location = new System.Drawing.Point(3, 58);
             this.LDatosBajaUs.Name = "LDatosBajaUs";
-            this.LDatosBajaUs.Size = new System.Drawing.Size(572, 64);
+            this.LDatosBajaUs.Size = new System.Drawing.Size(762, 78);
             this.LDatosBajaUs.TabIndex = 10;
             this.LDatosBajaUs.Text = "DATOS USUARIO";
             this.LDatosBajaUs.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -179,13 +180,14 @@
             this.FechaIng,
             this.TipoUsuario,
             this.Estado});
-            this.DGVListaUsuario.Location = new System.Drawing.Point(0, 114);
-            this.DGVListaUsuario.Margin = new System.Windows.Forms.Padding(2);
+            this.DGVListaUsuario.Location = new System.Drawing.Point(0, 140);
+            this.DGVListaUsuario.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.DGVListaUsuario.Name = "DGVListaUsuario";
             this.DGVListaUsuario.RowHeadersWidth = 51;
             this.DGVListaUsuario.RowTemplate.Height = 24;
-            this.DGVListaUsuario.Size = new System.Drawing.Size(574, 87);
+            this.DGVListaUsuario.Size = new System.Drawing.Size(765, 107);
             this.DGVListaUsuario.TabIndex = 9;
+            this.DGVListaUsuario.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGVListaUsuario_CellContentClick);
             // 
             // Dni
             // 
@@ -279,7 +281,9 @@
             // 
             this.Estado.DataPropertyName = "Estado";
             this.Estado.HeaderText = "Estado";
+            this.Estado.MinimumWidth = 6;
             this.Estado.Name = "Estado";
+            this.Estado.Width = 125;
             // 
             // BBorrar
             // 
@@ -287,9 +291,10 @@
             this.BBorrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BBorrar.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BBorrar.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.BBorrar.Location = new System.Drawing.Point(209, 252);
+            this.BBorrar.Location = new System.Drawing.Point(279, 310);
+            this.BBorrar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.BBorrar.Name = "BBorrar";
-            this.BBorrar.Size = new System.Drawing.Size(165, 68);
+            this.BBorrar.Size = new System.Drawing.Size(220, 84);
             this.BBorrar.TabIndex = 8;
             this.BBorrar.Text = "ELIMINAR";
             this.BBorrar.UseVisualStyleBackColor = false;
@@ -301,9 +306,10 @@
             this.panel2.Controls.Add(this.LAgregarventas);
             this.panel2.Controls.Add(this.panel1);
             this.panel2.Controls.Add(this.TBuscador);
-            this.panel2.Location = new System.Drawing.Point(2, 0);
+            this.panel2.Location = new System.Drawing.Point(3, 0);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(595, 609);
+            this.panel2.Size = new System.Drawing.Size(793, 750);
             this.panel2.TabIndex = 7;
             // 
             // LAgregarventas
@@ -316,19 +322,20 @@
             this.LAgregarventas.Location = new System.Drawing.Point(0, 0);
             this.LAgregarventas.Margin = new System.Windows.Forms.Padding(0);
             this.LAgregarventas.Name = "LAgregarventas";
-            this.LAgregarventas.Padding = new System.Windows.Forms.Padding(8, 3, 3, 3);
-            this.LAgregarventas.Size = new System.Drawing.Size(595, 79);
+            this.LAgregarventas.Padding = new System.Windows.Forms.Padding(11, 4, 4, 4);
+            this.LAgregarventas.Size = new System.Drawing.Size(793, 97);
             this.LAgregarventas.TabIndex = 13;
             this.LAgregarventas.Text = "BAJA USUARIO";
             this.LAgregarventas.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // bajaUsuario
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Lavender;
-            this.ClientSize = new System.Drawing.Size(579, 570);
+            this.ClientSize = new System.Drawing.Size(772, 702);
             this.Controls.Add(this.panel2);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "bajaUsuario";
             this.Text = "bajaUsuario";
             this.Load += new System.EventHandler(this.bajaUsuario_Load_1);
