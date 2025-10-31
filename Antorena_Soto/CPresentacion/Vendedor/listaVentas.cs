@@ -81,7 +81,7 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             {
                 case "codigo":
                     resultados = ListaVentas.Where(v =>
-                        v.Codigo_Venta != null &&
+                        v.Codigo_Venta != 0 &&
                         v.Codigo_Venta.ToString().Contains(valorBusqueda));
                     break;
 
