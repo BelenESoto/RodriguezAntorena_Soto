@@ -21,5 +21,10 @@ namespace Antorena_Soto.CPresentacion.Vendedor
         {
 
         }
+
+        private void facturaVenta_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
