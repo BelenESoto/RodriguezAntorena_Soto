@@ -1,4 +1,5 @@
-﻿using Antorena_Soto.CLogica;
+﻿using Antorena_Soto.CDatos;
+using Antorena_Soto.CLogica;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,25 +8,25 @@ using System.Drawing;
 using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
-using System.Windows.Forms;
 using System.Threading.Tasks;
+using System.Windows.Forms;
  
        
 namespace Antorena_Soto.CPresentacion.Administrador
-{
-    public partial class listaProductos : Form
+{ 
+    //    private bool buscarPorCodigo = true;
+        public partial class listaProductos : Form
     {
-       // private enum TipoBusqueda { None, Codigo, Nombre } //donde esta
-      //  private TipoBusqueda tipoBusquedaSeleccionado = TipoBusqueda.None;
 
         private readonly CN_Producto cn_Producto;
+        private bool buscarPorCod = true;
+        private string _modo = "Codigo";
 
         private List<Productox> _productos; // lista de productos borrar
-        private string _modo;       // "Ver" o "Editar" borrar
         
         private bool textoLimpiado = false; 
         private string textoAImprimir; 
-        private PrintDocument printDocument; 
+        private PrintDocument printDocument;
 
         public listaProductos()
         {
@@ -196,6 +197,7 @@ namespace Antorena_Soto.CPresentacion.Administrador
         private void toolCodigoProd_Click(object sender, EventArgs e)
         {
             _modo = "Codigo";
+            buscarPorCod = true;
             BBuscarProducto.Text = "Buscar por: Código";
             TBBuscarProducto.Clear();
             textoLimpiado = false;
@@ -204,11 +206,46 @@ namespace Antorena_Soto.CPresentacion.Administrador
         private void toolNombreProd_Click(object sender, EventArgs e)
         {
             _modo = "Nombre";
+            buscarPorCod = false;
             BBuscarProducto.Text = "Buscar por: Nombre";
             TBBuscarProducto.Clear();
             textoLimpiado = false;
         }
 
+        // BOTON DE BUSQUEDA
+        private void BTSBusquedaProdBD_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string criterio = TBBuscarProducto.Text.Trim();
+
+                if (string.IsNullOrWhiteSpace(criterio))
+                {
+                    MessageBox.Show("Ingrese un valor para buscar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                // Si buscamos por codigo, validar que sea numérico
+                if (buscarPorCod && !int.TryParse(criterio, out int _))
+                {
+                    MessageBox.Show("Ingrese un Codigo válido.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                    // Limpiar DataGridView antes de buscar
+                    DGVListaProd.DataSource = null;
+
+                DataTable resultado = this.cn_Producto.BuscarProductosBLL(criterio, buscarPorCod);
+                DGVListaProd.DataSource = resultado;
+
+                if (resultado.Rows.Count == 0)
+                    MessageBox.Show("No se encontraron productos con ese criterio.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al buscar producto: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+/*
         private void BTSBusquedaProd_Click(object sender, EventArgs e)
         {
             string criterio = TBBuscarProducto.Text.Trim();
@@ -266,7 +303,7 @@ namespace Antorena_Soto.CPresentacion.Administrador
                 );
             }
         }
-
+*/
 
         private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
@@ -317,6 +354,63 @@ namespace Antorena_Soto.CPresentacion.Administrador
                 }
             }
         }
+
+        
+        //BORRAR PRODUCTO DE LA BD 
+        private void BEliminarProdBD_Click(object sender, EventArgs e)
+        {
+            if (DGVListaProd.CurrentRow == null)
+            {
+                MessageBox.Show("Seleccione un producto de la lista para borrar.",
+                                "Advertencia",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return;
+            }
+            // Tomar el valor de la celda "Codigo"
+            int codigo_prod = Convert.ToInt32(DGVListaProd.CurrentRow.Cells["codigo_prod"].Value);
+
+            DialogResult confirmacion = MessageBox.Show(
+                "¿Seguro que desea eliminar a este Producto?",
+                "Confirmar eliminación",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
+
+            if (confirmacion == DialogResult.Yes)
+            {
+                try
+                {
+                    bool eliminado = cn_Producto.BajaProductoBLL(codigo_prod);
+
+                    if (eliminado)
+                    {
+                        MessageBox.Show("Producto eliminado correctamente.",
+                                        "Éxito",
+                                        MessageBoxButtons.OK,
+                                        MessageBoxIcon.Information);
+
+                        DataTable productoActualizado = cn_Producto.BuscarProductosBLL(codigo_prod.ToString(), true);
+                        DGVListaProd.DataSource = productoActualizado;
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se pudo eliminar el producto.",
+                                        "Error",
+                                        MessageBoxButtons.OK,
+                                        MessageBoxIcon.Error);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error al eliminar producto: {ex.Message}",
+                                    "Error",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Error);
+                }
+            }
+        }
+
 
         private void bImprimir_Click(object sender, EventArgs e)
         {

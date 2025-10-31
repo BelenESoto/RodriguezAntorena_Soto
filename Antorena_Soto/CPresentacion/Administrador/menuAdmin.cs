@@ -14,7 +14,7 @@ namespace Antorena_Soto.CPresentacion.Administrador
     public partial class menuAdmin : Form
     {
         private Form _formActual = null;
-        private string conexion = "Data Source=DESKTOP-IDH7B7D\\SQLEXPRESS;Initial Catalog=RodriguezAntorena_Soto;Integrated Security=True";
+        string conexionString = "Data Source=HP-BELENS\\SQLEXPRESS;Initial Catalog=RodriguezAntorena_Soto;Integrated Security=True";
 
         public menuAdmin()
         {
@@ -46,15 +46,25 @@ namespace Antorena_Soto.CPresentacion.Administrador
 
         }
 
-        // Listar productos
+        // Listar productos QUEDA <--
         private void BTListaProductosBD_Click_1(object sender, EventArgs e)
         {
             var form = new listaProductos();
+
+            // oculta el botón de eliminar y editar
+            var botonEliminar = form.Controls.Find("BEliminarProd", true).FirstOrDefault();
+            var botonEditar = form.Controls.Find("BEditarProd", true).FirstOrDefault();
+
+            if (botonEliminar != null && botonEditar != null)
+                botonEliminar.Visible = false;
+            botonEditar.Visible = false;
             AbrirFormularioEnPanel(form);
 
             form.CargarProductosBD();
         }
 
+
+        // SE VA <--
         private void BListarProductos_Click(object sender, EventArgs e)
         {
             try
@@ -98,16 +108,16 @@ namespace Antorena_Soto.CPresentacion.Administrador
         {
             try
             {
-                CN_Producto productoBLL = new CN_Producto(conexion);
+                CN_Producto productoBLL = new CN_Producto(conexionString);
 
-                // Traemos los productos como DataTable
                 DataTable dt = productoBLL.ListarProductos();
 
                 // Convertimos DataTable a List<Productox>
                 List<Productox> lista = dt.AsEnumerable().Select(fila => new Productox
                 {
-                    Codigo = Convert.ToInt32(fila["Codigo"]),
+
                     Nombre = fila["Nombre"].ToString(),
+                    Codigo = Convert.ToInt32(fila["Codigo"]),
                     Categoria = fila["Categoria"].ToString(), // si Productox.Categoria es int, usar Convert.ToInt32
                     Precio = Convert.ToDecimal(fila["Precio"]),
                     Stock = Convert.ToInt32(fila["Stock"]),
@@ -168,8 +178,23 @@ namespace Antorena_Soto.CPresentacion.Administrador
 
         }
 
-       
+        private void bEliminarProductoBD_Click(object sender, EventArgs e)
+        {
+            var form = new listaProductos();
+            // oculta el botón de imprimir y editar 
+            var botonImprimir = form.Controls.Find("bImprimir", true).FirstOrDefault();
+            var botonEditar = form.Controls.Find("BEditarProd", true).FirstOrDefault();
 
+            if (botonImprimir != null && botonEditar != null)
+                botonImprimir.Visible = false;
+            botonEditar.Visible = false;
+            AbrirFormularioEnPanel(form);
+
+            form.CargarProductosBD();
+
+        }
     }
 }
+    
+
 

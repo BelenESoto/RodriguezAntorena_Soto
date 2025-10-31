@@ -40,6 +40,7 @@
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.PAdmin = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.bEliminarProducto = new System.Windows.Forms.Button();
             this.PGerente1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -49,6 +50,7 @@
             // 
             this.PGerente1.BackColor = System.Drawing.Color.MidnightBlue;
             this.PGerente1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PGerente1.Controls.Add(this.bEliminarProducto);
             this.PGerente1.Controls.Add(this.btEstadVenta);
             this.PGerente1.Controls.Add(this.BVerReportes);
             this.PGerente1.Controls.Add(this.pAdmin2);
@@ -118,7 +120,7 @@
             // BListarProductos
             // 
             this.BListarProductos.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Bold);
-            this.BListarProductos.Location = new System.Drawing.Point(27, 360);
+            this.BListarProductos.Location = new System.Drawing.Point(27, 287);
             this.BListarProductos.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BListarProductos.Name = "BListarProductos";
             this.BListarProductos.Size = new System.Drawing.Size(240, 61);
@@ -130,7 +132,7 @@
             // BEditarProducto
             // 
             this.BEditarProducto.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BEditarProducto.Location = new System.Drawing.Point(27, 460);
+            this.BEditarProducto.Location = new System.Drawing.Point(27, 371);
             this.BEditarProducto.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BEditarProducto.Name = "BEditarProducto";
             this.BEditarProducto.Size = new System.Drawing.Size(240, 65);
@@ -142,7 +144,7 @@
             // BAltaProductos
             // 
             this.BAltaProductos.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Bold);
-            this.BAltaProductos.Location = new System.Drawing.Point(27, 253);
+            this.BAltaProductos.Location = new System.Drawing.Point(27, 203);
             this.BAltaProductos.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BAltaProductos.Name = "BAltaProductos";
             this.BAltaProductos.Size = new System.Drawing.Size(240, 62);
@@ -182,6 +184,18 @@
             this.panel1.Size = new System.Drawing.Size(850, 765);
             this.panel1.TabIndex = 0;
             // 
+            // bEliminarProducto
+            // 
+            this.bEliminarProducto.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Bold);
+            this.bEliminarProducto.Location = new System.Drawing.Point(27, 456);
+            this.bEliminarProducto.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.bEliminarProducto.Name = "bEliminarProducto";
+            this.bEliminarProducto.Size = new System.Drawing.Size(240, 61);
+            this.bEliminarProducto.TabIndex = 11;
+            this.bEliminarProducto.Text = "Eliminar Productos";
+            this.bEliminarProducto.UseVisualStyleBackColor = true;
+            this.bEliminarProducto.Click += new System.EventHandler(this.bEliminarProductoBD_Click);
+            // 
             // menuAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -219,5 +233,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button BVerReportes;
         private System.Windows.Forms.Button btEstadVenta;
+        private System.Windows.Forms.Button bEliminarProducto;
     }
 }

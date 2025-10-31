@@ -42,6 +42,15 @@
             this.BTSBusquedaProd = new FontAwesome.Sharp.IconButton();
             this.bImprimir = new System.Windows.Forms.Button();
             this.LAgregarventas = new System.Windows.Forms.Label();
+            this.Nombre_prod = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.codigo_prod = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.estado_prod = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descripcion_prod = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.categoria_prod = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.precio_prod = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.stock_prod = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.imagen_prod = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fechaModif_prod = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DGVListaProd)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -50,6 +59,16 @@
             // 
             this.DGVListaProd.BackgroundColor = System.Drawing.Color.Gainsboro;
             this.DGVListaProd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGVListaProd.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Nombre_prod,
+            this.codigo_prod,
+            this.estado_prod,
+            this.descripcion_prod,
+            this.categoria_prod,
+            this.precio_prod,
+            this.stock_prod,
+            this.imagen_prod,
+            this.fechaModif_prod});
             this.DGVListaProd.Location = new System.Drawing.Point(9, 196);
             this.DGVListaProd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.DGVListaProd.Name = "DGVListaProd";
@@ -85,7 +104,7 @@
             this.BEliminarProd.TabIndex = 3;
             this.BEliminarProd.Text = "ELIMINAR";
             this.BEliminarProd.UseVisualStyleBackColor = false;
-            this.BEliminarProd.Click += new System.EventHandler(this.BEliminarProd_Click);
+            this.BEliminarProd.Click += new System.EventHandler(this.BEliminarProdBD_Click);
             // 
             // toolStrip1
             // 
@@ -170,7 +189,7 @@
             this.BTSBusquedaProd.TabIndex = 9;
             this.BTSBusquedaProd.Text = "Buscar";
             this.BTSBusquedaProd.UseVisualStyleBackColor = false;
-            this.BTSBusquedaProd.Click += new System.EventHandler(this.BTSBusquedaProd_Click);
+            this.BTSBusquedaProd.Click += new System.EventHandler(this.BTSBusquedaProdBD_Click);
             // 
             // bImprimir
             // 
@@ -202,6 +221,78 @@
             this.LAgregarventas.Text = "INFORMACIÓN PRODUCTO";
             this.LAgregarventas.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.LAgregarventas.Click += new System.EventHandler(this.LAgregarventas_Click);
+            // 
+            // Nombre_prod
+            // 
+            this.Nombre_prod.DataPropertyName = "nombre_prod";
+            this.Nombre_prod.HeaderText = "Nombre";
+            this.Nombre_prod.MinimumWidth = 6;
+            this.Nombre_prod.Name = "Nombre_prod";
+            this.Nombre_prod.Width = 125;
+            // 
+            // codigo_prod
+            // 
+            this.codigo_prod.DataPropertyName = "codigo_prod";
+            this.codigo_prod.HeaderText = "Codigo";
+            this.codigo_prod.MinimumWidth = 6;
+            this.codigo_prod.Name = "codigo_prod";
+            this.codigo_prod.Width = 125;
+            // 
+            // estado_prod
+            // 
+            this.estado_prod.DataPropertyName = "estado_prod";
+            this.estado_prod.HeaderText = "Estado";
+            this.estado_prod.MinimumWidth = 6;
+            this.estado_prod.Name = "estado_prod";
+            this.estado_prod.Width = 125;
+            // 
+            // descripcion_prod
+            // 
+            this.descripcion_prod.DataPropertyName = "descripcion_prod";
+            this.descripcion_prod.HeaderText = "Descripcion";
+            this.descripcion_prod.MinimumWidth = 6;
+            this.descripcion_prod.Name = "descripcion_prod";
+            this.descripcion_prod.Width = 125;
+            // 
+            // categoria_prod
+            // 
+            this.categoria_prod.DataPropertyName = "categoria_prod";
+            this.categoria_prod.HeaderText = "Categoria";
+            this.categoria_prod.MinimumWidth = 6;
+            this.categoria_prod.Name = "categoria_prod";
+            this.categoria_prod.Width = 125;
+            // 
+            // precio_prod
+            // 
+            this.precio_prod.DataPropertyName = "precio_prod";
+            this.precio_prod.HeaderText = "Precio";
+            this.precio_prod.MinimumWidth = 6;
+            this.precio_prod.Name = "precio_prod";
+            this.precio_prod.Width = 125;
+            // 
+            // stock_prod
+            // 
+            this.stock_prod.DataPropertyName = "stock_prod";
+            this.stock_prod.HeaderText = "Stock";
+            this.stock_prod.MinimumWidth = 6;
+            this.stock_prod.Name = "stock_prod";
+            this.stock_prod.Width = 125;
+            // 
+            // imagen_prod
+            // 
+            this.imagen_prod.DataPropertyName = "imagen_prod";
+            this.imagen_prod.HeaderText = "Imagen";
+            this.imagen_prod.MinimumWidth = 6;
+            this.imagen_prod.Name = "imagen_prod";
+            this.imagen_prod.Width = 125;
+            // 
+            // fechaModif_prod
+            // 
+            this.fechaModif_prod.DataPropertyName = "fechaModif_prod";
+            this.fechaModif_prod.HeaderText = "Fecha Modif";
+            this.fechaModif_prod.MinimumWidth = 6;
+            this.fechaModif_prod.Name = "fechaModif_prod";
+            this.fechaModif_prod.Width = 125;
             // 
             // listaProductos
             // 
@@ -243,5 +334,14 @@
         private System.Windows.Forms.Button bImprimir;
         private System.Windows.Forms.ToolStripTextBox TBBuscarProducto;
         public System.Windows.Forms.Label LAgregarventas;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre_prod;
+        private System.Windows.Forms.DataGridViewTextBoxColumn codigo_prod;
+        private System.Windows.Forms.DataGridViewTextBoxColumn estado_prod;
+        private System.Windows.Forms.DataGridViewTextBoxColumn descripcion_prod;
+        private System.Windows.Forms.DataGridViewTextBoxColumn categoria_prod;
+        private System.Windows.Forms.DataGridViewTextBoxColumn precio_prod;
+        private System.Windows.Forms.DataGridViewTextBoxColumn stock_prod;
+        private System.Windows.Forms.DataGridViewTextBoxColumn imagen_prod;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fechaModif_prod;
     }
 }
