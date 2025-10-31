@@ -72,7 +72,7 @@ namespace Antorena_Soto
                 //aca redirigir a ventana admin
                 MessageBox.Show("Abriendo perfil Gerente");
 
-                CPresentacion.Gerente.menuAdmin formGerente = new CPresentacion.Gerente.menuAdmin();
+                CPresentacion.Administrador.menuAdmin formGerente = new CPresentacion.Administrador.menuAdmin();
                 formGerente.Show();
                 this.Hide(); // oculta el formulario actual
             }
