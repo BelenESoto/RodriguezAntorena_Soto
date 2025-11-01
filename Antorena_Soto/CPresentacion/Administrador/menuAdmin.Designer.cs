@@ -1,4 +1,4 @@
-﻿namespace Antorena_Soto.CPresentacion.Gerente
+﻿namespace Antorena_Soto.CPresentacion.Administrador
 {
     partial class menuAdmin
     {
@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.PGerente1 = new System.Windows.Forms.Panel();
+            this.btEstadVenta = new System.Windows.Forms.Button();
+            this.BVerReportes = new System.Windows.Forms.Button();
             this.pAdmin2 = new System.Windows.Forms.Panel();
             this.pAdmin1 = new System.Windows.Forms.Panel();
             this.lAdministrador = new System.Windows.Forms.Label();
@@ -38,8 +40,7 @@
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.PAdmin = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.BVerReportes = new System.Windows.Forms.Button();
-            this.btEstadVenta = new System.Windows.Forms.Button();
+            this.bEliminarProducto = new System.Windows.Forms.Button();
             this.PGerente1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -49,6 +50,7 @@
             // 
             this.PGerente1.BackColor = System.Drawing.Color.MidnightBlue;
             this.PGerente1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PGerente1.Controls.Add(this.bEliminarProducto);
             this.PGerente1.Controls.Add(this.btEstadVenta);
             this.PGerente1.Controls.Add(this.BVerReportes);
             this.PGerente1.Controls.Add(this.pAdmin2);
@@ -63,6 +65,30 @@
             this.PGerente1.Size = new System.Drawing.Size(285, 957);
             this.PGerente1.TabIndex = 0;
             this.PGerente1.Paint += new System.Windows.Forms.PaintEventHandler(this.PGerente1_Paint);
+            // 
+            // btEstadVenta
+            // 
+            this.btEstadVenta.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Bold);
+            this.btEstadVenta.Location = new System.Drawing.Point(27, 662);
+            this.btEstadVenta.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btEstadVenta.Name = "btEstadVenta";
+            this.btEstadVenta.Size = new System.Drawing.Size(240, 61);
+            this.btEstadVenta.TabIndex = 10;
+            this.btEstadVenta.Text = "Reporte de Recaudacion";
+            this.btEstadVenta.UseVisualStyleBackColor = true;
+            this.btEstadVenta.Click += new System.EventHandler(this.btEstadVenta_Click);
+            // 
+            // BVerReportes
+            // 
+            this.BVerReportes.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Bold);
+            this.BVerReportes.Location = new System.Drawing.Point(27, 560);
+            this.BVerReportes.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.BVerReportes.Name = "BVerReportes";
+            this.BVerReportes.Size = new System.Drawing.Size(240, 62);
+            this.BVerReportes.TabIndex = 9;
+            this.BVerReportes.Text = "Reportes de ventas";
+            this.BVerReportes.UseVisualStyleBackColor = true;
+            this.BVerReportes.Click += new System.EventHandler(this.BVerReportes_Click);
             // 
             // pAdmin2
             // 
@@ -90,24 +116,23 @@
             this.lAdministrador.TabIndex = 0;
             this.lAdministrador.Text = "Menu Administrador";
             this.lAdministrador.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lAdministrador.Click += new System.EventHandler(this.lAdministrador_Click);
             // 
             // BListarProductos
             // 
             this.BListarProductos.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Bold);
-            this.BListarProductos.Location = new System.Drawing.Point(27, 360);
+            this.BListarProductos.Location = new System.Drawing.Point(27, 287);
             this.BListarProductos.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BListarProductos.Name = "BListarProductos";
             this.BListarProductos.Size = new System.Drawing.Size(240, 61);
             this.BListarProductos.TabIndex = 8;
             this.BListarProductos.Text = "Listar Productos";
             this.BListarProductos.UseVisualStyleBackColor = true;
-            this.BListarProductos.Click += new System.EventHandler(this.BListarProductos_Click);
+            this.BListarProductos.Click += new System.EventHandler(this.BTListaProductosBD_Click_1);
             // 
             // BEditarProducto
             // 
             this.BEditarProducto.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BEditarProducto.Location = new System.Drawing.Point(27, 460);
+            this.BEditarProducto.Location = new System.Drawing.Point(27, 371);
             this.BEditarProducto.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BEditarProducto.Name = "BEditarProducto";
             this.BEditarProducto.Size = new System.Drawing.Size(240, 65);
@@ -119,7 +144,7 @@
             // BAltaProductos
             // 
             this.BAltaProductos.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Bold);
-            this.BAltaProductos.Location = new System.Drawing.Point(27, 253);
+            this.BAltaProductos.Location = new System.Drawing.Point(27, 203);
             this.BAltaProductos.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BAltaProductos.Name = "BAltaProductos";
             this.BAltaProductos.Size = new System.Drawing.Size(240, 62);
@@ -148,7 +173,7 @@
             this.PAdmin.Name = "PAdmin";
             this.PAdmin.Size = new System.Drawing.Size(850, 765);
             this.PAdmin.TabIndex = 1;
-            this.PAdmin.Paint += new System.Windows.Forms.PaintEventHandler(this.PGerente2_Paint);
+            this.PAdmin.Paint += new System.Windows.Forms.PaintEventHandler(this.PAdmin_Paint);
             // 
             // panel1
             // 
@@ -159,29 +184,17 @@
             this.panel1.Size = new System.Drawing.Size(850, 765);
             this.panel1.TabIndex = 0;
             // 
-            // BVerReportes
+            // bEliminarProducto
             // 
-            this.BVerReportes.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Bold);
-            this.BVerReportes.Location = new System.Drawing.Point(27, 560);
-            this.BVerReportes.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.BVerReportes.Name = "BVerReportes";
-            this.BVerReportes.Size = new System.Drawing.Size(240, 62);
-            this.BVerReportes.TabIndex = 9;
-            this.BVerReportes.Text = "Reportes de ventas";
-            this.BVerReportes.UseVisualStyleBackColor = true;
-            this.BVerReportes.Click += new System.EventHandler(this.BVerReportes_Click);
-            // 
-            // btEstadVenta
-            // 
-            this.btEstadVenta.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Bold);
-            this.btEstadVenta.Location = new System.Drawing.Point(27, 662);
-            this.btEstadVenta.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btEstadVenta.Name = "btEstadVenta";
-            this.btEstadVenta.Size = new System.Drawing.Size(240, 61);
-            this.btEstadVenta.TabIndex = 10;
-            this.btEstadVenta.Text = "Reporte de Recaudacion";
-            this.btEstadVenta.UseVisualStyleBackColor = true;
-            this.btEstadVenta.Click += new System.EventHandler(this.btEstadVenta_Click);
+            this.bEliminarProducto.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Bold);
+            this.bEliminarProducto.Location = new System.Drawing.Point(27, 456);
+            this.bEliminarProducto.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.bEliminarProducto.Name = "bEliminarProducto";
+            this.bEliminarProducto.Size = new System.Drawing.Size(240, 61);
+            this.bEliminarProducto.TabIndex = 11;
+            this.bEliminarProducto.Text = "Eliminar Productos";
+            this.bEliminarProducto.UseVisualStyleBackColor = true;
+            this.bEliminarProducto.Click += new System.EventHandler(this.bEliminarProductoBD_Click);
             // 
             // menuAdmin
             // 
@@ -198,7 +211,7 @@
             this.Name = "menuAdmin";
             this.Text = "menuAdmin";
             this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
-            this.Load += new System.EventHandler(this.FormMenuGerente_Load);
+            this.Load += new System.EventHandler(this.menuAdmin_Load);
             this.PGerente1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
             this.panel1.ResumeLayout(false);
@@ -220,5 +233,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button BVerReportes;
         private System.Windows.Forms.Button btEstadVenta;
+        private System.Windows.Forms.Button bEliminarProducto;
     }
 }

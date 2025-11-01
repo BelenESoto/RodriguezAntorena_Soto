@@ -235,7 +235,7 @@ namespace Antorena_Soto.CPresentacion.Gerente
         public string NombreCliente { get; set; }
         public DateTime FechaVenta { get; set; }
         public string NombreVendedor { get; set; }
-        public List<Productox> Productos { get; set; }
+        public List<Producto> Productos { get; set; }
         public decimal Total { get; set; }
     }
 

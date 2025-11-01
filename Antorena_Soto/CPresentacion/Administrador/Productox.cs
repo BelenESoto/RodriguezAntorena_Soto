@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 
-namespace Antorena_Soto.CPresentacion.Gerente
+namespace Antorena_Soto.CPresentacion.Administrador
 {
     public class Productox
     {

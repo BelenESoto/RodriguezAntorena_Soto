@@ -1,5 +1,7 @@
 ﻿using Antorena_Soto.CPresentacion.Gerente;
 using Antorena_Soto.CPresentacion.Vendedor;
+using Antorena_Soto.CPresentacion.Administrador;
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

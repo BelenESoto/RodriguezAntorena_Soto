@@ -2,7 +2,7 @@
 using System.Drawing.Printing;
 using System.Windows.Forms;
 
-namespace Antorena_Soto.CPresentacion.Gerente
+namespace Antorena_Soto.CPresentacion.Administrador
 {
     public partial class FormRecaudacion : Form
     {

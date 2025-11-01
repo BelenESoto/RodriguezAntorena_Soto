@@ -1,23 +1,26 @@
 ﻿
+
+using Antorena_Soto.CDatos;
 using Antorena_Soto.CLogica;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Markup;
+using System.Windows.Media;
 
-namespace Antorena_Soto.CPresentacion.Gerente
+namespace Antorena_Soto.CPresentacion.Administrador
 {
     public partial class AltaProductos : Form
     {
         private bool esEdicion = false;           // Variable de clase
         private int CodigoOriginal;            // Para mantener el código en edición
-        private List<Productox> _productos;
+        private List <Productox > _productos;
 
 
         public int CodigoProducto { get; internal set; }
@@ -45,18 +48,21 @@ namespace Antorena_Soto.CPresentacion.Gerente
         // Constructor para edición: recibe el producto existente
         public AltaProductos(Productox prodExistente)
         {
+            //codigo, nombre, categoria, precio, stock, descripcion, estado, fechaModif, imagen))
             InitializeComponent();
             esEdicion = true;
 
             CodigoOriginal = prodExistente.Codigo;
             TBNombreProducto.Text = prodExistente.Nombre;
-            TBPrecioProducto.Text = prodExistente.Precio.ToString();
             CBCategoriaProducto.Text = prodExistente.Categoria;
+            TBPrecioProducto.Text = prodExistente.Precio.ToString();
             TBStockProducto.Text = prodExistente.Stock.ToString();
             TBDescripcionProducto.Text = prodExistente.Descripcion;
-            PBImagenProducto.Image = prodExistente.Imagen;
-            DTFechaModifProd.Value = DateTime.Now;
             CBEstadoProd.Text = prodExistente.Estado ? "Activo" : "Inactivo";
+            DTFechaModifProd.Value = DateTime.Now;
+            PBImagenProducto.Image = prodExistente.Imagen;
+            
+           
 
             BAgregarProducto.Text = "Guardar Cambios";
         }
@@ -104,101 +110,28 @@ namespace Antorena_Soto.CPresentacion.Gerente
 
         private void TBCodigoProducto_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (!ValidarCodigoProducto())
-                e.Cancel = true; 
-        }
-
-
-        private void TBNombreProductos_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            string nombreProducto = TBNombreProducto.Text.Trim();
-            if (string.IsNullOrEmpty(nombreProducto))
+            string codigoProducto = tbCodigoProducto.Text.Trim();
+            if (string.IsNullOrEmpty(codigoProducto))
             {
                 MessageBox.Show("El campo nombre no puede estar vacío.", "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 e.Cancel = true;
             }
-            else if (nombreProducto.All(char.IsDigit))
+            else if (!int.TryParse(codigoProducto, out _))
             {
-                MessageBox.Show("El nombre no puede ser númerico.", "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("El código del producto debe ser un número entero.", "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                e.Cancel = true;
+            }
+            else if (!ValidarCodigoProducto())
+            {
                 e.Cancel = true;
             }
         }
-        private void CBEstadoProd_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            var cb = sender as ComboBox;
-            if (cb == null) return;
-
-            if (cb.SelectedIndex < 0 || string.IsNullOrWhiteSpace(cb.Text))
-            {
-                MessageBox.Show("Seleccione un estado (Activo/Inactivo).", "Error de validación",
-                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                e.Cancel = true;
-            }
-            else
-            {
-                e.Cancel = false;
-            }
-        }
-
-        private void TBCategoriaProducto_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+            private void TBCategoriaProducto_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             string categoriaProducto = CBCategoriaProducto.Text.Trim();
             if (string.IsNullOrEmpty(categoriaProducto))
             {
                 MessageBox.Show("El campo categoría no puede estar vacío.", "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                e.Cancel = true;
-            }
-        }
-        private void TBPrecioProducto_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            string precioProducto = TBPrecioProducto.Text.Trim();
-            if (String.IsNullOrEmpty(precioProducto))
-            {
-                MessageBox.Show("El campo precio no puede estar vacío.", "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                e.Cancel = true;
-            }
-            else if (!decimal.TryParse(precioProducto, out _))
-            {
-                MessageBox.Show("El campo precio solo acepta números.", "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                e.Cancel = true;
-            }
-            else if (decimal.TryParse(precioProducto, out decimal precio) && precio < 0)
-            {
-                MessageBox.Show("El campo precio no puede ser negativo.", "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                e.Cancel = true;
-            }
-        }
-        private void TBStockProducto_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            string stockProducto = TBStockProducto.Text.Trim();
-            if (String.IsNullOrEmpty(stockProducto))
-            {
-                MessageBox.Show("El campo stock no puede estar vacío.", "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                e.Cancel = true;
-            }
-            else if (!int.TryParse(stockProducto, out _))
-            {
-                MessageBox.Show("El campo stock solo acepta números enteros.", "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                e.Cancel = true;
-            }
-            else if (int.TryParse(stockProducto, out int stock) && stock < 0)
-            {
-                MessageBox.Show("El campo stock no puede ser negativo.", "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                e.Cancel = true;
-            }
-        }
-
-        private void DTFechaModifProd_Validating(object sender, CancelEventArgs e)
-        {
-            DateTime fechaSeleccionada = DTFechaModifProd.Value.Date;
-            DateTime fechaActual = DateTime.Now.Date;
-
-            if (fechaSeleccionada != fechaActual)
-            {
-                MessageBox.Show("La fecha de modificación debe ser la fecha actual.",
-                                "Error de Validación",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Error);
                 e.Cancel = true;
             }
         }
@@ -286,61 +219,109 @@ namespace Antorena_Soto.CPresentacion.Gerente
         {
 
         }
-          
+
+
+        
         private void BAgregarProducto_Click(object sender, EventArgs e)
         {
-            if (!ValidarCodigoProducto())
-                return;
-
             if (!ValidateChildren())
             {
                 MessageBox.Show("Por favor, corrija los errores antes de continuar.",
                     "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-              int codigo = int.Parse(tbCodigoProducto.Text.Trim());
-
-            if (esEdicion)
+            try
             {
-                // Modificar el producto existente
-                Productox prod = _productos.First(p => p.Codigo == CodigoOriginal);
-                prod.Codigo = codigo;
-                prod.Nombre = NombreProducto;
-                prod.Precio = PrecioProducto;
-                prod.Categoria = CategoriaProducto;
-                prod.Stock = StockProducto;
-                prod.Descripcion = DescripcionProducto;
-                prod.Imagen = ImagenProducto;
-                prod.FechaModificacion = DateTime.Now;
-                prod.Estado = CBEstadoProd.Text == "Activo";
-            }
-            else
-            {
-                // Crear nuevo producto
-                Productox nuevo = new Productox
+                string conexionString = "Data Source=HP-BELENS\\SQLEXPRESS;Initial Catalog=RodriguezAntorena_Soto;Integrated Security=True";
+               // Data Source = HP - BELENS\SQLEXPRESS; Initial Catalog = RodriguezAntorena_Soto; Integrated Security = True; Encrypt = True; Trust Server Certificate = True
+                CN_Producto productoBLL = new CN_Producto(conexionString);
+                // Validaciones básicas
+                if (!int.TryParse(tbCodigoProducto.Text.Trim(), out int codigo))
                 {
-                    Codigo = codigo,
-                    Nombre = NombreProducto,
-                    Precio = PrecioProducto,
-                    Categoria = CategoriaProducto,
-                    Stock = StockProducto,
-                    Descripcion = DescripcionProducto,
-                    Imagen = ImagenProducto,
-                    FechaModificacion = DateTime.Now,
-                    Estado = CBEstadoProd.Text == "Activo"
+                    MessageBox.Show("Código inválido. Ingrese un número entero.", "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
-                };
-                MessageBox.Show($"Producto modificado correctamente");
+                if (!decimal.TryParse(TBPrecioProducto.Text.Trim(), out decimal precio))
+                {
+                    MessageBox.Show("Precio inválido. Ingrese un valor numérico.", "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
-                _productos.Add(nuevo);
+                if (CBCategoriaProducto.SelectedItem == null)
+                {
+                    MessageBox.Show("Seleccione una categoría válida.", "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Muestra qué valor está tomando realmente el ComboBox
+                string seleccion = CBCategoriaProducto.SelectedItem.ToString();
+                MessageBox.Show($"Seleccion actual: '{seleccion}'"); // 👈 verificación
+
+                // Intentamos separar el número del texto
+                string[] partes = seleccion.Split('-');
+
+                // Validamos que haya al menos una parte numérica
+                if (partes.Length == 0)
+                {
+                    MessageBox.Show("Categoría inválida. El formato debe ser '1 - Texto'.", "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Intentamos convertir el primer fragmento a entero
+                if (!int.TryParse(partes[0].Trim(), out int categoria))
+                {
+                    MessageBox.Show($"No se pudo convertir '{partes[0].Trim()}' a número.", "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // 👇 Si llegó hasta acá, todo bien:
+                MessageBox.Show($"Categoría numérica detectada correctamente: {categoria}");
+
+
+                //if (!int.TryParse(CBCategoriaProducto.Text.Trim(), out int categoria)){
+                //   MessageBox.Show("Categoria inválida. Ingrese un valor numérico valido.", "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //    return; }
+
+
+                if (!int.TryParse(TBStockProducto.Text.Trim(), out int stock))
+                {
+                    MessageBox.Show("Stock inválido. Ingrese un número entero.", "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+          
+                    bool ok = productoBLL.AgregarProducto(
+                    codigo: tbCodigoProducto.Text.Trim(),
+                    nombre: TBNombreProducto.Text.Trim(),
+                    categoria: categoria.ToString(),
+                    descripcion: TBDescripcionProducto.Text.Trim(),
+                    precio: TBPrecioProducto.Text.Trim(),
+                    stock: TBStockProducto.Text.Trim(),
+                    imagen: PBImagenProducto.Image != null ? ConvertirImagenAByte(PBImagenProducto.Image) : null,
+                    fechaModif: DateTime.Now,
+                    estado: true
+                );
+
+                    if (ok)
+                    {
+                        MessageBox.Show("Producto agregado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se pudo agregar el producto.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error al agregar producto: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
 
-            MessageBox.Show("Producto guardado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            this.Close();
-            }
 
-           
-   
+        private byte[] ConvertirImagenAByte(Image image)
+        {
+            throw new NotImplementedException();
+        }
 
         private void LAgregarProducto_Click(object sender, EventArgs e)
         {
@@ -397,8 +378,24 @@ namespace Antorena_Soto.CPresentacion.Gerente
         {
 
         }
+
+        private void tbCodigoProducto_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TBNombreProducto_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CBCategoriaProducto_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 
 
 
+ 

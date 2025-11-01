@@ -155,5 +155,10 @@ namespace Antorena_Soto.CPresentacion.Administrador
         {
 
         }
+
+        private void BEditarUsuario_Click(object sender, EventArgs e)
+        {
+
+        }
     }
     }

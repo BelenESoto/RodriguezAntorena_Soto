@@ -46,32 +46,7 @@ namespace Antorena_Soto.CPresentacion.Gerente
 
 
             List<Venta> ventas = new List<Venta>(); 
-            ventas.Add(new Venta
-            {
-                CodigoVenta = 123,
-                NombreCliente = "Juan Perez",
-                FechaVenta = DateTime.Now.AddDays(-2),
-                NombreVendedor = "Carlos Gomez",
-                Productos = new List<Productox>
-                {
-                   new Productox { Nombre = "Aros Mary", Precio = 5000 },
-                   new Productox { Nombre = "Collar Eva", Precio = 8000 }
-                },
-                Total = 13000
-            });
-            ventas.Add(new Venta
-            {
-                CodigoVenta = 456,
-                NombreCliente = "Maria Lopez",
-                FechaVenta = DateTime.Now.AddDays(-1),
-                NombreVendedor = "Ana Torres",
-                Productos = new List<Productox>
-                {
-                   new Productox { Nombre = "Pulsera Luna", Precio = 3500 },
-                   new Productox { Nombre = "Anillo Sol", Precio = 6000 }
-                },
-                Total = 9500
-            });
+            
 
             reporteVentas formReporte = new reporteVentas(ventas);
             formReporte.TopLevel = false;
