@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(listaClientes));
             this.PGerente2 = new System.Windows.Forms.Panel();
+            this.LDatosBajaUs = new System.Windows.Forms.Label();
+            this.LAgregarventas = new System.Windows.Forms.Label();
             this.BBuscarCliente = new FontAwesome.Sharp.IconButton();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.BBuscarPor = new System.Windows.Forms.ToolStripSplitButton();
@@ -47,8 +49,6 @@
             this.Telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Correo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FechaIng = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LAgregarventas = new System.Windows.Forms.Label();
-            this.LDatosBajaUs = new System.Windows.Forms.Label();
             this.PGerente2.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGVListaCliente)).BeginInit();
@@ -68,6 +68,36 @@
             this.PGerente2.Name = "PGerente2";
             this.PGerente2.Size = new System.Drawing.Size(595, 609);
             this.PGerente2.TabIndex = 5;
+            // 
+            // LDatosBajaUs
+            // 
+            this.LDatosBajaUs.BackColor = System.Drawing.Color.White;
+            this.LDatosBajaUs.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.LDatosBajaUs.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LDatosBajaUs.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.LDatosBajaUs.Location = new System.Drawing.Point(0, 182);
+            this.LDatosBajaUs.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.LDatosBajaUs.Name = "LDatosBajaUs";
+            this.LDatosBajaUs.Size = new System.Drawing.Size(577, 45);
+            this.LDatosBajaUs.TabIndex = 15;
+            this.LDatosBajaUs.Text = "DATOS CLIENTE";
+            this.LDatosBajaUs.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // LAgregarventas
+            // 
+            this.LAgregarventas.BackColor = System.Drawing.Color.MidnightBlue;
+            this.LAgregarventas.Dock = System.Windows.Forms.DockStyle.Top;
+            this.LAgregarventas.Font = new System.Drawing.Font("SimSun", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LAgregarventas.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.LAgregarventas.Image = ((System.Drawing.Image)(resources.GetObject("LAgregarventas.Image")));
+            this.LAgregarventas.Location = new System.Drawing.Point(0, 0);
+            this.LAgregarventas.Margin = new System.Windows.Forms.Padding(0);
+            this.LAgregarventas.Name = "LAgregarventas";
+            this.LAgregarventas.Padding = new System.Windows.Forms.Padding(8, 3, 3, 3);
+            this.LAgregarventas.Size = new System.Drawing.Size(595, 98);
+            this.LAgregarventas.TabIndex = 14;
+            this.LAgregarventas.Text = " INFORMACIÓN CLIENTE";
+            this.LAgregarventas.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // BBuscarCliente
             // 
@@ -123,13 +153,13 @@
             // BDniCliente
             // 
             this.BDniCliente.Name = "BDniCliente";
-            this.BDniCliente.Size = new System.Drawing.Size(180, 22);
+            this.BDniCliente.Size = new System.Drawing.Size(119, 22);
             this.BDniCliente.Text = "DNI";
             // 
             // BApellidoCliente
             // 
             this.BApellidoCliente.Name = "BApellidoCliente";
-            this.BApellidoCliente.Size = new System.Drawing.Size(180, 22);
+            this.BApellidoCliente.Size = new System.Drawing.Size(119, 22);
             this.BApellidoCliente.Text = "Apellido";
             // 
             // toolStripSeparator1
@@ -227,36 +257,6 @@
             this.FechaIng.Name = "FechaIng";
             this.FechaIng.Width = 125;
             // 
-            // LAgregarventas
-            // 
-            this.LAgregarventas.BackColor = System.Drawing.Color.MidnightBlue;
-            this.LAgregarventas.Dock = System.Windows.Forms.DockStyle.Top;
-            this.LAgregarventas.Font = new System.Drawing.Font("SimSun", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LAgregarventas.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.LAgregarventas.Image = ((System.Drawing.Image)(resources.GetObject("LAgregarventas.Image")));
-            this.LAgregarventas.Location = new System.Drawing.Point(0, 0);
-            this.LAgregarventas.Margin = new System.Windows.Forms.Padding(0);
-            this.LAgregarventas.Name = "LAgregarventas";
-            this.LAgregarventas.Padding = new System.Windows.Forms.Padding(8, 3, 3, 3);
-            this.LAgregarventas.Size = new System.Drawing.Size(595, 98);
-            this.LAgregarventas.TabIndex = 14;
-            this.LAgregarventas.Text = " INFORMACIÓN CLIENTE";
-            this.LAgregarventas.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // LDatosBajaUs
-            // 
-            this.LDatosBajaUs.BackColor = System.Drawing.Color.White;
-            this.LDatosBajaUs.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.LDatosBajaUs.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LDatosBajaUs.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.LDatosBajaUs.Location = new System.Drawing.Point(0, 182);
-            this.LDatosBajaUs.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.LDatosBajaUs.Name = "LDatosBajaUs";
-            this.LDatosBajaUs.Size = new System.Drawing.Size(577, 45);
-            this.LDatosBajaUs.TabIndex = 15;
-            this.LDatosBajaUs.Text = "DATOS CLIENTE";
-            this.LDatosBajaUs.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // listaClientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -265,6 +265,7 @@
             this.Controls.Add(this.PGerente2);
             this.Name = "listaClientes";
             this.Text = "listaClientes";
+            this.Load += new System.EventHandler(this.listaClientes_Load_1);
             this.PGerente2.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();

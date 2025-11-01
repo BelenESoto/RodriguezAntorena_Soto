@@ -49,11 +49,11 @@
             this.label4 = new System.Windows.Forms.Label();
             this.LFechaFact = new System.Windows.Forms.Label();
             this.LFactN = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.label1Cuit = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.LFacturaA = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.LNomCliente = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.LCuit = new System.Windows.Forms.Label();
             this.LEmail = new System.Windows.Forms.Label();
@@ -226,11 +226,11 @@
             this.panel3.Controls.Add(this.label4);
             this.panel3.Controls.Add(this.LFechaFact);
             this.panel3.Controls.Add(this.LFactN);
-            this.panel3.Controls.Add(this.label1);
+            this.panel3.Controls.Add(this.label1Cuit);
             this.panel3.Controls.Add(this.label2);
             this.panel3.Controls.Add(this.label3);
             this.panel3.Controls.Add(this.LFacturaA);
-            this.panel3.Controls.Add(this.label5);
+            this.panel3.Controls.Add(this.LNomCliente);
             this.panel3.Location = new System.Drawing.Point(10, 132);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(663, 119);
@@ -302,16 +302,16 @@
             this.LFactN.TabIndex = 46;
             this.LFactN.Text = "FACTURA N°";
             // 
-            // label1
+            // label1Cuit
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.White;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(105, 37);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 16);
-            this.label1.TabIndex = 43;
-            this.label1.Text = "CUIT";
+            this.label1Cuit.AutoSize = true;
+            this.label1Cuit.BackColor = System.Drawing.Color.White;
+            this.label1Cuit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1Cuit.Location = new System.Drawing.Point(105, 37);
+            this.label1Cuit.Name = "label1Cuit";
+            this.label1Cuit.Size = new System.Drawing.Size(38, 16);
+            this.label1Cuit.TabIndex = 43;
+            this.label1Cuit.Text = "CUIT";
             // 
             // label2
             // 
@@ -345,16 +345,16 @@
             this.LFacturaA.TabIndex = 41;
             this.LFacturaA.Text = "FACTURA A:";
             // 
-            // label5
+            // LNomCliente
             // 
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.Color.White;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(105, 11);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(100, 16);
-            this.label5.TabIndex = 40;
-            this.label5.Text = "Nombre Cliente";
+            this.LNomCliente.AutoSize = true;
+            this.LNomCliente.BackColor = System.Drawing.Color.White;
+            this.LNomCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LNomCliente.Location = new System.Drawing.Point(105, 11);
+            this.LNomCliente.Name = "LNomCliente";
+            this.LNomCliente.Size = new System.Drawing.Size(100, 16);
+            this.LNomCliente.TabIndex = 40;
+            this.LNomCliente.Text = "Nombre Cliente";
             // 
             // panel2
             // 
@@ -482,11 +482,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad_producto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Subtotal_producto;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label1Cuit;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label LFacturaA;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label LNomCliente;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label LFechaFact;
         private System.Windows.Forms.Label LFactN;

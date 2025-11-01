@@ -275,5 +275,10 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             // Quizás este botón abre un menú para elegir el tipo de búsqueda?
             // Por ahora, la lógica se basa en 3 botones separados (DNI, Nombre, Estado)
         }
+
+        private void listaClientes_Load_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }
