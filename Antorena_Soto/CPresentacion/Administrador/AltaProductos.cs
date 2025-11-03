@@ -232,7 +232,7 @@ namespace Antorena_Soto.CPresentacion.Administrador
             }
             try
             {
-                string conexionString = "Data Source=HP-BELENS\\SQLEXPRESS;Initial Catalog=RodriguezAntorena_Soto;Integrated Security=True";
+                string conexionString = "Data Source=DESKTOP-IDH7B7D\\SQLEXPRESS;Initial Catalog=RodriguezAntorena_Soto;Integrated Security=True";
                // Data Source = HP - BELENS\SQLEXPRESS; Initial Catalog = RodriguezAntorena_Soto; Integrated Security = True; Encrypt = True; Trust Server Certificate = True
                 CN_Producto productoBLL = new CN_Producto(conexionString);
                 // Validaciones básicas
@@ -390,6 +390,11 @@ namespace Antorena_Soto.CPresentacion.Administrador
         }
 
         private void CBCategoriaProducto_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AltaProductos_Load(object sender, EventArgs e)
         {
 
         }

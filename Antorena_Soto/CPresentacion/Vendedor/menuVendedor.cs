@@ -236,5 +236,10 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             PVendedor2.Controls.Add(formLista);
             formLista.Show();
         }
+
+        private void menuVendedor_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

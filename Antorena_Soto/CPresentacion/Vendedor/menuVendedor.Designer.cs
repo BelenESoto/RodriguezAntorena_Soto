@@ -39,12 +39,12 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             this.BVerInfoCliente = new System.Windows.Forms.Button();
             this.BAgregarDatoCliente = new System.Windows.Forms.Button();
             this.BListarVenta = new System.Windows.Forms.Button();
-            this.LVentas = new System.Windows.Forms.Label();
             this.BVerProducto = new System.Windows.Forms.Button();
             this.BAgregarVenta = new System.Windows.Forms.Button();
-            this.PVendedor2 = new System.Windows.Forms.Panel();
+            this.LVentas = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.PVendedor2 = new System.Windows.Forms.Panel();
             this.PVendedor1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -145,26 +145,6 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             this.BListarVenta.UseWaitCursor = true;
             this.BListarVenta.Click += new System.EventHandler(this.BListarVenta_Click);
             // 
-            // LVentas
-            // 
-            this.LVentas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.LVentas.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.LVentas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.LVentas.Cursor = System.Windows.Forms.Cursors.WaitCursor;
-            this.LVentas.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.LVentas.Font = new System.Drawing.Font("Yu Gothic UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LVentas.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.LVentas.Location = new System.Drawing.Point(21, 141);
-            this.LVentas.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.LVentas.Name = "LVentas";
-            this.LVentas.Padding = new System.Windows.Forms.Padding(3);
-            this.LVentas.Size = new System.Drawing.Size(181, 128);
-            this.LVentas.TabIndex = 8;
-            this.LVentas.Text = "VENTAS";
-            this.LVentas.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.LVentas.UseWaitCursor = true;
-            this.LVentas.Click += new System.EventHandler(this.LVentas_Click);
-            // 
             // BVerProducto
             // 
             this.BVerProducto.BackColor = System.Drawing.Color.AliceBlue;
@@ -195,20 +175,25 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             this.BAgregarVenta.UseWaitCursor = true;
             this.BAgregarVenta.Click += new System.EventHandler(this.BAgregarVenta_Click);
             // 
-            // PVendedor2
+            // LVentas
             // 
-            this.PVendedor2.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.PVendedor2.BackgroundImage = global::Antorena_Soto.Properties.Resources.cart_icon_147474;
-            this.PVendedor2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.PVendedor2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.PVendedor2.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.PVendedor2.Location = new System.Drawing.Point(218, 0);
-            this.PVendedor2.Margin = new System.Windows.Forms.Padding(2);
-            this.PVendedor2.Name = "PVendedor2";
-            this.PVendedor2.Size = new System.Drawing.Size(595, 609);
-            this.PVendedor2.TabIndex = 5;
-            this.PVendedor2.UseWaitCursor = true;
-            this.PVendedor2.Paint += new System.Windows.Forms.PaintEventHandler(this.PVendedor2_Paint);
+            this.LVentas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.LVentas.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.LVentas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.LVentas.Cursor = System.Windows.Forms.Cursors.WaitCursor;
+            this.LVentas.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.LVentas.Font = new System.Drawing.Font("Yu Gothic UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LVentas.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.LVentas.Location = new System.Drawing.Point(21, 141);
+            this.LVentas.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.LVentas.Name = "LVentas";
+            this.LVentas.Padding = new System.Windows.Forms.Padding(3);
+            this.LVentas.Size = new System.Drawing.Size(181, 128);
+            this.LVentas.TabIndex = 8;
+            this.LVentas.Text = "VENTAS";
+            this.LVentas.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LVentas.UseWaitCursor = true;
+            this.LVentas.Click += new System.EventHandler(this.LVentas_Click);
             // 
             // label1
             // 
@@ -248,6 +233,21 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label2.UseWaitCursor = true;
             // 
+            // PVendedor2
+            // 
+            this.PVendedor2.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.PVendedor2.BackgroundImage = global::Antorena_Soto.Properties.Resources.cart_icon_147474;
+            this.PVendedor2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.PVendedor2.Dock = System.Windows.Forms.DockStyle.Right;
+            this.PVendedor2.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.PVendedor2.Location = new System.Drawing.Point(218, 0);
+            this.PVendedor2.Margin = new System.Windows.Forms.Padding(2);
+            this.PVendedor2.Name = "PVendedor2";
+            this.PVendedor2.Size = new System.Drawing.Size(595, 609);
+            this.PVendedor2.TabIndex = 5;
+            this.PVendedor2.UseWaitCursor = true;
+            this.PVendedor2.Paint += new System.Windows.Forms.PaintEventHandler(this.PVendedor2_Paint);
+            // 
             // menuVendedor
             // 
             this.AllowDrop = true;
@@ -262,6 +262,7 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             this.Name = "menuVendedor";
             this.Text = "menuVendedor";
             this.UseWaitCursor = true;
+            this.Load += new System.EventHandler(this.menuVendedor_Load);
             this.PVendedor1.ResumeLayout(false);
             this.ResumeLayout(false);
 
