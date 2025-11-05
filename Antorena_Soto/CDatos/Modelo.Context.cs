@@ -26,16 +26,13 @@ namespace Antorena_Soto.CDatos
         {
             throw new UnintentionalCodeFirstException();
         }
-
+    
         public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<Categoria> Categoria { get; set; }
         public virtual DbSet<Cliente> Cliente { get; set; }
         public virtual DbSet<Detalle_venta> Detalle_venta { get; set; }
         public virtual DbSet<Factura> Factura { get; set; }
         public virtual DbSet<Producto> Producto { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
-      
-       
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -92,7 +89,7 @@ namespace Antorena_Soto.CDatos
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_dropdiagram", diagramnameParameter, owner_idParameter);
         }
     
-      /*  public virtual ObjectResult<sp_helpdiagramdefinition_Result> sp_helpdiagramdefinition(string diagramname, Nullable<int> owner_id)
+        public virtual ObjectResult<sp_helpdiagramdefinition_Result> sp_helpdiagramdefinition(string diagramname, Nullable<int> owner_id)
         {
             var diagramnameParameter = diagramname != null ?
                 new ObjectParameter("diagramname", diagramname) :
@@ -117,7 +114,7 @@ namespace Antorena_Soto.CDatos
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagrams_Result>("sp_helpdiagrams", diagramnameParameter, owner_idParameter);
         }
-    */
+    
         public virtual int sp_renamediagram(string diagramname, Nullable<int> owner_id, string new_diagramname)
         {
             var diagramnameParameter = diagramname != null ?

@@ -122,11 +122,15 @@
     <Compile Include="CDatos\Factura.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="CDatos\FacturaController.cs" />
     <Compile Include="CDatos\Producto.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="CDatos\CD_Producto.cs" />
-    <Compile Include="CDatos\sysdiagrams.cs">
+    <Compile Include="CDatos\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CDatos\sp_helpdiagrams_Result.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="CDatos\UsuarioController.cs" />
@@ -149,6 +153,7 @@
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="CLogica\CN_Cliente.cs" />
+    <Compile Include="CLogica\CN_Factura.cs" />
     <Compile Include="CLogica\CN_Producto.cs" />
     <Compile Include="CLogica\CN_Usuario.cs" />
     <Compile Include="CPresentacion\Administrador\listaProductos.cs">

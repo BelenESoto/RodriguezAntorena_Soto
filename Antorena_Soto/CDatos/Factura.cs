@@ -26,6 +26,7 @@ namespace Antorena_Soto.CDatos
         public System.DateTime fecha_factura { get; set; }
         public string forma_pago { get; set; }
         public long monto_total { get; set; }
+        public int estado_factura { get; set; }
     
         public virtual Cliente Cliente { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

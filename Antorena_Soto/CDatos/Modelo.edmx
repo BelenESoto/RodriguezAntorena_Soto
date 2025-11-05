@@ -47,6 +47,7 @@
           <Property Name="fecha_factura" Type="datetime" Nullable="false" />
           <Property Name="forma_pago" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="monto_total" Type="bigint" Nullable="false" />
+          <Property Name="estado_factura" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Producto">
           <Key>
@@ -306,6 +307,7 @@
           <Property Name="monto_total" Type="Int64" Nullable="false" />
           <NavigationProperty Name="Cliente" Relationship="RodriguezAntorena_SotoModel.FK_id_cliente" FromRole="Factura" ToRole="Cliente" />
           <NavigationProperty Name="Detalle_venta" Relationship="RodriguezAntorena_SotoModel.FK_id_factura" FromRole="Factura" ToRole="Detalle_venta" />
+          <Property Name="estado_factura" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Producto">
           <Key>
@@ -443,6 +445,7 @@
           <EntitySetMapping Name="Factura">
             <EntityTypeMapping TypeName="RodriguezAntorena_SotoModel.Factura">
               <MappingFragment StoreEntitySet="Factura">
+                <ScalarProperty Name="estado_factura" ColumnName="estado_factura" />
                 <ScalarProperty Name="monto_total" ColumnName="monto_total" />
                 <ScalarProperty Name="forma_pago" ColumnName="forma_pago" />
                 <ScalarProperty Name="fecha_factura" ColumnName="fecha_factura" />

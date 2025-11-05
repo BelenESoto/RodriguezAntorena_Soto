@@ -1,52 +1,50 @@
-﻿// --- NUEVO ---
-// Importamos la capa de Lógica de Negocio para poder usarla
-using Antorena_Soto.CLogica;
-// --- FIN NUEVO ---
+﻿// --- AÑADIR ESTOS USINGS ---
+using Antorena_Soto.CLogica; // Para ClienteBLL y (asumo) FacturaBLL
+using Antorena_Soto.CDatos;   // Para la clase Factura
+using System.Data;           // Para DataRow
 
 using FontAwesome.Sharp;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-
 namespace Antorena_Soto.CPresentacion.Vendedor
 {
     public partial class ventaConfirmar : Form
     {
-
         private bool buscarPorDni = false;
         private bool buscarPorNombre = false;
 
-        // --- NUEVO ---
-        // Instancia de la BLL que se usará en este formulario
         private readonly ClienteBLL clienteBLL;
+
+        // --- NUEVO ---
+        private readonly FacturaBLL facturaBLL; // Asumimos que esta BLL existe
+        private DataRow clienteActual = null; // Para guardar el cliente encontrado
         // --- FIN NUEVO ---
 
         public ventaConfirmar()
         {
             InitializeComponent();
 
-            // --- NUEVO ---
-            // Inicializamos la BLL en el constructor, pasando la cadena de conexión
             try
             {
                 string conexionString = "Data Source=DESKTOP-IDH7B7D\\SQLEXPRESS;Initial Catalog=RodriguezAntorena_Soto;Integrated Security=True";
                 clienteBLL = new ClienteBLL(conexionString);
+                facturaBLL = new FacturaBLL(conexionString);
+
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error fatal al inicializar la lógica de negocio: {ex.Message}", "Error de Conexión", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                // Si la BLL no puede iniciarse, es probable que el formulario no deba cargarse
+                MessageBox.Show($"Error al inicializar: {ex.Message}", "Error de Conexión", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Load += (s, e) => this.Close();
             }
-            // --- FIN NUEVO ---
         }
+
 
         private void LDatosBajaUs_Click(object sender, EventArgs e)
         {
@@ -93,48 +91,27 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             MessageBox.Show("Búsqueda configurada por NOMBRE.");
         }
 
-        // --- MÉTODO PRINCIPAL MODIFICADO ---
         private void BTSBusquedaCliente_Click(object sender, EventArgs e)
         {
-            string criterio = TBBuscarCliente.Text.Trim();
-
-            // 1. Validar que se haya seleccionado un tipo de búsqueda
-            if (!buscarPorDni && !buscarPorNombre)
-            {
-                MessageBox.Show("Debe seleccionar si desea buscar por DNI o por NOMBRE (en el menú '...').", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            // 2. Validar que el campo no esté vacío o sea el placeholder
-            if (string.IsNullOrEmpty(criterio) || criterio == "Ingrese DNI" || criterio == "Ingrese Nombre/Apellido")
-            {
-                MessageBox.Show("El campo de búsqueda de cliente no puede estar vacío.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            // ... (Tus validaciones de búsqueda) ...
 
             // 3. Limpiar los campos de factura antes de buscar
             LimpiarCamposCliente();
 
-            // 4. Ejecutar la búsqueda
             try
             {
-                // Llamamos a la BLL
-                DataTable resultado = clienteBLL.BuscarClientesBLL(criterio, buscarPorDni);
+                DataTable resultado = clienteBLL.BuscarClientesBLL(TBBuscarCliente.Text.Trim(), buscarPorDni);
 
-                // 5. Procesar los resultados
                 if (resultado.Rows.Count > 0)
                 {
-                    // Si hay más de un resultado (ej. búsqueda por nombre "Perez"),
-                    // cargamos el primero.
-                    if (resultado.Rows.Count > 1)
-                    {
-                        MessageBox.Show("Se encontraron múltiples clientes. Se cargarán los datos del primero.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-
-                    // Tomamos la primera fila
                     DataRow filaCliente = resultado.Rows[0];
 
-                    // 6. Poblamos los TextBoxes de la factura con los datos
+                    // --- NUEVO ---
+                    // Guardamos el cliente completo para usarlo en la factura
+                    clienteActual = filaCliente;
+                    // --- FIN NUEVO ---
+
+                    // 6. Poblamos los TextBoxes
                     TBDniFact.Text = Convert.ToString(filaCliente["dni_cliente"]);
                     TBCuitFact.Text = Convert.ToString(filaCliente["cuit"]);
                     TBNombreFact.Text = Convert.ToString(filaCliente["nomYApe_cliente"]);
@@ -144,28 +121,25 @@ namespace Antorena_Soto.CPresentacion.Vendedor
                 }
                 else
                 {
-                    // No se encontró ningún cliente
-                    MessageBox.Show("Cliente no encontrado. Verifique los datos e intente de nuevo.", "Búsqueda Fallida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Cliente no encontrado.", "Búsqueda Fallida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception ex)
             {
-                // Captura de cualquier error de la BLL (ej. DNI no numérico, error de BBDD)
-                MessageBox.Show($"Error al buscar cliente: {ex.Message}", "Error de Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error al buscar cliente: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        // --- FIN MÉTODO MODIFICADO ---
 
-        // --- NUEVO ---
-        // Método helper para limpiar los campos del cliente
         private void LimpiarCamposCliente()
         {
             TBDniFact.Text = "";
             TBCuitFact.Text = "";
             TBNombreFact.Text = "";
             TBCiudadFact.Text = "";
+            // --- NUEVO ---
+            clienteActual = null; // Limpiamos el cliente guardado
+            // --- FIN NUEVO ---
         }
-        // --- FIN NUEVO ---
 
 
         private void TBDniFact_TextChanged(object sender, EventArgs e)
@@ -213,26 +187,86 @@ namespace Antorena_Soto.CPresentacion.Vendedor
 
         }
 
+        // --- MÉTODO 'FINALIZAR PAGO' MODIFICADO ---
         private void BBorrar_Click(object sender, EventArgs e)
         {
-            // Validaciones de factura
-            // (Tu código de validación existente está bien)
-            if (string.IsNullOrWhiteSpace(TBNombreFact.Text))
+            // 1. Validaciones de factura
+            // --- NUEVA VALIDACIÓN ---
+            if (clienteActual == null)
             {
-                MessageBox.Show("Debe completar el Nombre para la factura (puede buscarlo).");
+                MessageBox.Show("Debe buscar y cargar un cliente antes de facturar.", "Cliente Requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            // --- FIN NUEVA VALIDACIÓN ---
+
+            if (string.IsNullOrWhiteSpace(TBMedioPagoFact.Text))
+            {
+                MessageBox.Show("Debe seleccionar un Medio de Pago.");
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(TBTipoFact.Text))
+            {
+                MessageBox.Show("Debe completar el Tipo de Factura.");
+                return;
+            }
+            if (!long.TryParse(TBMontoFact.Text, out long monto))
+            {
+                MessageBox.Show("Debe ingresar un Monto válido (numérico).");
                 return;
             }
             // ... (resto de tus validaciones) ...
 
-            // Si todo está correcto:
-            MessageBox.Show("Factura creada con éxito.");
+            // 2. Crear el objeto Factura
+            Factura nuevaFactura = new Factura
+            {
+                // nro_factura se asignará por la BBDD (IDENTITY)
+                tipo_factura = TBTipoFact.Text.Trim(),
+                id_cliente = Convert.ToInt32(clienteActual["dni_cliente"]), // Obtenido del cliente guardado
+                fecha_factura = DTFechaAct.Value,
+                forma_pago = TBMedioPagoFact.Text.Trim(),
+                monto_total = monto
+            };
 
-            CrearBotonesFactura();
+            try
+            {
+                // 3. Guardar en la Base de Datos
+                //    (ASUMIMOS que FacturaBLL y este método existen)
+                //    (ASUMIMOS que devuelve la factura con el Nro de factura asignado)
+                Factura facturaGuardada = facturaBLL.AgregarFactura(nuevaFactura);
 
-            // (Tu código de creación de Venta y guardado en lista)
-            // ...
+                if (facturaGuardada != null)
+                {
+                    MessageBox.Show($"Factura N° {facturaGuardada.nro_factura} creada con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    // 4. Abrir el formulario 'facturaVenta' y pasarle los datos
+                    facturaVenta formFactura = new facturaVenta();
+
+                    // Pasamos la factura (con nro_factura) y el cliente
+                    formFactura.FacturaMostrada = facturaGuardada;
+                    formFactura.ClienteMostrado = clienteActual;
+
+                    formFactura.ShowDialog();
+
+                    // Opcional: Limpiar todo para una nueva venta
+                    LimpiarCamposCliente();
+                    TBBuscarCliente.Text = "";
+                    TBMedioPagoFact.Text = "";
+                    TBTipoFact.Text = "";
+                    TBMontoFact.Text = "";
+                }
+                else
+                {
+                    MessageBox.Show("Error: La factura no pudo ser guardada.", "Error BBDD", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al guardar la factura: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            // (Tu código de 'CrearBotonesFactura' y 'Venta' puede ir aquí si aún lo necesitas,
+            // aunque 'CrearBotonesFactura' parece que ahora debería estar DENTRO del try)
         }
-
 
         private void CrearBotonesFactura()
         {
