@@ -46,7 +46,7 @@ namespace Antorena_Soto.CLogica
                 throw new ArgumentException("El estado del producto debe ser verdadero o falso.");
 
             return cd_Producto.InsertarProducto(
-                nombre, codigoInt, categoriaInt, precioDec, descripcion, stockInt, estado,  fechaModif, imagen );
+                nombre, codigoInt, estado, descripcion, categoriaInt, precioDec,  stockInt, imagen, fechaModif );
         }
 
         //   LISTAR USUARIOS BD 
@@ -55,8 +55,8 @@ namespace Antorena_Soto.CLogica
             return cd_Producto.ListarProductosBD();
         }
 
-        //   MODIFICACIÓN DE PRODUCTO-
-        public bool ModificarProducto(string codigo, string nombre, string categoria,
+        //   MODIFICACIÓN DE PRODUCTO bd -
+        public bool ModificarProductoBBL(string codigo, string nombre, string categoria,
                                       string precio, string descripcion, string stock,
                                       bool estado, DateTime fechaModif, byte[] imagen = null)
         {   // VALIDACIONES OBLIGATORIAS
@@ -75,9 +75,10 @@ namespace Antorena_Soto.CLogica
             if (string.IsNullOrWhiteSpace(stock) || !int.TryParse(stock, out int stockInt) || stockInt < 0)
                 throw new ArgumentException("Debe ingresar un stock válido (número mayor o igual a 0).");
 
-            return cd_Producto.ModificarProducto(
-             codigoInt, nombre, categoriaInt, precioDec, descripcion, stockInt, estado, fechaModif, imagen);
+            return cd_Producto.ModificarProductoBD(
+              nombre, codigoInt, estado, descripcion, categoriaInt, precioDec,  stockInt, imagen,  fechaModif);
         }
+
 
         //   BAJA LÓGICA (estado = 0) 
 
@@ -109,6 +110,7 @@ namespace Antorena_Soto.CLogica
         }
 
         // ELIMINAR USUARIO
+        /*
         public bool BajaUsuarioBLL(int idUsuario)
         {
             // Acá podrías agregar validaciones de negocio antes de llamar al DAL
@@ -119,10 +121,11 @@ namespace Antorena_Soto.CLogica
 
             return cd_Producto.BajaProductoBD(idUsuario);
         }
-    
+    */
+
+
 
 //   LISTAR PRODUCTOS BD
-
 public DataTable ListarProductos()
         {
             return cd_Producto.ListarProductosBD();

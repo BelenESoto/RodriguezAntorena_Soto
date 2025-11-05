@@ -306,6 +306,7 @@
           <Property Name="monto_total" Type="Int64" Nullable="false" />
           <NavigationProperty Name="Cliente" Relationship="RodriguezAntorena_SotoModel.FK_id_cliente" FromRole="Factura" ToRole="Cliente" />
           <NavigationProperty Name="Detalle_venta" Relationship="RodriguezAntorena_SotoModel.FK_id_factura" FromRole="Factura" ToRole="Detalle_venta" />
+          <Property Name="estado_factura" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Producto">
           <Key>

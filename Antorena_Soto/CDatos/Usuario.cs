@@ -25,6 +25,6 @@ namespace Antorena_Soto.CDatos
         public long cuit { get; set; }
         public System.DateTime fecha_ingreso { get; set; }
         public int tipo_Usuario { get; set; }
-        public bool Estado { get; set; }
+        public string Estado { get; set; }
     }
 }

@@ -29,8 +29,7 @@ namespace Antorena_Soto.CDatos
 
                     if (buscarPorCod)
                     {
-                
-                        consulta = @"SELECT nombre_prod, codigo_prod, estado_prod, descripcion_prod, 
+                         consulta = @"SELECT nombre_prod, codigo_prod, estado_prod, descripcion_prod, 
                                   categoria_prod, precio_prod, stock_prod, imagen_prod, fechaModif_prod 
                              FROM Producto WHERE codigo_prod = @criterio ";
                     }
@@ -80,9 +79,8 @@ namespace Antorena_Soto.CDatos
         }
 
         // INSERTAR PRODUCTO BD
-        public bool InsertarProducto(string nombre, int codigo, int categoria, decimal precio,
-                                     string descripcion, int stock, bool estado,
-                                     DateTime fechaModif, byte[] imagen)
+        public bool InsertarProducto(string nombre, int codigo, bool estado, string descripcion,
+            int categoria, decimal precio, int stock, byte[] imagen, DateTime fechaModif)
         {
             using (SqlConnection conn = new SqlConnection(conexionString))
             {
@@ -120,7 +118,8 @@ namespace Antorena_Soto.CDatos
             {
                 using (SqlConnection conexionSql = new SqlConnection(conexionString))
                 {
-                    string consulta = @"SELECT nombre_prod, codigo_prod, estado_prod, descripcion_prod, categoria_prod, precio_prod, stock_prod fechaModif_prod 
+                    string consulta = @"SELECT nombre_prod, codigo_prod, estado_prod, descripcion_prod, 
+                                        categoria_prod, precio_prod, stock_prod, imagen_prod, fechaModif_prod 
                                         FROM Producto ";
                     SqlCommand comandoSql = new SqlCommand(consulta, conexionSql);
                     SqlDataAdapter adaptador = new SqlDataAdapter(comandoSql);
@@ -175,34 +174,34 @@ namespace Antorena_Soto.CDatos
         }
 
 
-        // MODIFICAR PRODUCTO
+        // MODIFICAR PRODUCTO bd
 
-        public bool ModificarProducto(int codigo, string nombre, int categoria, decimal precio,
-                                      string descripcion, int stock, bool estado,
-                                      DateTime fechaModif, byte[] imagen)
+        public bool ModificarProductoBD(string nombre, int codigo, bool estado, string descripcion, int categoria, decimal precio,
+                                       int stock, byte[] imagen,DateTime fechaModif )
         {
             using (SqlConnection conn = new SqlConnection(conexionString))
             {
                 string query = @"UPDATE Producto 
                                  SET nombre_prod=@nombre,
+                                     estado_prod=@estado,
+                                     descripcion_prod=@descripcion,
                                      categoria_prod=@categoria,
                                      precio_prod=@precio,
-                                     descripcion_prod=@descripcion,
                                      stock_prod=@stock,
-                                     estado_prod=@estado,
-                                     fechaModif_prod=@fechaModif,
-                                     imagen_prod=@imagen
-                                 WHERE codigo_prod=@codigo";
+                                      imagen_prod = @imagen,
+                                     fechaModif_prod=@fechaModif 
+                                 WHERE codigo_prod=@codigo;";
 
                 SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@codigo", codigo);
                 cmd.Parameters.AddWithValue("@nombre", nombre);
+            
+                cmd.Parameters.AddWithValue("@estado", estado);
+                cmd.Parameters.AddWithValue("@descripcion", descripcion);
                 cmd.Parameters.AddWithValue("@categoria", categoria);
                 cmd.Parameters.AddWithValue("@precio", precio);
-                cmd.Parameters.AddWithValue("@descripcion", descripcion);
                 cmd.Parameters.AddWithValue("@stock", stock);
-                cmd.Parameters.AddWithValue("@estado", estado);
                 cmd.Parameters.AddWithValue("@fechaModif", fechaModif);
+                cmd.Parameters.AddWithValue("@codigo", codigo);
 
                 if (imagen != null)
                     cmd.Parameters.Add("@imagen", SqlDbType.VarBinary).Value = imagen;

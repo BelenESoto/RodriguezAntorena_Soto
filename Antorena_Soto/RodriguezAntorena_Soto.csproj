@@ -126,7 +126,10 @@
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="CDatos\CD_Producto.cs" />
-    <Compile Include="CDatos\sysdiagrams.cs">
+    <Compile Include="CDatos\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CDatos\sp_helpdiagrams_Result.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="CDatos\UsuarioController.cs" />

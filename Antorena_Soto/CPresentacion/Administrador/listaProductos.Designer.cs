@@ -30,6 +30,15 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(listaProductos));
             this.DGVListaProd = new System.Windows.Forms.DataGridView();
+            this.Nombre_prod = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.codigo_prod = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.estado_prod = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descripcion_prod = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.categoria_prod = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.precio_prod = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.stock_prod = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.imagen_prod = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fechaModif_prod = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BEditarProd = new System.Windows.Forms.Button();
             this.BEliminarProd = new System.Windows.Forms.Button();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -42,15 +51,6 @@
             this.BTSBusquedaProd = new FontAwesome.Sharp.IconButton();
             this.bImprimir = new System.Windows.Forms.Button();
             this.LAgregarventas = new System.Windows.Forms.Label();
-            this.Nombre_prod = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.codigo_prod = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.estado_prod = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descripcion_prod = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.categoria_prod = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.precio_prod = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.stock_prod = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.imagen_prod = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fechaModif_prod = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DGVListaProd)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -69,7 +69,7 @@
             this.stock_prod,
             this.imagen_prod,
             this.fechaModif_prod});
-            this.DGVListaProd.Location = new System.Drawing.Point(9, 196);
+            this.DGVListaProd.Location = new System.Drawing.Point(12, 183);
             this.DGVListaProd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.DGVListaProd.Name = "DGVListaProd";
             this.DGVListaProd.RowHeadersWidth = 51;
@@ -77,150 +77,6 @@
             this.DGVListaProd.Size = new System.Drawing.Size(731, 231);
             this.DGVListaProd.TabIndex = 1;
             this.DGVListaProd.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGVListaProd_CellContentClick_1);
-            // 
-            // BEditarProd
-            // 
-            this.BEditarProd.BackColor = System.Drawing.Color.White;
-            this.BEditarProd.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BEditarProd.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.BEditarProd.Location = new System.Drawing.Point(92, 450);
-            this.BEditarProd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.BEditarProd.Name = "BEditarProd";
-            this.BEditarProd.Size = new System.Drawing.Size(165, 53);
-            this.BEditarProd.TabIndex = 2;
-            this.BEditarProd.Text = "EDITAR";
-            this.BEditarProd.UseVisualStyleBackColor = false;
-            this.BEditarProd.Click += new System.EventHandler(this.BEditarProd_Click);
-            // 
-            // BEliminarProd
-            // 
-            this.BEliminarProd.BackColor = System.Drawing.Color.White;
-            this.BEliminarProd.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BEliminarProd.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.BEliminarProd.Location = new System.Drawing.Point(476, 446);
-            this.BEliminarProd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.BEliminarProd.Name = "BEliminarProd";
-            this.BEliminarProd.Size = new System.Drawing.Size(173, 55);
-            this.BEliminarProd.TabIndex = 3;
-            this.BEliminarProd.Text = "ELIMINAR";
-            this.BEliminarProd.UseVisualStyleBackColor = false;
-            this.BEliminarProd.Click += new System.EventHandler(this.BEliminarProdBD_Click);
-            // 
-            // toolStrip1
-            // 
-            this.toolStrip1.AutoSize = false;
-            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
-            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.BBuscarProducto,
-            this.toolStripSeparator2,
-            this.toolStripLabel1,
-            this.TBBuscarProducto});
-            this.toolStrip1.Location = new System.Drawing.Point(-5, 97);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(775, 43);
-            this.toolStrip1.TabIndex = 7;
-            this.toolStrip1.Text = "toolStrip1";
-            this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
-            // 
-            // BBuscarProducto
-            // 
-            this.BBuscarProducto.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.BBuscarProducto.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolCodigoProd,
-            this.toolNombreProd});
-            this.BBuscarProducto.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold);
-            this.BBuscarProducto.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.BBuscarProducto.Image = ((System.Drawing.Image)(resources.GetObject("BBuscarProducto.Image")));
-            this.BBuscarProducto.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.BBuscarProducto.Name = "BBuscarProducto";
-            this.BBuscarProducto.Size = new System.Drawing.Size(188, 40);
-            this.BBuscarProducto.Text = "BUSCAR PRODUCTO";
-            this.BBuscarProducto.Click += new System.EventHandler(this.BBuscarProducto_Click);
-            // 
-            // toolCodigoProd
-            // 
-            this.toolCodigoProd.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.toolCodigoProd.Name = "toolCodigoProd";
-            this.toolCodigoProd.Size = new System.Drawing.Size(202, 26);
-            this.toolCodigoProd.Text = "POR CODIGO";
-            this.toolCodigoProd.Click += new System.EventHandler(this.toolCodigoProd_Click);
-            // 
-            // toolNombreProd
-            // 
-            this.toolNombreProd.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.toolNombreProd.Name = "toolNombreProd";
-            this.toolNombreProd.Size = new System.Drawing.Size(202, 26);
-            this.toolNombreProd.Text = "POR NOMBRE";
-            this.toolNombreProd.Click += new System.EventHandler(this.toolNombreProd_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 43);
-            // 
-            // toolStripLabel1
-            // 
-            this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(0, 40);
-            // 
-            // TBBuscarProducto
-            // 
-            this.TBBuscarProducto.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.TBBuscarProducto.Name = "TBBuscarProducto";
-            this.TBBuscarProducto.Size = new System.Drawing.Size(367, 43);
-            this.TBBuscarProducto.Click += new System.EventHandler(this.TBBuscarCliente_Click);
-            // 
-            // BTSBusquedaProd
-            // 
-            this.BTSBusquedaProd.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.BTSBusquedaProd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BTSBusquedaProd.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold);
-            this.BTSBusquedaProd.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.BTSBusquedaProd.IconChar = FontAwesome.Sharp.IconChar.Searchengin;
-            this.BTSBusquedaProd.IconColor = System.Drawing.Color.Black;
-            this.BTSBusquedaProd.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.BTSBusquedaProd.IconSize = 36;
-            this.BTSBusquedaProd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BTSBusquedaProd.Location = new System.Drawing.Point(588, 97);
-            this.BTSBusquedaProd.Margin = new System.Windows.Forms.Padding(4);
-            this.BTSBusquedaProd.Name = "BTSBusquedaProd";
-            this.BTSBusquedaProd.Size = new System.Drawing.Size(167, 43);
-            this.BTSBusquedaProd.TabIndex = 9;
-            this.BTSBusquedaProd.Text = "Buscar";
-            this.BTSBusquedaProd.UseVisualStyleBackColor = false;
-            this.BTSBusquedaProd.Click += new System.EventHandler(this.BTSBusquedaProdBD_Click);
-            // 
-            // bImprimir
-            // 
-            this.bImprimir.BackColor = System.Drawing.Color.White;
-            this.bImprimir.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bImprimir.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.bImprimir.Location = new System.Drawing.Point(292, 449);
-            this.bImprimir.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.bImprimir.Name = "bImprimir";
-            this.bImprimir.Size = new System.Drawing.Size(165, 53);
-            this.bImprimir.TabIndex = 10;
-            this.bImprimir.Text = "IMPRIMIR";
-            this.bImprimir.UseVisualStyleBackColor = false;
-            this.bImprimir.Click += new System.EventHandler(this.bImprimir_Click);
-            // 
-            // LAgregarventas
-            // 
-            this.LAgregarventas.BackColor = System.Drawing.Color.MidnightBlue;
-            this.LAgregarventas.Dock = System.Windows.Forms.DockStyle.Top;
-            this.LAgregarventas.Font = new System.Drawing.Font("SimSun", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LAgregarventas.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.LAgregarventas.Image = ((System.Drawing.Image)(resources.GetObject("LAgregarventas.Image")));
-            this.LAgregarventas.Location = new System.Drawing.Point(0, 0);
-            this.LAgregarventas.Margin = new System.Windows.Forms.Padding(0);
-            this.LAgregarventas.Name = "LAgregarventas";
-            this.LAgregarventas.Padding = new System.Windows.Forms.Padding(11, 4, 4, 4);
-            this.LAgregarventas.Size = new System.Drawing.Size(755, 97);
-            this.LAgregarventas.TabIndex = 11;
-            this.LAgregarventas.Text = "INFORMACIÓN PRODUCTO";
-            this.LAgregarventas.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.LAgregarventas.Click += new System.EventHandler(this.LAgregarventas_Click);
             // 
             // Nombre_prod
             // 
@@ -293,6 +149,149 @@
             this.fechaModif_prod.MinimumWidth = 6;
             this.fechaModif_prod.Name = "fechaModif_prod";
             this.fechaModif_prod.Width = 125;
+            // 
+            // BEditarProd
+            // 
+            this.BEditarProd.BackColor = System.Drawing.Color.White;
+            this.BEditarProd.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BEditarProd.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.BEditarProd.Location = new System.Drawing.Point(92, 450);
+            this.BEditarProd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.BEditarProd.Name = "BEditarProd";
+            this.BEditarProd.Size = new System.Drawing.Size(165, 53);
+            this.BEditarProd.TabIndex = 2;
+            this.BEditarProd.Text = "EDITAR";
+            this.BEditarProd.UseVisualStyleBackColor = false;
+            this.BEditarProd.Click += new System.EventHandler(this.BEditarProd_Click);
+            // 
+            // BEliminarProd
+            // 
+            this.BEliminarProd.BackColor = System.Drawing.Color.White;
+            this.BEliminarProd.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BEliminarProd.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.BEliminarProd.Location = new System.Drawing.Point(476, 446);
+            this.BEliminarProd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.BEliminarProd.Name = "BEliminarProd";
+            this.BEliminarProd.Size = new System.Drawing.Size(173, 55);
+            this.BEliminarProd.TabIndex = 3;
+            this.BEliminarProd.Text = "ELIMINAR";
+            this.BEliminarProd.UseVisualStyleBackColor = false;
+            this.BEliminarProd.Click += new System.EventHandler(this.BEliminarProdBD_Click);
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.AutoSize = false;
+            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.BBuscarProducto,
+            this.toolStripSeparator2,
+            this.toolStripLabel1,
+            this.TBBuscarProducto});
+            this.toolStrip1.Location = new System.Drawing.Point(-5, 97);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(775, 43);
+            this.toolStrip1.TabIndex = 7;
+            this.toolStrip1.Text = "toolStrip1";
+            this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
+            // 
+            // BBuscarProducto
+            // 
+            this.BBuscarProducto.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.BBuscarProducto.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolCodigoProd,
+            this.toolNombreProd});
+            this.BBuscarProducto.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold);
+            this.BBuscarProducto.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.BBuscarProducto.Image = ((System.Drawing.Image)(resources.GetObject("BBuscarProducto.Image")));
+            this.BBuscarProducto.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.BBuscarProducto.Name = "BBuscarProducto";
+            this.BBuscarProducto.Size = new System.Drawing.Size(188, 40);
+            this.BBuscarProducto.Text = "BUSCAR PRODUCTO";
+            // 
+            // toolCodigoProd
+            // 
+            this.toolCodigoProd.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.toolCodigoProd.Name = "toolCodigoProd";
+            this.toolCodigoProd.Size = new System.Drawing.Size(224, 26);
+            this.toolCodigoProd.Text = "POR CODIGO";
+            this.toolCodigoProd.Click += new System.EventHandler(this.toolCodigoProd_Click);
+            // 
+            // toolNombreProd
+            // 
+            this.toolNombreProd.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.toolNombreProd.Name = "toolNombreProd";
+            this.toolNombreProd.Size = new System.Drawing.Size(224, 26);
+            this.toolNombreProd.Text = "POR NOMBRE";
+            this.toolNombreProd.Click += new System.EventHandler(this.toolNombreProd_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 43);
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(0, 40);
+            // 
+            // TBBuscarProducto
+            // 
+            this.TBBuscarProducto.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.TBBuscarProducto.Name = "TBBuscarProducto";
+            this.TBBuscarProducto.Size = new System.Drawing.Size(367, 43);
+            this.TBBuscarProducto.Click += new System.EventHandler(this.TBBuscarCliente_Click);
+            // 
+            // BTSBusquedaProd
+            // 
+            this.BTSBusquedaProd.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.BTSBusquedaProd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTSBusquedaProd.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold);
+            this.BTSBusquedaProd.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.BTSBusquedaProd.IconChar = FontAwesome.Sharp.IconChar.Searchengin;
+            this.BTSBusquedaProd.IconColor = System.Drawing.Color.Black;
+            this.BTSBusquedaProd.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.BTSBusquedaProd.IconSize = 36;
+            this.BTSBusquedaProd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BTSBusquedaProd.Location = new System.Drawing.Point(576, 97);
+            this.BTSBusquedaProd.Margin = new System.Windows.Forms.Padding(4);
+            this.BTSBusquedaProd.Name = "BTSBusquedaProd";
+            this.BTSBusquedaProd.Size = new System.Drawing.Size(167, 43);
+            this.BTSBusquedaProd.TabIndex = 9;
+            this.BTSBusquedaProd.Text = "Buscar";
+            this.BTSBusquedaProd.UseVisualStyleBackColor = false;
+            this.BTSBusquedaProd.Click += new System.EventHandler(this.BTSBusquedaProdBD_Click);
+            // 
+            // bImprimir
+            // 
+            this.bImprimir.BackColor = System.Drawing.Color.White;
+            this.bImprimir.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bImprimir.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.bImprimir.Location = new System.Drawing.Point(292, 449);
+            this.bImprimir.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.bImprimir.Name = "bImprimir";
+            this.bImprimir.Size = new System.Drawing.Size(165, 53);
+            this.bImprimir.TabIndex = 10;
+            this.bImprimir.Text = "IMPRIMIR";
+            this.bImprimir.UseVisualStyleBackColor = false;
+            this.bImprimir.Click += new System.EventHandler(this.bImprimir_Click);
+            // 
+            // LAgregarventas
+            // 
+            this.LAgregarventas.BackColor = System.Drawing.Color.MidnightBlue;
+            this.LAgregarventas.Dock = System.Windows.Forms.DockStyle.Top;
+            this.LAgregarventas.Font = new System.Drawing.Font("SimSun", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LAgregarventas.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.LAgregarventas.Image = ((System.Drawing.Image)(resources.GetObject("LAgregarventas.Image")));
+            this.LAgregarventas.Location = new System.Drawing.Point(0, 0);
+            this.LAgregarventas.Margin = new System.Windows.Forms.Padding(0);
+            this.LAgregarventas.Name = "LAgregarventas";
+            this.LAgregarventas.Padding = new System.Windows.Forms.Padding(11, 4, 4, 4);
+            this.LAgregarventas.Size = new System.Drawing.Size(755, 97);
+            this.LAgregarventas.TabIndex = 11;
+            this.LAgregarventas.Text = "INFORMACIÓN PRODUCTO";
+            this.LAgregarventas.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LAgregarventas.Click += new System.EventHandler(this.LAgregarventas_Click);
             // 
             // listaProductos
             // 
