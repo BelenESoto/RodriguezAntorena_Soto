@@ -14,6 +14,12 @@ namespace Antorena_Soto.CDatos
     
     public partial class Usuario
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Usuario()
+        {
+            this.Factura = new HashSet<Factura>();
+        }
+    
         public int id_dni_usuario { get; set; }
         public string nomYApe_usuario { get; set; }
         public string provincia { get; set; }
@@ -26,5 +32,8 @@ namespace Antorena_Soto.CDatos
         public System.DateTime fecha_ingreso { get; set; }
         public int tipo_Usuario { get; set; }
         public string Estado { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Factura> Factura { get; set; }
     }
 }

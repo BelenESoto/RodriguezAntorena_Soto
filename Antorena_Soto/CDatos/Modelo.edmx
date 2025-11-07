@@ -32,22 +32,23 @@
             <PropertyRef Name="id_factura" />
             <PropertyRef Name="id_producto" />
           </Key>
-          <Property Name="id_factura" Type="bigint" Nullable="false" />
+          <Property Name="id_factura" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_producto" Type="int" Nullable="false" />
           <Property Name="cantidad" Type="int" Nullable="false" />
           <Property Name="precio" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="Factura">
           <Key>
-            <PropertyRef Name="nro_factura" />
+            <PropertyRef Name="estado_factura" />
           </Key>
-          <Property Name="nro_factura" Type="bigint" Nullable="false" />
+          <Property Name="nro_factura" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="tipo_factura" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="id_cliente" Type="int" Nullable="false" />
           <Property Name="fecha_factura" Type="datetime" Nullable="false" />
           <Property Name="forma_pago" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="monto_total" Type="bigint" Nullable="false" />
           <Property Name="estado_factura" Type="int" Nullable="false" />
+          <Property Name="vendedor_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Producto">
           <Key>
@@ -92,39 +93,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_id_cliente">
-          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+        <Association Name="FK_id_vendedor">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
           <End Role="Factura" Type="Self.Factura" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Cliente">
-              <PropertyRef Name="dni_cliente" />
+            <Principal Role="Usuario">
+              <PropertyRef Name="id_dni_usuario" />
             </Principal>
             <Dependent Role="Factura">
-              <PropertyRef Name="id_cliente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_id_factura">
-          <End Role="Factura" Type="Self.Factura" Multiplicity="1" />
-          <End Role="Detalle_venta" Type="Self.Detalle_venta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Factura">
-              <PropertyRef Name="nro_factura" />
-            </Principal>
-            <Dependent Role="Detalle_venta">
-              <PropertyRef Name="id_factura" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_id_producto">
-          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
-          <End Role="Detalle_venta" Type="Self.Detalle_venta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Producto">
-              <PropertyRef Name="codigo_prod" />
-            </Principal>
-            <Dependent Role="Detalle_venta">
-              <PropertyRef Name="id_producto" />
+              <PropertyRef Name="vendedor_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -170,17 +147,9 @@
             <End Role="Categoria" EntitySet="Categoria" />
             <End Role="Producto" EntitySet="Producto" />
           </AssociationSet>
-          <AssociationSet Name="FK_id_cliente" Association="Self.FK_id_cliente">
-            <End Role="Cliente" EntitySet="Cliente" />
+          <AssociationSet Name="FK_id_vendedor" Association="Self.FK_id_vendedor">
+            <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Factura" EntitySet="Factura" />
-          </AssociationSet>
-          <AssociationSet Name="FK_id_factura" Association="Self.FK_id_factura">
-            <End Role="Factura" EntitySet="Factura" />
-            <End Role="Detalle_venta" EntitySet="Detalle_venta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_id_producto" Association="Self.FK_id_producto">
-            <End Role="Producto" EntitySet="Producto" />
-            <End Role="Detalle_venta" EntitySet="Detalle_venta" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -203,6 +172,7 @@
           <Property Name="fecha_ingreso" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="tipo_Usuario" Type="Int32" Nullable="false" />
           <Property Name="Estado" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Factura" Relationship="RodriguezAntorena_SotoModel.FK_id_vendedor" FromRole="Usuario" ToRole="Factura" />
 			<!--   <Property Name="tipoUsuario" Type="String" Nullable="false" /> -->
         </EntityType>
         <EntityContainer Name="RodriguezAntorena_SotoEntities" annotation:LazyLoadingEnabled="true">
@@ -258,6 +228,10 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <AssociationSet Name="FK_id_vendedor" Association="RodriguezAntorena_SotoModel.FK_id_vendedor">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Factura" EntitySet="Factura" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Categoria">
           <Key>
@@ -308,6 +282,8 @@
           <NavigationProperty Name="Cliente" Relationship="RodriguezAntorena_SotoModel.FK_id_cliente" FromRole="Factura" ToRole="Cliente" />
           <NavigationProperty Name="Detalle_venta" Relationship="RodriguezAntorena_SotoModel.FK_id_factura" FromRole="Factura" ToRole="Detalle_venta" />
           <Property Name="estado_factura" Type="Int32" Nullable="false" />
+          <Property Name="vendedor_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="RodriguezAntorena_SotoModel.FK_id_vendedor" FromRole="Factura" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Producto">
           <Key>
@@ -384,6 +360,18 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <Association Name="FK_id_vendedor">
+          <End Type="RodriguezAntorena_SotoModel.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="RodriguezAntorena_SotoModel.Factura" Role="Factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id_dni_usuario" />
+            </Principal>
+            <Dependent Role="Factura">
+              <PropertyRef Name="vendedor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -445,6 +433,7 @@
           <EntitySetMapping Name="Factura">
             <EntityTypeMapping TypeName="RodriguezAntorena_SotoModel.Factura">
               <MappingFragment StoreEntitySet="Factura">
+                <ScalarProperty Name="vendedor_id" ColumnName="vendedor_id" />
                 <ScalarProperty Name="estado_factura" ColumnName="estado_factura" />
                 <ScalarProperty Name="monto_total" ColumnName="monto_total" />
                 <ScalarProperty Name="forma_pago" ColumnName="forma_pago" />

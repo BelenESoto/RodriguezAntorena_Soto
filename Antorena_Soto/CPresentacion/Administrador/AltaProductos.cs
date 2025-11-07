@@ -43,7 +43,7 @@ namespace Antorena_Soto.CPresentacion.Administrador
         public AltaProductos(Productox prodExistente, string modo, string conexionString)
         {
             InitializeComponent();
-            this.conexionString = "Data Source=HP-BELENS\\SQLEXPRESS;Initial Catalog=RodriguezAntorena_Soto;Integrated Security=True";
+            this.conexionString = "Data Source=DESKTOP-IDH7B7D\\SQLEXPRESS;Initial Catalog=RodriguezAntorena_Soto;Integrated Security=True";
             //this.conexionString = conexionString;
             cn_Producto = new CN_Producto(conexionString);
 

@@ -48,7 +48,7 @@ namespace Antorena_Soto.CLogica
             return cd_Producto.InsertarProducto(
                 nombre, codigoInt, estado, descripcion, categoriaInt, precioDec, stockInt, imagen, fechaModif);
         }
-
+       
         //   LISTAR USUARIOS BD 
         public DataTable ListarProductosBLL()
         {
