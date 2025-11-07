@@ -136,7 +136,7 @@
             this.BBuscarProducto.Name = "BBuscarProducto";
             this.BBuscarProducto.Size = new System.Drawing.Size(188, 40);
             this.BBuscarProducto.Text = "BUSCAR PRODUCTO";
-            this.BBuscarProducto.Click += new System.EventHandler(this.BBuscarProducto_Click);
+           // this.BBuscarProducto.Click += new System.EventHandler(this.BBuscarProducto_Click);
             // 
             // toolCodigoProd
             // 

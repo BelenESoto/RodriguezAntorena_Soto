@@ -1,7 +1,7 @@
 ﻿
-
 using Antorena_Soto.CDatos;
 using Antorena_Soto.CLogica;
+using Antorena_Soto.CPresentacion.Gerente;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,54 +18,58 @@ namespace Antorena_Soto.CPresentacion.Administrador
 {
     public partial class AltaProductos : Form
     {
+        private readonly CN_Producto cn_Producto;
+        private readonly string conexionString;
         private bool esEdicion = false;           // Variable de clase
         private int CodigoOriginal;            // Para mantener el código en edición
-        private List <Productox > _productos;
+        private List<Productox> _productos;
+        private Productox _producto;
+        private string _modo;
 
-
-        public int CodigoProducto { get; internal set; }
-        public string NombreProducto => TBNombreProducto.Text.Trim();
-        public decimal PrecioProducto => decimal.Parse(TBPrecioProducto.Text.Trim());
-        public string CategoriaProducto => CBCategoriaProducto.Text.Trim();
-        public int StockProducto => int.Parse(TBStockProducto.Text.Trim());
-        public string DescripcionProducto => TBDescripcionProducto.Text.Trim();
-        public Image ImagenProducto => PBImagenProducto.Image;
-        public object EstadoProducto { get; internal set; }
 
         // Constructor para alta
         public AltaProductos()
         {
             InitializeComponent();
+            this.conexionString = "Data Source=DESKTOP-IDH7B7D\\SQLEXPRESS;Initial Catalog=RodriguezAntorena_Soto;Integrated Security=True";
+            // Inicializa la capa lógica con la conexión
+            cn_Producto = new CN_Producto(conexionString);
             esEdicion = false;
+            BAgregarProducto.Text = "Guardar";
         }
-       
-        public AltaProductos(List<Productox> productos)
-        {
-            InitializeComponent();
-            _productos = productos;
-        }
+
 
         // Constructor para edición: recibe el producto existente
-        public AltaProductos(Productox prodExistente)
+        public AltaProductos(Productox prodExistente, string modo, string conexionString)
         {
-            //codigo, nombre, categoria, precio, stock, descripcion, estado, fechaModif, imagen))
             InitializeComponent();
-            esEdicion = true;
+            this.conexionString = "Data Source=HP-BELENS\\SQLEXPRESS;Initial Catalog=RodriguezAntorena_Soto;Integrated Security=True";
+            //this.conexionString = conexionString;
+            cn_Producto = new CN_Producto(conexionString);
 
-            CodigoOriginal = prodExistente.Codigo;
+            esEdicion = modo.Trim().Equals("Editar", StringComparison.OrdinalIgnoreCase);
+
             TBNombreProducto.Text = prodExistente.Nombre;
+            tbCodigoProducto.Text = prodExistente.Codigo.ToString();
+            CBEstadoProd.Text = prodExistente.Estado ? "Activo" : "Inactivo";
+            TBDescripcionProducto.Text = prodExistente.Descripcion;
             CBCategoriaProducto.Text = prodExistente.Categoria;
             TBPrecioProducto.Text = prodExistente.Precio.ToString();
             TBStockProducto.Text = prodExistente.Stock.ToString();
-            TBDescripcionProducto.Text = prodExistente.Descripcion;
-            CBEstadoProd.Text = prodExistente.Estado ? "Activo" : "Inactivo";
-            DTFechaModifProd.Value = DateTime.Now;
-            PBImagenProducto.Image = prodExistente.Imagen;
-            
-           
 
-            BAgregarProducto.Text = "Guardar Cambios";
+            PBImagenProducto.Image = prodExistente.Imagen;
+            DTFechaModifProd.Value = DateTime.Now;
+            if (esEdicion)
+            {
+                this.Text = "Editar Producto";
+                lAltaProd.Text = "Editar Producto";
+                BAgregarProducto.Text = "Guardar Cambios";
+            }
+
+            else
+                BAgregarProducto.Text = "Guardar";
         }
+
 
         private bool ValidarCodigoProducto()
         {
@@ -86,7 +90,7 @@ namespace Antorena_Soto.CPresentacion.Administrador
 
             if (_productos != null)
             {
-                if (!esEdicion) 
+                if (!esEdicion)
                 {
                     if (_productos.Any(p => p.Codigo == codigo))
                     {
@@ -95,7 +99,7 @@ namespace Antorena_Soto.CPresentacion.Administrador
                         return false;
                     }
                 }
-                else 
+                else
                 {
                     if (_productos.Any(p => p.Codigo == codigo && p.Codigo != CodigoOriginal))
                     {
@@ -126,7 +130,7 @@ namespace Antorena_Soto.CPresentacion.Administrador
                 e.Cancel = true;
             }
         }
-            private void TBCategoriaProducto_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        private void TBCategoriaProducto_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             string categoriaProducto = CBCategoriaProducto.Text.Trim();
             if (string.IsNullOrEmpty(categoriaProducto))
@@ -220,8 +224,6 @@ namespace Antorena_Soto.CPresentacion.Administrador
 
         }
 
-
-        
         private void BAgregarProducto_Click(object sender, EventArgs e)
         {
             if (!ValidateChildren())
@@ -230,11 +232,12 @@ namespace Antorena_Soto.CPresentacion.Administrador
                     "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
             try
             {
-                string conexionString = "Data Source=DESKTOP-IDH7B7D\\SQLEXPRESS;Initial Catalog=RodriguezAntorena_Soto;Integrated Security=True";
-               // Data Source = HP - BELENS\SQLEXPRESS; Initial Catalog = RodriguezAntorena_Soto; Integrated Security = True; Encrypt = True; Trust Server Certificate = True
-                CN_Producto productoBLL = new CN_Producto(conexionString);
+                // Inicializamos la capa lógica con la conexión actual
+                CN_Producto productoBLL = new CN_Producto(this.conexionString);
+
                 // Validaciones básicas
                 if (!int.TryParse(tbCodigoProducto.Text.Trim(), out int codigo))
                 {
@@ -256,51 +259,67 @@ namespace Antorena_Soto.CPresentacion.Administrador
 
                 // Muestra qué valor está tomando realmente el ComboBox
                 string seleccion = CBCategoriaProducto.SelectedItem.ToString();
-                MessageBox.Show($"Seleccion actual: '{seleccion}'"); // 👈 verificación
-
-                // Intentamos separar el número del texto
                 string[] partes = seleccion.Split('-');
 
-                // Validamos que haya al menos una parte numérica
                 if (partes.Length == 0)
                 {
                     MessageBox.Show("Categoría inválida. El formato debe ser '1 - Texto'.", "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                // Intentamos convertir el primer fragmento a entero
                 if (!int.TryParse(partes[0].Trim(), out int categoria))
                 {
                     MessageBox.Show($"No se pudo convertir '{partes[0].Trim()}' a número.", "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                // 👇 Si llegó hasta acá, todo bien:
-                MessageBox.Show($"Categoría numérica detectada correctamente: {categoria}");
-
-
-                //if (!int.TryParse(CBCategoriaProducto.Text.Trim(), out int categoria)){
-                //   MessageBox.Show("Categoria inválida. Ingrese un valor numérico valido.", "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                //    return; }
-
-
                 if (!int.TryParse(TBStockProducto.Text.Trim(), out int stock))
                 {
                     MessageBox.Show("Stock inválido. Ingrese un número entero.", "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-          
+
+                // Convertir imagen (si hay)
+                byte[] imagenBytes = PBImagenProducto.Image != null ? ConvertirImagenAByte(PBImagenProducto.Image) : null;
+
+                if (esEdicion)
+                {
+                    // --- MODO EDICIÓN ---
+                    bool ok = productoBLL.ModificarProductoBBL(
+                        codigo: tbCodigoProducto.Text.Trim(),
+                        nombre: TBNombreProducto.Text.Trim(),
+                        categoria: categoria.ToString(),
+                        precio: TBPrecioProducto.Text.Trim(),
+                        descripcion: TBDescripcionProducto.Text.Trim(),
+                        stock: TBStockProducto.Text.Trim(),
+                        estado: CBEstadoProd.Text == "Activo",
+                        fechaModif: DateTime.Now,
+                        imagen: imagenBytes
+                    );
+
+                    if (ok)
+                    {
+                        MessageBox.Show("Producto actualizado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se pudo actualizar el producto.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    // --- MODO ALTA ---
                     bool ok = productoBLL.AgregarProducto(
-                    codigo: tbCodigoProducto.Text.Trim(),
-                    nombre: TBNombreProducto.Text.Trim(),
-                    categoria: categoria.ToString(),
-                    descripcion: TBDescripcionProducto.Text.Trim(),
-                    precio: TBPrecioProducto.Text.Trim(),
-                    stock: TBStockProducto.Text.Trim(),
-                    imagen: PBImagenProducto.Image != null ? ConvertirImagenAByte(PBImagenProducto.Image) : null,
-                    fechaModif: DateTime.Now,
-                    estado: true
-                );
+                        codigo: tbCodigoProducto.Text.Trim(),
+                        nombre: TBNombreProducto.Text.Trim(),
+                        categoria: categoria.ToString(),
+                        descripcion: TBDescripcionProducto.Text.Trim(),
+                        precio: TBPrecioProducto.Text.Trim(),
+                        stock: TBStockProducto.Text.Trim(),
+                        imagen: imagenBytes,
+                        fechaModif: DateTime.Now,
+                        estado: true
+                    );
 
                     if (ok)
                     {
@@ -311,17 +330,28 @@ namespace Antorena_Soto.CPresentacion.Administrador
                         MessageBox.Show("No se pudo agregar el producto.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Error al agregar producto: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al guardar producto: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
 
         private byte[] ConvertirImagenAByte(Image image)
         {
-            throw new NotImplementedException();
+            //  throw new NotImplementedException();
+            if (image == null)
+                return null;
+
+            using (MemoryStream ms = new MemoryStream())
+            {
+                image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                return ms.ToArray();
+            }
         }
+
+
 
         private void LAgregarProducto_Click(object sender, EventArgs e)
         {
@@ -398,9 +428,26 @@ namespace Antorena_Soto.CPresentacion.Administrador
         {
 
         }
+
+        private void PBImagenProducto_Click_1(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFile = new OpenFileDialog())
+            {
+                openFile.Title = "Seleccionar imagen del producto";
+                openFile.Filter = "Archivos de imagen|*.jpg;*.jpeg;*.png;*.bmp";
+                openFile.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+
+                if (openFile.ShowDialog() == DialogResult.OK)
+                {
+                    // Cargar la imagen seleccionada en el PictureBox
+                    PBImagenProducto.Image = Image.FromFile(openFile.FileName);
+                    PBImagenProducto.ImageLocation = openFile.FileName;
+                }
+            }
+        }
     }
 }
 
 
 
- 
+

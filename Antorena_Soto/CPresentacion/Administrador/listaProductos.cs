@@ -10,33 +10,35 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
- 
-       
+
+
 namespace Antorena_Soto.CPresentacion.Administrador
-{ 
+{
     //    private bool buscarPorCodigo = true;
-        public partial class listaProductos : Form
+    public partial class listaProductos : Form
     {
 
         private readonly CN_Producto cn_Producto;
+        private readonly string conexionString;
         private bool buscarPorCod = true;
         private string _modo = "Codigo";
 
         private List<Productox> _productos; // lista de productos borrar
-        
-        private bool textoLimpiado = false; 
-        private string textoAImprimir; 
+
+        private bool textoLimpiado = false;
+        private string textoAImprimir;
         private PrintDocument printDocument;
 
         public listaProductos()
         {
             InitializeComponent();
-            string conexionString = "Data Source=HP-BELENS\\SQLEXPRESS;Initial Catalog=RodriguezAntorena_Soto;Integrated Security=True";
+            conexionString = "Data Source=DESKTOP-IDH7B7D\\SQLEXPRESS;Initial Catalog=RodriguezAntorena_Soto;Integrated Security=True";
 
             // Inicializa la capa lógica con la conexión
-             cn_Producto = new CN_Producto(conexionString);
-          
+            cn_Producto = new CN_Producto(conexionString);
+
         }
+
 
         public listaProductos(List<Productox> productos, string modo)
         {
@@ -56,14 +58,15 @@ namespace Antorena_Soto.CPresentacion.Administrador
             {
                 DGVListaProd.Rows.Add(
                     contador,
-                    p.Codigo,
                     p.Nombre,
-                    p.Precio,
+                    p.Codigo,
+                    p.Estado ? "Activo" : "Inactivo",
+                    p.Descripcion,
                     p.Categoria,
+                    p.Precio,
                     p.Stock,
-                    p.FechaModificacion,
                     p.Imagen,
-                    p.Estado ? "Activo" : "Inactivo"
+                    p.FechaModificacion
                 );
                 contador++;
             }
@@ -71,7 +74,7 @@ namespace Antorena_Soto.CPresentacion.Administrador
 
 
         public void CargarProductosBD()
-        { 
+        {
             try
             {
                 DGVListaProd.DefaultCellStyle.ForeColor = Color.Black;
@@ -129,65 +132,49 @@ namespace Antorena_Soto.CPresentacion.Administrador
             }
         }
 
-        private void DGVListaProd_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void TBBuscarProd_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void TBuscadorProd_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
         private void BEditarProd_Click(object sender, EventArgs e)
         {
-            if (DGVListaProd.SelectedRows.Count == 0)
-            {
-                MessageBox.Show("Debe seleccionar un producto para editar.");
-                return;
-            }
-
-            // Obtener la fila seleccionada
-            DataGridViewRow fila = DGVListaProd.SelectedRows[0];
-
             try
             {
-                // Tomar los valores de la fila directamente desde la grilla
-                int codigo = Convert.ToInt32(fila.Cells["Codigo"].Value);
-                string nombre = fila.Cells["Nombre"].Value.ToString();
-                int categoria = Convert.ToInt32(fila.Cells["Categoria"].Value);
-                decimal precio = Convert.ToDecimal(fila.Cells["Precio"].Value);
-                int stock = Convert.ToInt32(fila.Cells["Stock"].Value);
-                string descripcion = fila.Cells["Descripcion"].Value.ToString();
-                bool estado = fila.Cells["Estado"].Value.ToString() == "Activo";
-                DateTime fechaModif = DateTime.Now;
-                Image imagen = fila.Cells["Imagen"].Value as Image; // Si guardás la imagen en memoria o columna de tipo Image
-
-                // Abrimos el formulario AltaProductos en modo edición
-                using (AltaProductos formAlta = new AltaProductos())
+                if (DGVListaProd.CurrentRow == null)
                 {
-                    if (formAlta.ShowDialog() == DialogResult.OK)
-                    {
-                        CargarProductos();
-                    }
+                    MessageBox.Show("Seleccione un producto para editar.", "Aviso",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
                 }
-            }
 
+                // Crear objeto Productox desde la fila seleccionada
+                Productox prodSeleccionado = new Productox
+                {
+                    Nombre = DGVListaProd.CurrentRow.Cells["nombre_prod"].Value.ToString(),
+                    Codigo = Convert.ToInt32(DGVListaProd.CurrentRow.Cells["codigo_prod"].Value),
+                    Estado = DGVListaProd.CurrentRow.Cells["estado_prod"].Value != DBNull.Value
+                        && Convert.ToBoolean(DGVListaProd.CurrentRow.Cells["estado_prod"].Value),
+                    Descripcion = DGVListaProd.CurrentRow.Cells["descripcion_prod"].Value.ToString(),
+                    Categoria = DGVListaProd.CurrentRow.Cells["categoria_prod"].Value.ToString(),
+
+                    Precio = Convert.ToDecimal(DGVListaProd.CurrentRow.Cells["precio_prod"].Value),
+                    Stock = Convert.ToInt32(DGVListaProd.CurrentRow.Cells["stock_prod"].Value),
+                    Imagen = DGVListaProd.CurrentRow.Cells["imagen_prod"].Value != DBNull.Value
+                        ? (Image)new ImageConverter().ConvertFrom(DGVListaProd.CurrentRow.Cells["imagen_prod"].Value)
+                        : null,
+                    FechaModificacion = DGVListaProd.CurrentRow.Cells["fechaModif_prod"].Value != DBNull.Value
+                        ? Convert.ToDateTime(DGVListaProd.CurrentRow.Cells["fechaModif_prod"].Value)
+                        : DateTime.Now
+                };
+
+                // Abrir el formulario de alta en modo edición
+                AltaProductos formEditar = new AltaProductos(prodSeleccionado, "Editar", conexionString);
+
+                formEditar.ShowDialog();
+            }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al editar el producto: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error al editar producto: " + ex.Message,
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-
-
-        private void BBuscarProducto_Click(object sender, EventArgs e)
-        {
-        }
 
         private void TBBuscarCliente_Click(object sender, EventArgs e)
         {
@@ -218,23 +205,22 @@ namespace Antorena_Soto.CPresentacion.Administrador
             try
             {
                 string criterio = TBBuscarProducto.Text.Trim();
-
                 if (string.IsNullOrWhiteSpace(criterio))
                 {
                     MessageBox.Show("Ingrese un valor para buscar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
-
                 // Si buscamos por codigo, validar que sea numérico
                 if (buscarPorCod && !int.TryParse(criterio, out int _))
                 {
                     MessageBox.Show("Ingrese un Codigo válido.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-                    // Limpiar DataGridView antes de buscar
-                    DGVListaProd.DataSource = null;
-
+                // Limpiar DataGridView antes de buscar
+                DGVListaProd.DataSource = null;
+                DGVListaProd.Rows.Clear();
                 DataTable resultado = this.cn_Producto.BuscarProductosBLL(criterio, buscarPorCod);
+                // DGVListaProd.AutoGenerateColumns = false; 
                 DGVListaProd.DataSource = resultado;
 
                 if (resultado.Rows.Count == 0)
@@ -245,65 +231,6 @@ namespace Antorena_Soto.CPresentacion.Administrador
                 MessageBox.Show($"Error al buscar producto: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-/*
-        private void BTSBusquedaProd_Click(object sender, EventArgs e)
-        {
-            string criterio = TBBuscarProducto.Text.Trim();
-            if (string.IsNullOrWhiteSpace(criterio))
-            {
-                MessageBox.Show("Ingrese un valor para buscar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
-            // Validaciones
-            if (_modo == "Codigo" && !int.TryParse(criterio, out _))
-            {
-                MessageBox.Show("Ingrese un código numérico válido.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (_modo == "Nombre" && !criterio.All(c => char.IsLetter(c) || char.IsWhiteSpace(c)))
-            {
-                MessageBox.Show("Ingrese un nombre válido.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            // Buscar en la lista
-            List<Productox> resultado;
-            if (_modo == "Codigo")
-            {
-                resultado = _productos.Where(p => p.Codigo.ToString().Contains(criterio)).ToList();
-            }
-            else
-            {
-                resultado = _productos.Where(p => p.Nombre.IndexOf(criterio, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
-            }
-
-            // Mostrar resultados
-            DGVListaProd.Rows.Clear();
-            if (resultado.Count == 0)
-            {
-                MessageBox.Show("No se encontraron productos con ese criterio.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
-            int contador = 1;
-            foreach (var p in resultado)
-            {
-                DGVListaProd.Rows.Add(
-                    contador++,
-                    p.Codigo,
-                    p.Nombre,
-                    p.Precio,
-                    p.Categoria,
-                    p.Stock,
-                    p.Descripcion,
-                    p.Imagen,
-                    p.Estado ? "Activo" : "Inactivo"
-                );
-            }
-        }
-*/
 
         private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
@@ -355,7 +282,7 @@ namespace Antorena_Soto.CPresentacion.Administrador
             }
         }
 
-        
+
         //BORRAR PRODUCTO DE LA BD 
         private void BEliminarProdBD_Click(object sender, EventArgs e)
         {
@@ -411,7 +338,6 @@ namespace Antorena_Soto.CPresentacion.Administrador
             }
         }
 
-
         private void bImprimir_Click(object sender, EventArgs e)
         {
             if (DGVListaProd.Rows.Count == 0)
@@ -420,7 +346,6 @@ namespace Antorena_Soto.CPresentacion.Administrador
                 return;
             }
 
-            // Elegir qué imprimir
             DialogResult dr = MessageBox.Show("¿Desea imprimir solo la selección?\n\n(Si selecciona NO, se imprimirá toda la lista)",
                                               "Imprimir productos",
                                               MessageBoxButtons.YesNoCancel,
@@ -428,17 +353,12 @@ namespace Antorena_Soto.CPresentacion.Administrador
 
             if (dr == DialogResult.Cancel) return;
 
-            // Construir el texto a imprimir
             StringBuilder sb = new StringBuilder();
-
             sb.AppendLine("LISTADO DE PRODUCTOS");
             sb.AppendLine(new string('=', 70));
-
-            // Encabezados
             sb.AppendLine($"{"Código",-10} {"Nombre",-20} {"Precio",-10} {"Categoría",-15} {"Stock",-8} {"Estado",-10}");
             sb.AppendLine(new string('-', 70));
 
-            // Filas a imprimir
             var filas = dr == DialogResult.Yes && DGVListaProd.SelectedRows.Count > 0
                 ? DGVListaProd.SelectedRows.Cast<DataGridViewRow>()
                 : DGVListaProd.Rows.Cast<DataGridViewRow>();
@@ -448,45 +368,41 @@ namespace Antorena_Soto.CPresentacion.Administrador
                 if (row.IsNewRow) continue;
 
                 sb.AppendLine(
-                    $"{row.Cells["Codigo"].Value,-10} " +
-                    $"{row.Cells["Nombre"].Value,-20} " +
-                    $"{row.Cells["Precio"].Value,-10} " +
-                    $"{row.Cells["Categoria"].Value,-15} " +
-                    $"{row.Cells["Stock"].Value,-8} " +
-                    $"{row.Cells["Estado"].Value,-10}"
+                    $"{row.Cells["codigo_prod"].Value,-10} " +
+                    $"{row.Cells["nombre_prod"].Value,-20} " +
+                    $"{row.Cells["precio_prod"].Value,-10} " +
+                    $"{row.Cells["categoria_prod"].Value,-15} " +
+                    $"{row.Cells["stock_prod"].Value,-8} " +
+                    $"{row.Cells["estado_prod"].Value,-10}"
                 );
             }
 
             textoAImprimir = sb.ToString();
 
-            // Crear y configurar el PrintDocument
             printDocument = new PrintDocument();
             printDocument.PrintPage += PrintDocument_PrintPage;
 
-            // Mostrar vista previa
             PrintPreviewDialog preview = new PrintPreviewDialog();
             preview.Document = printDocument;
             preview.Width = 800;
             preview.Height = 600;
             preview.StartPosition = FormStartPosition.CenterScreen;
+            preview.UseAntiAlias = true;
 
             preview.ShowDialog();
         }
 
-
         private void PrintDocument_PrintPage(object sender, PrintPageEventArgs e)
         {
-            // Fuente y posición inicial
             Font fuente = new Font("Consolas", 10);
             float x = e.MarginBounds.Left;
             float y = e.MarginBounds.Top;
 
-            // Dibujar el texto
             e.Graphics.DrawString(textoAImprimir, fuente, Brushes.Black, new RectangleF(x, y, e.MarginBounds.Width, e.MarginBounds.Height));
-
-            // Si el texto no entra en una sola página, podrías manejar paginación aquí.
             e.HasMorePages = false;
         }
+
+
 
         private void DGVListaProd_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
@@ -500,14 +416,12 @@ namespace Antorena_Soto.CPresentacion.Administrador
 
         private void listaProductos_Load(object sender, EventArgs e)
         {
-
+            CargarProductosBD();
         }
     }
 }
-    
 
 
-    
 
 
 

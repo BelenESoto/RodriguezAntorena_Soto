@@ -14,7 +14,7 @@ namespace Antorena_Soto.CPresentacion.Administrador
     public partial class menuAdmin : Form
     {
         private Form _formActual = null;
-        string conexionString = "Data Source=HP-BELENS\\SQLEXPRESS;Initial Catalog=RodriguezAntorena_Soto;Integrated Security=True";
+        string conexionString = "Data Source=DESKTOP-IDH7B7D\\SQLEXPRESS;Initial Catalog=RodriguezAntorena_Soto;Integrated Security=True";
 
         public menuAdmin()
         {
@@ -64,79 +64,23 @@ namespace Antorena_Soto.CPresentacion.Administrador
         }
 
 
-        // SE VA <--
-        private void BListarProductos_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                string conexion = "Data Source=HP-BELENS\\SQLEXPRESS;Initial Catalog=RodriguezAntorena_Soto;Integrated Security=True";
-                CN_Producto productoBLL = new CN_Producto(conexion);
-
-                DataTable dt = productoBLL.ListarProductos(); // devuelve DataTable desde DAL
-
-                // Convertir DataTable a List<Productox>
-                List<Productox> lista = dt.AsEnumerable().Select(fila => new Productox
-                {
-                    Codigo = Convert.ToInt32(fila["Codigo"]),
-                    Nombre = fila["Nombre"].ToString(),
-                    Categoria = fila["Categoria"].ToString(),
-
-                    Precio = Convert.ToDecimal(fila["Precio"]),
-                    Stock = Convert.ToInt32(fila["Stock"]),
-                    Descripcion = fila["Descripcion"].ToString(),
-                    Estado = Convert.ToBoolean(fila["Estado"]),
-                    FechaModificacion = Convert.ToDateTime(fila["FechaModificacion"]),
-                    Imagen = fila["Imagen"] != DBNull.Value
-                                ? (Image)new ImageConverter().ConvertFrom(fila["Imagen"])
-                                : null
-                }).ToList();
-
-                listaProductos formListaProd = new listaProductos(lista, "Editar");
-                AbrirFormularioEnPanel(formListaProd);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al cargar productos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
 
 
-
-
-        // Editar productos
+        // Editar productos bd
         private void BEditarProducto_Click(object sender, EventArgs e)
         {
-            try
-            {
-                CN_Producto productoBLL = new CN_Producto(conexionString);
+            var form = new listaProductos();
 
-                DataTable dt = productoBLL.ListarProductos();
+            var botonEliminar = form.Controls.Find("BEliminarProd", true).FirstOrDefault();
+            var botonEditar = form.Controls.Find("BEditarProd", true).FirstOrDefault();
 
-                // Convertimos DataTable a List<Productox>
-                List<Productox> lista = dt.AsEnumerable().Select(fila => new Productox
-                {
+            if (botonEliminar != null) botonEliminar.Visible = false;
+            if (botonEditar != null) botonEditar.Visible = true;
 
-                    Nombre = fila["Nombre"].ToString(),
-                    Codigo = Convert.ToInt32(fila["Codigo"]),
-                    Categoria = fila["Categoria"].ToString(), // si Productox.Categoria es int, usar Convert.ToInt32
-                    Precio = Convert.ToDecimal(fila["Precio"]),
-                    Stock = Convert.ToInt32(fila["Stock"]),
-                    Descripcion = fila["Descripcion"].ToString(),
-                    Estado = Convert.ToBoolean(fila["Estado"]),
-                    FechaModificacion = Convert.ToDateTime(fila["FechaModificacion"]),
-                    Imagen = fila["Imagen"] != DBNull.Value
-                                ? (Image)new ImageConverter().ConvertFrom(fila["Imagen"])
-                                : null
-                }).ToList();
+            AbrirFormularioEnPanel(form);
 
-                // Abrimos el formulario con la lista ya convertida
-                listaProductos formListaProd = new listaProductos(lista, "Editar");
-                AbrirFormularioEnPanel(formListaProd);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al cargar productos para edición: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            // Cargar desde BD (esto llenará el DataGridView dentro del form)
+            form.CargarProductosBD();
         }
 
 
@@ -188,6 +132,7 @@ namespace Antorena_Soto.CPresentacion.Administrador
             if (botonImprimir != null && botonEditar != null)
                 botonImprimir.Visible = false;
             botonEditar.Visible = false;
+
             AbrirFormularioEnPanel(form);
 
             form.CargarProductosBD();
@@ -195,6 +140,3 @@ namespace Antorena_Soto.CPresentacion.Administrador
         }
     }
 }
-    
-
-
