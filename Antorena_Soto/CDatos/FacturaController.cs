@@ -27,9 +27,9 @@ namespace Antorena_Soto.CDatos
                     // La consulta inserta los datos Y DEVUELVE el ID generado
                     // Asumimos que la tabla tiene la columna 'estado' y la insertamos como '1' (Activa)
                     string consulta = @"INSERT INTO Factura 
-                                        (tipo_factura, id_cliente, fecha_factura, forma_pago, monto_total, estado_factura)
+                                        (tipo_factura, id_cliente, fecha_factura, forma_pago, monto_total, estado_factura, vendedor_id)
                                       VALUES 
-                                        (@tipo_factura, @id_cliente, @fecha_factura, @forma_pago, @monto_total, 1);
+                                        (@tipo_factura, @id_cliente, @fecha_factura, @forma_pago, @monto_total, 1, @vendedor_id);
                                       
                                       SELECT CAST(SCOPE_IDENTITY() AS BIGINT);"; // Devuelve el último ID (long)
 
@@ -40,7 +40,7 @@ namespace Antorena_Soto.CDatos
                     comandoSql.Parameters.AddWithValue("@fecha_factura", factura.fecha_factura);
                     comandoSql.Parameters.AddWithValue("@forma_pago", factura.forma_pago);
                     comandoSql.Parameters.AddWithValue("@monto_total", factura.monto_total);
-
+                    comandoSql.Parameters.AddWithValue("@vendedor_id", factura.vendedor_id);
                     conexionSql.Open();
 
                     // Usamos ExecuteScalar porque la consulta devuelve un solo valor (el nuevo ID)
@@ -72,7 +72,7 @@ namespace Antorena_Soto.CDatos
                 using (SqlConnection conexionSql = new SqlConnection(conexionString))
                 {
                     // Agregamos la columna 'estado' al select
-                    string consulta = @"SELECT nro_factura, tipo_factura, id_cliente, fecha_factura, forma_pago, monto_total, estado_factura 
+                    string consulta = @"SELECT nro_factura, tipo_factura, id_cliente, fecha_factura, forma_pago, monto_total, estado_factura,vendedor_id 
                                         FROM Factura WHERE estado_factura = 1";
                     // Opcional: WHERE estado = 1 (para listar solo activas)
 
@@ -98,7 +98,7 @@ namespace Antorena_Soto.CDatos
             {
                 using (SqlConnection conexionSql = new SqlConnection(conexionString))
                 {
-                    string consultaBase = "SELECT nro_factura, tipo_factura, id_cliente, fecha_factura, forma_pago, monto_total, estado_factura FROM Factura";
+                    string consultaBase = "SELECT nro_factura, tipo_factura, id_cliente, fecha_factura, forma_pago, monto_total, estado_factura,vendedor_id FROM Factura";
                     string consultaWhere;
 
                     if (buscarPorNroFactura)
@@ -148,6 +148,7 @@ namespace Antorena_Soto.CDatos
                                             forma_pago = @forma_pago,
                                             monto_total = @monto_total
                                             estado = @estado_factura 
+                                            vendedor_id = @vendedor_id
                                       WHERE
                                             nro_factura = @nro_factura";
 
@@ -160,6 +161,7 @@ namespace Antorena_Soto.CDatos
                     comandoSql.Parameters.AddWithValue("@monto_total", factura.monto_total);
                     comandoSql.Parameters.AddWithValue("@nro_factura", factura.nro_factura);
                     comandoSql.Parameters.AddWithValue("@estado_factura", factura.estado_factura);
+                    comandoSql.Parameters.AddWithValue("@vendedor_id", factura.vendedor_id);
 
                     conexionSql.Open();
                     int filasAfectadas = comandoSql.ExecuteNonQuery();

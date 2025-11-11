@@ -1,4 +1,4 @@
-﻿namespace Antorena_Soto.CPresentacion.Gerente
+﻿namespace Antorena_Soto.CPresentacion.Administrador
 {
     partial class reporteVentas
     {
@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(reporteVentas));
             this.pReporteVenta = new System.Windows.Forms.Panel();
+            this.lReporteVentas = new System.Windows.Forms.Label();
             this.BTSBusquedaProd = new FontAwesome.Sharp.IconButton();
             this.toolStripRepVenta = new System.Windows.Forms.ToolStrip();
             this.tsdFiltroBusqueda = new System.Windows.Forms.ToolStripDropDownButton();
@@ -50,16 +51,34 @@
             // pReporteVenta
             // 
             this.pReporteVenta.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.pReporteVenta.Controls.Add(this.lReporteVentas);
             this.pReporteVenta.Controls.Add(this.BTSBusquedaProd);
             this.pReporteVenta.Controls.Add(this.toolStripRepVenta);
             this.pReporteVenta.Controls.Add(this.bImprimir);
             this.pReporteVenta.Controls.Add(this.DGVentas);
             this.pReporteVenta.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pReporteVenta.Location = new System.Drawing.Point(0, 0);
+            this.pReporteVenta.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pReporteVenta.Name = "pReporteVenta";
-            this.pReporteVenta.Size = new System.Drawing.Size(755, 718);
+            this.pReporteVenta.Size = new System.Drawing.Size(566, 583);
             this.pReporteVenta.TabIndex = 0;
             this.pReporteVenta.Paint += new System.Windows.Forms.PaintEventHandler(this.pReporteVenta_Paint);
+            // 
+            // lReporteVentas
+            // 
+            this.lReporteVentas.BackColor = System.Drawing.Color.MidnightBlue;
+            this.lReporteVentas.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lReporteVentas.Font = new System.Drawing.Font("SimSun", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lReporteVentas.ForeColor = System.Drawing.Color.AliceBlue;
+            this.lReporteVentas.Location = new System.Drawing.Point(0, 0);
+            this.lReporteVentas.Margin = new System.Windows.Forms.Padding(0);
+            this.lReporteVentas.Name = "lReporteVentas";
+            this.lReporteVentas.Padding = new System.Windows.Forms.Padding(8, 3, 3, 3);
+            this.lReporteVentas.Size = new System.Drawing.Size(566, 61);
+            this.lReporteVentas.TabIndex = 43;
+            this.lReporteVentas.Text = "Reporte de Ventas ";
+            this.lReporteVentas.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lReporteVentas.Click += new System.EventHandler(this.lReporteVentas_Click);
             // 
             // BTSBusquedaProd
             // 
@@ -72,10 +91,9 @@
             this.BTSBusquedaProd.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.BTSBusquedaProd.IconSize = 36;
             this.BTSBusquedaProd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BTSBusquedaProd.Location = new System.Drawing.Point(547, 5);
-            this.BTSBusquedaProd.Margin = new System.Windows.Forms.Padding(4);
+            this.BTSBusquedaProd.Location = new System.Drawing.Point(418, 84);
             this.BTSBusquedaProd.Name = "BTSBusquedaProd";
-            this.BTSBusquedaProd.Size = new System.Drawing.Size(167, 43);
+            this.BTSBusquedaProd.Size = new System.Drawing.Size(125, 35);
             this.BTSBusquedaProd.TabIndex = 10;
             this.BTSBusquedaProd.Text = "Buscar";
             this.BTSBusquedaProd.UseVisualStyleBackColor = false;
@@ -84,15 +102,16 @@
             // toolStripRepVenta
             // 
             this.toolStripRepVenta.AutoSize = false;
+            this.toolStripRepVenta.Dock = System.Windows.Forms.DockStyle.None;
             this.toolStripRepVenta.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStripRepVenta.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsdFiltroBusqueda,
             this.toolStripSeparator2,
             this.toolStripLabel1,
             this.TBBuscarProducto});
-            this.toolStripRepVenta.Location = new System.Drawing.Point(0, 0);
+            this.toolStripRepVenta.Location = new System.Drawing.Point(0, 80);
             this.toolStripRepVenta.Name = "toolStripRepVenta";
-            this.toolStripRepVenta.Size = new System.Drawing.Size(755, 48);
+            this.toolStripRepVenta.Size = new System.Drawing.Size(566, 39);
             this.toolStripRepVenta.TabIndex = 8;
             this.toolStripRepVenta.Text = "toolStrip1";
             this.toolStripRepVenta.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStripRepVenta_ItemClicked);
@@ -110,7 +129,7 @@
             this.tsdFiltroBusqueda.Image = ((System.Drawing.Image)(resources.GetObject("tsdFiltroBusqueda.Image")));
             this.tsdFiltroBusqueda.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsdFiltroBusqueda.Name = "tsdFiltroBusqueda";
-            this.tsdFiltroBusqueda.Size = new System.Drawing.Size(144, 45);
+            this.tsdFiltroBusqueda.Size = new System.Drawing.Size(119, 36);
             this.tsdFiltroBusqueda.Text = "BUSCAR POR:";
             this.tsdFiltroBusqueda.Click += new System.EventHandler(this.tsdFiltroBusqueda_Click);
             // 
@@ -118,7 +137,7 @@
             // 
             this.toolCodigoVenta.ForeColor = System.Drawing.Color.MidnightBlue;
             this.toolCodigoVenta.Name = "toolCodigoVenta";
-            this.toolCodigoVenta.Size = new System.Drawing.Size(257, 26);
+            this.toolCodigoVenta.Size = new System.Drawing.Size(209, 22);
             this.toolCodigoVenta.Text = "Codigo de Venta";
             this.toolCodigoVenta.Click += new System.EventHandler(this.toolProducto_Click);
             // 
@@ -126,48 +145,49 @@
             // 
             this.toolNombreProd.ForeColor = System.Drawing.Color.MidnightBlue;
             this.toolNombreProd.Name = "toolNombreProd";
-            this.toolNombreProd.Size = new System.Drawing.Size(257, 26);
-            this.toolNombreProd.Text = "Cliente";
+            this.toolNombreProd.Size = new System.Drawing.Size(209, 22);
+            this.toolNombreProd.Text = "DNI Cliente";
             this.toolNombreProd.Click += new System.EventHandler(this.toolCliente_Click);
             // 
             // pORFECHAToolStripMenuItem
             // 
             this.pORFECHAToolStripMenuItem.Name = "pORFECHAToolStripMenuItem";
-            this.pORFECHAToolStripMenuItem.Size = new System.Drawing.Size(257, 26);
-            this.pORFECHAToolStripMenuItem.Text = "Vendedor";
+            this.pORFECHAToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.pORFECHAToolStripMenuItem.Text = "DNI Vendedor";
             this.pORFECHAToolStripMenuItem.Click += new System.EventHandler(this.toolVendedor_Click);
             // 
             // pORVENDEDORToolStripMenuItem
             // 
             this.pORVENDEDORToolStripMenuItem.Name = "pORVENDEDORToolStripMenuItem";
-            this.pORVENDEDORToolStripMenuItem.Size = new System.Drawing.Size(257, 26);
+            this.pORVENDEDORToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
             this.pORVENDEDORToolStripMenuItem.Text = "Fecha venta";
             this.pORVENDEDORToolStripMenuItem.Click += new System.EventHandler(this.toolFecha_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 48);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 39);
             // 
             // toolStripLabel1
             // 
             this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(0, 45);
+            this.toolStripLabel1.Size = new System.Drawing.Size(0, 36);
             // 
             // TBBuscarProducto
             // 
             this.TBBuscarProducto.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.TBBuscarProducto.Name = "TBBuscarProducto";
-            this.TBBuscarProducto.Size = new System.Drawing.Size(367, 48);
+            this.TBBuscarProducto.Size = new System.Drawing.Size(276, 39);
             this.TBBuscarProducto.Click += new System.EventHandler(this.TBBuscarProducto_Click);
             // 
             // bImprimir
             // 
             this.bImprimir.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bImprimir.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.bImprimir.Location = new System.Drawing.Point(300, 583);
+            this.bImprimir.Location = new System.Drawing.Point(225, 474);
+            this.bImprimir.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.bImprimir.Name = "bImprimir";
-            this.bImprimir.Size = new System.Drawing.Size(128, 37);
+            this.bImprimir.Size = new System.Drawing.Size(96, 30);
             this.bImprimir.TabIndex = 5;
             this.bImprimir.Text = "IMPRIMIR";
             this.bImprimir.UseVisualStyleBackColor = true;
@@ -175,20 +195,25 @@
             // 
             // DGVentas
             // 
+            this.DGVentas.BackgroundColor = System.Drawing.Color.Gainsboro;
             this.DGVentas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGVentas.Location = new System.Drawing.Point(37, 127);
+            this.DGVentas.Location = new System.Drawing.Point(28, 137);
+            this.DGVentas.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.DGVentas.Name = "DGVentas";
             this.DGVentas.RowHeadersWidth = 51;
             this.DGVentas.RowTemplate.Height = 24;
-            this.DGVentas.Size = new System.Drawing.Size(677, 433);
+            this.DGVentas.Size = new System.Drawing.Size(508, 318);
             this.DGVentas.TabIndex = 4;
+            this.DGVentas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGVentas_CellContentClick);
+            this.DGVentas.Click += new System.EventHandler(this.reporteVentas_Load_1);
             // 
             // reporteVentas
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(755, 718);
+            this.ClientSize = new System.Drawing.Size(566, 583);
             this.Controls.Add(this.pReporteVenta);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "reporteVentas";
             this.Text = "reporteVentas";
             this.Load += new System.EventHandler(this.reporteVentas_Load_1);
@@ -215,5 +240,6 @@
         private FontAwesome.Sharp.IconButton BTSBusquedaProd;
         private System.Windows.Forms.ToolStripMenuItem pORFECHAToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pORVENDEDORToolStripMenuItem;
+        public System.Windows.Forms.Label lReporteVentas;
     }
 }

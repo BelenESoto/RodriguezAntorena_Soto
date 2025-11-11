@@ -1,4 +1,4 @@
-﻿using Antorena_Soto.CPresentacion.Gerente;
+﻿using Antorena_Soto.CLogica;
 using Antorena_Soto.CPresentacion.Vendedor;
 using System;
 using System.Collections.Generic;
@@ -15,12 +15,31 @@ namespace Antorena_Soto
 {
     public partial class Form1 : Form
     {
+
+        // --- NUEVO ---
+        // Instancia de la capa BLL de Usuario para el ingreso desde BD y no Manual
+        private readonly UsuarioBLL usuarioBLL;
+
         public Form1()
         {
             InitializeComponent();
+
+            // --- NUEVO ---
+            // Inicializamos la BLL con la cadena de conexión a la base de datos 
+            try
+            {
+                string conexionString = "Data Source=DESKTOP-IDH7B7D\\SQLEXPRESS;Initial Catalog=RodriguezAntorena_Soto;Integrated Security=True";
+                usuarioBLL = new UsuarioBLL(conexionString);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error fatal al conectar con la base de datos: " + ex.Message, "Error de Conexión", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit(); // Si no hay BBDD, el login no puede funcionar
+            }
+
         }
 
-        //aca vañidaciones 
+        //VALIDACIONES
 
         private void TBDni_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
@@ -57,44 +76,94 @@ namespace Antorena_Soto
 
         private void BIngresar_Click(object sender, EventArgs e)
         {
-            string dni = TBDni.Text.Trim();
-            string contrasenia = TBContrasenia.Text;
-            string dniGerente = "11111111";
-            string contraseniaGerente = "111111";
-            string dniVendedor = "00000000";
-            string contraseniaVendedor = "000000";
-            string dniSuperAdmin = "22222222";
-            string contraseniaSuperAdmin = "222222";
+            string dniInput = TBDni.Text.Trim();
+            string contraseniaInput = TBContrasenia.Text;
 
-
-            if (dni.Equals(dniGerente, StringComparison.Ordinal) && contrasenia.Equals(contraseniaGerente, StringComparison.Ordinal))
+            // Validación de DNI
+            if (!int.TryParse(dniInput, out int dniNum))
             {
-                //aca redirigir a ventana admin
-                MessageBox.Show("Abriendo perfil Gerente");
-
-                CPresentacion.Administrador.menuAdmin formGerente = new CPresentacion.Administrador.menuAdmin();
-                formGerente.Show();
-                this.Hide(); // oculta el formulario actual
+                MessageBox.Show("El DNI ingresado no es un número válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
 
-            else if (dni.Equals(dniVendedor, StringComparison.Ordinal) && contrasenia.Equals(contraseniaVendedor, StringComparison.Ordinal))
+            try
             {
+                // Buscar al usuario en la Base de Datos por DNI    
+                DataTable dtUsuario = usuarioBLL.BuscarUsuariosBLL(dniInput, true); // true = buscar por DNI
 
-                menuVendedor formVendedor = new menuVendedor();
-                formVendedor.Show();
-                this.Hide();
-            }
-            else if (dni.Equals(dniSuperAdmin, StringComparison.Ordinal) && contrasenia.Equals(contraseniaSuperAdmin, StringComparison.Ordinal))
-            {
-                MessageBox.Show("Abriendo perfil Administrador");
-                CPresentacion.Administrador.menuSuperAdm formSuperAdm = new CPresentacion.Administrador.menuSuperAdm();
-                formSuperAdm.Show();
-                this.Hide();
-            }
-            else
-            {
-                MessageBox.Show("Dni y/o contraseña no son correctos");
+                // Validar si el DNI existe
+                if (dtUsuario.Rows.Count == 0)
+                {
+                    MessageBox.Show("DNI no encontrado.", "Error de Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
 
+                // Obtener los datos del usuario
+                DataRow filaUsuario = dtUsuario.Rows[0];
+                int tipoUsuario = Convert.ToInt32(filaUsuario["tipo_Usuario"]);
+                string estado = Convert.ToString(filaUsuario["Estado"]);
+                int idDniBD = Convert.ToInt32(filaUsuario["id_dni_usuario"]); // Este es tu 'vendedor_id'
+
+                // Validar el Estado "Activo", sino no puede ingresar
+                if (estado.ToUpper() != "ACTIVO")
+                {
+                    MessageBox.Show("Este usuario se encuentra inactivo. Contacte al administrador.", "Error de Login", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Validar Contraseña con tres de prototipo
+                string contraseniaCorrecta = "";
+                switch (tipoUsuario)
+                {
+                    case 1: // Vendedor
+                        contraseniaCorrecta = "111111";
+                        break;
+                    case 2: // Admin
+                        contraseniaCorrecta = "222222";
+                        break;
+                    case 3: // SuperAdmin
+                        contraseniaCorrecta = "333333";
+                        break;
+                    default:
+                        MessageBox.Show("Tipo de usuario desconocido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                }
+
+                if (contraseniaInput != contraseniaCorrecta)
+                {
+                    MessageBox.Show("Contraseña incorrecta.", "Error de Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Si llegamos acá, el login esta ok
+                // Guardamos los datos del usuario en la sesión para usarlo en otros forms
+                UsuarioBLL.SesionUsuario.Login(filaUsuario);
+
+                // Segun el tipo de usuario, abrir el form correspondiente
+                switch (tipoUsuario)
+                {
+                    case 1: // Vendedor
+                        menuVendedor formVendedor = new menuVendedor();
+                        formVendedor.Show();
+                        this.Hide();
+                        break;
+                    case 2: // Admin
+                        MessageBox.Show("Abriendo perfil Administrador"); // "Gerente" en tu código, "Admin" en la DB
+                        CPresentacion.Administrador.menuAdmin formAdmin = new CPresentacion.Administrador.menuAdmin();
+                        formAdmin.Show();
+                        this.Hide();
+                        break;
+                    case 3: // SuperAdmin
+                        MessageBox.Show("Abriendo perfil Super Administrador");
+                        CPresentacion.Administrador.menuSuperAdm formSuperAdm = new CPresentacion.Administrador.menuSuperAdm();
+                        formSuperAdm.Show();
+                        this.Hide();
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrió un error inesperado durante el login: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

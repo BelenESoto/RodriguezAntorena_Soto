@@ -116,6 +116,7 @@
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="CDatos\ClienteController.cs" />
+    <Compile Include="CDatos\DetalleVentaController.cs" />
     <Compile Include="CDatos\Detalle_venta.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
@@ -131,6 +132,9 @@
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="CDatos\sp_helpdiagrams_Result.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CDatos\sysdiagrams.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="CDatos\UsuarioController.cs" />
@@ -153,9 +157,15 @@
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="CLogica\CN_Cliente.cs" />
+    <Compile Include="CLogica\CN_DetalleVenta.cs" />
     <Compile Include="CLogica\CN_Factura.cs" />
     <Compile Include="CLogica\CN_Producto.cs" />
     <Compile Include="CLogica\CN_Usuario.cs" />
+    <Compile Include="CPresentacion\Administrador\FormRecaudacion1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FormRecaudacion.resx</DependentUpon>
+    </Compile>
     <Compile Include="CPresentacion\Administrador\listaProductos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -279,6 +289,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CPresentacion\Administrador\FormRecaudacion.resx">
       <DependentUpon>FormRecaudacion.cs</DependentUpon>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FormRecaudacion1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="CPresentacion\Gerente\menuGerente.resx">
       <DependentUpon>menuGerente.cs</DependentUpon>

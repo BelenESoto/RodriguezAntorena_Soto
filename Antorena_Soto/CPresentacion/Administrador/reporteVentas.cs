@@ -1,62 +1,103 @@
 ﻿
+
+using Antorena_Soto.CPresentacion.Administrador;
+using Antorena_Soto.CPresentacion.Vendedor;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Antorena_Soto.CPresentacion.Gerente
+namespace Antorena_Soto.CPresentacion.Administrador
 {
     public partial class reporteVentas : Form
     {
+        private string conexionString = "Data Source=DESKTOP-IDH7B7D\\SQLEXPRESS;Initial Catalog=RodriguezAntorena_Soto;Integrated Security=True";
+        private DataTable ventasTabla;   // Para almacenar resultados
+
         private string modoBusqueda = "Fecha";
-        private List<Venta> Ventas;
+        // private List<Venta> Ventas;
         private PrintDocument printDocument;
         private string textoAImprimir;
 
-        public reporteVentas(List<Venta> ventas)
+
+        public reporteVentas()
         {
             InitializeComponent();
-            this.Ventas = ventas;
         }
 
         private void reporteVentas_Load_1(object sender, EventArgs e)
         {
-            // Configurar columnas si no existen
-            if (DGVentas.Columns.Count == 0)
-            {
-                DGVentas.Columns.Add("CodigoVenta", "Código Venta");
-                DGVentas.Columns.Add("Cliente", "Nombre Cliente");
-                DGVentas.Columns.Add("FechaVenta", "Fecha Venta");
-                DGVentas.Columns.Add("Vendedor", "Nombre Vendedor");
-                DGVentas.Columns.Add("Productos", "Productos");
-                DGVentas.Columns.Add("Total", "Total");
-            }
-
-            // Cargar todas las ventas al iniciar
-            CargarVentas(Ventas);
+            ConfigurarColumnas();
+            DGVentas.ColumnHeadersVisible = true;
+            DGVentas.EnableHeadersVisualStyles = false;
+            DGVentas.ColumnHeadersDefaultCellStyle.BackColor = Color.LightGray;
+            DGVentas.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black;
+            DGVentas.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10);
+            CargarVentasDesdeBD();
         }
 
-        private void CargarVentas(List<Venta> ventas)
+        private void ConfigurarColumnas()
         {
-            DGVentas.Rows.Clear();
-            foreach (var v in ventas)
-            {
-                string productosConcatenados = string.Join(", ", v.Productos.Select(p => p.Nombre));
+            DGVentas.Columns.Clear();
 
-                DGVentas.Rows.Add(
-                    v.CodigoVenta,
-                    v.NombreCliente,
-                    v.FechaVenta.ToString("dd/MM/yyyy"),
-                    v.NombreVendedor,
-                    productosConcatenados,
-                    v.Total.ToString("C")
-                );
+            DGVentas.Columns.Add("CodigoVenta", "Código Venta");
+            DGVentas.Columns.Add("Cliente", "Nombre Cliente");
+            DGVentas.Columns.Add("FechaVenta", "Fecha Venta");
+            DGVentas.Columns.Add("Vendedor", "Nombre Vendedor");
+            DGVentas.Columns.Add("Total", "Total");
+
+            // Botón Ver Detalle
+            DataGridViewButtonColumn colBtn = new DataGridViewButtonColumn();
+            colBtn.Name = "Detalle";
+            colBtn.DefaultCellStyle.NullValue = "Ver";
+            colBtn.HeaderText = "VerDetale";
+            //colBtn.Text = "Ver";
+            colBtn.UseColumnTextForButtonValue = true;
+            colBtn.Width = 120;
+            DGVentas.Columns.Add(colBtn);
+            (DGVentas.Columns["Detalle"] as DataGridViewButtonColumn).UseColumnTextForButtonValue = true;
+        }
+
+        private void CargarVentasDesdeBD()
+        {
+            string consulta = @"
+        SELECT 
+            F.nro_factura AS CodigoVenta,
+            C.nomYApe_cliente AS Cliente,
+            F.fecha_factura AS FechaVenta,
+            U.nomYApe_usuario AS Vendedor,
+            F.monto_total AS Total
+        FROM Factura F
+        INNER JOIN Cliente C ON F.id_cliente = C.dni_cliente
+        INNER JOIN Usuario U ON F.vendedor_id = U.id_dni_usuario
+        ORDER BY F.fecha_factura DESC";
+
+            using (SqlConnection con = new SqlConnection(conexionString))
+            using (SqlDataAdapter da = new SqlDataAdapter(consulta, con))
+            {
+                ventasTabla = new DataTable();
+                da.Fill(ventasTabla);
+
+                DGVentas.Rows.Clear();
+
+                foreach (DataRow row in ventasTabla.Rows)
+                {
+                    DGVentas.Rows.Add(
+                        row["CodigoVenta"],
+                        row["Cliente"],
+                        Convert.ToDateTime(row["FechaVenta"]).ToString("dd/MM/yyyy"),
+                        row["Vendedor"],
+                        ((decimal)row["Total"]).ToString("C")
+                    );
+                }
             }
         }
+
 
         private void toolFecha_Click(object sender, EventArgs e)
         {
@@ -86,79 +127,128 @@ namespace Antorena_Soto.CPresentacion.Gerente
             TBBuscarProducto.Clear();
         }
 
-        // Botón de búsqueda
         private void BTSBusquedaProd_Click(object sender, EventArgs e)
         {
             string criterio = TBBuscarProducto.Text.Trim();
 
-            // Validar que se ingrese algo
             if (string.IsNullOrWhiteSpace(criterio))
             {
-                MessageBox.Show("Ingrese un valor para buscar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Ingrese un valor para buscar.", "Aviso",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            IEnumerable<Venta> resultado = Ventas;
+            BuscarVentasDesdeBD(criterio);
+        }
+
+        private void BuscarVentasDesdeBD(string criterio)
+        {
+            string where = "";
+            SqlCommand cmd = new SqlCommand();
 
             switch (modoBusqueda)
             {
                 case "Fecha":
-                    // Validar que sea una fecha válida
-                    if (!DateTime.TryParse(criterio, out DateTime fechaBuscada))
+                    if (!DateTime.TryParse(criterio, out DateTime fecha))
                     {
-                        MessageBox.Show("Ingrese una fecha válida (ej: 30/09/2025).", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Ingrese una fecha válida.", "Aviso",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
-                    resultado = Ventas.Where(v => v.FechaVenta.Date == fechaBuscada.Date);
+
+                    where = "WHERE CONVERT(date, F.fecha_factura) = @Fecha";
+                    cmd.Parameters.AddWithValue("@Fecha", fecha.Date);
                     break;
 
                 case "Cliente":
-                    // Validar solo letras y espacios
-                    if (!criterio.All(c => char.IsLetter(c) || char.IsWhiteSpace(c)))
+                    if (!criterio.All(char.IsDigit))
                     {
-                        MessageBox.Show("No se permiten números ni caracteres especiales en el nombre del cliente.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("El DNI del cliente debe ser numérico.", "Aviso",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
-                    resultado = Ventas.Where(v => v.NombreCliente.IndexOf(criterio, StringComparison.OrdinalIgnoreCase) >= 0);
+
+                    where = "WHERE C.dni_cliente = @DNICliente";
+                    cmd.Parameters.AddWithValue("@DNICliente", criterio);
                     break;
 
                 case "Vendedor":
-                    // Validar solo letras y espacios
-                    if (!criterio.All(c => char.IsLetter(c) || char.IsWhiteSpace(c)))
+                    if (!criterio.All(char.IsDigit))
                     {
-                        MessageBox.Show("No se permiten números ni caracteres especiales en el nombre del vendedor.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("El DNI del vendedor debe ser numérico.", "Aviso",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
-                    resultado = Ventas.Where(v => v.NombreVendedor.IndexOf(criterio, StringComparison.OrdinalIgnoreCase) >= 0);
+
+                    where = "WHERE U.id_dni_usuario = @DNIVend";
+                    cmd.Parameters.AddWithValue("@DNIVend", criterio);
                     break;
 
                 case "CodVenta":
-                    // Validar que sea número
                     if (!criterio.All(char.IsDigit))
                     {
-                        MessageBox.Show("Solo se permiten números en el código de la venta.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("El código debe ser numérico.", "Aviso",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
-                    resultado = Ventas.Where(v => v.CodigoVenta.ToString().Contains(criterio));
+
+                    where = "WHERE F.nro_factura = @Cod";
+                    cmd.Parameters.AddWithValue("@Cod", int.Parse(criterio));
                     break;
-
-                default:
-                    MessageBox.Show("Criterio de búsqueda no válido.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
             }
 
-            // Convertir a lista y mostrar resultados
-            var lista = resultado.ToList();
-            if (lista.Count == 0)
+            string consulta = $@"
+                SELECT 
+                    F.nro_factura AS CodigoVenta,
+                    C.nomYApe_cliente AS Cliente,
+                    F.fecha_factura AS FechaVenta,
+                    U.nomYApe_usuario AS Vendedor,
+                    F.monto_total AS Total
+                FROM Factura F
+                INNER JOIN Cliente C ON F.id_cliente = C.dni_cliente
+                INNER JOIN Usuario U ON F.vendedor_id = U.id_usuarios
+                {where}
+                ORDER BY F.fecha_factura DESC";
+
+            cmd.CommandText = consulta;
+            cmd.Connection = new SqlConnection(conexionString);
+
+            DataTable resultado = new DataTable();
+
+            using (cmd.Connection)
             {
-                MessageBox.Show("No se encontraron ventas con ese criterio.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
+                cmd.Connection.Open();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(resultado);
             }
 
-            CargarVentas(lista);
+            DGVentas.Rows.Clear();
+
+            foreach (DataRow row in resultado.Rows)
+            {
+                DGVentas.Rows.Add(
+                    row["CodigoVenta"],
+                    row["Cliente"],
+                    Convert.ToDateTime(row["FechaVenta"]).ToString("dd/MM/yyyy"),
+                    row["Vendedor"],
+                    ((decimal)row["Total"]).ToString("C")
+                );
+            }
         }
+        private void DGVentas_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
 
+            if (DGVentas.Columns[e.ColumnIndex].Name == "Detalle")
+            {
+                int codigoVenta = Convert.ToInt32(
+                    DGVentas.Rows[e.RowIndex].Cells["CodigoVenta"].Value);
 
+                // Abrir tu formulario REAL
+                facturaVenta form = new facturaVenta(codigoVenta);
+                form.ShowDialog();
+            }
+        }
         // Botón Imprimir
         private void bImprimir_Click(object sender, EventArgs e)
         {
@@ -201,10 +291,9 @@ namespace Antorena_Soto.CPresentacion.Gerente
         private void PrintDocument_PrintPage(object sender, PrintPageEventArgs e)
         {
             Font fuente = new Font("Consolas", 10);
-            float x = e.MarginBounds.Left;
-            float y = e.MarginBounds.Top;
-            e.Graphics.DrawString(textoAImprimir, fuente, Brushes.Black, new RectangleF(x, y, e.MarginBounds.Width, e.MarginBounds.Height));
-            e.HasMorePages = false;
+            e.Graphics.DrawString(textoAImprimir, fuente, Brushes.Black,
+                new RectangleF(e.MarginBounds.Left, e.MarginBounds.Top,
+                e.MarginBounds.Width, e.MarginBounds.Height));
         }
 
         private void pReporteVenta_Paint(object sender, PaintEventArgs e)
@@ -226,9 +315,13 @@ namespace Antorena_Soto.CPresentacion.Gerente
         {
 
         }
+
+        private void lReporteVentas_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
-    // 📌 Clase auxiliar: debe existir en tu modelo real
     public class Venta
     {
         public int CodigoVenta { get; set; }
@@ -244,5 +337,3 @@ namespace Antorena_Soto.CPresentacion.Gerente
         public string Nombre { get; set; }
     }
 }
-
-

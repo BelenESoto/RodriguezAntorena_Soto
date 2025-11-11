@@ -1,12 +1,13 @@
-﻿using Antorena_Soto.CPresentacion.Gerente;
-using Antorena_Soto.CPresentacion.Vendedor;
+﻿using Antorena_Soto.CLogica;
 using Antorena_Soto.CPresentacion.Administrador;
-
+using Antorena_Soto.CPresentacion.Gerente;
+using Antorena_Soto.CPresentacion.Vendedor;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,59 +21,48 @@ namespace Antorena_Soto.CPresentacion.Vendedor
         private bool buscarPorCodigo = false;
         private bool buscarPorNombre = false;
 
-        // ⭐ Nueva propiedad para recibir la lista de productos
-        private List<Productox> productos; // ⭐
+        private CN_Producto productoBLL; // BLL para productos
+        private DataRow productoSeleccionado; // Guarda el producto de la búsqueda
 
-        // ⭐ Constructor que recibe la lista de productos
-        public ventaAgregar(List<Productox> productos) // ⭐
+        public ventaAgregar()
         {
             InitializeComponent();
-            this.productos = productos; // ⭐ Guardamos la lista recibida
+
+            // Inicializamos la BLL (asumiendo que tienes una cadena de conexión)
+            try
+            {
+                string conexionString = "Data Source=DESKTOP-IDH7B7D\\SQLEXPRESS;Initial Catalog=RodriguezAntorena_Soto;Integrated Security=True";
+                productoBLL = new CN_Producto(conexionString); // Asumo que tienes ProductoBLL
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al conectar con la BBDD de productos: " + ex.Message);
+            }
         }
+
 
         private void ventaAgregar_Load(object sender, EventArgs e)
         {
-            // ⭐ Cargar la lista de productos al iniciar el form
-            CargarProductosEnVenta(); // ⭐
+            // Al cargar, solo configuramos las columnas del DGV (el carrito)
+            ConfigurarDGVCarrito();
+            // Damos la bienvenida al buscador
+            TBBuscarCliente.Text = "Ingrese CÓDIGO de producto";
         }
 
-        // ⭐ Método para cargar los productos en DGVListaProdVentas
-        private void CargarProductosEnVenta()
+        private void ConfigurarDGVCarrito()
         {
-            if (DGVListaProdVentas.Columns.Count == 0) // Evita columnas duplicadas
-            {
-                DGVListaProdVentas.Columns.Add("nOrden", "Orden Producto");
-                DGVListaProdVentas.Columns.Add("Codigo", "Código Producto");
-                DGVListaProdVentas.Columns.Add("Nombre", "Nombre Producto");
-                DGVListaProdVentas.Columns.Add("Precio", "Precio");
-                DGVListaProdVentas.Columns.Add("Categoria", "Categoría");
-                DGVListaProdVentas.Columns.Add("Stock", "Stock");
-                DGVListaProdVentas.Columns.Add("Descripcion", "Descripción");
-                DGVListaProdVentas.Columns.Add("Imagen", "Imagen");
-                DGVListaProdVentas.Columns.Add("Estado", "Estado");
+            DGVListaProdVentas.Columns.Clear();
+            DGVListaProdVentas.AutoGenerateColumns = false; // Importante
 
-                // ⭐ Nuevas columnas para venta
-                DGVListaProdVentas.Columns.Add("Cantidad", "Cantidad");
-                DGVListaProdVentas.Columns.Add("Subtotal", "Subtotal");
-            }
+            DGVListaProdVentas.Columns.Add("Codigo", "Código");
+            DGVListaProdVentas.Columns.Add("Nombre", "Nombre");
+            DGVListaProdVentas.Columns.Add("Precio", "Precio Unit.");
+            DGVListaProdVentas.Columns.Add("Cantidad", "Cantidad");
+            DGVListaProdVentas.Columns.Add("Subtotal", "Subtotal");
 
-            DGVListaProdVentas.Rows.Clear(); // Limpia antes de cargar
-            int contador = 1;
-
-            foreach (var p in productos) // ⭐ usamos la lista recibida
-            {
-                DGVListaProdVentas.Rows.Add(
-                    contador++,
-                    p.Codigo,
-                    p.Nombre,
-                    p.Precio,
-                    p.Categoria,
-                    p.Stock,
-                    p.Descripcion,
-                    p.Imagen,
-                    p.Estado ? "Activo" : "Inactivo"
-                );
-            }
+            // Formatear columnas
+            DGVListaProdVentas.Columns["Precio"].DefaultCellStyle.Format = "C2"; // Moneda
+            DGVListaProdVentas.Columns["Subtotal"].DefaultCellStyle.Format = "C2"; // Moneda
         }
 
         private void BBuscarProd_ButtonClick(object sender, EventArgs e)
@@ -99,70 +89,74 @@ namespace Antorena_Soto.CPresentacion.Vendedor
 
         private void BAgregarProd_Click(object sender, EventArgs e)
         {
-            int codigo = int.Parse(TBNombreProd.Text.Trim());
-            int cantidad = int.Parse(TBCantidadProd.Text.Trim());
-            if (string.IsNullOrWhiteSpace(TBNombreProd.Text))
+            // 1. Validar que se haya seleccionado un producto
+            if (productoSeleccionado == null)
             {
-                MessageBox.Show("El campo 'Nombre Vendedor' es obligatorio.");
+                MessageBox.Show("Debe buscar y seleccionar un producto válido primero.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(TBCantidadProd.Text) || !int.TryParse(TBCantidadProd.Text, out _))
+            // 2. Validar que el código en el TextBox coincida (seguridad)
+            if (TBNombreProd.Text != productoSeleccionado["id_codigo_producto"].ToString())
             {
-                MessageBox.Show("Debe ingresar una CANTIDAD válida (número entero).");
+                MessageBox.Show("El código de producto no coincide con el producto buscado. Por favor, busque de nuevo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            MessageBox.Show("Producto agregado correctamente.");
-
-            var producto = productos.FirstOrDefault(p => p.Codigo == codigo);
-            if (producto == null)
+            // 3. Validar la cantidad
+            if (!int.TryParse(TBCantidadProd.Text, out int cantidad) || cantidad <= 0)
             {
-                MessageBox.Show("No se encontró un producto con ese CÓDIGO.");
+                MessageBox.Show("Debe ingresar una CANTIDAD válida (número entero mayor a 0).");
                 return;
             }
 
-            // Calcular subtotal
-            decimal subtotal = producto.Precio * cantidad;
+            // 4. (Opcional) Validar Stock
+            int stockDisponible = Convert.ToInt32(productoSeleccionado["stock"]);
+            if (cantidad > stockDisponible)
+            {
+                MessageBox.Show($"Stock insuficiente. Solo quedan {stockDisponible} unidades.", "Stock", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
-            // Agregar fila al DGV
-            int nOrden = DGVListaProdVentas.Rows.Count + 1;
+            // 5. Obtener datos del producto seleccionado
+            int codigo = Convert.ToInt32(productoSeleccionado["id_codigo_producto"]);
+            string nombre = Convert.ToString(productoSeleccionado["nom_producto"]);
+            decimal precio = Convert.ToDecimal(productoSeleccionado["precio_vta"]); // Asumo nombre de columna
+            decimal subtotal = precio * cantidad;
+
+            // 6. Agregar fila al DGV (el carrito)
             DGVListaProdVentas.Rows.Add(
-                nOrden,
-                producto.Codigo,
-                producto.Nombre,
-                producto.Precio,
-                producto.Categoria,
-                producto.Stock,
-                producto.Descripcion,
-                producto.Imagen,
-                producto.Estado ? "Activo" : "Inactivo",
-                cantidad,       // ⭐ Cantidad
-                subtotal        // ⭐ Subtotal
+                codigo,
+                nombre,
+                precio,
+                cantidad,
+                subtotal
             );
 
-            // Recalcular total
+            // 7. Recalcular total
             CalcularTotal();
 
-            // Limpiar campos de entrada
+            // 8. Limpiar campos de entrada
             TBNombreProd.Clear();
             TBCantidadProd.Clear();
+            TBBuscarCliente.Clear();
+            productoSeleccionado = null; // Listo para el siguiente producto
+            TBBuscarCliente.Focus();
         }
 
         private void BEditarProd_Click(object sender, EventArgs e)
         {
             if (DGVListaProdVentas.SelectedRows.Count == 0)
             {
-                MessageBox.Show("Debe seleccionar una fila para editar.");
+                MessageBox.Show("Debe seleccionar una fila del carrito para editar.");
                 return;
             }
 
             var fila = DGVListaProdVentas.SelectedRows[0];
 
-            // Validar cantidad nueva
             if (string.IsNullOrWhiteSpace(TBCantidadProd.Text) || !int.TryParse(TBCantidadProd.Text, out int nuevaCantidad) || nuevaCantidad <= 0)
             {
-                MessageBox.Show("Debe ingresar una CANTIDAD válida para editar.");
+                MessageBox.Show("Debe ingresar una CANTIDAD válida para editar en el campo 'Cantidad'.");
                 return;
             }
 
@@ -175,6 +169,7 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             CalcularTotal();
 
             TBCantidadProd.Clear();
+            DGVListaProdVentas.ClearSelection();
         }
 
         private void TBTotalVenta_TextChanged(object sender, EventArgs e)
@@ -199,32 +194,59 @@ namespace Antorena_Soto.CPresentacion.Vendedor
 
         public void BContinuar_Click(object sender, EventArgs e)
         {
-            string nombreProd = TBNombreProd.Text.Trim();
-            string cantidadProd = TBCantidadProd.Text.Trim();
-            if (!int.TryParse(nombreProd, out _))
+            // 1. Validar que el carrito (DGV) no esté vacío
+            if (DGVListaProdVentas.Rows.Count == 0 || (DGVListaProdVentas.Rows.Count == 1 && DGVListaProdVentas.Rows[0].IsNewRow))
             {
-                MessageBox.Show("El campo 'Codigo Producto' debe ser numérico.");
+                MessageBox.Show("Debe agregar al menos un producto a la venta.", "Carrito Vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            if (!int.TryParse(cantidadProd, out _))
+            // 2. Crear la lista de items del carrito
+            List<DetalleVentaDTO> carrito = new List<DetalleVentaDTO>();
+
+            foreach (DataGridViewRow row in DGVListaProdVentas.Rows)
             {
-                MessageBox.Show("Debe ingresar una CANTIDAD válida (número entero).");
-                return;
+                // Evitar la fila 'nueva' al final del DGV
+                if (row.IsNewRow) continue;
+
+                DetalleVentaDTO item = new DetalleVentaDTO
+                {
+                    // Leemos los valores de las celdas del DGV
+                    IdProducto = Convert.ToInt32(row.Cells["Codigo"].Value),
+                    Cantidad = Convert.ToInt32(row.Cells["Cantidad"].Value),
+                    Precio = Convert.ToDecimal(row.Cells["Precio"].Value) // Precio Unitario
+                };
+                carrito.Add(item);
+            }
+
+            // 3. Obtener el total. Lo parseamos desde el TextBox
+            // Usamos NumberStyles.Currency para quitar el símbolo "$" y las comas
+            decimal totalVenta = 0;
+            if (decimal.TryParse(TBTotalVenta.Text, NumberStyles.Currency, CultureInfo.CurrentCulture, out decimal totalParseado))
+            {
+                totalVenta = totalParseado;
             }
             else
             {
-                PAgregarVendedor.Controls.Clear();
-                ventaConfirmar formVenta = new ventaConfirmar();
-                formVenta.TopLevel = false;
-                formVenta.FormBorderStyle = FormBorderStyle.None; // Sin borde
-                formVenta.Dock = DockStyle.Fill;
-
-                PAgregarVendedor.Controls.Add(formVenta);
-                formVenta.Show();
+                MessageBox.Show("Error al leer el monto total.");
+                return; // No continuar si el total no es válido
             }
-        }
 
+            // 4. Abrir ventaConfirmar y pasar los datos
+            PAgregarVendedor.Controls.Clear();
+            ventaConfirmar formVenta = new ventaConfirmar();
+
+            // 5. Setear las propiedades públicas (que crearemos en el siguiente paso)
+            formVenta.ItemsCarrito = carrito;
+            formVenta.TotalVenta = totalVenta;
+
+            // 6. Mostrar el form
+            formVenta.TopLevel = false;
+            formVenta.FormBorderStyle = FormBorderStyle.None;
+            formVenta.Dock = DockStyle.Fill;
+            PAgregarVendedor.Controls.Add(formVenta);
+            formVenta.Show();
+        }
         private void DGVListaProd_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -261,36 +283,42 @@ namespace Antorena_Soto.CPresentacion.Vendedor
 
         private void BTSBusquedaCliente_Click(object sender, EventArgs e)
         {
-
             string input = TBBuscarCliente.Text.Trim();
 
-            if (string.IsNullOrEmpty(input))
+            if (string.IsNullOrEmpty(input) || input == "Ingrese CÓDIGO de producto" || input == "Ingrese NOMBRE de producto")
             {
                 MessageBox.Show("El campo de búsqueda no puede estar vacío.");
                 return;
             }
 
-            if (buscarPorCodigo)
+            try
             {
-                if (!int.TryParse(input, out _))
+                // Llamamos a la BLL de Producto (asumo que se llama BuscarProductosBLL)
+                DataTable resultado = productoBLL.BuscarProductosBLL(input, buscarPorCodigo);
+
+                if (resultado.Rows.Count > 0)
                 {
-                    MessageBox.Show("Debe ingresar un valor numérico válido para el CÓDIGO.");
-                    return;
+                    // Encontramos el producto y lo guardamos
+                    productoSeleccionado = resultado.Rows[0];
+
+                    // Ponemos el CÓDIGO (PK) en el TextBox, como pediste
+                    TBNombreProd.Text = productoSeleccionado["id_codigo_producto"].ToString(); // Asumo nombre de la PK
+
+                    MessageBox.Show($"Producto encontrado: {productoSeleccionado["nom_producto"]}. Ingrese la cantidad.");
+                    TBCantidadProd.Focus(); // Mover el cursor a Cantidad
                 }
-                MessageBox.Show($"Buscando producto por código: {input}");
-            }
-            else if (buscarPorNombre)
-            {
-                if (int.TryParse(input, out _))
+                else
                 {
-                    MessageBox.Show("El NOMBRE no puede ser un número.");
-                    return;
+                    MessageBox.Show("No se encontró ningún producto con ese criterio.");
+                    productoSeleccionado = null;
+                    TBNombreProd.Clear();
                 }
-                MessageBox.Show($"Buscando producto por nombre: {input}");
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Debe seleccionar si desea buscar por CÓDIGO o por NOMBRE.");
+                MessageBox.Show("Error al buscar el producto: " + ex.Message);
+                productoSeleccionado = null;
+                TBNombreProd.Clear();
             }
         }
 

@@ -33,6 +33,7 @@ namespace Antorena_Soto.CDatos
         public virtual DbSet<Detalle_venta> Detalle_venta { get; set; }
         public virtual DbSet<Factura> Factura { get; set; }
         public virtual DbSet<Producto> Producto { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

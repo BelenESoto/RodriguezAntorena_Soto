@@ -71,7 +71,7 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             List<Productox> listaProductos = ObtenerProductos(); // ⭐ Método que devuelve la lista
 
             // ⭐ Pasamos la lista al constructor de ventaAgregar
-            ventaAgregar formVenta = new ventaAgregar(listaProductos); // ⭐
+            ventaAgregar formVenta = new ventaAgregar(); // ⭐
 
             formVenta.TopLevel = false;
             formVenta.FormBorderStyle = FormBorderStyle.None; // Sin borde

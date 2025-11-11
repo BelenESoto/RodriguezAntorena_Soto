@@ -9,11 +9,41 @@ namespace Antorena_Soto.CLogica
     {
         private readonly UsuarioDAL usuarioDAL;
 
+        //Hicimos otra clase estatica para manejar la sesión del usuario
+        public static class SesionUsuario
+        {
+            // Propiedades para guardar los datos del usuario
+            public static int DniUsuario { get; private set; }
+            public static string NombreUsuario { get; private set; }
+            public static int TipoUsuario { get; private set; }
+            public static bool Logueado { get; private set; }
+
+            //Inicia la sesión y guardamos los datos del usuario.
+
+            public static void Login(DataRow filaUsuario)
+            {
+                // Asumimos los nombres de las columnas de tu tabla Usuario
+                DniUsuario = Convert.ToInt32(filaUsuario["id_dni_usuario"]);
+                NombreUsuario = Convert.ToString(filaUsuario["nomYApe_usuario"]);
+                TipoUsuario = Convert.ToInt32(filaUsuario["tipo_Usuario"]);
+                Logueado = true;
+            }
+
+            //Para cerrar la sesión y limpiar los datos.
+            public static void Logout()
+            {
+                DniUsuario = 0;
+                NombreUsuario = null;
+                TipoUsuario = 0;
+                Logueado = false;
+            }
+        }
+
         public UsuarioBLL(string conexionString)
         {
             usuarioDAL = new UsuarioDAL(conexionString);
         }
-
+        
         public bool AgregarUsuario(string dni, string nombre, string provincia, string ciudad,
                                    string domicilio, long telefono, string correo,
                                    DateTime fechaNacimiento, long cuit, DateTime fechaIngreso, int tipoUsuario,string Estado)

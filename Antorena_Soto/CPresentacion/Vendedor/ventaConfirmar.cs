@@ -1,17 +1,17 @@
 ﻿// --- AÑADIR ESTOS USINGS ---
-using Antorena_Soto.CLogica; // Para ClienteBLL y (asumo) FacturaBLL
 using Antorena_Soto.CDatos;   // Para la clase Factura
-using System.Data;           // Para DataRow
-
+using Antorena_Soto.CLogica; // Para ClienteBLL y (asumo) FacturaBLL
 using FontAwesome.Sharp;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;           // Para DataRow
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Antorena_Soto.CLogica.UsuarioBLL;
 
 namespace Antorena_Soto.CPresentacion.Vendedor
 {
@@ -22,14 +22,19 @@ namespace Antorena_Soto.CPresentacion.Vendedor
 
         private readonly ClienteBLL clienteBLL;
 
-        // --- NUEVO ---
-        private readonly FacturaBLL facturaBLL; // Asumimos que esta BLL existe
+       
+        private readonly FacturaBLL facturaBLL; 
         private DataRow clienteActual = null; // Para guardar el cliente encontrado
-        // --- FIN NUEVO ---
+
+       
+        // Estas propiedades reciben los datos de'ventaAgregar'
+        public List<DetalleVentaDTO> ItemsCarrito { get; set; }
+        public decimal TotalVenta { get; set; }
 
         public ventaConfirmar()
         {
             InitializeComponent();
+            ItemsCarrito = new List<DetalleVentaDTO>();
 
             try
             {
@@ -190,94 +195,85 @@ namespace Antorena_Soto.CPresentacion.Vendedor
         // --- MÉTODO 'FINALIZAR PAGO' MODIFICADO ---
         private void BBorrar_Click(object sender, EventArgs e)
         {
-            // 1. Validaciones de factura
-            // --- NUEVA VALIDACIÓN ---
+            // 1. Validaciones
             if (clienteActual == null)
             {
                 MessageBox.Show("Debe buscar y cargar un cliente antes de facturar.", "Cliente Requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            // --- FIN NUEVA VALIDACIÓN ---
-
-            if (string.IsNullOrWhiteSpace(TBMedioPagoFact.Text))
+            if (ItemsCarrito == null || ItemsCarrito.Count == 0)
             {
-                MessageBox.Show("Debe seleccionar un Medio de Pago.");
+                MessageBox.Show("Error: No hay productos en el carrito.", "Carrito Vacío", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (string.IsNullOrWhiteSpace(TBTipoFact.Text))
-            {
-                MessageBox.Show("Debe completar el Tipo de Factura.");
-                return;
-            }
-            if (!long.TryParse(TBMontoFact.Text, out long monto))
-            {
-                MessageBox.Show("Debe ingresar un Monto válido (numérico).");
-                return;
-            }
-            // ... (resto de tus validaciones) ...
+            // ... (resto de validaciones: forma_pago, tipo_factura) ...
 
             // 2. Crear el objeto Factura
             Factura nuevaFactura = new Factura
             {
-                // nro_factura se asignará por la BBDD (IDENTITY)
                 tipo_factura = TBTipoFact.Text.Trim(),
-                id_cliente = Convert.ToInt32(clienteActual["dni_cliente"]), // Obtenido del cliente guardado
+                id_cliente = Convert.ToInt32(clienteActual["dni_cliente"]),
                 fecha_factura = DTFechaAct.Value,
                 forma_pago = TBMedioPagoFact.Text.Trim(),
-                monto_total = monto
+                monto_total = (long)TotalVenta, // O decimal si cambiaste la BBDD
+                vendedor_id = SesionUsuario.DniUsuario // <-- Usamos el ID de la sesión
             };
+
+            // --- ASUMIMOS QUE NECESITAS UN 'DetalleVentaBLL' ---
+            // Debes crear estas clases (DAL y BLL) para Detalle_venta
+            string conexionString = "Data Source=DESKTOP-IDH7B7D\\SQLEXPRESS;Initial Catalog=RodriguezAntorena_Soto;Integrated Security=True";
+            Detalle_VentaBLL detalleBLL = new Detalle_VentaBLL(conexionString);
 
             try
             {
-                // 3. Guardar en la Base de Datos
-                //    (ASUMIMOS que FacturaBLL y este método existen)
-                //    (ASUMIMOS que devuelve la factura con el Nro de factura asignado)
+                // 3. Guardar la Factura (Maestro)
                 Factura facturaGuardada = facturaBLL.AgregarFactura(nuevaFactura);
 
-                if (facturaGuardada != null)
+                // 4. Guardar los Detalles (Hijos)
+                foreach (var item in ItemsCarrito)
                 {
-                    MessageBox.Show($"Factura N° {facturaGuardada.nro_factura} creada con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Detalle_venta nuevoDetalle = new Detalle_venta
+                    {
+                        id_factura = facturaGuardada.nro_factura, // <-- ID de la factura guardada
+                        id_producto = item.IdProducto,
+                        cantidad = item.Cantidad,
+                        precio = (double)item.Precio // Cast de decimal a double
+                    };
 
-                    // 4. Abrir el formulario 'facturaVenta' y pasarle los datos
-                    facturaVenta formFactura = new facturaVenta();
-
-                    // Pasamos la factura (con nro_factura) y el cliente
-                    formFactura.FacturaMostrada = facturaGuardada;
-                    formFactura.ClienteMostrado = clienteActual;
-
-                    formFactura.ShowDialog();
-
-                    // Opcional: Limpiar todo para una nueva venta
-                    LimpiarCamposCliente();
-                    TBBuscarCliente.Text = "";
-                    TBMedioPagoFact.Text = "";
-                    TBTipoFact.Text = "";
-                    TBMontoFact.Text = "";
+                    // Guardar cada detalle en la BBDD
+                    detalleBLL.AgregarDetalle(nuevoDetalle);
                 }
-                else
-                {
-                    MessageBox.Show("Error: La factura no pudo ser guardada.", "Error BBDD", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+
+                // 5. Éxito y abrir el form de la factura
+                MessageBox.Show($"Factura N° {facturaGuardada.nro_factura} creada con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                facturaVenta formFactura = new facturaVenta();
+                formFactura.FacturaMostrada = facturaGuardada;
+                formFactura.ClienteMostrado = clienteActual;
+                // Opcional: Pasar también los detalles
+                // formFactura.ItemsMostrados = ItemsCarrito; 
+                formFactura.ShowDialog();
+
+                // ... (Limpiar campos) ...
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al guardar la factura: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error al guardar la factura y sus detalles: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            // (Tu código de 'CrearBotonesFactura' y 'Venta' puede ir aquí si aún lo necesitas,
-            // aunque 'CrearBotonesFactura' parece que ahora debería estar DENTRO del try)
         }
 
         private void CrearBotonesFactura()
         {
-            // (Tu código existente para crear botones)
-            // ...
+           
         }
 
 
         private void ventaConfirmar_Load(object sender, EventArgs e)
         {
-
+            // Al cargar, mostramos el total que recibimos del carrito
+            TBMontoFact.Text = TotalVenta.ToString("0.00");
+            // Opcional: hacer el monto de solo lectura para que no se pueda cambiar
+            TBMontoFact.ReadOnly = true;
         }
     }
 }

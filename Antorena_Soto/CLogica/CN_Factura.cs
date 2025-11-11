@@ -4,6 +4,7 @@ using Antorena_Soto.CDatos; // Para Factura y FacturaDAL
 
 namespace Antorena_Soto.CLogica
 {
+
     public class FacturaBLL
     {
         // Dependencia de la capa DAL de Factura
