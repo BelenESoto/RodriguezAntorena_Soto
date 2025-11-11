@@ -1,4 +1,4 @@
-﻿namespace Antorena_Soto.CPresentacion.Gerente
+﻿/*namespace Antorena_Soto.CPresentacion.Gerente
 {
     partial class menuGerente
     {
@@ -149,3 +149,4 @@
         private System.Windows.Forms.Panel PGerente;
     }
 }
+*/

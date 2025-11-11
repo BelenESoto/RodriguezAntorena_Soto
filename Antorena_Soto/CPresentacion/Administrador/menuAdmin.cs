@@ -1,5 +1,5 @@
 ﻿using Antorena_Soto.CLogica;
-using Antorena_Soto.CPresentacion.Gerente;
+//using Antorena_Soto.CPresentacion.Gerente;
 using Antorena_Soto.CPresentacion.SuperAdministrador;
 using System;
 using System.Collections.Generic;
@@ -90,9 +90,9 @@ namespace Antorena_Soto.CPresentacion.Administrador
             try
             {
                 // TODO: Traer datos reales desde CN_Ventas cuando tengas implementada la capa
-                List<Venta> ventas = new List<Venta>();
-                reporteVentas formReporte = new reporteVentas(ventas);
+                reporteVentas formReporte = new reporteVentas();
                 AbrirFormularioEnPanel(formReporte);
+                
             }
             catch (Exception ex)
             {
