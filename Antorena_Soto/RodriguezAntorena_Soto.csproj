@@ -96,6 +96,7 @@
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -179,9 +180,7 @@
     <Compile Include="CPresentacion\Administrador\FormRecaudacion.Designer.cs">
       <DependentUpon>FormRecaudacion.cs</DependentUpon>
     </Compile>
-    <Compile Include="CPresentacion\Gerente\menuGerente.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="CPresentacion\Gerente\menuGerente.cs" />
     <Compile Include="CPresentacion\Gerente\menuGerente.Designer.cs">
       <DependentUpon>menuGerente.cs</DependentUpon>
     </Compile>

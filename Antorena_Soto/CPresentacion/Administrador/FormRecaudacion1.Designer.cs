@@ -22,14 +22,14 @@ namespace Antorena_Soto.CPresentacion.Administrador {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class FormRecaudacion {
+    public class FormRecaudacion1 {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal FormRecaudacion() {
+        internal FormRecaudacion1() {
         }
         
         /// <summary>
@@ -57,16 +57,6 @@ namespace Antorena_Soto.CPresentacion.Administrador {
             }
             set {
                 resourceCulture = value;
-            }
-        }
-        
-        /// <summary>
-        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap lRecaudacion_Image {
-            get {
-                object obj = ResourceManager.GetObject("lRecaudacion.Image", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

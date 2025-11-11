@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-
+/*
 namespace Antorena_Soto.CPresentacion.Gerente
 {
     public partial class menuGerente : Form
@@ -69,4 +69,4 @@ namespace Antorena_Soto.CPresentacion.Gerente
         }
     }
 }
-
+*/

@@ -1,5 +1,4 @@
-﻿
-using Antorena_Soto.CDatos;
+﻿using Antorena_Soto.CDatos;
 using Antorena_Soto.CLogica;
 using Antorena_Soto.CPresentacion.Administrador;
 using System;
@@ -32,7 +31,7 @@ namespace Antorena_Soto.CPresentacion.Administrador
         public FormRecaudacion()
         {
             InitializeComponent();
-            this.conexionString = "Data Source=DESKTOP-IDH7B7D\\SQLEXPRESS;Initial Catalog=RodriguezAntorena_Soto;Integrated Security=True";
+            this.conexionString = "Data Source=HP-BELENS\\SQLEXPRESS;Initial Catalog=RodriguezAntorena_Soto;Integrated Security=True";
             InicializarEventosYDocumentos();
         }
 
@@ -49,7 +48,7 @@ namespace Antorena_Soto.CPresentacion.Administrador
             // Eventos
             btnPorFecha.Click += BtnPorFecha_Click;
             btnPorPeriodo.Click += BtnPorPeriodo_Click;
-            this.btnBuscar.Click += btnBuscar_Click;
+            this.btnBuscar.Click += btnBuscar_Click; 
             btnImprimir.Click += BtnImprimir_Click;
 
             // Documento de impresión
@@ -72,10 +71,9 @@ namespace Antorena_Soto.CPresentacion.Administrador
             dtpDesde.Visible = true;
             dtpHasta.Visible = true;
         }
-
-
+       
         private void btnBuscar_Click(object sender, EventArgs e)
-        {
+        { 
             DateTime hoy = DateTime.Today;
 
             // Reset
@@ -354,3 +352,5 @@ namespace Antorena_Soto.CPresentacion.Administrador
         }
     }
 }
+
+
