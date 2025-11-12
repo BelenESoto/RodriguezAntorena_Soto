@@ -92,6 +92,7 @@
             this.DGVListaProd.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.DGVListaProd.Size = new System.Drawing.Size(663, 280);
             this.DGVListaProd.TabIndex = 39;
+            this.DGVListaProd.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGVListaProd_CellContentClick);
             // 
             // Codigo
             // 

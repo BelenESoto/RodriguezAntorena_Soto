@@ -2,6 +2,7 @@
 using Antorena_Soto.CDatos;   // Para la clase Factura
 using Antorena_Soto.CLogica; // Para ClienteBLL y (asumo) FacturaBLL
 using FontAwesome.Sharp;
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -216,11 +217,12 @@ namespace Antorena_Soto.CPresentacion.Vendedor
                 fecha_factura = DTFechaAct.Value,
                 forma_pago = TBMedioPagoFact.Text.Trim(),
                 monto_total = (long)TotalVenta, // O decimal si cambiaste la BBDD
-                vendedor_id = SesionUsuario.DniUsuario // <-- Usamos el ID de la sesión
+                estado_factura = 1,
+                vendedor_id = UsuarioBLL.SesionUsuario.DniUsuario
+                // <-- Usamos el ID de la sesión
             };
 
-            // --- ASUMIMOS QUE NECESITAS UN 'DetalleVentaBLL' ---
-            // Debes crear estas clases (DAL y BLL) para Detalle_venta
+            MessageBox.Show("Objeto Factura creado");
             string conexionString = "Data Source=DESKTOP-IDH7B7D\\SQLEXPRESS;Initial Catalog=RodriguezAntorena_Soto;Integrated Security=True";
             Detalle_VentaBLL detalleBLL = new Detalle_VentaBLL(conexionString);
 
@@ -228,7 +230,7 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             {
                 // 3. Guardar la Factura (Maestro)
                 Factura facturaGuardada = facturaBLL.AgregarFactura(nuevaFactura);
-
+                MessageBox.Show("Factura guardada");
                 // 4. Guardar los Detalles (Hijos)
                 foreach (var item in ItemsCarrito)
                 {
@@ -258,7 +260,13 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al guardar la factura y sus detalles: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                string errorReal = ex.Message; // El error de C#
+                if (ex.InnerException != null)
+                {
+                    errorReal = ex.InnerException.Message; // ¡El error de SQL Server!
+                }
+
+                MessageBox.Show($"Error al guardar: {errorReal}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

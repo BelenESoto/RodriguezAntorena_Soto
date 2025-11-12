@@ -32,14 +32,14 @@
             <PropertyRef Name="id_factura" />
             <PropertyRef Name="id_producto" />
           </Key>
-          <Property Name="id_factura" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_factura" Type="bigint" Nullable="false" />
           <Property Name="id_producto" Type="int" Nullable="false" />
           <Property Name="cantidad" Type="int" Nullable="false" />
           <Property Name="precio" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="Factura">
           <Key>
-            <PropertyRef Name="estado_factura" />
+            <PropertyRef Name="nro_factura" />
           </Key>
           <Property Name="nro_factura" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="tipo_factura" Type="varchar" MaxLength="200" Nullable="false" />
@@ -103,6 +103,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Detalle_Factura">
+          <End Role="Factura" Type="Self.Factura" Multiplicity="1" />
+          <End Role="Detalle_venta" Type="Self.Detalle_venta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Factura">
+              <PropertyRef Name="nro_factura" />
+            </Principal>
+            <Dependent Role="Detalle_venta">
+              <PropertyRef Name="id_factura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Detalle_Producto">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="Detalle_venta" Type="Self.Detalle_venta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="codigo_prod" />
+            </Principal>
+            <Dependent Role="Detalle_venta">
+              <PropertyRef Name="id_producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_id_vendedor">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
           <End Role="Factura" Type="Self.Factura" Multiplicity="*" />
@@ -157,6 +181,14 @@
           <AssociationSet Name="FK_categoria_prod" Association="Self.FK_categoria_prod">
             <End Role="Categoria" EntitySet="Categoria" />
             <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Detalle_Factura" Association="Self.FK_Detalle_Factura">
+            <End Role="Factura" EntitySet="Factura" />
+            <End Role="Detalle_venta" EntitySet="Detalle_venta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Detalle_Producto" Association="Self.FK_Detalle_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="Detalle_venta" EntitySet="Detalle_venta" />
           </AssociationSet>
           <AssociationSet Name="FK_id_vendedor" Association="Self.FK_id_vendedor">
             <End Role="Usuario" EntitySet="Usuario" />

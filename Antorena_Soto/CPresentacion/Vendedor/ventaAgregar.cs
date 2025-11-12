@@ -97,7 +97,7 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             }
 
             // 2. Validar que el código en el TextBox coincida (seguridad)
-            if (TBNombreProd.Text != productoSeleccionado["id_codigo_producto"].ToString())
+            if (TBNombreProd.Text != productoSeleccionado["codigo_prod"].ToString())
             {
                 MessageBox.Show("El código de producto no coincide con el producto buscado. Por favor, busque de nuevo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -111,7 +111,7 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             }
 
             // 4. (Opcional) Validar Stock
-            int stockDisponible = Convert.ToInt32(productoSeleccionado["stock"]);
+            int stockDisponible = Convert.ToInt32(productoSeleccionado["stock_prod"]);
             if (cantidad > stockDisponible)
             {
                 MessageBox.Show($"Stock insuficiente. Solo quedan {stockDisponible} unidades.", "Stock", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -119,9 +119,9 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             }
 
             // 5. Obtener datos del producto seleccionado
-            int codigo = Convert.ToInt32(productoSeleccionado["id_codigo_producto"]);
-            string nombre = Convert.ToString(productoSeleccionado["nom_producto"]);
-            decimal precio = Convert.ToDecimal(productoSeleccionado["precio_vta"]); // Asumo nombre de columna
+            int codigo = Convert.ToInt32(productoSeleccionado["codigo_prod"]);
+            string nombre = Convert.ToString(productoSeleccionado["nombre_prod"]);
+            decimal precio = Convert.ToDecimal(productoSeleccionado["precio_prod"]); 
             decimal subtotal = precio * cantidad;
 
             // 6. Agregar fila al DGV (el carrito)
@@ -302,9 +302,9 @@ namespace Antorena_Soto.CPresentacion.Vendedor
                     productoSeleccionado = resultado.Rows[0];
 
                     // Ponemos el CÓDIGO (PK) en el TextBox, como pediste
-                    TBNombreProd.Text = productoSeleccionado["id_codigo_producto"].ToString(); // Asumo nombre de la PK
+                    TBNombreProd.Text = productoSeleccionado["codigo_prod"].ToString(); // Asumo nombre de la PK
 
-                    MessageBox.Show($"Producto encontrado: {productoSeleccionado["nom_producto"]}. Ingrese la cantidad.");
+                    MessageBox.Show($"Producto encontrado: {productoSeleccionado["nombre_prod"]}. Ingrese la cantidad.");
                     TBCantidadProd.Focus(); // Mover el cursor a Cantidad
                 }
                 else
