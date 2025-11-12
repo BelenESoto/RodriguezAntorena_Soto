@@ -245,6 +245,7 @@ namespace Antorena_Soto.CPresentacion.Administrador
                     DGVentas.Rows[e.RowIndex].Cells["CodigoVenta"].Value);
 
                 // Abrir tu formulario REAL
+
                 facturaVenta form = new facturaVenta(codigoVenta);
                 form.ShowDialog();
             }
