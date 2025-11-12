@@ -163,5 +163,20 @@ namespace Antorena_Soto.CLogica
         {
             return cd_Producto.ReporteVentas();
         }
+        public bool ActualizarStockBLL(int idProducto, int cantidadComprada)
+        {
+            // --- REGLAS DE NEGOCIO ---
+            if (idProducto <= 0)
+                throw new ArgumentException("El ID del producto no es válido.");
+
+            if (cantidadComprada <= 0)
+                throw new ArgumentException("La cantidad comprada debe ser mayor a cero.");
+
+            // (Aquí podrías validar si el stock resultante será negativo,
+            // aunque 'ventaAgregar' ya debería haberlo hecho)
+
+            // Llamamos al nuevo método de la DAL
+            return cd_Producto.ActualizarStock(idProducto, cantidadComprada);
+        }
     }
 }

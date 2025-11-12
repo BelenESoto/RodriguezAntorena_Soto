@@ -31,15 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(listaVentas));
             this.LItems = new System.Windows.Forms.Label();
             this.DGVListaProdVentas = new System.Windows.Forms.DataGridView();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.LAgregarventas = new System.Windows.Forms.Label();
-            this.BBuscarVenta = new FontAwesome.Sharp.IconButton();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.BBuscarPor = new System.Windows.Forms.ToolStripSplitButton();
-            this.BCodigoVenta = new System.Windows.Forms.ToolStripMenuItem();
-            this.BApellidoClienteVenta = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.TBBuscarPorVenta = new System.Windows.Forms.ToolStripTextBox();
             this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Vendedor_resp = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -48,7 +39,16 @@
             this.Medio_pago_venta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Detalle_prod_ventas = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.total_venta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.LAgregarventas = new System.Windows.Forms.Label();
+            this.BBuscarVenta = new FontAwesome.Sharp.IconButton();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.BBuscarPor = new System.Windows.Forms.ToolStripSplitButton();
+            this.BCodigoVenta = new System.Windows.Forms.ToolStripMenuItem();
+            this.BApellidoClienteVenta = new System.Windows.Forms.ToolStripMenuItem();
             this.BFechaVenta = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.TBBuscarPorVenta = new System.Windows.Forms.ToolStripTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.DGVListaProdVentas)).BeginInit();
             this.panel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -88,6 +88,67 @@
             this.DGVListaProdVentas.RowTemplate.Height = 24;
             this.DGVListaProdVentas.Size = new System.Drawing.Size(577, 196);
             this.DGVListaProdVentas.TabIndex = 43;
+            this.DGVListaProdVentas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGVListaProdVentas_CellContentClick);
+            // 
+            // Codigo
+            // 
+            this.Codigo.DataPropertyName = "codigo_venta";
+            this.Codigo.HeaderText = "Codigo";
+            this.Codigo.MinimumWidth = 6;
+            this.Codigo.Name = "Codigo";
+            this.Codigo.Width = 125;
+            // 
+            // Fecha
+            // 
+            this.Fecha.DataPropertyName = "fecha_venta";
+            this.Fecha.HeaderText = "Fecha";
+            this.Fecha.MinimumWidth = 6;
+            this.Fecha.Name = "Fecha";
+            this.Fecha.Width = 125;
+            // 
+            // Vendedor_resp
+            // 
+            this.Vendedor_resp.DataPropertyName = "vendedor_resp";
+            this.Vendedor_resp.HeaderText = "Vendedor Responsable";
+            this.Vendedor_resp.MinimumWidth = 6;
+            this.Vendedor_resp.Name = "Vendedor_resp";
+            this.Vendedor_resp.Width = 125;
+            // 
+            // Cliente
+            // 
+            this.Cliente.DataPropertyName = "cliente_venta";
+            this.Cliente.HeaderText = "Cliente";
+            this.Cliente.Name = "Cliente";
+            // 
+            // Ciudad
+            // 
+            this.Ciudad.DataPropertyName = "ciudad_venta";
+            this.Ciudad.HeaderText = "Ciudad";
+            this.Ciudad.Name = "Ciudad";
+            // 
+            // Medio_pago_venta
+            // 
+            this.Medio_pago_venta.DataPropertyName = "medio_pago_venta";
+            this.Medio_pago_venta.HeaderText = "Medio de Pago";
+            this.Medio_pago_venta.MinimumWidth = 6;
+            this.Medio_pago_venta.Name = "Medio_pago_venta";
+            this.Medio_pago_venta.Width = 125;
+            // 
+            // Detalle_prod_ventas
+            // 
+            this.Detalle_prod_ventas.DataPropertyName = "detalle_prod_venta";
+            this.Detalle_prod_ventas.HeaderText = "Detalle Productos";
+            this.Detalle_prod_ventas.MinimumWidth = 6;
+            this.Detalle_prod_ventas.Name = "Detalle_prod_ventas";
+            this.Detalle_prod_ventas.Width = 125;
+            // 
+            // total_venta
+            // 
+            this.total_venta.DataPropertyName = "total_venta";
+            this.total_venta.HeaderText = "TOTAL";
+            this.total_venta.MinimumWidth = 6;
+            this.total_venta.Name = "total_venta";
+            this.total_venta.Width = 125;
             // 
             // panel1
             // 
@@ -183,6 +244,13 @@
             this.BApellidoClienteVenta.Text = "NOMBRE Y APELLIDO";
             this.BApellidoClienteVenta.Click += new System.EventHandler(this.BApellidoClienteVenta_Click);
             // 
+            // BFechaVenta
+            // 
+            this.BFechaVenta.Name = "BFechaVenta";
+            this.BFechaVenta.Size = new System.Drawing.Size(193, 22);
+            this.BFechaVenta.Text = "FECHA";
+            this.BFechaVenta.Click += new System.EventHandler(this.BFechaVenta_Click);
+            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
@@ -194,73 +262,6 @@
             this.TBBuscarPorVenta.Name = "TBBuscarPorVenta";
             this.TBBuscarPorVenta.Size = new System.Drawing.Size(367, 71);
             // 
-            // Codigo
-            // 
-            this.Codigo.DataPropertyName = "codigo_venta";
-            this.Codigo.HeaderText = "Codigo";
-            this.Codigo.MinimumWidth = 6;
-            this.Codigo.Name = "Codigo";
-            this.Codigo.Width = 125;
-            // 
-            // Fecha
-            // 
-            this.Fecha.DataPropertyName = "fecha_venta";
-            this.Fecha.HeaderText = "Fecha";
-            this.Fecha.MinimumWidth = 6;
-            this.Fecha.Name = "Fecha";
-            this.Fecha.Width = 125;
-            // 
-            // Vendedor_resp
-            // 
-            this.Vendedor_resp.DataPropertyName = "vendedor_resp";
-            this.Vendedor_resp.HeaderText = "Vendedor Responsable";
-            this.Vendedor_resp.MinimumWidth = 6;
-            this.Vendedor_resp.Name = "Vendedor_resp";
-            this.Vendedor_resp.Width = 125;
-            // 
-            // Cliente
-            // 
-            this.Cliente.DataPropertyName = "cliente_venta";
-            this.Cliente.HeaderText = "Cliente";
-            this.Cliente.Name = "Cliente";
-            // 
-            // Ciudad
-            // 
-            this.Ciudad.DataPropertyName = "ciudad_venta";
-            this.Ciudad.HeaderText = "Ciudad";
-            this.Ciudad.Name = "Ciudad";
-            // 
-            // Medio_pago_venta
-            // 
-            this.Medio_pago_venta.DataPropertyName = "medio_pago_venta";
-            this.Medio_pago_venta.HeaderText = "Medio de Pago";
-            this.Medio_pago_venta.MinimumWidth = 6;
-            this.Medio_pago_venta.Name = "Medio_pago_venta";
-            this.Medio_pago_venta.Width = 125;
-            // 
-            // Detalle_prod_ventas
-            // 
-            this.Detalle_prod_ventas.DataPropertyName = "detalle_prod_venta";
-            this.Detalle_prod_ventas.HeaderText = "Detalle Productos";
-            this.Detalle_prod_ventas.MinimumWidth = 6;
-            this.Detalle_prod_ventas.Name = "Detalle_prod_ventas";
-            this.Detalle_prod_ventas.Width = 125;
-            // 
-            // total_venta
-            // 
-            this.total_venta.DataPropertyName = "total_venta";
-            this.total_venta.HeaderText = "TOTAL";
-            this.total_venta.MinimumWidth = 6;
-            this.total_venta.Name = "total_venta";
-            this.total_venta.Width = 125;
-            // 
-            // BFechaVenta
-            // 
-            this.BFechaVenta.Name = "BFechaVenta";
-            this.BFechaVenta.Size = new System.Drawing.Size(193, 22);
-            this.BFechaVenta.Text = "FECHA";
-            this.BFechaVenta.Click += new System.EventHandler(this.BFechaVenta_Click);
-            // 
             // listaVentas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -269,6 +270,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "listaVentas";
             this.Text = "listaVentas";
+            this.Load += new System.EventHandler(this.listaVentas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DGVListaProdVentas)).EndInit();
             this.panel1.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);

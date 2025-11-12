@@ -235,5 +235,35 @@ namespace Antorena_Soto.CDatos
                 return dt;
             }
         }
+
+        public bool ActualizarStock(int idProducto, int cantidadComprada)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(conexionString))
+                {
+                    conn.Open();
+
+                    // Esta consulta resta la cantidad del stock actual
+                    string query = @"UPDATE Producto SET
+                                stock_prod = stock_prod - @cantidad
+                             WHERE
+                                codigo_prod = @idProducto";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@cantidad", cantidadComprada);
+                        cmd.Parameters.AddWithValue("@idProducto", idProducto); // Asumo que tu PK es codigo_prod
+
+                        int rows = cmd.ExecuteNonQuery();
+                        return rows > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error en ActualizarStock DAL", ex);
+            }
+        }
     }
 }

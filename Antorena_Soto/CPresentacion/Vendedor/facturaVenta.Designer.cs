@@ -29,12 +29,6 @@
         private void InitializeComponent()
         {
             this.DGVListaProd = new System.Windows.Forms.DataGridView();
-            this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Categoria_producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Precio_producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cantidad_producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Subtotal_producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label11 = new System.Windows.Forms.Label();
@@ -61,6 +55,12 @@
             this.LProvincia = new System.Windows.Forms.Label();
             this.PLogo = new System.Windows.Forms.PictureBox();
             this.LNombreSkorial = new System.Windows.Forms.Label();
+            this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Categoria_producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Precio_producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cantidad_producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Subtotal_producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DGVListaProd)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -93,48 +93,6 @@
             this.DGVListaProd.Size = new System.Drawing.Size(663, 280);
             this.DGVListaProd.TabIndex = 39;
             this.DGVListaProd.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGVListaProd_CellContentClick);
-            // 
-            // Codigo
-            // 
-            this.Codigo.DataPropertyName = "codigo_producto";
-            this.Codigo.HeaderText = "Codigo";
-            this.Codigo.MinimumWidth = 6;
-            this.Codigo.Name = "Codigo";
-            // 
-            // Nombre
-            // 
-            this.Nombre.DataPropertyName = "nombre_producto";
-            this.Nombre.HeaderText = "Nombre ";
-            this.Nombre.MinimumWidth = 6;
-            this.Nombre.Name = "Nombre";
-            // 
-            // Categoria_producto
-            // 
-            this.Categoria_producto.DataPropertyName = "categoria_producto";
-            this.Categoria_producto.HeaderText = "Categoria";
-            this.Categoria_producto.MinimumWidth = 6;
-            this.Categoria_producto.Name = "Categoria_producto";
-            // 
-            // Precio_producto
-            // 
-            this.Precio_producto.DataPropertyName = "precio";
-            this.Precio_producto.HeaderText = "Precio";
-            this.Precio_producto.MinimumWidth = 6;
-            this.Precio_producto.Name = "Precio_producto";
-            // 
-            // Cantidad_producto
-            // 
-            this.Cantidad_producto.DataPropertyName = "cantidad_producto";
-            this.Cantidad_producto.HeaderText = "Cantidad";
-            this.Cantidad_producto.MinimumWidth = 6;
-            this.Cantidad_producto.Name = "Cantidad_producto";
-            // 
-            // Subtotal_producto
-            // 
-            this.Subtotal_producto.DataPropertyName = "subtotal_producto";
-            this.Subtotal_producto.HeaderText = "Subtotal";
-            this.Subtotal_producto.MinimumWidth = 6;
-            this.Subtotal_producto.Name = "Subtotal_producto";
             // 
             // panel1
             // 
@@ -441,6 +399,48 @@
             this.LNombreSkorial.TabIndex = 40;
             this.LNombreSkorial.Text = "SKORIAL S.A.";
             // 
+            // Codigo
+            // 
+            this.Codigo.DataPropertyName = "codigo_producto";
+            this.Codigo.HeaderText = "Codigo";
+            this.Codigo.MinimumWidth = 6;
+            this.Codigo.Name = "Codigo";
+            // 
+            // Nombre
+            // 
+            this.Nombre.DataPropertyName = "nombre_producto";
+            this.Nombre.HeaderText = "Nombre ";
+            this.Nombre.MinimumWidth = 6;
+            this.Nombre.Name = "Nombre";
+            // 
+            // Categoria_producto
+            // 
+            this.Categoria_producto.DataPropertyName = "categoria_producto";
+            this.Categoria_producto.HeaderText = "Categoria";
+            this.Categoria_producto.MinimumWidth = 6;
+            this.Categoria_producto.Name = "Categoria_producto";
+            // 
+            // Precio_producto
+            // 
+            this.Precio_producto.DataPropertyName = "precio_producto";
+            this.Precio_producto.HeaderText = "Precio";
+            this.Precio_producto.MinimumWidth = 6;
+            this.Precio_producto.Name = "Precio_producto";
+            // 
+            // Cantidad_producto
+            // 
+            this.Cantidad_producto.DataPropertyName = "cantidad_producto";
+            this.Cantidad_producto.HeaderText = "Cantidad";
+            this.Cantidad_producto.MinimumWidth = 6;
+            this.Cantidad_producto.Name = "Cantidad_producto";
+            // 
+            // Subtotal_producto
+            // 
+            this.Subtotal_producto.DataPropertyName = "subtotal_producto";
+            this.Subtotal_producto.HeaderText = "Subtotal";
+            this.Subtotal_producto.MinimumWidth = 6;
+            this.Subtotal_producto.Name = "Subtotal_producto";
+            // 
             // facturaVenta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -476,12 +476,6 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.PictureBox PLogo;
         private System.Windows.Forms.Label LEmail;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Codigo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Categoria_producto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Precio_producto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad_producto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Subtotal_producto;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label1Cuit;
         private System.Windows.Forms.Label label2;
@@ -500,5 +494,11 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Codigo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Categoria_producto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Precio_producto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad_producto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Subtotal_producto;
     }
 }

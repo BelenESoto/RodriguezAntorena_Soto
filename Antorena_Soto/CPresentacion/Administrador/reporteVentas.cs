@@ -92,7 +92,7 @@ namespace Antorena_Soto.CPresentacion.Administrador
                         row["Cliente"],
                         Convert.ToDateTime(row["FechaVenta"]).ToString("dd/MM/yyyy"),
                         row["Vendedor"],
-                        ((decimal)row["Total"]).ToString("C")
+                       Convert.ToDecimal(row["Total"]).ToString("$#,##0.00")
                     );
                 }
             }
@@ -231,7 +231,7 @@ namespace Antorena_Soto.CPresentacion.Administrador
                     row["Cliente"],
                     Convert.ToDateTime(row["FechaVenta"]).ToString("dd/MM/yyyy"),
                     row["Vendedor"],
-                    ((decimal)row["Total"]).ToString("C")
+                    Convert.ToDecimal(row["Total"]).ToString("$#,##0.00")
                 );
             }
         }

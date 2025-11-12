@@ -31,7 +31,7 @@ namespace Antorena_Soto.CPresentacion.Administrador
         public FormRecaudacion()
         {
             InitializeComponent();
-            this.conexionString = "Data Source=HP-BELENS\\SQLEXPRESS;Initial Catalog=RodriguezAntorena_Soto;Integrated Security=True";
+            this.conexionString = "Data Source=DESKTOP-IDH7B7D\\SQLEXPRESS;Initial Catalog=RodriguezAntorena_Soto;Integrated Security=True";
             InicializarEventosYDocumentos();
         }
 
@@ -146,7 +146,7 @@ namespace Antorena_Soto.CPresentacion.Administrador
                 {
                     if (dr.Read())
                     {
-                        totalMonto = dr.GetDecimal(0);
+                        totalMonto = Convert.ToDecimal(dr.GetValue(0));
                         totalCantidad = dr.GetInt32(1);
                     }
                 }
@@ -227,7 +227,7 @@ namespace Antorena_Soto.CPresentacion.Administrador
             }
         }
 
-        private DataTable ObtenerDatosMensuales(DateTime desde, DateTime hasta)
+        /*private DataTable ObtenerDatosMensuales(DateTime desde, DateTime hasta)
         {
             DataTable tabla = new DataTable();
 
@@ -239,6 +239,36 @@ namespace Antorena_Soto.CPresentacion.Administrador
         WHERE CONVERT(date, F.fecha_factura) BETWEEN @Desde AND @Hasta
         GROUP BY FORMAT(F.fecha_factura, 'yyyy-MM')
         ORDER BY Mes";
+
+            using (SqlConnection con = new SqlConnection(conexionString))
+            using (SqlCommand cmd = new SqlCommand(consulta, con))
+            {
+                cmd.Parameters.AddWithValue("@Desde", desde);
+                cmd.Parameters.AddWithValue("@Hasta", hasta);
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(tabla);
+            }
+
+            return tabla;
+        }*/
+        private DataTable ObtenerDatosMensuales(DateTime desde, DateTime hasta)
+        {
+            DataTable tabla = new DataTable();
+
+            // --- CONSULTA MODIFICADA ---
+            // Se reemplazó FORMAT() por CONVERT() para compatibilidad
+            // con versiones de SQL Server anteriores a 2012.
+            // El estilo 120 (o 126) da el formato 'YYYY-MM-DD', 
+            // y VARCHAR(7) lo corta a 'YYYY-MM'.
+            string consulta = @"
+    SELECT 
+        CONVERT(VARCHAR(7), F.fecha_factura, 120) AS Mes,
+        SUM(F.monto_total) AS Monto
+    FROM Factura F
+    WHERE CONVERT(date, F.fecha_factura) BETWEEN @Desde AND @Hasta
+    GROUP BY CONVERT(VARCHAR(7), F.fecha_factura, 120)
+    ORDER BY Mes";
 
             using (SqlConnection con = new SqlConnection(conexionString))
             using (SqlCommand cmd = new SqlCommand(consulta, con))

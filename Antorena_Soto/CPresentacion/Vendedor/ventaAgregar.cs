@@ -20,10 +20,11 @@ namespace Antorena_Soto.CPresentacion.Vendedor
 
         private bool buscarPorCodigo = false;
         private bool buscarPorNombre = false;
+        
 
         private CN_Producto productoBLL; // BLL para productos
         private DataRow productoSeleccionado; // Guarda el producto de la búsqueda
-
+        private decimal totalVentaDecimal = 0;
         public ventaAgregar()
         {
             InitializeComponent();
@@ -51,6 +52,7 @@ namespace Antorena_Soto.CPresentacion.Vendedor
 
         private void ConfigurarDGVCarrito()
         {
+            DGVListaProdVentas.DefaultCellStyle.ForeColor = Color.Black;
             DGVListaProdVentas.Columns.Clear();
             DGVListaProdVentas.AutoGenerateColumns = false; // Importante
 
@@ -60,9 +62,8 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             DGVListaProdVentas.Columns.Add("Cantidad", "Cantidad");
             DGVListaProdVentas.Columns.Add("Subtotal", "Subtotal");
 
-            // Formatear columnas
-            DGVListaProdVentas.Columns["Precio"].DefaultCellStyle.Format = "C2"; // Moneda
-            DGVListaProdVentas.Columns["Subtotal"].DefaultCellStyle.Format = "C2"; // Moneda
+            DGVListaProdVentas.Columns["Precio"].DefaultCellStyle.Format = "$#,##0.00";
+            DGVListaProdVentas.Columns["Subtotal"].DefaultCellStyle.Format = "$#,##0.00";
         }
 
         private void BBuscarProd_ButtonClick(object sender, EventArgs e)
@@ -189,7 +190,11 @@ namespace Antorena_Soto.CPresentacion.Vendedor
                 }
             }
 
-            TBTotalVenta.Text = total.ToString("0.00");
+            // 1. Guardar el valor puro en nuestra variable
+            totalVentaDecimal = total;
+
+            // 2. Mostrar el valor formateado en el TextBox
+            TBTotalVenta.Text = totalVentaDecimal.ToString("$#,##0.00");
         }
 
         public void BContinuar_Click(object sender, EventArgs e)
@@ -219,26 +224,13 @@ namespace Antorena_Soto.CPresentacion.Vendedor
                 carrito.Add(item);
             }
 
-            // 3. Obtener el total. Lo parseamos desde el TextBox
-            // Usamos NumberStyles.Currency para quitar el símbolo "$" y las comas
-            decimal totalVenta = 0;
-            if (decimal.TryParse(TBTotalVenta.Text, NumberStyles.Currency, CultureInfo.CurrentCulture, out decimal totalParseado))
-            {
-                totalVenta = totalParseado;
-            }
-            else
-            {
-                MessageBox.Show("Error al leer el monto total.");
-                return; // No continuar si el total no es válido
-            }
-
             // 4. Abrir ventaConfirmar y pasar los datos
             PAgregarVendedor.Controls.Clear();
             ventaConfirmar formVenta = new ventaConfirmar();
 
             // 5. Setear las propiedades públicas (que crearemos en el siguiente paso)
             formVenta.ItemsCarrito = carrito;
-            formVenta.TotalVenta = totalVenta;
+            formVenta.TotalVenta = totalVentaDecimal;
 
             // 6. Mostrar el form
             formVenta.TopLevel = false;
@@ -337,6 +329,11 @@ namespace Antorena_Soto.CPresentacion.Vendedor
         }
 
         private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void DGVListaProdVentas_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

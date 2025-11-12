@@ -23,11 +23,11 @@ namespace Antorena_Soto.CPresentacion.Vendedor
 
         private readonly ClienteBLL clienteBLL;
 
-       
+        
         private readonly FacturaBLL facturaBLL; 
         private DataRow clienteActual = null; // Para guardar el cliente encontrado
+        private readonly CN_Producto productoBLL;
 
-       
         // Estas propiedades reciben los datos de'ventaAgregar'
         public List<DetalleVentaDTO> ItemsCarrito { get; set; }
         public decimal TotalVenta { get; set; }
@@ -42,6 +42,7 @@ namespace Antorena_Soto.CPresentacion.Vendedor
                 string conexionString = "Data Source=DESKTOP-IDH7B7D\\SQLEXPRESS;Initial Catalog=RodriguezAntorena_Soto;Integrated Security=True";
                 clienteBLL = new ClienteBLL(conexionString);
                 facturaBLL = new FacturaBLL(conexionString);
+                productoBLL = new CN_Producto(conexionString);
 
             }
             catch (Exception ex)
@@ -218,13 +219,15 @@ namespace Antorena_Soto.CPresentacion.Vendedor
                 forma_pago = TBMedioPagoFact.Text.Trim(),
                 monto_total = (long)TotalVenta, // O decimal si cambiaste la BBDD
                 estado_factura = 1,
-                vendedor_id = UsuarioBLL.SesionUsuario.DniUsuario
+                vendedor_id = SesionUsuario.DniUsuario
                 // <-- Usamos el ID de la sesión
             };
 
             MessageBox.Show("Objeto Factura creado");
             string conexionString = "Data Source=DESKTOP-IDH7B7D\\SQLEXPRESS;Initial Catalog=RodriguezAntorena_Soto;Integrated Security=True";
+            FacturaBLL facturaBLL = new FacturaBLL(conexionString);
             Detalle_VentaBLL detalleBLL = new Detalle_VentaBLL(conexionString);
+            CN_Producto productoBLL = new CN_Producto(conexionString);
 
             try
             {
@@ -244,8 +247,23 @@ namespace Antorena_Soto.CPresentacion.Vendedor
 
                     // Guardar cada detalle en la BBDD
                     detalleBLL.AgregarDetalle(nuevoDetalle);
-                }
 
+                    //4b
+                    try
+                    {
+                        // Llamamos a la BLL de Producto para restar el stock
+                        // (Asumo que tu 'ModificarProductoBBL' se llama así)
+                        productoBLL.ActualizarStockBLL(item.IdProducto, item.Cantidad);
+                    }
+                    catch (Exception stockEx)
+                    {
+                        // Si falla el stock, se informa, pero la venta YA SE HIZO.
+                        // (Esto es un riesgo que se arregla con 'Transacciones',
+                        // pero por ahora solo informamos el error).
+                        MessageBox.Show($"Error al actualizar stock para producto {item.IdProducto}: {stockEx.Message}", "Error de Stock", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+                
                 // 5. Éxito y abrir el form de la factura
                 MessageBox.Show($"Factura N° {facturaGuardada.nro_factura} creada con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -279,7 +297,7 @@ namespace Antorena_Soto.CPresentacion.Vendedor
         private void ventaConfirmar_Load(object sender, EventArgs e)
         {
             // Al cargar, mostramos el total que recibimos del carrito
-            TBMontoFact.Text = TotalVenta.ToString("0.00");
+            TBMontoFact.Text = TotalVenta.ToString("$#,##0.00");
             // Opcional: hacer el monto de solo lectura para que no se pueda cambiar
             TBMontoFact.ReadOnly = true;
         }

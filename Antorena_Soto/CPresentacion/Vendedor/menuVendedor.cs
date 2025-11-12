@@ -12,24 +12,25 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static Antorena_Soto.CPresentacion.Vendedor.agregarDatosCliente;
 
+
 namespace Antorena_Soto.CPresentacion.Vendedor
 {
     public partial class menuVendedor : Form
     {
-
-        private List<Productox> _productos; //EL DE BELEN
+        private Form _formActual = null;
+        // private List<Productox> _productos; //EL DE BELEN
         public menuVendedor()
         {
 
             InitializeComponent();
-            _productos = new List<Productox>
+            /*_productos = new List<Productox>
     {
     new Productox { Codigo = 123, Nombre = "Aros Mary", Precio = 5000, Categoria = "Accesorios", Stock = 10, Descripcion = "Aros de acero", FechaModificacion = DateTime.Now, Imagen = null, Estado = true },
     new Productox { Codigo = 456, Nombre = "Collar Eva", Precio = 8000, Categoria = "Accesorios", Stock = 5, Descripcion = "Collar con piedra", FechaModificacion = DateTime.Now, Imagen = null, Estado = true },
     new Productox { Codigo = 789, Nombre = "Pulsera Luna", Precio = 3500, Categoria = "Accesorios", Stock = 15, Descripcion = "Pulsera de cuero", FechaModificacion = DateTime.Now, Imagen = null, Estado = true },
     new Productox { Codigo = 321, Nombre = "Anillo Sol", Precio = 6000, Categoria = "Accesorios", Stock = 8, Descripcion = "Anillo de plata", FechaModificacion = DateTime.Now, Imagen = null, Estado = true },
     new Productox { Codigo = 654, Nombre = "Broche Estrella", Precio = 2000, Categoria = "Accesorios", Stock = 20, Descripcion = "Broche esmaltado", FechaModificacion = DateTime.Now, Imagen = null, Estado = true }
-        };
+        };*/
         }
 
  
@@ -98,15 +99,10 @@ namespace Antorena_Soto.CPresentacion.Vendedor
 
         private void BListarVenta_Click(object sender, EventArgs e)
         {
-            PVendedor2.Controls.Clear();
-           listaVentas formVenta = new listaVentas();
-            formVenta.TopLevel = false;
-            formVenta.FormBorderStyle = FormBorderStyle.None; // Sin borde
-            formVenta.Dock = DockStyle.Fill;             // Ocupa todo el panel
-
-            // Agregar al panel
-            PVendedor2.Controls.Add(formVenta);
-            formVenta.Show();
+            
+           var form = new listaVentas();
+            AbrirFormularioEnPanel(form);
+            form.CargarVentasBD();
         }
 
            private void BAgregarDatoCliente_Click(object sender, EventArgs e)
@@ -147,48 +143,24 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             PVendedor2.Controls.Add(frmClientes);
             frmClientes.Show();
         }
-/*
-        private void BVerInfoCliente_Click(object sender, EventArgs e)
-        {
-            PVendedor2.Controls.Clear();
-            
-            DataGridView dgv = new DataGridView
-            {
-                Dock = DockStyle.Fill,
-                AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
-                ReadOnly = true,
-                AllowUserToAddRows = false,
-                SelectionMode = DataGridViewSelectionMode.FullRowSelect
-            };
-
-            dgv.DataSource = null;
-            dgv.DataSource = listaClientes;
-
-            PVendedor2.Controls.Add(dgv);
-        }
-
-
-
-
-        */
 
 
 
        
         private void BVerProducto_Click(object sender, EventArgs e)
         {
-            PVendedor2.Controls.Clear();
+            var form = new listaProductos();
 
-            listaProductos formListaProd = new listaProductos(_productos, "Ver");
+            // oculta el botón de eliminar y editar
+            var botonEliminar = form.Controls.Find("BEliminarProd", true).FirstOrDefault();
+            var botonEditar = form.Controls.Find("BEditarProd", true).FirstOrDefault();
 
-            // Form hijo dentro del panel
-            formListaProd.TopLevel = false;
-            formListaProd.FormBorderStyle = FormBorderStyle.None;
-            formListaProd.Dock = DockStyle.Fill;
+            if (botonEliminar != null && botonEditar != null)
+                botonEliminar.Visible = false;
+            botonEditar.Visible = false;
+            AbrirFormularioEnPanel(form);
 
-            PVendedor2.Controls.Add(formListaProd);
-            PVendedor2.Tag = formListaProd;
-            formListaProd.Show();
+            form.CargarProductosBD();
 
         }
      
@@ -240,6 +212,22 @@ namespace Antorena_Soto.CPresentacion.Vendedor
         private void menuVendedor_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void AbrirFormularioEnPanel(Form formHijo)
+        {
+            if (_formActual != null)
+                _formActual.Close();
+
+            _formActual = formHijo;
+            formHijo.TopLevel = false;
+            formHijo.FormBorderStyle = FormBorderStyle.None;
+            formHijo.Dock = DockStyle.Fill;
+
+            PVendedor2.Controls.Clear();
+            PVendedor2.Controls.Add(formHijo);
+            PVendedor2.Tag = formHijo;
+            formHijo.Show();
         }
     }
 }

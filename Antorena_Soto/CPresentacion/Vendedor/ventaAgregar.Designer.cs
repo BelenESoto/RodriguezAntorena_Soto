@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ventaAgregar));
             this.LAgregarVenta = new System.Windows.Forms.Label();
             this.PAgregarVendedor = new System.Windows.Forms.Panel();
+            this.DGVListaProdVentas = new System.Windows.Forms.DataGridView();
             this.BTSBusquedaCliente = new FontAwesome.Sharp.IconButton();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.BBuscarCliente = new System.Windows.Forms.ToolStripDropDownButton();
@@ -57,11 +58,10 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.LBuscarPor = new System.Windows.Forms.ToolStripLabel();
             this.TBBuscadorProd = new System.Windows.Forms.ToolStripTextBox();
-            this.DGVListaProdVentas = new System.Windows.Forms.DataGridView();
             this.PAgregarVendedor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DGVListaProdVentas)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.TBuscador.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DGVListaProdVentas)).BeginInit();
             this.SuspendLayout();
             // 
             // LAgregarVenta
@@ -102,6 +102,19 @@
             this.PAgregarVendedor.Size = new System.Drawing.Size(579, 570);
             this.PAgregarVendedor.TabIndex = 3;
             this.PAgregarVendedor.Paint += new System.Windows.Forms.PaintEventHandler(this.PAgregarVendedor_Paint);
+            // 
+            // DGVListaProdVentas
+            // 
+            this.DGVListaProdVentas.BackgroundColor = System.Drawing.Color.Gainsboro;
+            this.DGVListaProdVentas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGVListaProdVentas.Location = new System.Drawing.Point(0, 285);
+            this.DGVListaProdVentas.Margin = new System.Windows.Forms.Padding(2);
+            this.DGVListaProdVentas.Name = "DGVListaProdVentas";
+            this.DGVListaProdVentas.RowHeadersWidth = 51;
+            this.DGVListaProdVentas.RowTemplate.Height = 24;
+            this.DGVListaProdVentas.Size = new System.Drawing.Size(577, 178);
+            this.DGVListaProdVentas.TabIndex = 41;
+            this.DGVListaProdVentas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGVListaProdVentas_CellContentClick);
             // 
             // BTSBusquedaCliente
             // 
@@ -158,14 +171,14 @@
             // BTSCodigoV
             // 
             this.BTSCodigoV.Name = "BTSCodigoV";
-            this.BTSCodigoV.Size = new System.Drawing.Size(180, 22);
+            this.BTSCodigoV.Size = new System.Drawing.Size(152, 22);
             this.BTSCodigoV.Text = "POR CODIGO";
             this.BTSCodigoV.Click += new System.EventHandler(this.BTSCodigoV_Click);
             // 
             // BTSPorNombreV
             // 
             this.BTSPorNombreV.Name = "BTSPorNombreV";
-            this.BTSPorNombreV.Size = new System.Drawing.Size(180, 22);
+            this.BTSPorNombreV.Size = new System.Drawing.Size(152, 22);
             this.BTSPorNombreV.Text = "POR NOMBRE";
             this.BTSPorNombreV.Click += new System.EventHandler(this.BTSPorNombreV_Click);
             // 
@@ -392,18 +405,6 @@
             this.TBBuscadorProd.Size = new System.Drawing.Size(276, 39);
             this.TBBuscadorProd.Click += new System.EventHandler(this.TBBuscadorProd_Click);
             // 
-            // DGVListaProdVentas
-            // 
-            this.DGVListaProdVentas.BackgroundColor = System.Drawing.Color.Gainsboro;
-            this.DGVListaProdVentas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGVListaProdVentas.Location = new System.Drawing.Point(0, 285);
-            this.DGVListaProdVentas.Margin = new System.Windows.Forms.Padding(2);
-            this.DGVListaProdVentas.Name = "DGVListaProdVentas";
-            this.DGVListaProdVentas.RowHeadersWidth = 51;
-            this.DGVListaProdVentas.RowTemplate.Height = 24;
-            this.DGVListaProdVentas.Size = new System.Drawing.Size(577, 178);
-            this.DGVListaProdVentas.TabIndex = 41;
-            // 
             // ventaAgregar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -416,11 +417,11 @@
             this.Load += new System.EventHandler(this.ventaAgregar_Load);
             this.PAgregarVendedor.ResumeLayout(false);
             this.PAgregarVendedor.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DGVListaProdVentas)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.TBuscador.ResumeLayout(false);
             this.TBuscador.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DGVListaProdVentas)).EndInit();
             this.ResumeLayout(false);
 
         }

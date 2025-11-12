@@ -21,6 +21,7 @@ namespace Antorena_Soto.CPresentacion.Vendedor
         public facturaVenta()
         {
             InitializeComponent();
+            DGVListaProd.AutoGenerateColumns = false;
         }
 
         public facturaVenta(long idFactura)
@@ -29,37 +30,32 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             CargarFactura(idFactura);
         }
 
-        // --- MÉTODO CARGARFACTURA MODIFICADO ---
-        // (Cambiado de int a long y consulta SQL actualizada)
-        private void CargarFactura(long idFactura) // <-- Modificado a long
+        
+        private void CargarFactura(long idFactura)
         {
-            // --- CONSULTA MODIFICADA ---
-            // Eliminamos el JOIN a Categoria y usamos CASE para traducir el id_categoria
+            // --- CONSULTA SQL (ESTÁ BIEN) ---
             string consulta = @"
-            SELECT 
-                P.codigo_prod AS Codigo,
-                P.nombre_prod AS Nombre,
-                
-                -- Traducción manual del ID de categoría
-                CASE P.categoria_prod 
-                    WHEN 1 THEN 'Collares'
-                    WHEN 2 THEN 'Aros'
-                    WHEN 3 THEN 'Otros'
-                    ELSE 'N/A' -- Si hay algún otro valor
-                END AS Categoria,
+    SELECT 
+        P.codigo_prod AS codigo_producto,
+        P.nombre_prod AS nombre_producto,
+        
+        CASE P.categoria_prod 
+            WHEN 1 THEN 'Collares'
+            WHEN 2 THEN 'Aros'
+            WHEN 3 THEN 'Otros'
+            ELSE 'N/A'
+        END AS categoria_producto,
 
-                DV.precio AS Precio,
-                DV.cantidad AS Cantidad,
-                (DV.cantidad * DV.precio) AS Subtotal
-            FROM Detalle_venta DV
-            INNER JOIN Producto P ON DV.id_producto = P.codigo_prod
-            -- Se eliminó el INNER JOIN a Categoria
-            WHERE DV.id_factura = @IdFactura";
+        DV.precio AS precio_producto,
+        DV.cantidad AS cantidad_producto,
+        (DV.cantidad * DV.precio) AS subtotal_producto
+    FROM Detalle_venta DV
+    INNER JOIN Producto P ON DV.id_producto = P.codigo_prod
+    WHERE DV.id_factura = @IdFactura";
 
             using (SqlConnection con = new SqlConnection(conexionString))
             using (SqlCommand cmd = new SqlCommand(consulta, con))
             {
-                // El parámetro @IdFactura ahora acepta un long
                 cmd.Parameters.AddWithValue("@IdFactura", idFactura);
                 con.Open();
 
@@ -70,17 +66,8 @@ namespace Antorena_Soto.CPresentacion.Vendedor
                 DGVListaProd.DataSource = tablaDetalle;
             }
 
-            // Ajuste de nombres visuales
-            DGVListaProd.Columns["Codigo"].HeaderText = "Código";
-            DGVListaProd.Columns["Nombre"].HeaderText = "Nombre";
-            DGVListaProd.Columns["Categoria_producto"].HeaderText = "Categoría";
-            DGVListaProd.Columns["Precio_producto"].HeaderText = "Precio";
-            DGVListaProd.Columns["Cantidad_producto"].HeaderText = "Cantidad";
-            DGVListaProd.Columns["Subtotal_producto"].HeaderText = "Subtotal";
-
-            // Formato de moneda
-            DGVListaProd.Columns["Precio"].DefaultCellStyle.Format = "C2";
-            DGVListaProd.Columns["Subtotal"].DefaultCellStyle.Format = "C2";
+            DGVListaProd.Columns["precio_producto"].DefaultCellStyle.Format = "$#,##0.00";
+            DGVListaProd.Columns["subtotal_producto"].DefaultCellStyle.Format = "$#,##0.00";
 
             DGVListaProd.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
@@ -127,7 +114,7 @@ namespace Antorena_Soto.CPresentacion.Vendedor
                 label8.Text = FacturaMostrada.tipo_factura;
                 label9.Text = FacturaMostrada.fecha_factura.ToShortDateString();
                 label17.Text = FacturaMostrada.forma_pago;
-                label11.Text = FacturaMostrada.monto_total.ToString("C");
+                label11.Text = FacturaMostrada.monto_total.ToString("$#,##0.00");
             }
             catch (Exception ex)
             {

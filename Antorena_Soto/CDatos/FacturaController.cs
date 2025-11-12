@@ -74,7 +74,7 @@ namespace Antorena_Soto.CDatos
                     // Agregamos la columna 'estado' al select
                     string consulta = @"SELECT nro_factura, tipo_factura, id_cliente, fecha_factura, forma_pago, monto_total, estado_factura,vendedor_id 
                                         FROM Factura WHERE estado_factura = 1";
-                    // Opcional: WHERE estado = 1 (para listar solo activas)
+                    
 
                     SqlCommand comandoSql = new SqlCommand(consulta, conexionSql);
                     SqlDataAdapter adaptador = new SqlDataAdapter(comandoSql);
