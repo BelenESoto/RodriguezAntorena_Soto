@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
-using Antorena_Soto.CDatos; // Para el objeto Factura
+using Antorena_Soto.CDatos; 
 
 namespace Antorena_Soto.CDatos
 {
@@ -14,24 +14,19 @@ namespace Antorena_Soto.CDatos
             this.conexionString = conexionString;
         }
 
-        /// <summary>
-        /// Inserta una factura y devuelve el nuevo Nro de Factura (IDENTITY).
-        /// </summary>
-        /// <returns>El nro_factura (long) generado por la base de datos.</returns>
         public long InsertarFactura(Factura factura)
         {
             try
             {
                 using (SqlConnection conexionSql = new SqlConnection(conexionString))
                 {
-                    // La consulta inserta los datos Y DEVUELVE el ID generado
-                    // Asumimos que la tabla tiene la columna 'estado' y la insertamos como '1' (Activa)
+                   
                     string consulta = @"INSERT INTO Factura 
                                         (tipo_factura, id_cliente, fecha_factura, forma_pago, monto_total, estado_factura, vendedor_id)
                                       VALUES 
                                         (@tipo_factura, @id_cliente, @fecha_factura, @forma_pago, @monto_total, 1, @vendedor_id);
                                       
-                                      SELECT CAST(SCOPE_IDENTITY() AS BIGINT);"; // Devuelve el último ID (long)
+                                      SELECT CAST(SCOPE_IDENTITY() AS BIGINT);";
 
                     SqlCommand comandoSql = new SqlCommand(consulta, conexionSql);
 
@@ -43,7 +38,6 @@ namespace Antorena_Soto.CDatos
                     comandoSql.Parameters.AddWithValue("@vendedor_id", factura.vendedor_id);
                     conexionSql.Open();
 
-                    // Usamos ExecuteScalar porque la consulta devuelve un solo valor (el nuevo ID)
                     object resultado = comandoSql.ExecuteScalar();
 
                     if (resultado != null && resultado != DBNull.Value)
@@ -62,16 +56,12 @@ namespace Antorena_Soto.CDatos
             }
         }
 
-        /// <summary>
-        /// Lista todas las facturas (idealmente debería filtrar por estado=1)
-        /// </summary>
         public DataTable ListarFacturas()
         {
             try
             {
                 using (SqlConnection conexionSql = new SqlConnection(conexionString))
                 {
-                    // Agregamos la columna 'estado' al select
                     string consulta = @"SELECT nro_factura, tipo_factura, id_cliente, fecha_factura, forma_pago, monto_total, estado_factura,vendedor_id 
                                         FROM Factura WHERE estado_factura = 1";
                     
@@ -89,9 +79,6 @@ namespace Antorena_Soto.CDatos
             }
         }
 
-        /// <summary>
-        /// Busca facturas por NroFactura o IdCliente.
-        /// </summary>
         public DataTable BuscarFacturas(string criterio, bool buscarPorNroFactura)
         {
             try
@@ -132,9 +119,6 @@ namespace Antorena_Soto.CDatos
             }
         }
 
-        /// <summary>
-        /// Actualiza una factura en la BBDD.
-        /// </summary>
         public bool ActualizarFactura(Factura factura)
         {
             try
@@ -174,11 +158,6 @@ namespace Antorena_Soto.CDatos
             }
         }
 
-        // --- MÉTODO MODIFICADO (Baja Lógica) ---
-        /// <summary>
-        /// Realiza una BAJA LÓGICA de una factura (la marca como inactiva/anulada).
-        /// Asume que existe una columna 'estado' (int) donde 0 = Inactiva.
-        /// </summary>
         public bool BajaLogicaFactura(long nroFactura)
         {
             try
@@ -186,20 +165,20 @@ namespace Antorena_Soto.CDatos
                 using (SqlConnection conn = new SqlConnection(conexionString))
                 {
                     conn.Open();
-                    // CAMBIO: De DELETE a UPDATE para baja lógica
+                    
                     string query = "UPDATE Factura SET estado_factura = 0 WHERE nro_factura = @nro_factura";
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@nro_factura", nroFactura);
                         int rows = cmd.ExecuteNonQuery();
-                        return rows > 0; // true si actualizó, false si no
+                        return rows > 0; 
                     }
                 }
             }
             catch (Exception ex)
             {
-                // Renombramos la excepción para que coincida con el método
+                
                 throw new Exception("Error en BajaLogicaFactura DAL", ex);
             }
         }

@@ -22,7 +22,6 @@ namespace Antorena_Soto.CDatos
             {
                 using (SqlConnection conexionSql = new SqlConnection(conexionString))
                 {
-                    // Columnas y valores en el orden solicitado
                     string consulta = @"INSERT INTO Cliente
                                         (nomYApe_cliente, dni_cliente, provincia, ciudad, domicilio, cuit, telefono, correo, fecha_ingreso, estado)
                                       VALUES 
@@ -30,7 +29,6 @@ namespace Antorena_Soto.CDatos
 
                     SqlCommand comandoSql = new SqlCommand(consulta, conexionSql);
 
-                    // Parámetros añadidos en el mismo orden
                     comandoSql.Parameters.AddWithValue("@nombre", nombre);
                     comandoSql.Parameters.AddWithValue("@dni", dni);
                     comandoSql.Parameters.AddWithValue("@provincia", provincia);
@@ -60,7 +58,6 @@ namespace Antorena_Soto.CDatos
             {
                 using (SqlConnection conexionSql = new SqlConnection(conexionString))
                 {
-                    // El orden del SELECT es el que define el DataTable
                     string consulta = @"SELECT nomYApe_cliente, dni_cliente, provincia, ciudad, domicilio, cuit, telefono, correo, fecha_ingreso, estado
                                         FROM Cliente";
 
@@ -78,7 +75,7 @@ namespace Antorena_Soto.CDatos
         }
 
         //BUSCAR CLIENTES (por DNI o por Nombre)
-        // Este método no recibe todos los parámetros, solo el de búsqueda
+       
         public DataTable BuscarClientes(string criterio, bool buscarPorDni)
         {
             if (string.IsNullOrWhiteSpace(criterio))
@@ -89,7 +86,7 @@ namespace Antorena_Soto.CDatos
                 using (SqlConnection conexionSql = new SqlConnection(conexionString))
                 {
                     string consulta;
-                    // Columnas en el orden deseado
+                    
                     string columnasSelect = "SELECT nomYApe_cliente, dni_cliente, provincia, ciudad, domicilio, cuit, telefono, correo, fecha_ingreso, estado FROM Cliente";
 
                     if (buscarPorDni)
@@ -123,7 +120,7 @@ namespace Antorena_Soto.CDatos
             }
         }
 
-        // ACTUALIZAR CLIENTE (Orden de parámetros respetado)
+        // ACTUALIZAR CLIENTE
         public bool ActualizarCliente(string nombre, int dni, string provincia, string ciudad,
                                     string domicilio, long cuit, long telefono, string correo,
                                     DateTime fechaIngreso, int estado)
@@ -132,7 +129,6 @@ namespace Antorena_Soto.CDatos
             {
                 using (SqlConnection conexionSql = new SqlConnection(conexionString))
                 {
-                    // La sentencia SET no requiere un orden, pero se ha ordenado para claridad
                     string consulta = @"UPDATE Cliente SET
                                             nomYApe_cliente = @nombre,
                                             provincia = @provincia,
@@ -144,13 +140,12 @@ namespace Antorena_Soto.CDatos
                                             fecha_ingreso = @fecha_ingreso,
                                             estado = @estado
                                       WHERE
-                                            dni_cliente = @dni"; // El DNI se usa para el WHERE
+                                            dni_cliente = @dni"; 
 
                     SqlCommand comandoSql = new SqlCommand(consulta, conexionSql);
 
-                    // Parámetros añadidos en el mismo orden de la firma del método
                     comandoSql.Parameters.AddWithValue("@nombre", nombre);
-                    comandoSql.Parameters.AddWithValue("@dni", dni); // El DNI se usa tanto en el WHERE como parámetro
+                    comandoSql.Parameters.AddWithValue("@dni", dni); 
                     comandoSql.Parameters.AddWithValue("@provincia", provincia);
                     comandoSql.Parameters.AddWithValue("@ciudad", ciudad);
                     comandoSql.Parameters.AddWithValue("@domicilio", domicilio);
@@ -173,7 +168,6 @@ namespace Antorena_Soto.CDatos
 
 
         // BAJA LÓGICA DE CLIENTE (por DNI)
-        // Este método solo necesita el DNI
         public bool BajaCliente(int dniCliente)
         {
             try
@@ -181,7 +175,6 @@ namespace Antorena_Soto.CDatos
                 using (SqlConnection conn = new SqlConnection(conexionString))
                 {
                     conn.Open();
-                    // Asumimos que '0' significa 'Inactivo'
                     string query = "UPDATE Cliente SET estado = 0 WHERE dni_cliente = @dni";
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))

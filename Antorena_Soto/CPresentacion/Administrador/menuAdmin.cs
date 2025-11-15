@@ -1,5 +1,4 @@
 ﻿using Antorena_Soto.CLogica;
-//using Antorena_Soto.CPresentacion.Gerente;
 using Antorena_Soto.CPresentacion.SuperAdministrador;
 using System;
 using System.Collections.Generic;
@@ -21,7 +20,6 @@ namespace Antorena_Soto.CPresentacion.Administrador
             InitializeComponent();
         }
 
-        // Método general para abrir un formulario dentro del panel
         private void AbrirFormularioEnPanel(Form formHijo)
         {
             if (_formActual != null)
@@ -46,7 +44,6 @@ namespace Antorena_Soto.CPresentacion.Administrador
 
         }
 
-        // Listar productos QUEDA <--
         private void BTListaProductosBD_Click_1(object sender, EventArgs e)
         {
             var form = new listaProductos();
@@ -64,8 +61,6 @@ namespace Antorena_Soto.CPresentacion.Administrador
         }
 
 
-
-
         // Editar productos bd
         private void BEditarProducto_Click(object sender, EventArgs e)
         {
@@ -78,8 +73,6 @@ namespace Antorena_Soto.CPresentacion.Administrador
             if (botonEditar != null) botonEditar.Visible = true;
 
             AbrirFormularioEnPanel(form);
-
-            // Cargar desde BD (esto llenará el DataGridView dentro del form)
             form.CargarProductosBD();
         }
 
@@ -89,7 +82,6 @@ namespace Antorena_Soto.CPresentacion.Administrador
         {
             try
             {
-                // TODO: Traer datos reales desde CN_Ventas cuando tengas implementada la capa
                 reporteVentas formReporte = new reporteVentas();
                 AbrirFormularioEnPanel(formReporte);
                 
@@ -109,12 +101,12 @@ namespace Antorena_Soto.CPresentacion.Administrador
 
         private void PAdmin_Paint(object sender, PaintEventArgs e)
         {
-            // Opcional: personalización de panel
+           
         }
 
         private void menuAdmin_Load(object sender, EventArgs e)
         {
-            // Opcional: inicializar algo al cargar
+            
         }
 
         private void PGerente1_Paint(object sender, PaintEventArgs e)

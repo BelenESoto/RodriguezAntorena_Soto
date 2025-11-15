@@ -118,9 +118,12 @@ namespace Antorena_Soto.CDatos
             {
                 using (SqlConnection conexionSql = new SqlConnection(conexionString))
                 {
-                    string consulta = @"SELECT nombre_prod, codigo_prod, estado_prod, descripcion_prod, 
-                                        categoria_prod, precio_prod, stock_prod, imagen_prod, fechaModif_prod 
-                                        FROM Producto ";
+                    string consulta = @"SELECT nombre_prod, codigo_prod, 
+                                 CASE 
+                                     WHEN estado_prod = 1 THEN 'Activo'
+                                     ELSE 'Inactivo'
+                                 END AS estado_prod, descripcion_prod, categoria_prod, precio_prod, 
+                                 stock_prod, imagen_prod, fechaModif_prod FROM Producto ";
                     SqlCommand comandoSql = new SqlCommand(consulta, conexionSql);
                     SqlDataAdapter adaptador = new SqlDataAdapter(comandoSql);
                     DataTable tablaProducto = new DataTable();
@@ -147,13 +150,12 @@ namespace Antorena_Soto.CDatos
                     {
                         cmd.Parameters.AddWithValue("@codigo_prod", codigoP);
                         int rows = cmd.ExecuteNonQuery();
-                        return rows > 0; // true si eliminó, false si no
+                        return rows > 0; 
                     }
                 }
             }
             catch (Exception ex)
             {
-                // Podés loguear o lanzar una excepción personalizada
                 throw new Exception("Error en BajaProducto ", ex);
             }
         }
@@ -173,9 +175,7 @@ namespace Antorena_Soto.CDatos
             }
         }
 
-
         // MODIFICAR PRODUCTO bd
-
         public bool ModificarProductoBD(string nombre, int codigo, bool estado, string descripcion, int categoria, decimal precio,
                                        int stock, byte[] imagen, DateTime fechaModif)
         {
@@ -214,9 +214,6 @@ namespace Antorena_Soto.CDatos
         }
 
 
-
-
-
         // REPORTE DE VENTAS POR PRODUCTO
 
         public DataTable ReporteVentas()
@@ -243,8 +240,6 @@ namespace Antorena_Soto.CDatos
                 using (SqlConnection conn = new SqlConnection(conexionString))
                 {
                     conn.Open();
-
-                    // Esta consulta resta la cantidad del stock actual
                     string query = @"UPDATE Producto SET
                                 stock_prod = stock_prod - @cantidad
                              WHERE
@@ -253,7 +248,7 @@ namespace Antorena_Soto.CDatos
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@cantidad", cantidadComprada);
-                        cmd.Parameters.AddWithValue("@idProducto", idProducto); // Asumo que tu PK es codigo_prod
+                        cmd.Parameters.AddWithValue("@idProducto", idProducto); 
 
                         int rows = cmd.ExecuteNonQuery();
                         return rows > 0;

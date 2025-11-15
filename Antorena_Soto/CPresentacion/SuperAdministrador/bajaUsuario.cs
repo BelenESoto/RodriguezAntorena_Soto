@@ -111,7 +111,7 @@ namespace Antorena_Soto.CPresentacion.SuperAdministrador
                 DataPropertyName = "Estado"
             });
 
-            DGVListaUsuario.AutoGenerateColumns = false; // Muy importante para que use solo estas columnas
+            DGVListaUsuario.AutoGenerateColumns = false; 
         }
         private void bajaUsuario_Load_1(object sender, EventArgs e)
         {
@@ -119,11 +119,9 @@ namespace Antorena_Soto.CPresentacion.SuperAdministrador
         }
         private void bajaUsuario_Load(object sender, EventArgs e)
         {
-            ConfigurarDataGridView(); // Configura las columnas con DataPropertyName
-                                      // No cargamos usuarios todavía; se hará al buscar
+            ConfigurarDataGridView();
         }
 
-        // BOTONES DEL TOOLSTRIP PARA SELECCIONAR EL CRITERIO
         private void BTSDni_Click(object sender, EventArgs e)
         {
             buscarPorDni = true;
@@ -139,9 +137,7 @@ namespace Antorena_Soto.CPresentacion.SuperAdministrador
             BTSDni.Checked = false;
             BTSNomYApe.Checked = true;
         }
-
-
-        // BOTON DE BUSQUEDA
+        //metodo para buscar usuario
         private void BTSBusqueda_Click(object sender, EventArgs e)
         {
             try
@@ -154,14 +150,12 @@ namespace Antorena_Soto.CPresentacion.SuperAdministrador
                     return;
                 }
 
-                // Si buscamos por DNI, validar que sea numérico
                 if (buscarPorDni && !int.TryParse(criterio, out int _))
                 {
                     MessageBox.Show("Ingrese un DNI válido.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                // Limpiar DataGridView antes de buscar
                 DGVListaUsuario.DataSource = null;
 
                 DataTable resultado = this.usuarioBLL.BuscarUsuariosBLL(criterio, buscarPorDni);
@@ -188,7 +182,6 @@ namespace Antorena_Soto.CPresentacion.SuperAdministrador
                 return;
             }
 
-            // Tomar el valor de la celda "Dni"
             int dniUsuario = Convert.ToInt32(DGVListaUsuario.CurrentRow.Cells["Dni"].Value);
 
             DialogResult confirmacion = MessageBox.Show(

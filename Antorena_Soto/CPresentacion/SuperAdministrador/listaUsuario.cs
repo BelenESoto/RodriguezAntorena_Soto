@@ -23,14 +23,12 @@ namespace Antorena_Soto.CPresentacion.SuperAdministrador
             InitializeComponent();    
             string conexionString = "Data Source=DESKTOP-IDH7B7D\\SQLEXPRESS;Initial Catalog=RodriguezAntorena_Soto;Integrated Security=True";
 
-            // Inicializa la capa lógica con la conexión
             usuarioBLL = new UsuarioBLL(conexionString);
         }
        
         private void listaUsuario_Load_1(object sender, EventArgs e)
         {
             CargarUsuarios();
-            
         }
         
 
@@ -39,13 +37,9 @@ namespace Antorena_Soto.CPresentacion.SuperAdministrador
             try
             {
                 DGVListaUsuarios.DefaultCellStyle.ForeColor = Color.Black;
-                // Traer datos desde la BLL
                 DataTable usuarios = usuarioBLL.ListarUsuariosBLL();
-
-                // Cargar en el DataGridView
                 DGVListaUsuarios.DataSource = usuarios;
 
-                // Mostrar cantidad de filas cargadas
                 MessageBox.Show($"Se cargaron {usuarios.Rows.Count} usuarios.",
                                 "Información",
                                 MessageBoxButtons.OK,
@@ -86,6 +80,7 @@ namespace Antorena_Soto.CPresentacion.SuperAdministrador
             TBBuscarr.Text = "Activo, Inactivo o Vacío";
         }
 
+        //Metodo para el boton de busqueda por apellido, dni o estado
         private void BTSBusquedaUs_Click(object sender, EventArgs e)
         {
             if (tipoBusquedaSeleccionado == TipoBusqueda.None)

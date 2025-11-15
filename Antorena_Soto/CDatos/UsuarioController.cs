@@ -130,13 +130,12 @@ namespace Antorena_Soto.CDatos
                     {
                         cmd.Parameters.AddWithValue("@dni", idUsuario);
                         int rows = cmd.ExecuteNonQuery();
-                        return rows > 0; // true si eliminó, false si no
+                        return rows > 0; 
                     }
                 }
             }
             catch (Exception ex)
             {
-                // Podés loguear o lanzar una excepción personalizada
                 throw new Exception("Error en BajaUsuario DAL", ex);
             }
         }

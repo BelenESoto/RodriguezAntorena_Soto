@@ -57,10 +57,12 @@
             this.LNombreSkorial = new System.Windows.Forms.Label();
             this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Categoria_producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Precio_producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cantidad_producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Subtotal_producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnImprimirFac = new FontAwesome.Sharp.IconButton();
             ((System.ComponentModel.ISupportInitialize)(this.DGVListaProd)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -80,6 +82,7 @@
             this.DGVListaProd.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Codigo,
             this.Nombre,
+            this.Descripcion,
             this.Categoria_producto,
             this.Precio_producto,
             this.Cantidad_producto,
@@ -111,6 +114,7 @@
             // 
             this.panel4.BackColor = System.Drawing.Color.White;
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.btnImprimirFac);
             this.panel4.Controls.Add(this.label11);
             this.panel4.Controls.Add(this.label12);
             this.panel4.Controls.Add(this.label16);
@@ -125,7 +129,7 @@
             this.label11.AutoSize = true;
             this.label11.BackColor = System.Drawing.Color.White;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(552, 45);
+            this.label11.Location = new System.Drawing.Point(552, 35);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(58, 20);
             this.label11.TabIndex = 47;
@@ -136,7 +140,7 @@
             this.label12.AutoSize = true;
             this.label12.BackColor = System.Drawing.Color.White;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(373, 45);
+            this.label12.Location = new System.Drawing.Point(373, 34);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(157, 20);
             this.label12.TabIndex = 46;
@@ -413,6 +417,12 @@
             this.Nombre.MinimumWidth = 6;
             this.Nombre.Name = "Nombre";
             // 
+            // Descripcion
+            // 
+            this.Descripcion.DataPropertyName = "descripcion_prod";
+            this.Descripcion.HeaderText = "Descripcion";
+            this.Descripcion.Name = "Descripcion";
+            // 
             // Categoria_producto
             // 
             this.Categoria_producto.DataPropertyName = "categoria_producto";
@@ -440,6 +450,20 @@
             this.Subtotal_producto.HeaderText = "Subtotal";
             this.Subtotal_producto.MinimumWidth = 6;
             this.Subtotal_producto.Name = "Subtotal_producto";
+            // 
+            // btnImprimirFac
+            // 
+            this.btnImprimirFac.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnImprimirFac.IconChar = FontAwesome.Sharp.IconChar.None;
+            this.btnImprimirFac.IconColor = System.Drawing.Color.Black;
+            this.btnImprimirFac.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnImprimirFac.Location = new System.Drawing.Point(429, 69);
+            this.btnImprimirFac.Name = "btnImprimirFac";
+            this.btnImprimirFac.Size = new System.Drawing.Size(164, 35);
+            this.btnImprimirFac.TabIndex = 48;
+            this.btnImprimirFac.Text = "IMPRIMIR";
+            this.btnImprimirFac.UseVisualStyleBackColor = true;
+            this.btnImprimirFac.Click += new System.EventHandler(this.btnImprimirFac_Click);
             // 
             // facturaVenta
             // 
@@ -496,9 +520,11 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.DataGridViewTextBoxColumn Codigo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Categoria_producto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Precio_producto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad_producto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Subtotal_producto;
+        private FontAwesome.Sharp.IconButton btnImprimirFac;
     }
 }

@@ -16,16 +16,12 @@ namespace Antorena_Soto
     public partial class Form1 : Form
     {
 
-        // --- NUEVO ---
-        // Instancia de la capa BLL de Usuario para el ingreso desde BD y no Manual
         private readonly UsuarioBLL usuarioBLL;
 
         public Form1()
         {
             InitializeComponent();
-
-            // --- NUEVO ---
-            // Inicializamos la BLL con la cadena de conexión a la base de datos 
+ 
             try
             {
                 string conexionString = "Data Source=DESKTOP-IDH7B7D\\SQLEXPRESS;Initial Catalog=RodriguezAntorena_Soto;Integrated Security=True";
@@ -34,7 +30,7 @@ namespace Antorena_Soto
             catch (Exception ex)
             {
                 MessageBox.Show("Error fatal al conectar con la base de datos: " + ex.Message, "Error de Conexión", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Application.Exit(); // Si no hay BBDD, el login no puede funcionar
+                Application.Exit(); 
             }
 
         }
@@ -88,17 +84,15 @@ namespace Antorena_Soto
 
             try
             {
-                // Buscar al usuario en la Base de Datos por DNI    
+
                 DataTable dtUsuario = usuarioBLL.BuscarUsuariosBLL(dniInput, true); // true = buscar por DNI
 
-                // Validar si el DNI existe
                 if (dtUsuario.Rows.Count == 0)
                 {
                     MessageBox.Show("DNI no encontrado.", "Error de Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
-                // Obtener los datos del usuario
                 DataRow filaUsuario = dtUsuario.Rows[0];
                 int tipoUsuario = Convert.ToInt32(filaUsuario["tipo_Usuario"]);
                 string estado = Convert.ToString(filaUsuario["Estado"]);
@@ -135,11 +129,8 @@ namespace Antorena_Soto
                     return;
                 }
 
-                // Si llegamos acá, el login esta ok
-                // Guardamos los datos del usuario en la sesión para usarlo en otros forms
                 UsuarioBLL.SesionUsuario.Login(filaUsuario);
 
-                // Segun el tipo de usuario, abrir el form correspondiente
                 switch (tipoUsuario)
                 {
                     case 1: // Vendedor
@@ -183,8 +174,6 @@ namespace Antorena_Soto
                 MessageBox.Show("Operación Cancelada", "Cancelar", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-
-        // hasta aca 
 
         private void Form1_Load(object sender, EventArgs e)
         {

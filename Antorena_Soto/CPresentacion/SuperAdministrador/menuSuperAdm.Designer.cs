@@ -38,6 +38,7 @@
             this.LVentas = new System.Windows.Forms.Label();
             this.PGerente22 = new System.Windows.Forms.Panel();
             this.PGerente2 = new System.Windows.Forms.Panel();
+            this.btnBack = new System.Windows.Forms.Button();
             this.PMenuSuperAdmin.SuspendLayout();
             this.PGerente1.SuspendLayout();
             this.SuspendLayout();
@@ -47,15 +48,16 @@
             this.PMenuSuperAdmin.BackColor = System.Drawing.Color.Lavender;
             this.PMenuSuperAdmin.Controls.Add(this.PGerente1);
             this.PMenuSuperAdmin.Controls.Add(this.PGerente22);
-            this.PMenuSuperAdmin.Location = new System.Drawing.Point(3, 2);
-            this.PMenuSuperAdmin.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.PMenuSuperAdmin.Location = new System.Drawing.Point(2, 2);
+            this.PMenuSuperAdmin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.PMenuSuperAdmin.Name = "PMenuSuperAdmin";
-            this.PMenuSuperAdmin.Size = new System.Drawing.Size(1105, 798);
+            this.PMenuSuperAdmin.Size = new System.Drawing.Size(829, 648);
             this.PMenuSuperAdmin.TabIndex = 0;
             // 
             // PGerente1
             // 
             this.PGerente1.BackColor = System.Drawing.Color.MidnightBlue;
+            this.PGerente1.Controls.Add(this.btnBack);
             this.PGerente1.Controls.Add(this.BEditarUsuario);
             this.PGerente1.Controls.Add(this.LMenuVentas);
             this.PGerente1.Controls.Add(this.BTBajaUsuario);
@@ -64,9 +66,9 @@
             this.PGerente1.Controls.Add(this.LVentas);
             this.PGerente1.Dock = System.Windows.Forms.DockStyle.Left;
             this.PGerente1.Location = new System.Drawing.Point(0, 0);
-            this.PGerente1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.PGerente1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.PGerente1.Name = "PGerente1";
-            this.PGerente1.Size = new System.Drawing.Size(293, 798);
+            this.PGerente1.Size = new System.Drawing.Size(220, 648);
             this.PGerente1.TabIndex = 2;
             // 
             // BEditarUsuario
@@ -74,10 +76,10 @@
             this.BEditarUsuario.BackColor = System.Drawing.Color.White;
             this.BEditarUsuario.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Bold);
             this.BEditarUsuario.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.BEditarUsuario.Location = new System.Drawing.Point(37, 383);
-            this.BEditarUsuario.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.BEditarUsuario.Location = new System.Drawing.Point(26, 333);
+            this.BEditarUsuario.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.BEditarUsuario.Name = "BEditarUsuario";
-            this.BEditarUsuario.Size = new System.Drawing.Size(219, 33);
+            this.BEditarUsuario.Size = new System.Drawing.Size(164, 27);
             this.BEditarUsuario.TabIndex = 10;
             this.BEditarUsuario.Text = "Editar Usuario";
             this.BEditarUsuario.UseVisualStyleBackColor = false;
@@ -89,9 +91,10 @@
             this.LMenuVentas.Font = new System.Drawing.Font("SimSun", 19.8F, System.Drawing.FontStyle.Bold);
             this.LMenuVentas.Image = global::Antorena_Soto.Properties.Resources.config2;
             this.LMenuVentas.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.LMenuVentas.Location = new System.Drawing.Point(9, 44);
+            this.LMenuVentas.Location = new System.Drawing.Point(7, 36);
+            this.LMenuVentas.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LMenuVentas.Name = "LMenuVentas";
-            this.LMenuVentas.Size = new System.Drawing.Size(279, 111);
+            this.LMenuVentas.Size = new System.Drawing.Size(209, 90);
             this.LMenuVentas.TabIndex = 8;
             this.LMenuVentas.Text = "MENU SUPER ADMINISTRADOR";
             this.LMenuVentas.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -102,10 +105,10 @@
             this.BTBajaUsuario.BackColor = System.Drawing.Color.White;
             this.BTBajaUsuario.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Bold);
             this.BTBajaUsuario.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.BTBajaUsuario.Location = new System.Drawing.Point(35, 329);
-            this.BTBajaUsuario.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.BTBajaUsuario.Location = new System.Drawing.Point(26, 280);
+            this.BTBajaUsuario.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.BTBajaUsuario.Name = "BTBajaUsuario";
-            this.BTBajaUsuario.Size = new System.Drawing.Size(219, 33);
+            this.BTBajaUsuario.Size = new System.Drawing.Size(164, 27);
             this.BTBajaUsuario.TabIndex = 7;
             this.BTBajaUsuario.Text = "Baja Usuario";
             this.BTBajaUsuario.UseVisualStyleBackColor = false;
@@ -116,10 +119,10 @@
             this.BTListaUsuario.BackColor = System.Drawing.Color.White;
             this.BTListaUsuario.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Bold);
             this.BTListaUsuario.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.BTListaUsuario.Location = new System.Drawing.Point(35, 437);
-            this.BTListaUsuario.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.BTListaUsuario.Location = new System.Drawing.Point(26, 391);
+            this.BTListaUsuario.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.BTListaUsuario.Name = "BTListaUsuario";
-            this.BTListaUsuario.Size = new System.Drawing.Size(219, 68);
+            this.BTListaUsuario.Size = new System.Drawing.Size(164, 55);
             this.BTListaUsuario.TabIndex = 2;
             this.BTListaUsuario.Text = "Lista de Usuarios";
             this.BTListaUsuario.UseVisualStyleBackColor = false;
@@ -130,10 +133,10 @@
             this.BTAltaUsuario.BackColor = System.Drawing.Color.White;
             this.BTAltaUsuario.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Bold);
             this.BTAltaUsuario.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.BTAltaUsuario.Location = new System.Drawing.Point(35, 278);
-            this.BTAltaUsuario.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.BTAltaUsuario.Location = new System.Drawing.Point(26, 226);
+            this.BTAltaUsuario.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.BTAltaUsuario.Name = "BTAltaUsuario";
-            this.BTAltaUsuario.Size = new System.Drawing.Size(219, 33);
+            this.BTAltaUsuario.Size = new System.Drawing.Size(164, 27);
             this.BTAltaUsuario.TabIndex = 1;
             this.BTAltaUsuario.Text = "Alta Usuario";
             this.BTAltaUsuario.UseVisualStyleBackColor = false;
@@ -148,11 +151,11 @@
             this.LVentas.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.LVentas.Font = new System.Drawing.Font("Yu Gothic UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LVentas.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.LVentas.Location = new System.Drawing.Point(16, 220);
-            this.LVentas.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.LVentas.Location = new System.Drawing.Point(12, 179);
+            this.LVentas.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.LVentas.Name = "LVentas";
-            this.LVentas.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.LVentas.Size = new System.Drawing.Size(259, 299);
+            this.LVentas.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.LVentas.Size = new System.Drawing.Size(195, 376);
             this.LVentas.TabIndex = 9;
             this.LVentas.Text = "PERSONAL";
             this.LVentas.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -164,10 +167,10 @@
             this.PGerente22.BackgroundImage = global::Antorena_Soto.Properties.Resources.config2;
             this.PGerente22.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.PGerente22.Dock = System.Windows.Forms.DockStyle.Right;
-            this.PGerente22.Location = new System.Drawing.Point(312, 0);
-            this.PGerente22.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.PGerente22.Location = new System.Drawing.Point(234, 0);
+            this.PGerente22.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.PGerente22.Name = "PGerente22";
-            this.PGerente22.Size = new System.Drawing.Size(793, 798);
+            this.PGerente22.Size = new System.Drawing.Size(595, 648);
             this.PGerente22.TabIndex = 4;
             // 
             // PGerente2
@@ -176,22 +179,36 @@
             this.PGerente2.BackgroundImage = global::Antorena_Soto.Properties.Resources.config2;
             this.PGerente2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.PGerente2.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.PGerente2.Location = new System.Drawing.Point(296, 2);
-            this.PGerente2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.PGerente2.Location = new System.Drawing.Point(222, 2);
+            this.PGerente2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.PGerente2.Name = "PGerente2";
-            this.PGerente2.Size = new System.Drawing.Size(793, 750);
+            this.PGerente2.Size = new System.Drawing.Size(595, 609);
             this.PGerente2.TabIndex = 6;
             this.PGerente2.UseWaitCursor = true;
             this.PGerente2.Paint += new System.Windows.Forms.PaintEventHandler(this.PGerente2_Paint);
             // 
+            // btnBack
+            // 
+            this.btnBack.BackColor = System.Drawing.Color.White;
+            this.btnBack.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Bold);
+            this.btnBack.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.btnBack.Location = new System.Drawing.Point(26, 482);
+            this.btnBack.Margin = new System.Windows.Forms.Padding(2);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(164, 51);
+            this.btnBack.TabIndex = 11;
+            this.btnBack.Text = "Backup Skorial";
+            this.btnBack.UseVisualStyleBackColor = false;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            // 
             // menuSuperAdm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1084, 750);
+            this.ClientSize = new System.Drawing.Size(813, 609);
             this.Controls.Add(this.PGerente2);
             this.Controls.Add(this.PMenuSuperAdmin);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "menuSuperAdm";
             this.Text = "Form1";
             this.PMenuSuperAdmin.ResumeLayout(false);
@@ -212,5 +229,6 @@
         private System.Windows.Forms.Label LVentas;
         private System.Windows.Forms.Button BEditarUsuario;
         private System.Windows.Forms.Panel PGerente2;
+        private System.Windows.Forms.Button btnBack;
     }
 }

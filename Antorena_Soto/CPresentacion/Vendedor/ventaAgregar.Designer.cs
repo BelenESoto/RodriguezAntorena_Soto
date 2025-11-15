@@ -31,6 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ventaAgregar));
             this.LAgregarVenta = new System.Windows.Forms.Label();
             this.PAgregarVendedor = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.TBStockProd = new System.Windows.Forms.TextBox();
             this.DGVListaProdVentas = new System.Windows.Forms.DataGridView();
             this.BTSBusquedaCliente = new FontAwesome.Sharp.IconButton();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -58,6 +60,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.LBuscarPor = new System.Windows.Forms.ToolStripLabel();
             this.TBBuscadorProd = new System.Windows.Forms.ToolStripTextBox();
+            this.PConfirmar = new System.Windows.Forms.Panel();
             this.PAgregarVendedor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGVListaProdVentas)).BeginInit();
             this.toolStrip1.SuspendLayout();
@@ -81,6 +84,9 @@
             // PAgregarVendedor
             // 
             this.PAgregarVendedor.BackColor = System.Drawing.Color.White;
+            this.PAgregarVendedor.Controls.Add(this.PConfirmar);
+            this.PAgregarVendedor.Controls.Add(this.label1);
+            this.PAgregarVendedor.Controls.Add(this.TBStockProd);
             this.PAgregarVendedor.Controls.Add(this.DGVListaProdVentas);
             this.PAgregarVendedor.Controls.Add(this.BTSBusquedaCliente);
             this.PAgregarVendedor.Controls.Add(this.toolStrip1);
@@ -102,6 +108,28 @@
             this.PAgregarVendedor.Size = new System.Drawing.Size(579, 570);
             this.PAgregarVendedor.TabIndex = 3;
             this.PAgregarVendedor.Paint += new System.Windows.Forms.PaintEventHandler(this.PAgregarVendedor_Paint);
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("SimSun", 13F, System.Drawing.FontStyle.Bold);
+            this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label1.Location = new System.Drawing.Point(174, 170);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(112, 39);
+            this.label1.TabIndex = 43;
+            this.label1.Text = "  Stock Disponible";
+            // 
+            // TBStockProd
+            // 
+            this.TBStockProd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TBStockProd.Location = new System.Drawing.Point(171, 211);
+            this.TBStockProd.Margin = new System.Windows.Forms.Padding(2);
+            this.TBStockProd.MaxLength = 11;
+            this.TBStockProd.Name = "TBStockProd";
+            this.TBStockProd.Size = new System.Drawing.Size(106, 26);
+            this.TBStockProd.TabIndex = 42;
+            this.TBStockProd.Click += new System.EventHandler(this.BTSBusquedaCliente_Click);
             // 
             // DGVListaProdVentas
             // 
@@ -234,12 +262,12 @@
             // 
             this.BEditarProd.BackColor = System.Drawing.Color.Lavender;
             this.BEditarProd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BEditarProd.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BEditarProd.Font = new System.Drawing.Font("SimSun", 13F, System.Drawing.FontStyle.Bold);
             this.BEditarProd.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.BEditarProd.Location = new System.Drawing.Point(476, 193);
+            this.BEditarProd.Location = new System.Drawing.Point(477, 212);
             this.BEditarProd.Margin = new System.Windows.Forms.Padding(2);
             this.BEditarProd.Name = "BEditarProd";
-            this.BEditarProd.Size = new System.Drawing.Size(92, 29);
+            this.BEditarProd.Size = new System.Drawing.Size(90, 29);
             this.BEditarProd.TabIndex = 39;
             this.BEditarProd.Text = "Editar ";
             this.BEditarProd.UseVisualStyleBackColor = false;
@@ -249,12 +277,12 @@
             // 
             this.BAgregarProd.BackColor = System.Drawing.Color.Lavender;
             this.BAgregarProd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BAgregarProd.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BAgregarProd.Font = new System.Drawing.Font("SimSun", 13F, System.Drawing.FontStyle.Bold);
             this.BAgregarProd.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.BAgregarProd.Location = new System.Drawing.Point(368, 193);
+            this.BAgregarProd.Location = new System.Drawing.Point(477, 170);
             this.BAgregarProd.Margin = new System.Windows.Forms.Padding(2);
             this.BAgregarProd.Name = "BAgregarProd";
-            this.BAgregarProd.Size = new System.Drawing.Size(99, 29);
+            this.BAgregarProd.Size = new System.Drawing.Size(90, 29);
             this.BAgregarProd.TabIndex = 37;
             this.BAgregarProd.Text = "Agregar Producto";
             this.BAgregarProd.UseVisualStyleBackColor = false;
@@ -262,24 +290,23 @@
             // 
             // LTipoUsuario
             // 
-            this.LTipoUsuario.AutoSize = true;
-            this.LTipoUsuario.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LTipoUsuario.Font = new System.Drawing.Font("SimSun", 13F, System.Drawing.FontStyle.Bold);
             this.LTipoUsuario.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.LTipoUsuario.Location = new System.Drawing.Point(205, 175);
+            this.LTipoUsuario.Location = new System.Drawing.Point(322, 170);
             this.LTipoUsuario.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LTipoUsuario.Name = "LTipoUsuario";
-            this.LTipoUsuario.Size = new System.Drawing.Size(97, 19);
+            this.LTipoUsuario.Size = new System.Drawing.Size(112, 39);
             this.LTipoUsuario.TabIndex = 36;
-            this.LTipoUsuario.Text = "CANTIDAD";
+            this.LTipoUsuario.Text = "Seleccione  Cantidad";
             // 
             // TBCantidadProd
             // 
             this.TBCantidadProd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TBCantidadProd.Location = new System.Drawing.Point(209, 196);
+            this.TBCantidadProd.Location = new System.Drawing.Point(325, 212);
             this.TBCantidadProd.Margin = new System.Windows.Forms.Padding(2);
             this.TBCantidadProd.MaxLength = 11;
             this.TBCantidadProd.Name = "TBCantidadProd";
-            this.TBCantidadProd.Size = new System.Drawing.Size(145, 26);
+            this.TBCantidadProd.Size = new System.Drawing.Size(106, 26);
             this.TBCantidadProd.TabIndex = 29;
             this.TBCantidadProd.TextChanged += new System.EventHandler(this.TBCantidadProd_TextChanged);
             // 
@@ -325,25 +352,24 @@
             // TBNombreProd
             // 
             this.TBNombreProd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TBNombreProd.Location = new System.Drawing.Point(12, 196);
+            this.TBNombreProd.Location = new System.Drawing.Point(11, 211);
             this.TBNombreProd.Margin = new System.Windows.Forms.Padding(2);
             this.TBNombreProd.MaxLength = 100;
             this.TBNombreProd.Name = "TBNombreProd";
-            this.TBNombreProd.Size = new System.Drawing.Size(185, 26);
+            this.TBNombreProd.Size = new System.Drawing.Size(119, 26);
             this.TBNombreProd.TabIndex = 14;
             this.TBNombreProd.TextChanged += new System.EventHandler(this.TBNombreProd_TextChanged);
             // 
             // LNombreProd
             // 
-            this.LNombreProd.AutoSize = true;
-            this.LNombreProd.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LNombreProd.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.LNombreProd.Location = new System.Drawing.Point(11, 175);
+            this.LNombreProd.Font = new System.Drawing.Font("SimSun", 13F, System.Drawing.FontStyle.Bold);
+            this.LNombreProd.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.LNombreProd.Location = new System.Drawing.Point(29, 170);
             this.LNombreProd.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LNombreProd.Name = "LNombreProd";
-            this.LNombreProd.Size = new System.Drawing.Size(97, 19);
+            this.LNombreProd.Size = new System.Drawing.Size(110, 45);
             this.LNombreProd.TabIndex = 11;
-            this.LNombreProd.Text = "PRODUCTO";
+            this.LNombreProd.Text = " Código  Producto";
             // 
             // TBuscador
             // 
@@ -405,6 +431,20 @@
             this.TBBuscadorProd.Size = new System.Drawing.Size(276, 39);
             this.TBBuscadorProd.Click += new System.EventHandler(this.TBBuscadorProd_Click);
             // 
+            // PConfirmar
+            // 
+            this.PConfirmar.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.PConfirmar.BackgroundImage = global::Antorena_Soto.Properties.Resources.cart_icon_147474;
+            this.PConfirmar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.PConfirmar.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.PConfirmar.Location = new System.Drawing.Point(0, 0);
+            this.PConfirmar.Margin = new System.Windows.Forms.Padding(2);
+            this.PConfirmar.Name = "PConfirmar";
+            this.PConfirmar.Size = new System.Drawing.Size(579, 609);
+            this.PConfirmar.TabIndex = 44;
+            this.PConfirmar.UseWaitCursor = true;
+            this.PConfirmar.Visible = false;
+            // 
             // ventaAgregar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -458,5 +498,8 @@
         private System.Windows.Forms.ToolStripTextBox TBBuscarCliente;
         public System.Windows.Forms.Label LAgregarventas;
         private System.Windows.Forms.DataGridView DGVListaProdVentas;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox TBStockProd;
+        private System.Windows.Forms.Panel PConfirmar;
     }
 }

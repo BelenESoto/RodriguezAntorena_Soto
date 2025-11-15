@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
-using Antorena_Soto.CDatos; // Para el objeto Detalle_venta
+using Antorena_Soto.CDatos; 
 
 namespace Antorena_Soto.CDatos
 {
@@ -14,16 +14,13 @@ namespace Antorena_Soto.CDatos
             this.conexionString = conexionString;
         }
 
-        /// <summary>
-        /// Inserta un item de detalle de venta en la BBDD.
-        /// </summary>
         public bool InsertarDetalle(Detalle_venta detalle)
         {
             try
             {
                 using (SqlConnection conexionSql = new SqlConnection(conexionString))
                 {
-                    // No se usa SCOPE_IDENTITY porque las PKs vienen de las otras tablas
+                    
                     string consulta = @"INSERT INTO Detalle_venta 
                                         (id_factura, id_producto, cantidad, precio)
                                       VALUES 
@@ -34,8 +31,7 @@ namespace Antorena_Soto.CDatos
                     comandoSql.Parameters.AddWithValue("@id_factura", detalle.id_factura);
                     comandoSql.Parameters.AddWithValue("@id_producto", detalle.id_producto);
                     comandoSql.Parameters.AddWithValue("@cantidad", detalle.cantidad);
-                    // Nota: Tu entidad usa 'double', SQL Server usa 'float' para 'double'
-                    // Si tu columna SQL es 'decimal', es mejor usar 'decimal' en C#
+                    
                     comandoSql.Parameters.AddWithValue("@precio", detalle.precio);
 
                     conexionSql.Open();
@@ -49,9 +45,6 @@ namespace Antorena_Soto.CDatos
             }
         }
 
-        /// <summary>
-        /// Lista todos los detalles de una factura específica.
-        /// </summary>
         public DataTable ListarDetallesPorFactura(long id_factura)
         {
             try
@@ -77,10 +70,7 @@ namespace Antorena_Soto.CDatos
             }
         }
 
-        /// <summary>
-        /// Actualiza un item de detalle (ej. cambia cantidad o precio).
-        /// Necesita la clave compuesta (factura + producto) para saber cuál actualizar.
-        /// </summary>
+       
         public bool ActualizarDetalle(Detalle_venta detalle)
         {
             try
@@ -111,10 +101,6 @@ namespace Antorena_Soto.CDatos
             }
         }
 
-        /// <summary>
-        /// Elimina un item de detalle específico de una factura.
-        /// Necesita la clave compuesta.
-        /// </summary>
         public bool EliminarDetalle(long id_factura, int id_producto)
         {
             try

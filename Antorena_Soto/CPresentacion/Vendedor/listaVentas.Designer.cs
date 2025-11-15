@@ -258,7 +258,6 @@
             // 
             // TBBuscarPorVenta
             // 
-            this.TBBuscarPorVenta.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.TBBuscarPorVenta.Name = "TBBuscarPorVenta";
             this.TBBuscarPorVenta.Size = new System.Drawing.Size(367, 71);
             // 

@@ -14,7 +14,7 @@ using System.Windows.Forms;
 
 namespace Antorena_Soto.CPresentacion.Administrador
 {
-    //    private bool buscarPorCodigo = true;
+ 
     public partial class listaProductos : Form
     {
 
@@ -23,7 +23,7 @@ namespace Antorena_Soto.CPresentacion.Administrador
         private bool buscarPorCod = true;
         private string _modo = "Codigo";
 
-        private List<Productox> _productos; // lista de productos borrar
+        private List<Productox> _productos; 
 
         private bool textoLimpiado = false;
         private string textoAImprimir;
@@ -34,7 +34,6 @@ namespace Antorena_Soto.CPresentacion.Administrador
             InitializeComponent();
             conexionString = "Data Source=DESKTOP-IDH7B7D\\SQLEXPRESS;Initial Catalog=RodriguezAntorena_Soto;Integrated Security=True";
 
-            // Inicializa la capa lógica con la conexión
             cn_Producto = new CN_Producto(conexionString);
 
         }
@@ -54,7 +53,7 @@ namespace Antorena_Soto.CPresentacion.Administrador
             DGVListaProd.Rows.Clear();
             int contador = 1;
 
-            foreach (var p in _productos) // <-- usamos _productos
+            foreach (var p in _productos) 
             {
                 DGVListaProd.Rows.Add(
                     contador,
@@ -78,13 +77,10 @@ namespace Antorena_Soto.CPresentacion.Administrador
             try
             {
                 DGVListaProd.DefaultCellStyle.ForeColor = Color.Black;
-                // Traer datos desde la BLL
                 DataTable productos = cn_Producto.ListarProductosBLL();
 
-                // Cargar en el DataGridView
                 DGVListaProd.DataSource = productos;
 
-                // Mostrar cantidad de filas cargadas
                 MessageBox.Show($"Se cargaron {productos.Rows.Count} productos.",
                                 "Información",
                                 MessageBoxButtons.OK,
@@ -132,6 +128,7 @@ namespace Antorena_Soto.CPresentacion.Administrador
             }
         }
 
+        //Editamos el producto y se actualiza en BD
         private void BEditarProd_Click(object sender, EventArgs e)
         {
             try
@@ -143,7 +140,6 @@ namespace Antorena_Soto.CPresentacion.Administrador
                     return;
                 }
 
-                // Crear objeto Productox desde la fila seleccionada
                 Productox prodSeleccionado = new Productox
                 {
                     Nombre = DGVListaProd.CurrentRow.Cells["nombre_prod"].Value.ToString(),
@@ -210,17 +206,17 @@ namespace Antorena_Soto.CPresentacion.Administrador
                     MessageBox.Show("Ingrese un valor para buscar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
-                // Si buscamos por codigo, validar que sea numérico
+
                 if (buscarPorCod && !int.TryParse(criterio, out int _))
                 {
                     MessageBox.Show("Ingrese un Codigo válido.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-                // Limpiar DataGridView antes de buscar
+                
                 DGVListaProd.DataSource = null;
                 DGVListaProd.Rows.Clear();
                 DataTable resultado = this.cn_Producto.BuscarProductosBLL(criterio, buscarPorCod);
-                // DGVListaProd.AutoGenerateColumns = false; 
+                 
                 DGVListaProd.DataSource = resultado;
 
                 if (resultado.Rows.Count == 0)
@@ -244,6 +240,7 @@ namespace Antorena_Soto.CPresentacion.Administrador
             }
         }
 
+        //Baja logica del producto
         private void BEliminarProd_Click(object sender, EventArgs e)
         {
             if (DGVListaProd.SelectedRows.Count == 0)
@@ -283,7 +280,7 @@ namespace Antorena_Soto.CPresentacion.Administrador
         }
 
 
-        //BORRAR PRODUCTO DE LA BD 
+        //BORRAR PRODUCTO DE LA BD LOGICO
         private void BEliminarProdBD_Click(object sender, EventArgs e)
         {
             if (DGVListaProd.CurrentRow == null)
@@ -294,7 +291,7 @@ namespace Antorena_Soto.CPresentacion.Administrador
                                 MessageBoxIcon.Warning);
                 return;
             }
-            // Tomar el valor de la celda "Codigo"
+            
             int codigo_prod = Convert.ToInt32(DGVListaProd.CurrentRow.Cells["codigo_prod"].Value);
 
             DialogResult confirmacion = MessageBox.Show(
@@ -338,6 +335,7 @@ namespace Antorena_Soto.CPresentacion.Administrador
             }
         }
 
+        //Metodos para imprimir la lista de productos
         private void bImprimir_Click(object sender, EventArgs e)
         {
             if (DGVListaProd.Rows.Count == 0)

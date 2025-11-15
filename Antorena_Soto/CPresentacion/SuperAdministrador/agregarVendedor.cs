@@ -201,8 +201,7 @@ namespace Antorena_Soto.CPresentacion.Gerente
             }
         }
 
-        //fin vañidaciones 
-
+      
         private void LNombreVendedor_Click(object sender, EventArgs e)
         {
         }
@@ -245,6 +244,7 @@ namespace Antorena_Soto.CPresentacion.Gerente
         {
 
         }
+        //agregamos al usuario a la BD
            private void BAgregarVendedor_Click_1(object sender, EventArgs e)
         {
             if (!ValidateChildren())

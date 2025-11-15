@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(reporteVentas));
             this.pReporteVenta = new System.Windows.Forms.Panel();
+            this.dtpFecha = new System.Windows.Forms.DateTimePicker();
             this.lReporteVentas = new System.Windows.Forms.Label();
             this.BTSBusquedaProd = new FontAwesome.Sharp.IconButton();
             this.toolStripRepVenta = new System.Windows.Forms.ToolStrip();
@@ -43,14 +44,26 @@
             this.TBBuscarProducto = new System.Windows.Forms.ToolStripTextBox();
             this.bImprimir = new System.Windows.Forms.Button();
             this.DGVentas = new System.Windows.Forms.DataGridView();
+            this.DGVentas1 = new System.Windows.Forms.DataGridView();
+            this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Vendedor_resp = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ciudad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Medio_pago_venta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Detalle_prod_ventas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.total_venta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pReporteVenta.SuspendLayout();
             this.toolStripRepVenta.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGVentas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DGVentas1)).BeginInit();
             this.SuspendLayout();
             // 
             // pReporteVenta
             // 
             this.pReporteVenta.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.pReporteVenta.Controls.Add(this.DGVentas1);
+            this.pReporteVenta.Controls.Add(this.dtpFecha);
             this.pReporteVenta.Controls.Add(this.lReporteVentas);
             this.pReporteVenta.Controls.Add(this.BTSBusquedaProd);
             this.pReporteVenta.Controls.Add(this.toolStripRepVenta);
@@ -58,11 +71,19 @@
             this.pReporteVenta.Controls.Add(this.DGVentas);
             this.pReporteVenta.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pReporteVenta.Location = new System.Drawing.Point(0, 0);
-            this.pReporteVenta.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pReporteVenta.Margin = new System.Windows.Forms.Padding(2);
             this.pReporteVenta.Name = "pReporteVenta";
             this.pReporteVenta.Size = new System.Drawing.Size(566, 583);
             this.pReporteVenta.TabIndex = 0;
             this.pReporteVenta.Paint += new System.Windows.Forms.PaintEventHandler(this.pReporteVenta_Paint);
+            // 
+            // dtpFecha
+            // 
+            this.dtpFecha.Location = new System.Drawing.Point(136, 118);
+            this.dtpFecha.Name = "dtpFecha";
+            this.dtpFecha.Size = new System.Drawing.Size(200, 20);
+            this.dtpFecha.TabIndex = 44;
+            this.dtpFecha.ValueChanged += new System.EventHandler(this.dtpFecha_ValueChanged);
             // 
             // lReporteVentas
             // 
@@ -185,7 +206,7 @@
             this.bImprimir.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bImprimir.ForeColor = System.Drawing.Color.MidnightBlue;
             this.bImprimir.Location = new System.Drawing.Point(225, 474);
-            this.bImprimir.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.bImprimir.Margin = new System.Windows.Forms.Padding(2);
             this.bImprimir.Name = "bImprimir";
             this.bImprimir.Size = new System.Drawing.Size(96, 30);
             this.bImprimir.TabIndex = 5;
@@ -198,7 +219,7 @@
             this.DGVentas.BackgroundColor = System.Drawing.Color.Gainsboro;
             this.DGVentas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGVentas.Location = new System.Drawing.Point(28, 137);
-            this.DGVentas.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.DGVentas.Margin = new System.Windows.Forms.Padding(2);
             this.DGVentas.Name = "DGVentas";
             this.DGVentas.RowHeadersWidth = 51;
             this.DGVentas.RowTemplate.Height = 24;
@@ -207,13 +228,94 @@
             this.DGVentas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGVentas_CellContentClick);
             this.DGVentas.Click += new System.EventHandler(this.reporteVentas_Load_1);
             // 
+            // DGVentas1
+            // 
+            this.DGVentas1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGVentas1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Codigo,
+            this.Fecha,
+            this.Vendedor_resp,
+            this.Cliente,
+            this.Ciudad,
+            this.Medio_pago_venta,
+            this.Detalle_prod_ventas,
+            this.total_venta});
+            this.DGVentas1.Location = new System.Drawing.Point(-11, 137);
+            this.DGVentas1.Margin = new System.Windows.Forms.Padding(2);
+            this.DGVentas1.Name = "DGVentas1";
+            this.DGVentas1.RowHeadersWidth = 51;
+            this.DGVentas1.RowTemplate.Height = 24;
+            this.DGVentas1.Size = new System.Drawing.Size(577, 318);
+            this.DGVentas1.TabIndex = 45;
+            this.DGVentas1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGVentas1_CellContentClick);
+            // 
+            // Codigo
+            // 
+            this.Codigo.DataPropertyName = "codigo_venta";
+            this.Codigo.HeaderText = "Codigo";
+            this.Codigo.MinimumWidth = 6;
+            this.Codigo.Name = "Codigo";
+            this.Codigo.Width = 125;
+            // 
+            // Fecha
+            // 
+            this.Fecha.DataPropertyName = "fecha_venta";
+            this.Fecha.HeaderText = "Fecha";
+            this.Fecha.MinimumWidth = 6;
+            this.Fecha.Name = "Fecha";
+            this.Fecha.Width = 125;
+            // 
+            // Vendedor_resp
+            // 
+            this.Vendedor_resp.DataPropertyName = "vendedor_resp";
+            this.Vendedor_resp.HeaderText = "Vendedor Responsable";
+            this.Vendedor_resp.MinimumWidth = 6;
+            this.Vendedor_resp.Name = "Vendedor_resp";
+            this.Vendedor_resp.Width = 125;
+            // 
+            // Cliente
+            // 
+            this.Cliente.DataPropertyName = "cliente_venta";
+            this.Cliente.HeaderText = "Cliente";
+            this.Cliente.Name = "Cliente";
+            // 
+            // Ciudad
+            // 
+            this.Ciudad.DataPropertyName = "ciudad_venta";
+            this.Ciudad.HeaderText = "Ciudad";
+            this.Ciudad.Name = "Ciudad";
+            // 
+            // Medio_pago_venta
+            // 
+            this.Medio_pago_venta.DataPropertyName = "medio_pago_venta";
+            this.Medio_pago_venta.HeaderText = "Medio de Pago";
+            this.Medio_pago_venta.MinimumWidth = 6;
+            this.Medio_pago_venta.Name = "Medio_pago_venta";
+            this.Medio_pago_venta.Width = 125;
+            // 
+            // Detalle_prod_ventas
+            // 
+            this.Detalle_prod_ventas.DataPropertyName = "detalle_prod_venta";
+            this.Detalle_prod_ventas.HeaderText = "Detalle Productos";
+            this.Detalle_prod_ventas.MinimumWidth = 6;
+            this.Detalle_prod_ventas.Name = "Detalle_prod_ventas";
+            this.Detalle_prod_ventas.Width = 125;
+            // 
+            // total_venta
+            // 
+            this.total_venta.DataPropertyName = "total_venta";
+            this.total_venta.HeaderText = "TOTAL";
+            this.total_venta.MinimumWidth = 6;
+            this.total_venta.Name = "total_venta";
+            this.total_venta.Width = 125;
+            // 
             // reporteVentas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(566, 583);
             this.Controls.Add(this.pReporteVenta);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "reporteVentas";
             this.Text = "reporteVentas";
             this.Load += new System.EventHandler(this.reporteVentas_Load_1);
@@ -221,6 +323,7 @@
             this.toolStripRepVenta.ResumeLayout(false);
             this.toolStripRepVenta.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGVentas)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DGVentas1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -241,5 +344,15 @@
         private System.Windows.Forms.ToolStripMenuItem pORFECHAToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pORVENDEDORToolStripMenuItem;
         public System.Windows.Forms.Label lReporteVentas;
+        private System.Windows.Forms.DateTimePicker dtpFecha;
+        private System.Windows.Forms.DataGridView DGVentas1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Codigo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Vendedor_resp;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cliente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Ciudad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Medio_pago_venta;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Detalle_prod_ventas;
+        private System.Windows.Forms.DataGridViewTextBoxColumn total_venta;
     }
 }

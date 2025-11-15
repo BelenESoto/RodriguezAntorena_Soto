@@ -18,22 +18,13 @@ namespace Antorena_Soto.CPresentacion.Vendedor
     public partial class menuVendedor : Form
     {
         private Form _formActual = null;
-        // private List<Productox> _productos; //EL DE BELEN
         public menuVendedor()
         {
 
             InitializeComponent();
-            /*_productos = new List<Productox>
-    {
-    new Productox { Codigo = 123, Nombre = "Aros Mary", Precio = 5000, Categoria = "Accesorios", Stock = 10, Descripcion = "Aros de acero", FechaModificacion = DateTime.Now, Imagen = null, Estado = true },
-    new Productox { Codigo = 456, Nombre = "Collar Eva", Precio = 8000, Categoria = "Accesorios", Stock = 5, Descripcion = "Collar con piedra", FechaModificacion = DateTime.Now, Imagen = null, Estado = true },
-    new Productox { Codigo = 789, Nombre = "Pulsera Luna", Precio = 3500, Categoria = "Accesorios", Stock = 15, Descripcion = "Pulsera de cuero", FechaModificacion = DateTime.Now, Imagen = null, Estado = true },
-    new Productox { Codigo = 321, Nombre = "Anillo Sol", Precio = 6000, Categoria = "Accesorios", Stock = 8, Descripcion = "Anillo de plata", FechaModificacion = DateTime.Now, Imagen = null, Estado = true },
-    new Productox { Codigo = 654, Nombre = "Broche Estrella", Precio = 2000, Categoria = "Accesorios", Stock = 20, Descripcion = "Broche esmaltado", FechaModificacion = DateTime.Now, Imagen = null, Estado = true }
-        };*/
+            
         }
 
- 
         private List<Producto> productos;
         
         public static class ListaProductosHelper
@@ -50,9 +41,7 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             InitializeComponent();
             productos = lista;
         }
-        
-
-
+      
         private void LMenuVentas_Click(object sender, EventArgs e)
         {
 
@@ -63,31 +52,26 @@ namespace Antorena_Soto.CPresentacion.Vendedor
 
         }
 
+        //Boton para abrir el formulario de agregar venta
         private void BAgregarVenta_Click(object sender, EventArgs e)
         {
             PVendedor2.Controls.Clear();
 
-            // ⭐ Obtener o instanciar la lista de productos
-            // Lo ideal es que esta lista venga de listaProductos o de una capa lógica común
-            List<Productox> listaProductos = ObtenerProductos(); // ⭐ Método que devuelve la lista
+            List<Productox> listaProductos = ObtenerProductos(); 
 
-            // ⭐ Pasamos la lista al constructor de ventaAgregar
-            ventaAgregar formVenta = new ventaAgregar(); // ⭐
+            ventaAgregar formVenta = new ventaAgregar(); 
 
             formVenta.TopLevel = false;
-            formVenta.FormBorderStyle = FormBorderStyle.None; // Sin borde
-            formVenta.Dock = DockStyle.Fill;             // Ocupa todo el panel
+            formVenta.FormBorderStyle = FormBorderStyle.None; 
+            formVenta.Dock = DockStyle.Fill;            
 
-            // Agregar al panel
             PVendedor2.Controls.Add(formVenta);
             formVenta.Show();
         }
 
-        // ⭐ Método de ejemplo para recuperar productos (puede ser de BD, lista estática, etc.)
+        //Metodo de carga manual que utilizabamos para probar el DataGridView antes de conectar la base de datos
         private List<Productox> ObtenerProductos()
         {
-            // 🔹 Si ya tenés la lista cargada en listaProductos, la podés pasar directamente.
-            // 🔹 Aquí te pongo un ejemplo básico:
             return new List<Productox>
     {
         new Productox { Codigo = 1, Nombre = "Producto A", Precio = 100, Categoria = "Cat1", Stock = 10, Descripcion = "Desc A", Estado = true },
@@ -96,7 +80,7 @@ namespace Antorena_Soto.CPresentacion.Vendedor
         }
 
 
-
+        //Boton para abrir el formulario de listar ventas
         private void BListarVenta_Click(object sender, EventArgs e)
         {
             
@@ -105,7 +89,8 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             form.CargarVentasBD();
         }
 
-           private void BAgregarDatoCliente_Click(object sender, EventArgs e)
+        //Boton para abrir el formulario de agregar cliente
+        private void BAgregarDatoCliente_Click(object sender, EventArgs e)
         {
             PVendedor2.Controls.Clear();
 
@@ -116,22 +101,14 @@ namespace Antorena_Soto.CPresentacion.Vendedor
 
             PVendedor2.Controls.Add(agregarCliente);
             agregarCliente.Show();
-            /*
-            // Suscribirse correctamente al evento
-            agregarCliente.ClienteAgregado += (s, eArgs) =>
-            {
-                // eArgs.Cliente contiene el cliente agregado
-                listaClientes.Add(eArgs.Cliente);
-            };
-
-           ;*/
+         
         }
 
+        //Boton para abrir el formulario de ver clientes
         private void BVerInfoCliente_Click(object sender, EventArgs e)
         {
             PVendedor2.Controls.Clear();
 
-            // Crear instancia del formulario listaClientes
             listaClientes frmClientes = new listaClientes
             {
                 TopLevel = false,
@@ -139,14 +116,13 @@ namespace Antorena_Soto.CPresentacion.Vendedor
                 Dock = DockStyle.Fill
             };
 
-            // Agregar al panel
             PVendedor2.Controls.Add(frmClientes);
             frmClientes.Show();
         }
 
 
 
-       
+        //Boton para abrir el formulario de ver productos
         private void BVerProducto_Click(object sender, EventArgs e)
         {
             var form = new listaProductos();
@@ -167,11 +143,6 @@ namespace Antorena_Soto.CPresentacion.Vendedor
         private void BListarProducto_Click(object sender, EventArgs e)
         {
 
-           // listaProductos formLista = new listaProductos(productos);
-            //formLista.MostrarProductos(DGVProductosVendedor, productos); // llamás a la función desde la instancia
-            //formLista.Show();
-
-
         }
         private void TBusqueda_Click(object sender, EventArgs e)
         {
@@ -182,10 +153,6 @@ namespace Antorena_Soto.CPresentacion.Vendedor
         {
 
         }
-
-
-        
-
         private void DGVListaVentas_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -196,6 +163,7 @@ namespace Antorena_Soto.CPresentacion.Vendedor
 
         }
 
+        //Boton para editar cliente de la lista
         private void BEditarCliente_Click(object sender, EventArgs e)
         {
             PVendedor2.Controls.Clear();
@@ -214,6 +182,7 @@ namespace Antorena_Soto.CPresentacion.Vendedor
 
         }
 
+        //Metodo para abrir formularios dentro del panel PVendedor2
         private void AbrirFormularioEnPanel(Form formHijo)
         {
             if (_formActual != null)

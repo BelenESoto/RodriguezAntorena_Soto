@@ -1,12 +1,12 @@
-﻿// --- AÑADIR ESTOS USINGS ---
-using Antorena_Soto.CDatos;   // Para la clase Factura
-using Antorena_Soto.CLogica; // Para ClienteBLL y (asumo) FacturaBLL
+﻿
+using Antorena_Soto.CDatos;  
+using Antorena_Soto.CLogica; 
 using FontAwesome.Sharp;
 
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;           // Para DataRow
+using System.Data;         
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -18,17 +18,20 @@ namespace Antorena_Soto.CPresentacion.Vendedor
 {
     public partial class ventaConfirmar : Form
     {
+       
         private bool buscarPorDni = false;
         private bool buscarPorNombre = false;
+        public event EventHandler OnVolverAtras;
+        public event EventHandler OnVentaFinalizada;
 
         private readonly ClienteBLL clienteBLL;
 
         
         private readonly FacturaBLL facturaBLL; 
-        private DataRow clienteActual = null; // Para guardar el cliente encontrado
+        private DataRow clienteActual = null; 
         private readonly CN_Producto productoBLL;
 
-        // Estas propiedades reciben los datos de'ventaAgregar'
+        //Hicimos una lista temporal para guardar los items de los productos de Detalle_venta hasta que se creen los otros datos de la Factura
         public List<DetalleVentaDTO> ItemsCarrito { get; set; }
         public decimal TotalVenta { get; set; }
 
@@ -65,25 +68,23 @@ namespace Antorena_Soto.CPresentacion.Vendedor
 
         private void TBBuscarCliente_Click(object sender, EventArgs e)
         {
-            // --- NUEVO ---
-            // Limpia el placeholder si el usuario hace click
+            
             if (TBBuscarCliente.Text == "Ingrese DNI" || TBBuscarCliente.Text == "Ingrese Nombre/Apellido")
             {
                 TBBuscarCliente.Text = "";
                 TBBuscarCliente.ForeColor = Color.Black;
             }
-            // --- FIN NUEVO ---
+            
         }
 
         private void dNIToolStripMenuItem_Click(object sender, EventArgs e)
         {
             buscarPorDni = true;
             buscarPorNombre = false;
-            // --- MODIFICADO ---
-            // Añadimos un placeholder para guiar al usuario
+            
             TBBuscarCliente.Text = "Ingrese DNI";
             TBBuscarCliente.ForeColor = Color.Gray;
-            // --- FIN MODIFICADO ---
+            
             MessageBox.Show("Búsqueda configurada por DNI.");
         }
 
@@ -91,18 +92,17 @@ namespace Antorena_Soto.CPresentacion.Vendedor
         {
             buscarPorDni = false;
             buscarPorNombre = true;
-            // --- MODIFICADO ---
+            
             TBBuscarCliente.Text = "Ingrese Nombre/Apellido";
             TBBuscarCliente.ForeColor = Color.Gray;
-            // --- FIN MODIFICADO ---
+            
             MessageBox.Show("Búsqueda configurada por NOMBRE.");
         }
 
+        //Método para buscar el cliente y cargar sus datos en los campos correspondientes
         private void BTSBusquedaCliente_Click(object sender, EventArgs e)
         {
-            // ... (Tus validaciones de búsqueda) ...
-
-            // 3. Limpiar los campos de factura antes de buscar
+           
             LimpiarCamposCliente();
 
             try
@@ -113,12 +113,8 @@ namespace Antorena_Soto.CPresentacion.Vendedor
                 {
                     DataRow filaCliente = resultado.Rows[0];
 
-                    // --- NUEVO ---
-                    // Guardamos el cliente completo para usarlo en la factura
                     clienteActual = filaCliente;
-                    // --- FIN NUEVO ---
-
-                    // 6. Poblamos los TextBoxes
+                   
                     TBDniFact.Text = Convert.ToString(filaCliente["dni_cliente"]);
                     TBCuitFact.Text = Convert.ToString(filaCliente["cuit"]);
                     TBNombreFact.Text = Convert.ToString(filaCliente["nomYApe_cliente"]);
@@ -143,9 +139,9 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             TBCuitFact.Text = "";
             TBNombreFact.Text = "";
             TBCiudadFact.Text = "";
-            // --- NUEVO ---
-            clienteActual = null; // Limpiamos el cliente guardado
-            // --- FIN NUEVO ---
+            
+            clienteActual = null; 
+            
         }
 
 
@@ -193,11 +189,10 @@ namespace Antorena_Soto.CPresentacion.Vendedor
         {
 
         }
-
-        // --- MÉTODO 'FINALIZAR PAGO' MODIFICADO ---
+        //Método del botón para confirmar la venta y  crear la factura, pero quedó con el nombre de un botón anterior
         private void BBorrar_Click(object sender, EventArgs e)
         {
-            // 1. Validaciones
+           
             if (clienteActual == null)
             {
                 MessageBox.Show("Debe buscar y cargar un cliente antes de facturar.", "Cliente Requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -208,19 +203,27 @@ namespace Antorena_Soto.CPresentacion.Vendedor
                 MessageBox.Show("Error: No hay productos en el carrito.", "Carrito Vacío", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            // ... (resto de validaciones: forma_pago, tipo_factura) ...
+            if (CBMedioPagoFact.SelectedItem == null || string.IsNullOrEmpty(CBMedioPagoFact.Text))
+            {
+                MessageBox.Show("Debe seleccionar un medio de pago.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (CBTipoFact.SelectedItem == null || string.IsNullOrEmpty(CBTipoFact.Text))
+            {
+                MessageBox.Show("Debe seleccionar un tipo de factura.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
-            // 2. Crear el objeto Factura
+            
             Factura nuevaFactura = new Factura
             {
-                tipo_factura = TBTipoFact.Text.Trim(),
+                tipo_factura = CBTipoFact.Text,
                 id_cliente = Convert.ToInt32(clienteActual["dni_cliente"]),
                 fecha_factura = DTFechaAct.Value,
-                forma_pago = TBMedioPagoFact.Text.Trim(),
-                monto_total = (long)TotalVenta, // O decimal si cambiaste la BBDD
+                forma_pago = CBMedioPagoFact.Text,
+                monto_total = (long)TotalVenta,
                 estado_factura = 1,
                 vendedor_id = SesionUsuario.DniUsuario
-                // <-- Usamos el ID de la sesión
             };
 
             MessageBox.Show("Objeto Factura creado");
@@ -231,75 +234,105 @@ namespace Antorena_Soto.CPresentacion.Vendedor
 
             try
             {
-                // 3. Guardar la Factura (Maestro)
+                
                 Factura facturaGuardada = facturaBLL.AgregarFactura(nuevaFactura);
                 MessageBox.Show("Factura guardada");
-                // 4. Guardar los Detalles (Hijos)
+
+               
                 foreach (var item in ItemsCarrito)
                 {
                     Detalle_venta nuevoDetalle = new Detalle_venta
                     {
-                        id_factura = facturaGuardada.nro_factura, // <-- ID de la factura guardada
+                        id_factura = facturaGuardada.nro_factura,
                         id_producto = item.IdProducto,
                         cantidad = item.Cantidad,
-                        precio = (double)item.Precio // Cast de decimal a double
+                        precio = (double)item.Precio
                     };
-
-                    // Guardar cada detalle en la BBDD
                     detalleBLL.AgregarDetalle(nuevoDetalle);
 
-                    //4b
                     try
                     {
-                        // Llamamos a la BLL de Producto para restar el stock
-                        // (Asumo que tu 'ModificarProductoBBL' se llama así)
                         productoBLL.ActualizarStockBLL(item.IdProducto, item.Cantidad);
                     }
                     catch (Exception stockEx)
                     {
-                        // Si falla el stock, se informa, pero la venta YA SE HIZO.
-                        // (Esto es un riesgo que se arregla con 'Transacciones',
-                        // pero por ahora solo informamos el error).
                         MessageBox.Show($"Error al actualizar stock para producto {item.IdProducto}: {stockEx.Message}", "Error de Stock", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
                 
-                // 5. Éxito y abrir el form de la factura
                 MessageBox.Show($"Factura N° {facturaGuardada.nro_factura} creada con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 facturaVenta formFactura = new facturaVenta();
                 formFactura.FacturaMostrada = facturaGuardada;
                 formFactura.ClienteMostrado = clienteActual;
-                // Opcional: Pasar también los detalles
-                // formFactura.ItemsMostrados = ItemsCarrito; 
                 formFactura.ShowDialog();
 
-                // ... (Limpiar campos) ...
+                LimpiarFormulario(); 
+                
+                OnVentaFinalizada?.Invoke(this, EventArgs.Empty);
+                
             }
             catch (Exception ex)
             {
-                string errorReal = ex.Message; // El error de C#
+                string errorReal = ex.Message;
                 if (ex.InnerException != null)
                 {
-                    errorReal = ex.InnerException.Message; // ¡El error de SQL Server!
+                    errorReal = ex.InnerException.Message;
                 }
-
                 MessageBox.Show($"Error al guardar: {errorReal}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                
             }
         }
 
-        private void CrearBotonesFactura()
+
+
+       
+        private void LimpiarFormulario()
         {
+            clienteActual = null;
+            ItemsCarrito.Clear();
+            TotalVenta = 0;
+
+            TBBuscarCliente.Text = string.Empty;
+            TBDniFact.Text = string.Empty;
+            TBCuitFact.Text = string.Empty;
+            TBNombreFact.Text = string.Empty;
+            TBCiudadFact.Text = string.Empty;
            
+            CBTipoFact.SelectedIndex = -1;
+            CBMedioPagoFact.SelectedIndex = -1;
+            
+            TBMontoFact.Text = string.Empty; 
+            DTFechaAct.Value = DateTime.Now;
         }
-
-
+        
         private void ventaConfirmar_Load(object sender, EventArgs e)
         {
-            // Al cargar, mostramos el total que recibimos del carrito
+            CBMedioPagoFact.Items.Add("Efectivo");
+            CBMedioPagoFact.Items.Add("Tarjeta");
+            CBMedioPagoFact.Items.Add("Mercado Pago");
+            CBMedioPagoFact.SelectedIndex = 0; 
+            CBTipoFact.Items.Add("A");
+            CBTipoFact.Items.Add("B");
+            CBTipoFact.Items.Add("C");
+            CBTipoFact.SelectedIndex = 0;
+
             TBMontoFact.Text = TotalVenta.ToString("$#,##0.00");
-            // Opcional: hacer el monto de solo lectura para que no se pueda cambiar
+          
             TBMontoFact.ReadOnly = true;
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        //Boton para volver al panel anterior sin confirmar la venta.
+        //Se oculta el form actual y lanza un evento para visualizar el form anterior
+        private void BVolverAtras_Click(object sender, EventArgs e)
+        {
+            OnVolverAtras?.Invoke(this, EventArgs.Empty);
         }
     }
 }

@@ -18,11 +18,9 @@ namespace Antorena_Soto.CLogica
             public static int TipoUsuario { get; private set; }
             public static bool Logueado { get; private set; }
 
-            //Inicia la sesión y guardamos los datos del usuario.
 
             public static void Login(DataRow filaUsuario)
             {
-                // Asumimos los nombres de las columnas de tu tabla Usuario
                 DniUsuario = Convert.ToInt32(filaUsuario["id_dni_usuario"]);
                 NombreUsuario = Convert.ToString(filaUsuario["nomYApe_usuario"]);
                 TipoUsuario = Convert.ToInt32(filaUsuario["tipo_Usuario"]);
@@ -43,7 +41,7 @@ namespace Antorena_Soto.CLogica
         {
             usuarioDAL = new UsuarioDAL(conexionString);
         }
-        
+        //AGREGAR USUARIO
         public bool AgregarUsuario(string dni, string nombre, string provincia, string ciudad,
                                    string domicilio, long telefono, string correo,
                                    DateTime fechaNacimiento, long cuit, DateTime fechaIngreso, int tipoUsuario,string Estado)
@@ -74,7 +72,7 @@ namespace Antorena_Soto.CLogica
         // ELIMINAR USUARIO
         public bool BajaUsuarioBLL(int idUsuario)
         {
-            // Acá podrías agregar validaciones de negocio antes de llamar al DAL
+           
             if (idUsuario <= 0)
             {
                 throw new ArgumentException("El ID de usuario no es válido.");

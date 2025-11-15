@@ -13,8 +13,6 @@ namespace Antorena_Soto.CPresentacion.Vendedor
 {
     public partial class agregarDatosCliente : Form
     {
-        // 1. CREA ESTA PROPIEDAD PÚBLICA
-        // Esta propiedad recibirá la fila desde 'listaClientes'
         public DataRow ClienteParaEditar { get; set; }
         public agregarDatosCliente()
         {
@@ -24,24 +22,19 @@ namespace Antorena_Soto.CPresentacion.Vendedor
         
         private void agregarDatosCliente_Load(object sender, EventArgs e)
         {
-            // Comprueba si la propiedad 'ClienteParaEditar' fue seteada
             if (ClienteParaEditar != null)
             {
-                // MODO EDICIÓN
-                this.Text = "Editar Cliente"; // Opcional: cambia el título del form
-                BAgregarCliente.Text = "Editar Cliente"; // Cambia el texto del botón
-
-                // Carga los datos de la fila en los controles
+                this.Text = "Editar Cliente";
+                BAgregarCliente.Text = "Editar Cliente";
                 CargarDatosParaEdicion();
             }
             else
             {
-                // MODO AGREGAR
                 this.Text = "Agregar Nuevo Cliente";
                 BAgregarCliente.Text = "Agregar Cliente";
             }
         }
-        //validaciopnes
+
         private void TBNombreCliente_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             string nombre = TBNombreCliente.Text.Trim();
@@ -154,7 +147,7 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             {
                 MessageBox.Show("El campo correo no puede estar vacío.", "Error de Validación",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
-                e.Cancel = true; // evita salir del control si hay error
+                e.Cancel = true; 
             }
             else if (!System.Text.RegularExpressions.Regex.IsMatch(
                          correo, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
@@ -226,15 +219,12 @@ namespace Antorena_Soto.CPresentacion.Vendedor
                 string conexionString = "Data Source=DESKTOP-IDH7B7D\\SQLEXPRESS;Initial Catalog=RodriguezAntorena_Soto;Integrated Security=True";
                 ClienteBLL clienteBLL = new ClienteBLL(conexionString);
 
-                // --- LÓGICA DE DECISIÓN ---
-                // AHORA COMPRUEBA LA PROPIEDAD PÚBLICA
                 if (ClienteParaEditar == null)
                 {
                     // MODO AGREGAR
                     bool ok = clienteBLL.AgregarCliente(
                         TBNombreCliente.Text.Trim(),
                         TBDniCliente.Text.Trim(),
-                        // ... (resto de parámetros de agregar) ...
                         TBProvinciaCliente.Text.Trim(),
                         TBCiudadCliente.Text.Trim(),
                         TBDomicilioCliente.Text.Trim(),
@@ -242,7 +232,7 @@ namespace Antorena_Soto.CPresentacion.Vendedor
                         long.Parse(TBNumCliente.Text.Trim()),
                         TBCorreoCliente.Text.Trim(),
                         DTFechaModifCliente.Value,
-                        1 // Estado Activo
+                        1 //este es el estado del cliente, al crearse es 1
                     );
 
                     if (ok)
@@ -258,13 +248,11 @@ namespace Antorena_Soto.CPresentacion.Vendedor
                 else
                 {
                     // MODO EDITAR
-                    // Lee el estado actual (o de un control si lo tienes)
                     int estado = Convert.ToInt32(ClienteParaEditar["estado"]);
 
                     bool ok = clienteBLL.ActualizarCliente(
                         TBNombreCliente.Text.Trim(),
-                        TBDniCliente.Text.Trim(), // El DNI (PK) no cambia
-                                                  // ... (resto de parámetros de actualizar) ...
+                        TBDniCliente.Text.Trim(), 
                         TBProvinciaCliente.Text.Trim(),
                         TBCiudadCliente.Text.Trim(),
                         TBDomicilioCliente.Text.Trim(),
@@ -288,12 +276,10 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             }
             catch (FormatException ex)
             {
-                // ... (tu manejo de excepciones) ...
                 MessageBox.Show("Error de formato: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
-                // ... (tu manejo de excepciones) ...
                 MessageBox.Show("Error al guardar: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         
@@ -340,9 +326,9 @@ namespace Antorena_Soto.CPresentacion.Vendedor
 
         }
 
+        //Metodo para cargar los datos en modo edicion
         private void CargarDatosParaEdicion()
         {
-            // Este método ahora lee de la PROPIEDAD PÚBLICA
             if (ClienteParaEditar == null) return;
 
             TBNombreCliente.Text = Convert.ToString(ClienteParaEditar["nomYApe_cliente"]);
@@ -358,8 +344,6 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             {
                 DTFechaModifCliente.Value = Convert.ToDateTime(ClienteParaEditar["fecha_ingreso"]);
             }
-
-            // Importante: Hacer el DNI (PK) de solo lectura
             TBDniCliente.ReadOnly = true;
             TBDniCliente.BackColor = System.Drawing.Color.LightGray;
         }

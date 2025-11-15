@@ -25,9 +25,7 @@ namespace Antorena_Soto.CPresentacion.Vendedor
     public partial class listaVentas : Form
     {
 
-
-        // --- NUEVO ---
-        private readonly string conexionString; // = "Data Source=DESKTOP-IDH7B7D\\SQLEXPRESS;Initial Catalog=RodriguezAntorena_Soto;Integrated Security=True";
+        private readonly string conexionString; 
         private readonly FacturaBLL cn_factura;
 
         private string criterioBusqueda = "";
@@ -41,66 +39,78 @@ namespace Antorena_Soto.CPresentacion.Vendedor
            
         }
 
-        // --- MÉTODO MODIFICADO ---
+        //Configura las columnas del DataGridView
         private void ConfigurarDataGrid()
         {
             DGVListaProdVentas.DefaultCellStyle.ForeColor = Color.Black;
             DGVListaProdVentas.AutoGenerateColumns = false;
             DGVListaProdVentas.Columns.Clear();
-
-            // Se agrega la propiedad 'Name' a cada columna.
-            // El 'Name' es el identificador para el código.
-            // El 'DataPropertyName' es el nombre de la columna de la consulta SQL.
+            
 
             DGVListaProdVentas.Columns.Add(new DataGridViewTextBoxColumn
             {
-                Name = "Codigo", // <-- Nombre para el código
+                Name = "Codigo", 
                 HeaderText = "Código",
-                DataPropertyName = "codigo_venta" // <-- Nombre de la consulta SQL
+                DataPropertyName = "codigo_venta" 
             });
             DGVListaProdVentas.Columns.Add(new DataGridViewTextBoxColumn
             {
-                Name = "Fecha", // <-- Nombre para el código
+                Name = "Fecha", 
                 HeaderText = "Fecha",
-                DataPropertyName = "fecha_venta" // <-- Nombre de la consulta SQL
+                DataPropertyName = "fecha_venta" 
             });
             DGVListaProdVentas.Columns.Add(new DataGridViewTextBoxColumn
             {
-                Name = "Vendedor_resp", // <-- Nombre para el código
+                Name = "Vendedor_resp", 
                 HeaderText = "Vendedor",
-                DataPropertyName = "vendedor_resp" // <-- Nombre de la consulta SQL
+                DataPropertyName = "vendedor_resp" 
             });
             DGVListaProdVentas.Columns.Add(new DataGridViewTextBoxColumn
             {
-                Name = "Cliente", // <-- Nombre para el código
+                Name = "Cliente", 
                 HeaderText = "Cliente",
-                DataPropertyName = "cliente_venta" // <-- Nombre de la consulta SQL
+                DataPropertyName = "cliente_venta" 
             });
             DGVListaProdVentas.Columns.Add(new DataGridViewTextBoxColumn
             {
-                Name = "Ciudad", // <-- Nombre para el código
+                Name = "Ciudad", 
                 HeaderText = "Ciudad",
-                DataPropertyName = "ciudad_venta" // <-- Nombre de la consulta SQL
+                DataPropertyName = "ciudad_venta" 
             });
             DGVListaProdVentas.Columns.Add(new DataGridViewTextBoxColumn
             {
-                Name = "Medio_pago_venta", // <-- Nombre para el código
+                Name = "Medio_pago_venta",
                 HeaderText = "Medio Pago",
-                DataPropertyName = "medio_pago_venta" // <-- Nombre de la consulta SQL
+                DataPropertyName = "medio_pago_venta" 
             });
             DGVListaProdVentas.Columns.Add(new DataGridViewTextBoxColumn
             {
-                Name = "total_venta", // <-- Nombre para el código
+                Name = "total_venta", 
                 HeaderText = "Total",
-                DataPropertyName = "total_venta" // <-- Nombre de la consulta SQL
+                DataPropertyName = "total_venta" 
             });
 
-            // Ahora se accede a las columnas por su 'Name'
+            DGVListaProdVentas.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "total_venta",
+                HeaderText = "Total",
+                DataPropertyName = "total_venta"
+            });
+
+            //Acá creamos una columna de botones para "Detalle" que trae la factura con los datos
+            DataGridViewButtonColumn colBtn = new DataGridViewButtonColumn();
+            colBtn.Name = "BDetalle"; 
+            colBtn.HeaderText = "Detalle";
+            colBtn.Text = "Ver"; 
+            colBtn.UseColumnTextForButtonValue = true; 
+            colBtn.Width = 80;
+            DGVListaProdVentas.Columns.Add(colBtn);
+
             DGVListaProdVentas.Columns["Fecha"].DefaultCellStyle.Format = "dd/MM/yyyy";
             DGVListaProdVentas.Columns["total_venta"].DefaultCellStyle.Format = "$#,##0.00";
         }
 
-        // --- Estos 3 métodos están bien, no cambian ---
+      
         private void BCodigoVenta_Click(object sender, EventArgs e)
         {
             criterioBusqueda = "codigo";
@@ -122,7 +132,8 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             TBBuscarPorVenta.Text = "Ingrese Fecha";
         }
 
-        // --- MÉTODO PRINCIPAL MODIFICADO ---
+
+        //Boton para buscar ventas segun el criterio seleccionado
         private void BBuscarVenta_Click(object sender, EventArgs e)
         {
             string valorBusqueda = TBBuscarPorVenta.Text.Trim();
@@ -139,7 +150,7 @@ namespace Antorena_Soto.CPresentacion.Vendedor
                 return;
             }
 
-            // 1. Consulta SQL Base
+        
             string consultaBase = @"
                 SELECT 
                     F.nro_factura AS codigo_venta,
@@ -156,7 +167,7 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             string whereClause = "";
             SqlCommand cmd = new SqlCommand();
 
-            // 2. Construir el WHERE según el criterio
+           
             try
             {
                 switch (criterioBusqueda)
@@ -193,7 +204,6 @@ namespace Antorena_Soto.CPresentacion.Vendedor
                 return;
             }
 
-            // 3. Ejecutar la consulta
             cmd.CommandText = consultaBase + whereClause + " ORDER BY F.fecha_factura DESC";
             cmd.Connection = new SqlConnection(conexionString);
 
@@ -211,7 +221,6 @@ namespace Antorena_Soto.CPresentacion.Vendedor
                 return;
             }
 
-            // 4. Mostrar resultados
             if (dtResultados.Rows.Count == 0)
             {
                 MessageBox.Show("No se encontraron resultados.");
@@ -222,7 +231,7 @@ namespace Antorena_Soto.CPresentacion.Vendedor
 
         private void TBBuscarPorVenta_Click(object sender, EventArgs e)
         {
-            // Helper para limpiar el placeholder
+            
             if (TBBuscarPorVenta.Text.StartsWith("Ingrese"))
             {
                 TBBuscarPorVenta.Text = "";
@@ -234,37 +243,85 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             
         }
 
+        //Configuraciones para el DGV al cargar el formulario y que funcione el boton detalle
         private void DGVListaProdVentas_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex < 0) return;
 
+            if (DGVListaProdVentas.Rows[e.RowIndex].IsNewRow) return;
+
+            if (DGVListaProdVentas.Columns[e.ColumnIndex].Name == "BDetalle")
+            {
+                long idFactura = Convert.ToInt64(
+                    DGVListaProdVentas.Rows[e.RowIndex].Cells["Codigo"].Value); 
+
+                Factura facturaParaMostrar = null;
+                DataRow clienteParaMostrar = null;
+
+                try
+                {
+                    using (SqlConnection con = new SqlConnection(conexionString))
+                    {
+                        con.Open();
+                        string qFactura = "SELECT * FROM Factura WHERE nro_factura = @Id";
+                        using (SqlCommand cmdFactura = new SqlCommand(qFactura, con))
+                        {
+                            cmdFactura.Parameters.AddWithValue("@Id", idFactura);
+                            SqlDataAdapter daFactura = new SqlDataAdapter(cmdFactura);
+                            DataTable dtFactura = new DataTable();
+                            daFactura.Fill(dtFactura);
+
+                            if (dtFactura.Rows.Count == 0)
+                            {
+                                MessageBox.Show("Error: No se encontró la factura.");
+                                return;
+                            }
+
+                            DataRow fRow = dtFactura.Rows[0];
+                            facturaParaMostrar = new Factura
+                            {
+                                nro_factura = Convert.ToInt64(fRow["nro_factura"]),
+                                tipo_factura = Convert.ToString(fRow["tipo_factura"]),
+                                id_cliente = Convert.ToInt32(fRow["id_cliente"]),
+                                fecha_factura = Convert.ToDateTime(fRow["fecha_factura"]),
+                                forma_pago = Convert.ToString(fRow["forma_pago"]),
+                                monto_total = Convert.ToInt64(fRow["monto_total"]),
+                                estado_factura = Convert.ToInt32(fRow["estado_factura"]),
+                                vendedor_id = Convert.ToInt32(fRow["vendedor_id"])
+                            };
+                        }
+
+                        string qCliente = "SELECT * FROM Cliente WHERE dni_cliente = @IdCliente";
+                        using (SqlCommand cmdCliente = new SqlCommand(qCliente, con))
+                        {
+                            cmdCliente.Parameters.AddWithValue("@IdCliente", facturaParaMostrar.id_cliente);
+                            SqlDataAdapter daCliente = new SqlDataAdapter(cmdCliente);
+                            DataTable dtCliente = new DataTable();
+                            daCliente.Fill(dtCliente);
+
+                            if (dtCliente.Rows.Count == 0)
+                            {
+                                MessageBox.Show("Error: No se encontró el cliente asociado.");
+                                return;
+                            }
+                            clienteParaMostrar = dtCliente.Rows[0];
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al recuperar los datos de la factura: " + ex.Message);
+                    return;
+                }
+                facturaVenta form = new facturaVenta();
+                form.FacturaMostrada = facturaParaMostrar;
+                form.ClienteMostrado = clienteParaMostrar;
+
+                form.ShowDialog();
+            }
         }
 
-        /*public void CargarVentasBD()
-        {
-
-            try
-            {
-                DGVListaProdVentas.DefaultCellStyle.ForeColor = Color.Black;
-                // Traer datos desde la BLL
-                DataTable ventas = cn_factura.ListarFacturasBLL();
-
-                // Cargar en el DataGridView
-                DGVListaProdVentas.DataSource = ventas;
-
-                // Mostrar cantidad de filas cargadas
-                MessageBox.Show($"Se cargaron {ventas.Rows.Count} Ventas.",
-                                "Información",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error al cargar usuarios: {ex.Message}",
-                                "Error",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Error);
-            }
-        }*/
+        
 
         public void CargarVentasBD()
         {
@@ -272,9 +329,6 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             {
                 DGVListaProdVentas.DefaultCellStyle.ForeColor = Color.Black;
 
-                // --- CORRECCIÓN AQUÍ ---
-                // 1. Usamos la misma consulta SQL compleja (con JOINs y Alias) 
-                //    que usa tu 'ConfigurarDataGrid'.
                 string consulta = @"
             SELECT 
                 F.nro_factura AS codigo_venta,
@@ -287,24 +341,21 @@ namespace Antorena_Soto.CPresentacion.Vendedor
             FROM Factura F
             INNER JOIN Cliente C ON F.id_cliente = C.dni_cliente
             INNER JOIN Usuario U ON F.vendedor_id = U.id_dni_usuario
-            ORDER BY F.fecha_factura DESC"; // Ordenar por fecha
+            ORDER BY F.fecha_factura DESC"; 
 
                 DataTable ventas = new DataTable();
 
-                // 2. Ejecutar esta consulta directamente
+               
                 using (SqlConnection con = new SqlConnection(conexionString))
                 using (SqlCommand cmd = new SqlCommand(consulta, con))
                 using (SqlDataAdapter da = new SqlDataAdapter(cmd))
                 {
                     da.Fill(ventas);
                 }
-                // --- FIN DE LA CORRECCIÓN ---
-
-                // Cargar en el DataGridView
-                // Ahora las columnas del DataTable SÍ coinciden con los DataPropertyName
+                
                 DGVListaProdVentas.DataSource = ventas;
 
-                // Mostrar cantidad de filas cargadas
+               
                 MessageBox.Show($"Se cargaron {ventas.Rows.Count} Ventas.",
                                  "Información",
                                  MessageBoxButtons.OK,

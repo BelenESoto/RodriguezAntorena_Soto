@@ -37,7 +37,7 @@ namespace Antorena_Soto.CPresentacion.Administrador
 
         private void FormRecaudacion_Load(object sender, EventArgs e)
         {
-            // Estado inicial → visible solo la búsqueda por fecha
+            
             dtpFecha.Visible = false;
             dtpDesde.Visible = false;
             dtpHasta.Visible = false;
@@ -76,7 +76,7 @@ namespace Antorena_Soto.CPresentacion.Administrador
         { 
             DateTime hoy = DateTime.Today;
 
-            // Reset
+            
             ultimoMonto = 0;
             ultimaCantidad = 0;
 
@@ -93,11 +93,15 @@ namespace Antorena_Soto.CPresentacion.Administrador
                 (ultimoMonto, ultimaCantidad) =
                     ObtenerRecaudacion(fecha, fecha);
                 MostrarGraficoSemana(fecha);
+                MostrarGraficoProductos(fecha, fecha);
+                MostrarGraficoCategorias(fecha, fecha);
             }
             else
             {
                 DateTime desde = dtpDesde.Value.Date;
                 DateTime hasta = dtpHasta.Value.Date;
+                MostrarGraficoProductos(desde, hasta);
+                MostrarGraficoCategorias(desde, hasta);
 
                 if (desde > hasta)
                 {
@@ -116,12 +120,12 @@ namespace Antorena_Soto.CPresentacion.Administrador
                 MostrarGraficoMensual(desde, hasta);
             }
 
-            // Mostrar resultados
+           
             lblMonto.Text = $"Total: ${ultimoMonto}";
             lblCantidad.Text = $"Unidades: {ultimaCantidad}";
         }
 
-
+        //Metodo con la consulta para obtener la recaudacion  
         private (decimal totalMonto, int totalCantidad) ObtenerRecaudacion(DateTime desde, DateTime hasta)
         {
             decimal totalMonto = 0;
@@ -157,7 +161,6 @@ namespace Antorena_Soto.CPresentacion.Administrador
 
         private DataTable ObtenerDatosSemana(DateTime fecha)
         {
-            // Determinar lunes y domingo de la semana
             int delta = DayOfWeek.Monday - fecha.DayOfWeek;
             DateTime lunes = fecha.AddDays(delta);
             DateTime domingo = lunes.AddDays(6);
@@ -206,14 +209,12 @@ namespace Antorena_Soto.CPresentacion.Administrador
             {
                 DateTime dia = inicio.AddDays(i);
 
-                // Buscar el dato del día
                 DataRow[] fila = datos.Select($"Fecha = '{dia:yyyy-MM-dd}'");
 
                 decimal monto = fila.Length > 0 ? Convert.ToDecimal(fila[0]["Monto"]) : 0;
 
                 int idx = serie.Points.AddXY(dia.ToString("ddd dd"), monto);
 
-                // Destacar el día seleccionado
                 if (dia.Date == fechaSeleccionada.Date)
                 {
                     serie.Points[idx].Color = Color.Blue;
@@ -227,40 +228,10 @@ namespace Antorena_Soto.CPresentacion.Administrador
             }
         }
 
-        /*private DataTable ObtenerDatosMensuales(DateTime desde, DateTime hasta)
-        {
-            DataTable tabla = new DataTable();
-
-            string consulta = @"
-        SELECT 
-            FORMAT(F.fecha_factura, 'yyyy-MM') AS Mes,
-            SUM(F.monto_total) AS Monto
-        FROM Factura F
-        WHERE CONVERT(date, F.fecha_factura) BETWEEN @Desde AND @Hasta
-        GROUP BY FORMAT(F.fecha_factura, 'yyyy-MM')
-        ORDER BY Mes";
-
-            using (SqlConnection con = new SqlConnection(conexionString))
-            using (SqlCommand cmd = new SqlCommand(consulta, con))
-            {
-                cmd.Parameters.AddWithValue("@Desde", desde);
-                cmd.Parameters.AddWithValue("@Hasta", hasta);
-
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                da.Fill(tabla);
-            }
-
-            return tabla;
-        }*/
         private DataTable ObtenerDatosMensuales(DateTime desde, DateTime hasta)
         {
             DataTable tabla = new DataTable();
 
-            // --- CONSULTA MODIFICADA ---
-            // Se reemplazó FORMAT() por CONVERT() para compatibilidad
-            // con versiones de SQL Server anteriores a 2012.
-            // El estilo 120 (o 126) da el formato 'YYYY-MM-DD', 
-            // y VARCHAR(7) lo corta a 'YYYY-MM'.
             string consulta = @"
     SELECT 
         CONVERT(VARCHAR(7), F.fecha_factura, 120) AS Mes,
@@ -309,8 +280,9 @@ namespace Antorena_Soto.CPresentacion.Administrador
             PrintPreviewDialog previewDialog = new PrintPreviewDialog();
             previewDialog.Document = printDocument;
             previewDialog.ShowDialog();
-        }
 
+        }
+        
         private void PrintDocument_PrintPage(object sender, PrintPageEventArgs e)
         {
             float margenX = 80;
@@ -330,25 +302,53 @@ namespace Antorena_Soto.CPresentacion.Administrador
             offsetY += 40;
 
             e.Graphics.DrawString("Generado el: " + DateTime.Now.ToString("dd/MM/yyyy HH:mm"),
-                                  fontTexto, Brushes.Black, margenX, offsetY);
+                                    fontTexto, Brushes.Black, margenX, offsetY);
             offsetY += 40;
 
-            Image grafico = CapturarGrafico();
-
-            int anchoImprimir = 700;   // ajustable
-            int altoImprimir = (int)(grafico.Height * (700.0 / grafico.Width));
-
-            //Rectangle destino = new Rectangle((int)margenX, (int)offsetY, anchoImprimir, altoImprimir);
+            int anchoImprimir = 700; 
             int xCentrado = (e.PageBounds.Width - anchoImprimir) / 2;
-            Rectangle destino = new Rectangle(xCentrado, (int)offsetY, anchoImprimir, altoImprimir);
+            int paddingGrafico = 30; 
 
-            e.Graphics.DrawImage(grafico, destino);
+
+            Image graficoBarras = CapturarControl(chartRecaudacion);
+            if (graficoBarras.Width > 0)
+            {
+                int altoImprimirBarras = (int)(graficoBarras.Height * (anchoImprimir / (double)graficoBarras.Width));
+                Rectangle destinoBarras = new Rectangle(xCentrado, (int)offsetY, anchoImprimir, altoImprimirBarras);
+                e.Graphics.DrawImage(graficoBarras, destinoBarras);
+
+                offsetY += altoImprimirBarras + paddingGrafico;
+            }
+
+
+            Image graficoProductos = CapturarControl(chartProductos);
+            if (graficoProductos.Width > 0)
+            {
+                int altoImprimirProductos = (int)(graficoProductos.Height * (anchoImprimir / (double)graficoProductos.Width));
+                Rectangle destinoProductos = new Rectangle(xCentrado, (int)offsetY, anchoImprimir, altoImprimirProductos);
+                e.Graphics.DrawImage(graficoProductos, destinoProductos);
+
+                offsetY += altoImprimirProductos + paddingGrafico;
+            }
+
+            Image graficoCategorias = CapturarControl(chartCategorias);
+            if (graficoCategorias.Width > 0)
+            {
+                int altoImprimirCategorias = (int)(graficoCategorias.Height * (anchoImprimir / (double)graficoCategorias.Width));
+                Rectangle destinoCategorias = new Rectangle(xCentrado, (int)offsetY, anchoImprimir, altoImprimirCategorias);
+                e.Graphics.DrawImage(graficoCategorias, destinoCategorias);
+            }
         }
-
-        private Image CapturarGrafico()
+        
+        private Image CapturarControl(Control control)
         {
-            Bitmap bmp = new Bitmap(chartRecaudacion.Width, chartRecaudacion.Height);
-            chartRecaudacion.DrawToBitmap(bmp, new Rectangle(0, 0, bmp.Width, bmp.Height));
+            if (control.Width <= 0 || control.Height <= 0)
+            {
+                return new Bitmap(1, 1);
+            }
+
+            Bitmap bmp = new Bitmap(control.Width, control.Height);
+            control.DrawToBitmap(bmp, new Rectangle(0, 0, bmp.Width, bmp.Height));
             return bmp;
         }
         private void btnBuscar_CursorChanged(object sender, EventArgs e)
@@ -380,6 +380,132 @@ namespace Antorena_Soto.CPresentacion.Administrador
         {
 
         }
+
+        private void lRecaudacion_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //NUEVAS FUNCIONES PARA GRAFICO : 
+        
+        private DataTable ObtenerProductosMasVendidos(DateTime desde, DateTime hasta)
+        {
+            DataTable tabla = new DataTable();
+
+            string consulta = @"
+        SELECT TOP 5 
+            P.nombre_prod AS Producto,
+            SUM(DV.cantidad) AS CantidadVendida
+        FROM Detalle_venta DV
+        INNER JOIN Producto P ON DV.id_producto = P.codigo_prod
+        INNER JOIN Factura F ON F.nro_factura = DV.id_factura
+        WHERE CONVERT(date, F.fecha_factura) BETWEEN @Desde AND @Hasta
+        GROUP BY P.nombre_prod
+        ORDER BY CantidadVendida DESC";
+
+            using (SqlConnection con = new SqlConnection(conexionString))
+            using (SqlCommand cmd = new SqlCommand(consulta, con))
+            {
+                cmd.Parameters.AddWithValue("@Desde", desde);
+                cmd.Parameters.AddWithValue("@Hasta", hasta);
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(tabla);
+            }
+
+            return tabla;
+        }
+
+        //MOSTRAR GRAFICO DE PRODUCTO MAS VENDIDOSS
+        private void MostrarGraficoProductos(DateTime desde, DateTime hasta)
+        {
+            DataTable datos = ObtenerProductosMasVendidos(desde, hasta);
+
+            chartProductos.Series.Clear();
+            chartProductos.ChartAreas.Clear();
+            chartProductos.ChartAreas.Add(new ChartArea("AreaProductos"));
+
+            Series serie = new Series("Productos");
+            serie.ChartType = SeriesChartType.Pie;
+            serie.IsValueShownAsLabel = true;
+            serie.LabelFormat = "{0}";
+
+            chartProductos.Series.Add(serie);
+
+            foreach (DataRow row in datos.Rows)
+            {
+                string producto = row["Producto"].ToString();
+                int cantidad = Convert.ToInt32(row["CantidadVendida"]);
+                serie.Points.AddXY(producto, cantidad);
+            }
+
+            chartProductos.Titles.Clear();
+            chartProductos.Titles.Add("Productos más vendidos");
+        }
+
+        // CATEGORIA MAS VENDIDA 
+        private DataTable ObtenerCategoriasMasVendidas(DateTime desde, DateTime hasta)
+        {
+            DataTable tabla = new DataTable();
+
+            string consulta = @"
+        SELECT TOP 5 
+            C.nombre_categoria AS Categoria,
+            SUM(DV.cantidad) AS CantidadVendida
+        FROM Detalle_venta DV
+        INNER JOIN Producto P ON DV.id_producto = P.codigo_prod
+        INNER JOIN Categoria C ON P.categoria_prod = C.id_categoria
+        INNER JOIN Factura F ON F.nro_factura = DV.id_factura
+        WHERE CONVERT(date, F.fecha_factura) BETWEEN @Desde AND @Hasta
+        GROUP BY C.nombre_categoria
+        ORDER BY CantidadVendida DESC";
+
+            using (SqlConnection con = new SqlConnection(conexionString))
+            using (SqlCommand cmd = new SqlCommand(consulta, con))
+            {
+                cmd.Parameters.AddWithValue("@Desde", desde);
+                cmd.Parameters.AddWithValue("@Hasta", hasta);
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(tabla);
+            }
+
+            return tabla;
+        }
+        //MOSTRAR GRAFICO DE CATEGORIA MAS VENDIDOSS
+
+        private void MostrarGraficoCategorias(DateTime desde, DateTime hasta)
+        {
+            DataTable datos = ObtenerCategoriasMasVendidas(desde, hasta);
+
+            chartCategorias.Series.Clear();
+            chartCategorias.ChartAreas.Clear();
+            chartCategorias.ChartAreas.Add(new ChartArea("AreaCategorias"));
+
+            Series serie = new Series("Categorías");
+            serie.ChartType = SeriesChartType.Pie;
+            serie.IsValueShownAsLabel = true;
+            serie.LabelFormat = "{0}";
+
+            chartCategorias.Series.Add(serie);
+
+            foreach (DataRow row in datos.Rows)
+            {
+                string categoria = row["Categoria"].ToString();
+                int cantidad = Convert.ToInt32(row["CantidadVendida"]);
+                serie.Points.AddXY(categoria, cantidad);
+            }
+
+            chartCategorias.Titles.Clear();
+            chartCategorias.Titles.Add("Categorías más vendidas");
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
     }
 }
 

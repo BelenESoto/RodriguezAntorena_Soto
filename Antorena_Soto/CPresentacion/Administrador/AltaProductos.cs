@@ -20,31 +20,27 @@ namespace Antorena_Soto.CPresentacion.Administrador
     {
         private readonly CN_Producto cn_Producto;
         private readonly string conexionString;
-        private bool esEdicion = false;           // Variable de clase
-        private int CodigoOriginal;            // Para mantener el código en edición
+        private bool esEdicion = false;         
+        private int CodigoOriginal;            
         private List<Productox> _productos;
         private Productox _producto;
         private string _modo;
 
-
-        // Constructor para alta
         public AltaProductos()
         {
             InitializeComponent();
             this.conexionString = "Data Source=DESKTOP-IDH7B7D\\SQLEXPRESS;Initial Catalog=RodriguezAntorena_Soto;Integrated Security=True";
-            // Inicializa la capa lógica con la conexión
+            
             cn_Producto = new CN_Producto(conexionString);
             esEdicion = false;
             BAgregarProducto.Text = "Guardar";
         }
 
-
-        // Constructor para edición: recibe el producto existente
         public AltaProductos(Productox prodExistente, string modo, string conexionString)
         {
             InitializeComponent();
             this.conexionString = "Data Source=DESKTOP-IDH7B7D\\SQLEXPRESS;Initial Catalog=RodriguezAntorena_Soto;Integrated Security=True";
-            //this.conexionString = conexionString;
+         
             cn_Producto = new CN_Producto(conexionString);
 
             esEdicion = modo.Trim().Equals("Editar", StringComparison.OrdinalIgnoreCase);
@@ -224,6 +220,7 @@ namespace Antorena_Soto.CPresentacion.Administrador
 
         }
 
+        //Boton para agregar o guardar cambios en el producto
         private void BAgregarProducto_Click(object sender, EventArgs e)
         {
             if (!ValidateChildren())
@@ -235,10 +232,8 @@ namespace Antorena_Soto.CPresentacion.Administrador
 
             try
             {
-                // Inicializamos la capa lógica con la conexión actual
                 CN_Producto productoBLL = new CN_Producto(this.conexionString);
 
-                // Validaciones básicas
                 if (!int.TryParse(tbCodigoProducto.Text.Trim(), out int codigo))
                 {
                     MessageBox.Show("Código inválido. Ingrese un número entero.", "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -256,8 +251,7 @@ namespace Antorena_Soto.CPresentacion.Administrador
                     MessageBox.Show("Seleccione una categoría válida.", "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-
-                // Muestra qué valor está tomando realmente el ComboBox
+                //para el combo box de categoria
                 string seleccion = CBCategoriaProducto.SelectedItem.ToString();
                 string[] partes = seleccion.Split('-');
 
@@ -279,7 +273,6 @@ namespace Antorena_Soto.CPresentacion.Administrador
                     return;
                 }
 
-                // Convertir imagen (si hay)
                 byte[] imagenBytes = PBImagenProducto.Image != null ? ConvertirImagenAByte(PBImagenProducto.Image) : null;
 
                 if (esEdicion)
@@ -340,7 +333,6 @@ namespace Antorena_Soto.CPresentacion.Administrador
 
         private byte[] ConvertirImagenAByte(Image image)
         {
-            //  throw new NotImplementedException();
             if (image == null)
                 return null;
 
